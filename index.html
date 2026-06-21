@@ -280,7 +280,7 @@
     .sub-q { color: var(--accent-o); background: var(--pill-o-bg); }
     .sub-q-r { color: var(--accent-r); background: var(--pill-r-bg); }
 
-    /* Naya Clickable Question UI */
+    /* Clickable Question UI */
     .q-click { cursor: pointer; transition: transform 0.2s, opacity 0.2s; -webkit-tap-highlight-color: transparent; }
     .q-click:active { transform: scale(0.92); }
 
@@ -340,20 +340,25 @@
     }
     .q-block-num.r { color: var(--accent-r); }
 
+    /* Yaha Question text ka size aur bold badhaya gaya hai */
     .q-block-text {
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 700;
       color: var(--text);
       line-height: 1.6;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
+    
+    /* Yaha Hindi text ka size thoda bada kiya gaya hai */
     .q-block-hindi {
-      font-size: 13px;
+      font-size: 15px;
+      font-weight: 500;
       color: var(--muted);
       font-family: 'Noto Sans Devanagari', sans-serif;
       line-height: 1.5;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
+    
     .q-block-opts {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -611,7 +616,6 @@ function makeSubCard(key, ch, clr) {
   card.className = "chapter-card" + (done?" done":"");
   card.dataset.key = key;
 
-  // Build sub rows HTML and ADD q-click DIRECTLY to the 'Q. 48' text
   var subsHtml = '<div class="sub-list">';
   ch.subs.forEach(function(s) {
     subsHtml += '<div class="sub-row"><span class="sub-label">Sub '+s.subNum+'</span>'
@@ -631,14 +635,12 @@ function makeSubCard(key, ch, clr) {
     +   '<div class="q-expand-inner" id="qinner_'+key+'"><div class="q-loading">Loading questions...</div></div>'
     + '</div>';
 
-  // Check circle click → toggle done
   var checkEl = card.querySelector(".check-box");
   checkEl.addEventListener("click", function(e) {
     e.stopPropagation();
     toggleDone(key, card, clr);
   });
 
-  // Direct Click on Q.48 pill → expand that question
   if (ch.questionsFile) {
     var pills = card.querySelectorAll(".q-click");
     pills.forEach(function(pill) {
@@ -654,7 +656,7 @@ function makeSubCard(key, ch, clr) {
 }
 
 // State: which cards have expand open, and which qnums are shown
-var expandState = {}; // key -> Set of qnums currently shown
+var expandState = {}; 
 
 function toggleExpandQuestion(key, file, qnum, clr, pillEl) {
   haptic();
@@ -662,24 +664,27 @@ function toggleExpandQuestion(key, file, qnum, clr, pillEl) {
   var expDiv   = document.getElementById("qexp_" + key);
   var innerDiv = document.getElementById("qinner_" + key);
 
+  // Card ke sabhi pills dhundho unki opacity reset karne ke liye
+  var card = document.querySelector('.chapter-card[data-key="'+key+'"]');
+  var allPills = card ? card.querySelectorAll(".q-click") : [];
+
   if (expandState[key].has(qnum)) {
-    // Remove this question
-    expandState[key].delete(qnum);
-    pillEl.style.opacity = "1";
-    if (expandState[key].size === 0) {
-      expDiv.classList.remove("open");
-    } else {
-      renderExpandedQuestions(key, file, clr);
-    }
+    // Agar same click kiya hai to open wale ko band kar do
+    expandState[key].clear();
+    allPills.forEach(function(p) { p.style.opacity = "1"; });
+    expDiv.classList.remove("open");
   } else {
-    // Add this question
+    // Agar doosra click kiya hai to pehle wale ko clear karo
+    expandState[key].clear();
+    allPills.forEach(function(p) { p.style.opacity = "1"; });
+    
+    // Ab is naye wale ko open karo
     expandState[key].add(qnum);
     pillEl.style.opacity = "0.5";
     expDiv.classList.add("open");
-    // Load JSON if not cached, then render
+    
     loadQBank(file, function() {
       renderExpandedQuestions(key, file, clr);
-      // Rerun MathJax on new content
       if (window.MathJax && MathJax.typesetPromise) {
         MathJax.typesetPromise([innerDiv]).catch(function(){});
       }
