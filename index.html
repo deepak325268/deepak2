@@ -210,9 +210,10 @@
     }
     .stale-bar.show { display: block; }
 
+    /* Yaha par max-width ko 520px se 800px kiya gaya hai PC ke liye */
     .main {
       padding: 18px 16px 0;
-      max-width: 520px;
+      max-width: 800px;
       margin: 0 auto;
       overflow: hidden;
     }
@@ -340,21 +341,21 @@
     }
     .q-block-num.r { color: var(--accent-r); }
 
-    /* Yaha Question text ka size aur bold badhaya gaya hai */
-    .q-block-text {
-      font-size: 15px;
+    /* Hindi - Bada, Dark aur Bold ho gaya */
+    .q-block-hindi {
+      font-size: 16px;
       font-weight: 700;
       color: var(--text);
+      font-family: 'Noto Sans Devanagari', sans-serif;
       line-height: 1.6;
       margin-bottom: 6px;
     }
-    
-    /* Yaha Hindi text ka size thoda bada kiya gaya hai */
-    .q-block-hindi {
-      font-size: 15px;
+
+    /* English - Hindi ke niche, thoda light/muted ho gaya */
+    .q-block-text {
+      font-size: 14px;
       font-weight: 500;
       color: var(--muted);
-      font-family: 'Noto Sans Devanagari', sans-serif;
       line-height: 1.5;
       margin-bottom: 12px;
     }
@@ -723,10 +724,12 @@ function renderExpandedQuestions(key, file, clr) {
     var optsHtml = '<div class="q-block-opts">'
       + q.opts.map(function(o){ return '<div class="q-opt">'+o+'</div>'; }).join('')
       + '</div>';
+      
+    // Yaha Hindi pehle aur English baad me set kiya gaya hai
     html += '<div class="q-block">'
       + '<div class="q-block-num'+(clr==="r"?" r":"")+'">Q.'+n+'</div>'
-      + '<div class="q-block-text">'+q.text+'</div>'
       + (q.hindi ? '<div class="q-block-hindi">'+q.hindi+'</div>' : '')
+      + '<div class="q-block-text">'+q.text+'</div>'
       + optsHtml
       + '</div>';
   });
