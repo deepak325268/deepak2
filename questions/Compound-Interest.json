@@ -1,0 +1,248 @@
+[
+  {
+    "num": 1,
+    "text": "A sum of Rs. 100 is invested at 10% per annum compound interest (compounded annually) for two years. How much interest will be received after two years?",
+    "hindi": "100 रुपये की राशि को दो साल के लिए 10% प्रति वर्ष चक्रवृद्धि ब्याज (वार्षिक रूप से संयोजित) पर निवेश किया जाता है। दो साल बाद कितना ब्याज मिलेगा?",
+    "opts": ["(a) Rs. 42", "(b) Rs. 21", "(c) Rs. 210", "(d) Rs. 20", "(e) None of these"]
+  },
+  {
+    "num": 2,
+    "text": "A sum of Rs. 2000 is invested at 10% per annum compound interest (compounded annually) for two years. How much interest will be received after two years?",
+    "hindi": "2000 रुपये की राशि को दो साल के लिए 10% प्रति वर्ष चक्रवृद्धि ब्याज (वार्षिक रूप से संयोजित) पर निवेश किया जाता है। दो साल बाद कितना ब्याज मिलेगा?",
+    "opts": ["(a) Rs. 420", "(b) Rs. 2420", "(c) Rs. 210", "(d) Rs. 400", "(e) None of these"]
+  },
+  {
+    "num": 3,
+    "text": "The compound interest (compounded annually) on a sum of money invested for two years is Rs. 10125. If the rate of interest in 25% per annum, then what is the amount after these two years?",
+    "hindi": "2 वर्षों के लिए निवेश की गयी किसी राशि पर चक्रवृद्धि ब्याज (वार्षिक रूप से संयोजित) ₹ 10125 है। यदि व्याज की दर 25% प्रति वर्ष है, तो इन दो वर्षों के बाद मिश्रधन ज्ञात करें।",
+    "opts": ["(a) 28125", "(b) 32275", "(c) 30625", "(d) 26275", "(e) None of these"]
+  },
+  {
+    "num": 4,
+    "text": "A sum of ₹3000 is invested at 20% p.a. compound interest (compounded annually). What is the compound interest for two years?",
+    "hindi": "₹ 3000 की राशि को 20% प्रति वर्ष के चक्रवृद्धि ब्याज दर (वार्षिक रूप से संयोजित) पर निवेश किया गया है। 2 वर्षों का चक्रवृद्धि ब्याज कितना है?",
+    "opts": ["(a) 1360", "(b) 1320", "(c) 1200", "(d) 1440", "(e) None of these"]
+  },
+  {
+    "num": 5,
+    "text": "What is the compound interest on a sum of Rs 102400 after three years at a rate of 12.5 percent per annum interest compounded yearly?",
+    "hindi": "102400 रुपये की राशि पर 12.5 प्रतिशत वार्षिक ब्याज की दर से तीन वर्ष बाद चक्रवृद्धि ब्याज कितना होगा?",
+    "opts": ["(a) 12184", "(b) 12288", "(c) 43400", "(d) 12148", "(e) None of these"]
+  },
+  {
+    "num": 6,
+    "text": "What will be the compound interest for 3 years on Rs 5120 at the rate of 12.5% (compounded annually)?",
+    "hindi": "₹5120 की राशि पर 12.5% की दर से 3 वर्षों का चक्रवृद्धि ब्याज (वार्षिक रूप से संयोजित) कितना होगा?",
+    "opts": ["(a) ₹2280", "(b) ₹1960", "(c) ₹2120", "(d) ₹2170", "(e) None of these"]
+  },
+  {
+    "num": 7,
+    "text": "How much will a principal of Rs 5000 invested on compound interest (compounded annually) amount to, in three years at a rate of 50% per annum?",
+    "hindi": "चक्रवृद्धि ब्याज (वार्षिक रूप से संयोजित) पर निवेश किया गया ₹ 5000 का मूलधन 50% प्रति वर्ष की दर से तीन वर्षों में कितना हो जाएगा?",
+    "opts": ["(a) 16,375", "(b) 16,875", "(c) 11,250", "(d) 17,275", "(e) None of these"]
+  },
+  {
+    "num": 8,
+    "text": "A sum of ₹1000 is invested on compound interest (compounded annually) for three years. If the rate of interest is 10% per annum for the first two years and 50% per annum for the third year, then what will be the interest?",
+    "hindi": "₹1000 की राशि तीन वर्षों के लिए चक्रवृद्धि ब्याज (वार्षिक रूप से संयोजित) पर निवेश की गयी है। यदि ब्याज की दर पहले दो वर्षों के लिए 10% प्रति वर्ष और तीसरे वर्ष के लिए 50% प्रति वर्ष है, तो व्याज कितना होगा?",
+    "opts": ["(a) 612", "(b) 655", "(c) 815", "(d) 756", "(e) None of these"]
+  },
+  {
+    "num": 9,
+    "text": "What is the present value of Rs 14,739 payable in 3 years at the rate of 6.25% yearly compound interest?",
+    "hindi": "6.25% वार्षिक चक्रवृद्धि ब्याज की दर से 3 वर्ष में देय ₹14,739 की राशि का आज का मान कितना है?",
+    "opts": ["(a) 12184", "(b) 12288", "(c) 12473", "(d) 12148", "(e) None of these"]
+  },
+  {
+    "num": 10,
+    "text": "A certain sum invested on compound interest (compounded annually) grows to ₹5040 in three years. If the rate of interest is 20% for the first year, 40% for the second years and 50% for the third years, then what is the sum?",
+    "hindi": "चक्रवृद्धि ब्याज (वार्षिक रूप से संयोजित) पर निवेश की गयी एक निश्चित राशि तीन वर्षों में ₹5040 बड़ जाती है। यदि ब्याज की दर पहले वर्ष के लिए 20%, दूसरे वर्ष के लिए 40% और तीसरे वर्ष के लिए 50% है, तो यह राशि ज्ञात करें।",
+    "opts": ["(a) 1210", "(b) 2566", "(c) 1800", "(d) 2000", "(e) None of these"]
+  },
+  {
+    "num": 11,
+    "text": "Find the compound interest (in Rs) on a sum of Rs 7,500 for 4 years if the rate of interest is 20% per annum for the first two years and 10% per annum for the next two years. (The interest is compounded annually.)",
+    "hindi": "7500 की धनराशि पर 4 वर्ष में प्राप्त चक्रवृद्धि ब्याज (रु. में) ज्ञात करें, यदि प्रथम दो वर्ष के लिए ब्याज दर 20% वार्षिक है और अगले दो वर्ष के लिए ब्याज दर 10% वार्षिक है (ब्याज की गणना वार्षिक चक्रवृद्धि आधार पर होती है)।",
+    "opts": ["(a) 6,558", "(b) 5,658", "(c) 5,586", "(d) 5,568", "(e) None of these"]
+  },
+  {
+    "num": 12,
+    "text": "A sum of Rs. 200 is invested at 10% per annum compound interest (compounded annually) for 1.5 years. How much interest will be received after 1.5 years?",
+    "hindi": "200 रुपये की राशि को 1.5 वर्षों के लिए 10% प्रति वर्ष चक्रवृद्धि ब्याज (वार्षिक रूप से संयोजित) पर निवेश किया जाता है। 1.5 साल बाद कितना ब्याज मिलेगा?",
+    "opts": ["(a) Rs. 31", "(b) Rs. 21", "(c) Rs. 310", "(d) Rs. 20", "(e) None of these"]
+  },
+  {
+    "num": 13,
+    "text": "A sum of Rs. 2000 is invested at 10% per annum compound interest (compounded annually) for 2.5 years. How much interest will be received after 2.5 years?",
+    "hindi": "2000 रुपये की राशि को 2.5 वर्षों के लिए 10% प्रति वर्ष चक्रवृद्धि ब्याज (वार्षिक रूप से संयोजित) पर निवेश किया जाता है। 2.5 साल बाद कितना व्याज मिलेगा?",
+    "opts": ["(a) Rs. 541", "(b) Rs. 241", "(c) Rs. 310", "(d) Rs. 2541", "(e) None of these"]
+  },
+  {
+    "num": 14,
+    "text": "The compound interest on a certain sum in $2\\frac{1}{2}$ years at 10% p.a. interest compounded yearly, is Rs. 1623. The sum is:",
+    "hindi": "किसी निश्चित राशि पर 10% प्रति वर्ष वार्षिक चक्रवृद्धि ब्याज की दर से $2\\frac{1}{2}$ वर्षों का चक्रवृद्धि ब्याज रु 1623 हैं। यह राशि हैं?",
+    "opts": ["(a) Rs. 5,000", "(b) Rs. 6,000", "(c) Rs. 6,500", "(d) Rs. 7,200", "(e) None of these"]
+  },
+  {
+    "num": 15,
+    "text": "What is the compound interest (in Rs) on a sum of Rs. 25,000 for $3\\frac{2}{5}$ years at 10% p.a. If the interest is compounded annually?",
+    "hindi": "25000 रूपये की राशि पर 10% वार्षिक ब्याज दर से $3\\frac{2}{5}$ वर्षों का चक्रवृद्धि ब्याज (रूपये में) क्या होगा? वार्षिक रूप से चक्रवृद्धि किया जाता है।",
+    "opts": ["(a) 9606", "(b) 8275", "(c) 9516", "(d) 8425", "(e) None of these"]
+  },
+  {
+    "num": 16,
+    "text": "Find the ratio of principal to amount. If the rate of interest is $16\\frac{2}{3}\\%$ per annum compounded annually for $1\\frac{1}{4}$ years.",
+    "hindi": "मूलधन और मिश्रधन का अनुपात ज्ञात कीजिए यदि चक्रवृद्धि ब्याज की दर $16\\frac{2}{3}\\%$ वार्षिक तथा समय $1\\frac{1}{4}$ वर्ष हैं?",
+    "opts": ["(a) 144:175", "(b) 144:169", "(c) 125:144", "(d) 175:144", "(e) None of these"]
+  },
+  {
+    "num": 17,
+    "text": "Find the ratio of principal to amount. If the rate of interest is $12\\frac{1}{2}\\%$ per annum compounded annually for 1 year and 2 months.",
+    "hindi": "मूलधन और मिश्रधन का अनुपात ज्ञात कीजिए यदि चक्रवृद्धि ब्याज की दर $12\\frac{1}{2}\\%$ वार्षिक तथा समय 1 वर्ष 2 माह है?",
+    "opts": ["(a) 441:625", "(b) 128:147", "(c) 400:441", "(d) 441:400", "(e) None of these"]
+  },
+  {
+    "num": 18,
+    "text": "Find the ratio of principal to amount. If the rate of interest is 12% per annum compounded annually for 2 year and 5 months.",
+    "hindi": "मूलधन और मिश्रधन का अनुपात ज्ञात कीजिए यदि चक्रवृद्धि ब्याज की दर 12% वार्षिक तथा समय 2 वर्ष 5 माह हैं?",
+    "opts": ["(a) 9261:80000", "(b) 3125:4116", "(c) 8000:9261", "(d) 4116:3125", "(e) None of these"]
+  },
+  {
+    "num": 19,
+    "text": "A certain amount of money was lent for a period of 1 year 9 months at a rate of 10% per annum compounded annually. If the compound interest is Rs 1460, find the amount of money lent.",
+    "hindi": "एक निश्चित राशि 1 वर्ष 9 महीने की अवधि के लिए 10% वार्षिक चक्रवृद्धि ब्याज की दर पर उधार दी गई थी। यदि चक्रवृद्धि ब्याज 1460 रुपये है, तो उधार दी गई धनराशि ज्ञात करें।",
+    "opts": ["(a) Rs 8200", "(b) Rs 7500", "(c) Rs 6000", "(d) Rs 8000", "(e) None of these"]
+  },
+  {
+    "num": 20,
+    "text": "Find the ratio of principal to amount. If the rate of interest is 12% per annum compounded 5 monthly for 1 year and 3 months.",
+    "hindi": "मूलधन और मिश्रघन का अनुपात ज्ञात कीजिए यदि चक्रवृद्धि ब्याज की दर 12% वार्षिक (ब्याज की गणना प्रत्येक 5 माह पर होती है) तथा समय 1 वर्ष 3 माह है।",
+    "opts": ["(a) 10000:9261", "(b) 8000:9261", "(c) 21600:9261", "(d) 9261:8000", "(e) None of these"]
+  },
+  {
+    "num": 21,
+    "text": "Find the compound interest on Rs 10,000 for $1\\frac{1}{2}$ years at 20% per annum, interest is payable half-yearly.",
+    "hindi": "10,000 रुपये पर $1\\frac{1}{2}$ वर्षों में 20% प्रति वर्ष की दर से चक्रवृद्धि ब्याज ज्ञात कीजिए, ब्याज अर्ध-वार्षिक चक्रवृद्धि है।",
+    "opts": ["(a) Rs 3315", "(b) Rs 3310", "(c) Rs 3305", "(d) Rs 3320", "(e) None of these"]
+  },
+  {
+    "num": 22,
+    "text": "What is the difference between the compound interest, when interest is compounded 5 monthly, and the simple interest on a sum of Rs 12,000 for $1\\frac{1}{4}$ years at 12% per annum?",
+    "hindi": "₹12000 की राशि पर 12% की दर से $1\\frac{1}{4}$ वर्षों का चक्रवृद्धि ब्याज (5 माह की चक्रवृद्धि) तथा साधारण ब्याज में अंतर ज्ञात करें।",
+    "opts": ["(a) ₹ 90", "(b) ₹ 91.50", "(c) ₹ 93", "(d) ₹ 92.50", "(e) None of these"]
+  },
+  {
+    "num": 23,
+    "text": "A sum of Rs. 10000 is invested at 10% per annum compound interest (compounded annually) for two years. How much interest will be received after two years?",
+    "hindi": "10000 रुपये की राशि को दो साल के लिए 10% प्रति वर्ष चक्रवृद्धि ब्याज (वार्षिक रूप से संयोजित) पर निवेश किया जाता है। दो साल बाद कितना ब्याज मिलेगा?",
+    "opts": ["(a) Rs. 420", "(b) Rs. 210", "(c) Rs. 2100", "(d) Rs. 2000", "(e) None of these"]
+  },
+  {
+    "num": 24,
+    "text": "In how many years will Rs. 10000 amounts to Rs. 12100 at the rate of 10% compound interest per annum?",
+    "hindi": "10% वार्षिक चक्रवृद्धि ब्याज की दर से कितने वर्षों में 10000 रूपये की राशि 12100 रूपये हो जाएगी?",
+    "opts": ["(a) 5", "(b) 2", "(c) 4", "(d) 3"]
+  },
+  {
+    "num": 25,
+    "text": "In how many years will Rs. 4000 amounts to Rs. 5760 at the rate of 20% compound interest per annum?",
+    "hindi": "20% वार्षिक चक्रवृद्धि ब्याज की दर से कितने वर्षों में 4000 रूपये की राशि 5760 रूपये हो जाएगी?",
+    "opts": ["(a) 5", "(b) 2", "(c) 4", "(d) 3"]
+  },
+  {
+    "num": 26,
+    "text": "In how many years will Rs. 20000 amounts to Rs. 26620 at the rate of 10% compound interest per annum?",
+    "hindi": "10% वार्षिक चक्रवृद्धि ब्याज की दर से कितने वर्षों में 20000 रूपये की राशि 26620 रूपये हो जाएगी?",
+    "opts": ["(a) 5", "(b) 2", "(c) 4", "(d) 3"]
+  },
+  {
+    "num": 27,
+    "text": "In what time will Rs. 3,20,000 amount to Rs. 4,05,000 if compounded at 12.5% per annum?",
+    "hindi": "कितने समय में ₹3,20,000 की राशि ₹4,05,000 हो जाएगी यदि वह 12.5% वार्षिक दर से संयोजित की जाती है?",
+    "opts": ["(1) 1 year", "(2) 2 year", "(3) 3 year", "(4) 4 year"]
+  },
+  {
+    "num": 28,
+    "text": "If a certain sum of money of Rs. 225 amount to Rs. 256 in two years. Find the rate of compound interest?",
+    "hindi": "रु 225 का धन 2 वर्ष में रु 256 हो जाता हैं दर ज्ञात करों?",
+    "opts": ["(a) 20/3%", "(b) 18/4%", "(c) 15%", "(d) 20%"]
+  },
+  {
+    "num": 29,
+    "text": "If a certain sum of money of Rs. 2304 amount to Rs. 2500 in two years. Find the rate of compound interest?",
+    "hindi": "रु 2304 का धन 2 वर्ष में रु 2500 हो जाता हैं दर ज्ञात करों?",
+    "opts": ["(a) 25/6%", "(b) 18/4%", "(c) 15%", "(d) 20%"]
+  },
+  {
+    "num": 30,
+    "text": "If a certain sum of money of Rs. 102400 amount to Rs.145800 in 3 years. Find the rate of compound interest?",
+    "hindi": "रु 102400 का धन 3 वर्ष में रु 145800 हो जाता हैं दर ज्ञात करों?",
+    "opts": ["(a) 12.5%", "(b) 18/4%", "(c) 15%", "(d) 20%"]
+  },
+  {
+    "num": 31,
+    "text": "A sum of Rs. 6,400 invested on the basis of yearly compounding of interest, grows to Rs. 7,056 in two years. What is the percentage rate of interest?",
+    "hindi": "रु. 6,400 की राशि का वार्षिक चक्रवृद्धि ब्याज के आधार पर निवेश किया गया और यह राशि दो वर्षों में रु. 7,056 हो गई। ब्याज की प्रतिशत दर कितनी थी?",
+    "opts": ["(a) 4", "(b) 7.5", "(c) 5", "(d) 6.25"]
+  },
+  {
+    "num": 32,
+    "text": "At what rate per annum will Rs. 32000 yield a compound interest of Rs. 5044 in 3 years?",
+    "hindi": "32000 रूपये की राशि कितने प्रतिशत ब्याज दर पर 3 वर्षों 5044 रुपए का चक्रवृद्धि ब्याज अर्जित करेगी?",
+    "opts": ["(a) 10%", "(b) $5\\frac{1}{2}\\%$", "(c) 5%", "(d) 2.5%"]
+  },
+  {
+    "num": 33,
+    "text": "The compound interest and the amount obtained, on a certain sum of money are Rs 820 and Rs 8820 respectively after 2 years. If the rate of interest compounded yearly, then the rate of interest is:",
+    "hindi": "एक निश्चित राशि पर 2 साल बाद चक्रवृद्धि ब्याज और प्राप्त राशि क्रमशः ₹820 और ₹ 8,820 है। यदि ब्याज की दर वार्षिक रूप से संयोजित है, तो ब्याज की दर है:",
+    "opts": ["(a) 8%", "(b) 6%", "(c) 5%", "(d) 7%"]
+  },
+  {
+    "num": 34,
+    "text": "At what rate percentage per annum will Rs. 14,400 amount to Rs 15,876 in one year, if interest is compounded half-yearly?",
+    "hindi": "यदि ब्याज अर्ध-वार्षिक चक्रवृद्धि है तो किस दर प्रतिशत प्रति वर्ष पर 14400 की धनराशि बढ़कर 15,876 हो जाएगी?",
+    "opts": ["(a) 15%", "(b) 12%", "(c) 10%", "(d) 8%"]
+  },
+  {
+    "num": 35,
+    "text": "A sum of money becomes Rs 650 after 2 years and Rs 676 after 4 years by compound interest. What is that sum?",
+    "hindi": "एक धनराशि चक्रवृद्धि ब्याज द्वारा 2 वर्षों के पश्चात रु 650 और 4 वर्ष के पश्चात रु 676 हो जाती हैं। वह धनराशि हैं?",
+    "opts": ["(a) Rs. 600", "(b) Rs. 321", "(c) Rs. 625", "(d) Rs. 249"]
+  },
+  {
+    "num": 36,
+    "text": "A sum of money becomes Rs 4818 after 3 years and Rs 7227 after 6 years by compound interest. What is that sum?",
+    "hindi": "एक धनराशि चक्रवृद्धि ब्याज द्वारा 3 वर्षों के पश्चात रु 4818 और 6 वर्ष के पश्चात रु 7227 हो जाती हैं। वह धनराशि हैं?",
+    "opts": ["(a) Rs. 3122", "(b) Rs. 3212", "(c) Rs. 2409", "(d) Rs. 2490"]
+  },
+  {
+    "num": 37,
+    "text": "A sum of money becomes Rs 3600 after 2 years and Rs 5184 after 4 years by compound interest. What is that sum?",
+    "hindi": "एक धनराशि चक्रवृद्धि ब्याज द्वारा 2 वर्षों के पश्चात रु 3600 और 4 वर्ष के पश्चात रु 5184 हो जाती हैं। वह धनराशि हैं?",
+    "opts": ["(a) Rs. 2550", "(b) Rs. 3210", "(c) Rs. 2500", "(d) Rs. 2490"]
+  },
+  {
+    "num": 38,
+    "text": "If a certain sum of money becomes equal 3 times in 8 years in how much time it will be 243 times of itself.",
+    "hindi": "अगर कोई धन 8 वर्ष में अपने से तीन गुणा हो जाता हैं तो कितने समय में यह अपने से 243 गुणा हो जाएगा?",
+    "opts": ["(a) 40 years", "(b) 30 years", "(c) 25 years", "(d) 20 years"]
+  },
+  {
+    "num": 39,
+    "text": "If a certain sum of money becomes equal 2 times in 3 years in how much time it will be 64 times of itself.",
+    "hindi": "अगर कोई धन 3 वर्ष में अपने से 2 गुणा हो जाता हैं तो कितने समय में यह अपने से 64 गुणा हो जाएगा?",
+    "opts": ["(a) 40 years", "(b) 30 years", "(c) 25 years", "(d) 18 years"]
+  },
+  {
+    "num": 40,
+    "text": "If a certain sum of money becomes equal 3 times in 6 years in how much time it will be 27 times of itself.",
+    "hindi": "अगर कोई धन 6 वर्ष में अपने से तीन गुणा हो जाता हैं तो कितने समय में यह अपने से 27 गुणा हो जाएगा?",
+    "opts": ["(a) 40 years", "(b) 30 years", "(c) 25 years", "(d) 18 years"]
+  },
+  {
+    "num": 41,
+    "text": "If a certain sum of money becomes equal 2 times in 5 years in how much time it will be 16 times of itself.",
+    "hindi": "अगर कोई धन 5 वर्ष में अपने से 2 गुणा हो जाता हैं तो कितने समय में यह अपने से 16 गुणा हो जाएगा?",
+    "opts": ["(a) 40 years", "(b) 20 years", "(c) 25 years", "(d) 22 years"]
+  }
+]
