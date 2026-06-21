@@ -271,16 +271,18 @@
     .sub-list { display: flex; flex-direction: column; gap: 6px; }
     .sub-row  { display: flex; align-items: center; gap: 10px; }
     .sub-label { font-size: 12px; font-weight: 600; color: var(--muted); font-family: 'Inter', sans-serif; min-width: 44px; }
-    .sub-q {
-      font-size: 14px; font-weight: 600; color: var(--accent-o);
+    
+    .sub-q, .sub-q-r {
+      font-size: 14px; font-weight: 600; 
       font-family: 'Inter', sans-serif;
-      background: var(--pill-o-bg); padding: 2px 10px; border-radius: 6px;
+      padding: 2px 10px; border-radius: 6px;
     }
-    .sub-q-r {
-      font-size: 14px; font-weight: 600; color: var(--accent-r);
-      font-family: 'Inter', sans-serif;
-      background: var(--pill-r-bg); padding: 2px 10px; border-radius: 6px;
-    }
+    .sub-q { color: var(--accent-o); background: var(--pill-o-bg); }
+    .sub-q-r { color: var(--accent-r); background: var(--pill-r-bg); }
+
+    /* Naya Clickable Question UI */
+    .q-click { cursor: pointer; transition: transform 0.2s, opacity 0.2s; -webkit-tap-highlight-color: transparent; }
+    .q-click:active { transform: scale(0.92); }
 
     /* check circle */
     .check-box {
@@ -320,51 +322,6 @@
       margin-top: 14px;
       padding-top: 14px;
     }
-
-    /* q-toggle button (small chevron row) */
-    .q-toggle {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 12px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--muted);
-      font-family: 'Inter', sans-serif;
-    }
-    .q-toggle .q-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      flex: 1;
-    }
-    .q-pill {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 20px;
-      cursor: pointer;
-      border: 1.5px solid var(--pill-o-border);
-      background: var(--pill-o-bg);
-      color: var(--pill-o-text);
-      font-family: 'Inter', sans-serif;
-      transition: all 0.2s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .q-pill.r-pill {
-      border-color: var(--pill-r-border);
-      background: var(--pill-r-bg);
-      color: var(--pill-r-text);
-    }
-    .q-pill:active { transform: scale(0.92); }
-
-    .chevron {
-      font-size: 11px;
-      transition: transform 0.3s ease;
-      flex-shrink: 0;
-      color: var(--muted);
-    }
-    .chevron.up { transform: rotate(180deg); }
 
     /* single question block inside expand */
     .q-block {
@@ -634,7 +591,7 @@ function renderContent() {
   content.innerHTML = "";
   var data = allData[activeTab];
   if (!data.chapters || data.chapters.length === 0) {
-    content.innerHTML = '<div class="error-box"><p>कोई chapter नहीं मिला。</p></div>';
+    content.innerHTML = '<div class="error-box"><p>कोई chapter नहीं मिला।</p></div>';
     updateProgress(); return;
   }
   var cards = [];
@@ -654,43 +611,19 @@ function makeSubCard(key, ch, clr) {
   card.className = "chapter-card" + (done?" done":"");
   card.dataset.key = key;
 
-  // Build sub rows HTML (Q count pills)
+  // Build sub rows HTML and ADD q-click DIRECTLY to the 'Q. 48' text
   var subsHtml = '<div class="sub-list">';
   ch.subs.forEach(function(s) {
     subsHtml += '<div class="sub-row"><span class="sub-label">Sub '+s.subNum+'</span>'
-              + '<span class="sub-q'+(clr==="r"?"-r":"")+'">Q. '+s.q+'</span></div>';
+              + '<span class="sub-q'+(clr==="r"?"-r":"")+' q-click" data-qnum="'+s.q+'" title="Click to Expand">Q. '+s.q+'</span></div>';
   });
   subsHtml += '</div>';
-
-  // Q number pills for expand toggle
-  // Collect all question numbers from all subs
-  var allQNums = [];
-  ch.subs.forEach(function(s) {
-    if (Array.isArray(s.questions)) {
-      s.questions.forEach(function(n) { if (allQNums.indexOf(n)<0) allQNums.push(n); });
-    }
-  });
-
-  var pillsHtml = '';
-  var toggleHtml = '';
-  if (allQNums.length > 0 && ch.questionsFile) {
-    allQNums.sort(function(a,b){return a-b;});
-    pillsHtml = allQNums.map(function(n) {
-      return '<span class="q-pill'+(clr==="r"?" r-pill":"")+'" data-qnum="'+n+'">Q.'+n+'</span>';
-    }).join('');
-    toggleHtml =
-      '<div class="q-toggle">'
-      + '<div class="q-pills">'+pillsHtml+'</div>'
-      + '<span class="chevron" id="chev_'+key+'">▼</span>'
-      + '</div>';
-  }
 
   card.innerHTML =
     '<div class="card-top">'
     + '<div class="chapter-info">'
     +   '<div class="chapter-name">'+ch.chapter+'</div>'
     +   subsHtml
-    +   toggleHtml
     + '</div>'
     + '<div class="check-box check-'+clr+(done?" checked":"")+'">'+( done?"✓":"")+'</div>'
     + '</div>'
@@ -705,9 +638,9 @@ function makeSubCard(key, ch, clr) {
     toggleDone(key, card, clr);
   });
 
-  // Q pill click → expand that question
-  if (allQNums.length > 0 && ch.questionsFile) {
-    var pills = card.querySelectorAll(".q-pill");
+  // Direct Click on Q.48 pill → expand that question
+  if (ch.questionsFile) {
+    var pills = card.querySelectorAll(".q-click");
     pills.forEach(function(pill) {
       pill.addEventListener("click", function(e) {
         e.stopPropagation();
@@ -728,7 +661,6 @@ function toggleExpandQuestion(key, file, qnum, clr, pillEl) {
   if (!expandState[key]) expandState[key] = new Set();
   var expDiv   = document.getElementById("qexp_" + key);
   var innerDiv = document.getElementById("qinner_" + key);
-  var chevron  = document.getElementById("chev_" + key);
 
   if (expandState[key].has(qnum)) {
     // Remove this question
@@ -736,7 +668,6 @@ function toggleExpandQuestion(key, file, qnum, clr, pillEl) {
     pillEl.style.opacity = "1";
     if (expandState[key].size === 0) {
       expDiv.classList.remove("open");
-      if (chevron) chevron.classList.remove("up");
     } else {
       renderExpandedQuestions(key, file, clr);
     }
@@ -745,7 +676,6 @@ function toggleExpandQuestion(key, file, qnum, clr, pillEl) {
     expandState[key].add(qnum);
     pillEl.style.opacity = "0.5";
     expDiv.classList.add("open");
-    if (chevron) chevron.classList.add("up");
     // Load JSON if not cached, then render
     loadQBank(file, function() {
       renderExpandedQuestions(key, file, clr);
