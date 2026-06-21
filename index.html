@@ -634,11 +634,12 @@ function renderContent() {
   content.innerHTML = "";
   var data = allData[activeTab];
   if (!data.chapters || data.chapters.length === 0) {
-    content.innerHTML = '<div class="error-box"><p>कोई chapter नहीं मिला।</p></div>';
+    content.innerHTML = '<div class="error-box"><p>कोई chapter नहीं मिला。</p></div>';
     updateProgress(); return;
   }
   var cards = [];
   data.chapters.forEach(function(ch, i) {
+    ch.questionsFile = ch.chapter.toLowerCase().trim().replace(/\s+/g, '-') + ".json";
     cards.push(makeSubCard(activeTab + "_" + i, ch, clr));
   });
   var pending = cards.filter(function(c) { return !c.classList.contains("done"); });
