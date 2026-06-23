@@ -1,167 +1,156 @@
 [
   {
     "num": 1,
-    "text": "Calculate the mean of the following set of values: 2.2, 4.2, 6.4, 8.3, 10.5",
-    "hindi": "दिए गए मानों के समुच्चय का माध्य ज्ञात कीजिए: 2.2, 4.2, 6.4, 8.3, 10.5",
+    "text": "Find the mean of the first ten natural numbers.",
+    "hindi": "प्रथम दस प्राकृत संख्याओं का माध्य ज्ञात कीजिए?",
     "opts": [
-      "(a) 6.50",
-      "(b) 7",
-      "(c) 6.32",
-      "(d) 6.12"
+      "(a) 5",
+      "(b) 5.5",
+      "(c) 10",
+      "(d) 11"
     ]
   },
   {
     "num": 2,
-    "text": "Find out the mean of the given below data: $1, \\frac{1}{2}, \\frac{1}{2}, \\frac{3}{4}, \\frac{1}{4}, 2, \\frac{1}{2}, \\frac{1}{4}, \\frac{3}{4}$",
-    "hindi": "आंकड़ों का माध्य हैं? $1, \\frac{1}{2}, \\frac{1}{2}, \\frac{3}{4}, \\frac{1}{4}, 2, \\frac{1}{2}, \\frac{1}{4}, \\frac{3}{4}$",
+    "text": "Find the mean of the first ten odd numbers?",
+    "hindi": "प्रथम दस विषम संख्याओं का माध्य ज्ञात कीजिए ?",
     "opts": [
-      "(a) $\\frac{15}{18}$",
-      "(b) $\\frac{13}{18}$",
-      "(c) $\\frac{7}{9}$",
-      "(d) $\\frac{8}{9}$"
+      "(a) 8",
+      "(b) 10",
+      "(c) 11",
+      "(d) 100"
     ]
   },
   {
     "num": 3,
-    "text": "The median of 4, 4, 5, 7, 6, 7, 7, 12, 3",
-    "hindi": "4, 4, 5, 7, 6, 7, 7, 12, 3 की माध्यिका ज्ञात कीजिए",
+    "text": "Find the mean of the first ten even numbers?",
+    "hindi": "प्रथम दस सम संख्याओं का माध्य ज्ञात कीजिए ?",
     "opts": [
-      "(a) 4",
-      "(b) 6",
-      "(c) 5",
-      "(d) 7"
+      "(a) 10",
+      "(b) 5.5",
+      "(c) 11",
+      "(d) 10.5"
     ]
   },
   {
     "num": 4,
-    "text": "What is the median of the following data? 78, 56, 22, 34, 48, 54, 39, 68, 54, 84",
-    "hindi": "निम्नलिखित आंकड़ों की माध्यिका ज्ञात कीजिए ? 78, 56, 22, 34, 48, 54, 39, 68, 54, 84",
+    "text": "Find the mean of the squares of the first five natural numbers.",
+    "hindi": "प्रथम पाँच प्राकृत संख्याओं के वर्गों का माध्य ज्ञात कीजिए ?",
     "opts": [
-      "(a) 54",
-      "(b) 53",
-      "(c) 55",
-      "(d) 51"
-    ]
-  },
-  {
-    "num": 5,
-    "text": "The digits given below are arranged in ascending order. If their median is 10, then find the value of p: 3, 5, 6, 2p+3, 3p+2, 15, 25, 51",
-    "hindi": "नीचे दिए गए आंकड़ों को आरोही क्रम में व्यवस्थित किया गया हैं I यदि इनकी माध्यिका 10 हैं, तो p का मान ज्ञात कीजिए ? 3, 5, 6, 2p+3, 3p+2, 15, 25, 51",
-    "opts": [
-      "(a) 2",
-      "(b) 3",
-      "(c) 27.5",
-      "(d) 38"
-    ]
-  },
-  {
-    "num": 6,
-    "text": "What will be the mode of the given data? 12, 1, 10, 1, 9, 3, 4, 9, 7, 9",
-    "hindi": "आंकड़ों 12, 1, 10, 1, 9, 3, 4, 9, 7, 9 का बहुलक हैं?",
-    "opts": [
-      "(a) 9",
-      "(b) 12",
-      "(c) 1",
-      "(d) 7"
-    ]
-  },
-  {
-    "num": 7,
-    "text": "Wickets taken by a bowler in 12 cricket matches are as follows: 2, 6, 4, 3, 5, 0, 3, 2, 1, 3, 2, 3. What will be the mode of the given data?",
-    "hindi": "एक गेंदबाज द्वारा 12 क्रिकेट मैचों में लिए गए विकेट इस प्रकार हैं: 2, 6, 4, 3, 5, 0, 3, 2, 1, 3, 2, 3. आंकड़ों का बहुलक (मोड़) ज्ञात कीजिए।",
-    "opts": [
-      "(a) 4",
-      "(b) 2",
-      "(c) 3",
-      "(d) 1"
-    ]
-  },
-  {
-    "num": 8,
-    "text": "The following are the weights (in kg) of 25 students: 58, 55, 53, 50, 53, 51, 52, 54, 53, 52, 54, 53, 58, 53, 59, 55, 53, 52, 51, 54, 53, 59, 55, 53, 52. What is the range of the given data?",
-    "hindi": "25 छात्रों का वजन (किग्रा. में) निम्नलिखित हैं: 58, 55, 53, 50, 53, 51, 52, 54, 53, 52, 54, 53, 58, 53, 59, 55, 53, 52, 51, 54, 53, 59, 55, 53, 52. दिए गए आंकड़ों का परास (range) क्या हैं?",
-    "opts": [
-      "(a) 6",
-      "(b) 8",
-      "(c) 9",
-      "(d) 7"
-    ]
-  },
-  {
-    "num": 9,
-    "text": "What will be the range of the following data? 12, 11, 18, 28, 19, 13, 19, 18, 12, 11, 18, 28, 19, 13, 19, 18",
-    "hindi": "इन अंकों का range ज्ञात कीजिए ? 12, 11, 18, 28, 19, 13, 19, 18, 12, 11, 18, 28, 19, 13, 19, 18",
-    "opts": [
-      "(a) 11",
-      "(b) 17",
-      "(c) 18",
-      "(d) 19"
-    ]
-  },
-  {
-    "num": 10,
-    "text": "If the standard deviation of a distribution is 6, then what is the value of variance?",
-    "hindi": "यदि एक बंटन का मानक विचलन 6 हैं, तो उसके प्रसरण (variance) का क्या मान हैं?",
-    "opts": [
-      "(a) 8",
-      "(b) 24",
-      "(c) 36",
+      "(a) 9.5",
+      "(b) 10",
+      "(c) 11",
       "(d) 12"
     ]
   },
   {
-    "num": 11,
-    "text": "If the variance of a data set is 196, the standard deviation will be?",
-    "hindi": "एक डाटा सेट का प्रसरण 196 हैं, तो मानक विचलन ज्ञात कीजिए ?",
+    "num": 5,
+    "text": "Find the mean of the cubes of the first five natural numbers.",
+    "hindi": "प्रथम पाँच प्राकृत संख्याओं के घनों का माध्य ज्ञात कीजिए ?",
     "opts": [
-      "(a) $\\pm14$",
+      "(a) 43",
+      "(b) 45",
+      "(c) 47",
+      "(d) 50"
+    ]
+  },
+  {
+    "num": 6,
+    "text": "Find the average of the squares of the first 10 consecutive even numbers?",
+    "hindi": "प्रथम 10 लगातार सम संख्याओं का वर्गों का औसत ज्ञात कीजिए ?",
+    "opts": [
+      "(a) 100",
+      "(b) 110",
+      "(c) 124",
+      "(d) 154"
+    ]
+  },
+  {
+    "num": 7,
+    "text": "Find the average of the squares of the first 15 odd numbers?",
+    "hindi": "प्रथम 15 विषम संख्याओं के वर्गों का औसत ज्ञात कीजिए?",
+    "opts": [
+      "(a) 225",
+      "(b) 226",
+      "(c) 244.6",
+      "(d) 299.6"
+    ]
+  },
+  {
+    "num": 8,
+    "text": "Find the average of consecutive numbers given below: 25, 26, 27, 28, 29, 30, 31",
+    "hindi": "नीचे दिए गई लगातार संख्याओं का औसत ज्ञात कीजिए: 25, 26, 27, 28, 29, 30, 31",
+    "opts": [
+      "(a) 27",
+      "(b) 28",
+      "(c) 28.5",
+      "(d) 29"
+    ]
+  },
+  {
+    "num": 9,
+    "text": "Find the average of the following consecutive odd numbers 9, 11, 13, 15, 17, 19",
+    "hindi": "निम्नलिखित लगातार विषम संख्याओं का औसत ज्ञात कीजिए 9, 11, 13, 15, 17, 19",
+    "opts": [
+      "(a) 13",
       "(b) 14",
-      "(c) 96",
-      "(d) 98"
+      "(c) 15",
+      "(d) 13.5"
+    ]
+  },
+  {
+    "num": 10,
+    "text": "Average of all even numbers between 222 and 250 is",
+    "hindi": "222 और 250 के बीच की सभी सम संख्याओं का औसत हैं?",
+    "opts": [
+      "(a) 234",
+      "(b) 232",
+      "(c) 236",
+      "(d) 230"
+    ]
+  },
+  {
+    "num": 11,
+    "text": "The average of all odd numbers from 113 to 159 is",
+    "hindi": "113 से 159 तक की सभी विषम संख्याओं का औसत हैं?",
+    "opts": [
+      "(a) 135",
+      "(b) 134",
+      "(c) 133",
+      "(d) 136"
     ]
   },
   {
     "num": 12,
-    "text": "The variance of a data set is 169, then what will be the standard deviation?",
-    "hindi": "एक सेट का विचलन (variance) 169 हैं, तो मानक विचलन (standard deviation) ज्ञात कीजिए ?",
+    "text": "Find the mean of x, x+2, x+4, x+6 and x+8?",
+    "hindi": "x, x+2, x+4, x+6 और x+8 का माध्य ज्ञात कीजिए ?",
     "opts": [
-      "(a) $\\pm13$",
-      "(b) 13",
-      "(c) 69",
-      "(d) 845"
+      "(a) x+2",
+      "(b) x+4",
+      "(c) x+5",
+      "(d) x+6"
     ]
   },
   {
     "num": 13,
-    "text": "The mean of a distribution is 11 and the standard deviation is 5. What is the value of variance coefficient?",
-    "hindi": "एक बंटन का माध्य 11 हैं और मानक विचलन 5 हैं I विचरण गुणांक का मान क्या हैं?",
+    "text": "Find the average of multiples of first five three?",
+    "hindi": "प्रथम पाँच तीन के गुणजों का औसत ज्ञात कीजिए ?",
     "opts": [
-      "(a) 45.45%",
-      "(b) 35.35%",
-      "(c) 25.25%",
-      "(d) 55.55%"
+      "(a) 9",
+      "(b) 12",
+      "(c) 15",
+      "(d) 18"
     ]
   },
   {
     "num": 14,
-    "text": "The mean of the distribution is 14 and the standard deviation is 5. Find the variance coefficient.",
-    "hindi": "बटनों का माध्य (mean) 14 हैं और मानक विचलन 5 हैं I विचलन गुणांक ज्ञात कीजिए ?",
+    "text": "Find average of first 19 multiple of 39.",
+    "hindi": "39 के पहले 19 गुणकों की औसत ज्ञात करें?",
     "opts": [
-      "(a) 60.4%",
-      "(b) 27.9%",
-      "(c) 35.7%",
-      "(d) 48.3%"
-    ]
-  },
-  {
-    "num": 15,
-    "text": "If the median and mean are 36 and 35 respectively, then find the mode.",
-    "hindi": "यदि माध्यिका और माध्य क्रमशः 36 और 35 हैं, तो बहुलक ज्ञात कीजिए ?",
-    "opts": [
-      "(a) 32",
-      "(b) 34",
-      "(c) 38",
-      "(d) 30"
+      "(a) 385",
+      "(b) 390",
+      "(c) 360",
+      "(d) 372"
     ]
   }
 ]
