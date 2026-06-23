@@ -269,21 +269,24 @@
     }
 
     /* sub rows (Q count) */
-    .sub-list { display: flex; flex-direction: column; gap: 6px; }
-    .sub-row  { display: flex; align-items: center; gap: 10px; }
-    .sub-label { font-size: 12px; font-weight: 600; color: var(--muted); font-family: 'Inter', sans-serif; min-width: 44px; }
-    
-    .sub-q, .sub-q-r {
-      font-size: 14px; font-weight: 600; 
-      font-family: 'Inter', sans-serif;
-      padding: 2px 10px; border-radius: 6px;
-    }
-    .sub-q { color: var(--accent-o); background: var(--pill-o-bg); }
-    .sub-q-r { color: var(--accent-r); background: var(--pill-r-bg); }
+    .sub-list { display: flex; flex-direction: column; gap: 10px; }
+.sub-row  { display: flex; align-items: center; gap: 14px; }
+.sub-label { font-size: 12px; font-weight: 600; color: var(--muted); font-family: 'Inter', sans-serif; min-width: 54px; }
+
+.sub-q, .sub-q-r {
+  font-size: 14px; font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  padding: 6px 16px; border-radius: 20px;
+  display: inline-block; min-width: 72px;
+  text-align: center; letter-spacing: 0.3px;
+}
+.sub-q { color: var(--accent-o); background: var(--pill-o-bg); border: 1.5px solid var(--pill-o-border); }
+.sub-q-r { color: var(--accent-r); background: var(--pill-r-bg); border: 1.5px solid var(--pill-r-border); }
 
     /* Clickable Question UI */
-    .q-click { cursor: pointer; transition: transform 0.2s, opacity 0.2s; -webkit-tap-highlight-color: transparent; }
-    .q-click:active { transform: scale(0.92); }
+.q-click { cursor: pointer; transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s; -webkit-tap-highlight-color: transparent; }
+.q-click:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.q-click:active { transform: scale(0.90); box-shadow: none; opacity: 0.75; }
 
     /* check circle */
     .check-box {
@@ -318,11 +321,14 @@
       max-height: 2000px;
       opacity: 1;
     }
-    .q-expand-inner {
-      border-top: 1px solid var(--border);
-      margin-top: 14px;
-      padding-top: 14px;
-    }
+   .q-expand-inner {
+  border-top: 1px solid var(--border);
+  margin-top: 14px;
+  padding: 16px;
+  background: var(--check-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
 
     /* single question block inside expand */
     .q-block {
