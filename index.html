@@ -424,6 +424,22 @@
     @media(max-width: 400px) {
       .q-block-opts { grid-template-columns: 1fr; }
     }
+    .admin-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--border);
+  color: var(--text);
+  font-size: 16px;
+  text-decoration: none;
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.admin-link:hover { opacity: 1; }
   </style>
 </head>
 <body>
@@ -433,6 +449,7 @@
     <div class="day-pill" id="dayPill">...</div>
     <h1>आज का Revision</h1>
     <div class="header-date" id="dateText"></div>
+    <a href="admin.html" class="admin-link" title="Admin">⚙️</a>
   </div>
   <div class="tabs" id="tabsContainer">
     <button class="tab-btn" id="tab-o" onclick="switchTab('math', null)"><span class="icon">📐</span> Math</button>
