@@ -795,11 +795,13 @@ function renderContent() {
   }
 
   if (currentView === 'questions' && currentCh) {
+    document.querySelector('.header').style.display = 'none';
     renderQuestionPage(content); return;
   }
 
   // ── HOME VIEW ──
   currentView = 'home';
+  document.querySelector('.header').style.display = 'block';
   content.innerHTML = "";
   var data = allData[activeTab];
   if (!data.chapters || data.chapters.length === 0) {
