@@ -107,7 +107,7 @@ textarea{resize:vertical;font-family:var(--mono);line-height:1.6}
 .qe-card.new-q{border-color:var(--success)}
 .qe-head{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--surface2);cursor:pointer;user-select:none}
 .qe-num{font-size:13px;font-weight:700;color:var(--accent);min-width:32px}
-.qe-preview{flex:1;font-size:var(--fs-sm);color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qe-preview{flex:1;font-size:var(--fs-q-text,15px);color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .qe-badge{font-size:10px;padding:2px 7px;border-radius:4px;font-weight:700}
 .qe-badge-new{background:rgba(76,175,130,.15);color:var(--success);border:1px solid rgba(76,175,130,.3)}
 .qe-head-btns{display:flex;gap:4px;flex-shrink:0}
@@ -120,7 +120,7 @@ textarea{resize:vertical;font-family:var(--mono);line-height:1.6}
 .field-row{display:flex;gap:6px}
 .field-row textarea{flex:1}
 .opt-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
-.opt-row input{flex:1}
+.opt-row input{flex:1;font-size:var(--fs-opt-text,13px) !important}
 .opt-row .btn-xs{flex-shrink:0}
 
 /* insert zone */
@@ -149,9 +149,24 @@ hr{border:none;border-top:1px solid var(--border);margin:12px 0}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
-/* Add new JSON section */
-#add-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:16px}
-#add-section .add-title{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)}
+/* settings collapse */
+.lp-title-row{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.lp-title-row .lp-title{margin-bottom:0}
+.collapse-btn{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;padding:2px 6px;border-radius:4px;transition:all .2s}
+.collapse-btn:hover{color:var(--text);background:var(--surface2)}
+.lp-collapsible{transition:all .2s}
+.lp-collapsible.hidden{display:none}
+
+/* font size slider */
+.slider-row{display:flex;align-items:center;gap:8px;padding:8px 0}
+.slider-row label{margin:0;white-space:nowrap;min-width:80px}
+input[type="range"]{-webkit-appearance:none;appearance:none;height:4px;background:var(--border);border-radius:2px;outline:none;cursor:pointer;flex:1;padding:0}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer}
+.slider-val{font-size:12px;color:var(--accent);font-weight:700;min-width:30px;text-align:right}
+
+/* json textarea flex grow */
+.lp-add-section{display:flex;flex-direction:column;flex:1;padding:16px;border-bottom:1px solid var(--border);min-height:0}
+.lp-add-section textarea{flex:1;min-height:120px;resize:none}
 
 /* save bar */
 .save-bar{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:10px;margin-top:16px}
@@ -165,10 +180,10 @@ hr{border:none;border-top:1px solid var(--border);margin:12px 0}
 /* preview cards */
 .pv-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:10px}
 .pv-num{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:5px}
-.pv-text{font-size:15px;line-height:1.6;margin-bottom:6px}
-.pv-hindi{font-size:14px;color:var(--muted);margin-bottom:10px;line-height:1.5}
+.pv-text{font-size:var(--fs-q-text,15px);line-height:1.6;margin-bottom:6px}
+.pv-hindi{font-size:var(--fs-q-text,15px);color:var(--muted);margin-bottom:10px;line-height:1.5}
 .pv-opts{display:flex;flex-wrap:wrap;gap:6px}
-.pv-opt{background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.25);border-radius:5px;padding:4px 12px;font-size:13px;color:var(--accent)}
+.pv-opt{background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.25);border-radius:5px;padding:4px 12px;font-size:var(--fs-opt-text,13px);color:var(--accent)}
 </style>
 </head>
 <body>
@@ -191,24 +206,44 @@ hr{border:none;border-top:1px solid var(--border);margin:12px 0}
   <!-- ══════════════ LEFT PANEL ══════════════ -->
   <div class="left-panel">
 
-    <!-- GitHub Settings -->
-    <div class="lp-section">
-      <div class="lp-title">⚙️ GitHub Settings</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-        <div><label>Username</label><input type="text" id="gh-user" value="deepak325268"></div>
-        <div><label>Repository</label><input type="text" id="gh-repo" value="deepak2"></div>
+    <!-- GitHub Settings — collapsible -->
+    <div class="lp-section" id="gh-section">
+      <div class="lp-title-row" onclick="toggleSettings()">
+        <div class="lp-title" style="margin-bottom:0">⚙️ GitHub Settings</div>
+        <button class="collapse-btn" id="settings-toggle-btn" title="Chhupaao/Dikhaao">▲</button>
       </div>
-      <div class="pat-row">
-        <div><label>Personal Access Token <span style="color:var(--muted);font-size:10px">(localStorage)</span></label>
-          <input type="password" id="gh-pat" placeholder="ghp_...">
+      <div class="lp-collapsible" id="settings-body" style="margin-top:12px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+          <div><label>Username</label><input type="text" id="gh-user" value="deepak325268" onchange="saveSettings()"></div>
+          <div><label>Repository</label><input type="text" id="gh-repo" value="deepak2" onchange="saveSettings()"></div>
         </div>
-        <span class="badge badge-success" id="pat-badge">✓</span>
+        <div class="pat-row">
+          <div><label>Personal Access Token <span style="color:var(--muted);font-size:10px">(localStorage)</span></label>
+            <input type="password" id="gh-pat" placeholder="ghp_...">
+          </div>
+          <span class="badge badge-success" id="pat-badge">✓</span>
+        </div>
+        <div style="display:flex;gap:6px;margin-top:8px">
+          <button class="btn btn-outline btn-sm" onclick="savePAT()">💾 Save</button>
+          <button class="btn btn-outline btn-sm" onclick="testPAT()">🔌 Test</button>
+        </div>
+        <div class="status-bar" id="status-bar"></div>
+
+        <!-- Font size slider -->
+        <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:10px">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">🔤 Text Size</div>
+          <div class="slider-row">
+            <label>Questions</label>
+            <input type="range" id="fs-q" min="12" max="22" value="15" oninput="applyFontSize('q',this.value)">
+            <span class="slider-val" id="fs-q-val">15px</span>
+          </div>
+          <div class="slider-row">
+            <label>Options</label>
+            <input type="range" id="fs-opt" min="11" max="20" value="13" oninput="applyFontSize('opt',this.value)">
+            <span class="slider-val" id="fs-opt-val">13px</span>
+          </div>
+        </div>
       </div>
-      <div style="display:flex;gap:6px;margin-top:8px">
-        <button class="btn btn-outline btn-sm" onclick="savePAT()">💾 Save</button>
-        <button class="btn btn-outline btn-sm" onclick="testPAT()">🔌 Test</button>
-      </div>
-      <div class="status-bar" id="status-bar"></div>
     </div>
 
     <!-- File Selector -->
@@ -231,7 +266,7 @@ hr{border:none;border-top:1px solid var(--border);margin:12px 0}
     </div>
 
     <!-- Add Questions -->
-    <div class="lp-section" style="flex:1">
+    <div class="lp-add-section">
       <div class="lp-title">➕ Naye Questions Add</div>
 
       <div class="mode-tabs">
@@ -242,7 +277,7 @@ hr{border:none;border-top:1px solid var(--border);margin:12px 0}
       <div class="warn-box" id="merge-info">⚠️ Replace mode: File ka poora content replace ho jaayega!</div>
 
       <label>JSON Paste karo</label>
-      <textarea id="json-input" rows="10" placeholder='[
+      <textarea id="json-input" placeholder='[
   {
     "num": 1,
     "text": "Question text",
@@ -327,9 +362,28 @@ window.onload = async function() {
     document.getElementById('gh-pat').value = pat;
     document.getElementById('pat-badge').classList.add('show');
   }
+  // Load saved username/repo
+  const user = localStorage.getItem('gh_user');
+  const repo = localStorage.getItem('gh_repo');
+  if (user) document.getElementById('gh-user').value = user;
+  if (repo) document.getElementById('gh-repo').value = repo;
+
   // Load saved theme
   const th = localStorage.getItem('theme') || 'dark';
   setTheme(th);
+
+  // Load font sizes
+  const fsQ   = localStorage.getItem('fs_q')   || '15';
+  const fsOpt = localStorage.getItem('fs_opt') || '13';
+  document.getElementById('fs-q').value   = fsQ;
+  document.getElementById('fs-opt').value = fsOpt;
+  applyFontSize('q',   fsQ,   false);
+  applyFontSize('opt', fsOpt, false);
+
+  // Restore settings collapse state
+  const collapsed = localStorage.getItem('settings_collapsed') === '1';
+  if (collapsed) collapseSettings(false);
+
   // Auto-load files
   if (pat) await loadFiles();
 };
@@ -383,6 +437,50 @@ function savePAT() {
   localStorage.setItem('gh_pat', pat);
   document.getElementById('pat-badge').classList.add('show');
   toast('PAT save ho gaya!','success');
+}
+
+function saveSettings() {
+  localStorage.setItem('gh_user', document.getElementById('gh-user').value.trim());
+  localStorage.setItem('gh_repo', document.getElementById('gh-repo').value.trim());
+}
+
+// ═══════════════════════════════════════════
+//  SETTINGS COLLAPSE
+// ═══════════════════════════════════════════
+function toggleSettings() {
+  const body = document.getElementById('settings-body');
+  const isHidden = body.classList.contains('hidden');
+  if (isHidden) {
+    body.classList.remove('hidden');
+    document.getElementById('settings-toggle-btn').textContent = '▲';
+    localStorage.setItem('settings_collapsed','0');
+  } else {
+    collapseSettings(true);
+  }
+}
+function collapseSettings(save=true) {
+  document.getElementById('settings-body').classList.add('hidden');
+  document.getElementById('settings-toggle-btn').textContent = '▼';
+  if (save) localStorage.setItem('settings_collapsed','1');
+}
+
+// ═══════════════════════════════════════════
+//  FONT SIZE SLIDER
+// ═══════════════════════════════════════════
+function applyFontSize(type, val, saveLS=true) {
+  val = parseInt(val);
+  if (type==='q') {
+    document.getElementById('fs-q-val').textContent = val+'px';
+    // Apply to all question texts in editor + preview
+    document.querySelectorAll('.qe-preview, .pv-text, .qe-body textarea').forEach(el => el.style.fontSize = val+'px');
+    document.documentElement.style.setProperty('--fs-q-text', val+'px');
+    if (saveLS) localStorage.setItem('fs_q', val);
+  } else {
+    document.getElementById('fs-opt-val').textContent = val+'px';
+    document.querySelectorAll('.pv-opt, .opt-row input').forEach(el => el.style.fontSize = val+'px');
+    document.documentElement.style.setProperty('--fs-opt-text', val+'px');
+    if (saveLS) localStorage.setItem('fs_opt', val);
+  }
 }
 
 async function testPAT() {
@@ -769,13 +867,15 @@ function deleteQ(idx) {
 }
 
 function insertQuestionAt(idx) {
-  const maxN = existingQ.length>0?Math.max(...existingQ.map(q=>q.num||0)):0;
-  const newQ = {num: maxN+1, text:'', hindi:'', opts:['(a) ','(b) ','(c) ','(d) '], _new:true};
-  existingQ.splice(idx,0,newQ);
-  dirty=true;
+  // Insert placeholder
+  const newQ = {num: 0, text:'', hindi:'', opts:['(a) ','(b) ','(c) ','(d) '], _new:true};
+  existingQ.splice(idx, 0, newQ);
+  // Renumber all from idx onwards
+  existingQ.forEach((q, i) => { q.num = i + 1; });
+  dirty = true;
   renderEditor();
-  // auto open the new card
-  setTimeout(()=>{ toggleCard(idx); document.getElementById('qtext-'+idx)?.focus(); }, 50);
+  // Auto open the new card
+  setTimeout(() => { toggleCard(idx); document.getElementById('qtext-'+idx)?.focus(); }, 50);
 }
 
 function moveUp(idx) {
