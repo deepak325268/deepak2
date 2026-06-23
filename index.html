@@ -431,21 +431,194 @@
       .q-block-opts { grid-template-columns: 1fr; }
     }
     .admin-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--border);
-  color: var(--text);
-  font-size: 16px;
-  text-decoration: none;
-  flex-shrink: 0;
-  opacity: 0.6;
-  transition: opacity 0.2s;
-}
-.admin-link:hover { opacity: 1; }
+      display: flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--border); color: var(--text);
+      font-size: 16px; text-decoration: none;
+      flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s;
+    }
+    .admin-link:hover { opacity: 1; }
+
+    /* ══════════════════════════════════════
+       HOME — Topic Cards
+    ══════════════════════════════════════ */
+    .topic-home-card {
+      background: var(--card-gradient);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: var(--card-shadow);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34,1.4,0.64,1);
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .topic-home-card:active { transform: scale(0.97) translateY(2px); box-shadow: var(--card-active-shadow); }
+    .topic-home-card.done {
+      opacity: 0.5; background: var(--bg);
+      box-shadow: none; border: 1.5px dashed var(--muted);
+    }
+    .topic-home-left { flex: 1; min-width: 0; }
+    .topic-home-name {
+      font-size: 17px; font-weight: 700; color: var(--text);
+      line-height: 1.3; margin-bottom: 8px;
+      font-family: 'Noto Sans Devanagari', sans-serif;
+    }
+    .topic-home-card.done .topic-home-name {
+      text-decoration: line-through; color: var(--muted);
+      text-decoration-thickness: 2px;
+    }
+    .topic-home-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .topic-q-badge {
+      font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px;
+      white-space: nowrap; font-family: 'Inter', sans-serif;
+    }
+    .topic-q-badge.clr-o { color: var(--accent-o); background: var(--pill-o-bg); border: 1px solid var(--pill-o-border); }
+    .topic-q-badge.clr-r { color: var(--accent-r); background: var(--pill-r-bg); border: 1px solid var(--pill-r-border); }
+    .topic-q-range {
+      font-size: 12px; color: var(--muted);
+      font-weight: 600; font-family: 'Inter', sans-serif;
+    }
+    .topic-home-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .topic-check {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 3px solid var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 900;
+      background: var(--check-bg); color: transparent;
+      transition: all 0.3s ease; flex-shrink: 0;
+    }
+    .topic-check.check-o.checked { background: var(--accent-o); border-color: var(--accent-o); color:#fff; animation: checkPopO 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+    .topic-check.check-r.checked { background: var(--accent-r); border-color: var(--accent-r); color:#fff; animation: checkPopR 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+    .topic-arrow {
+      font-size: 22px; color: var(--muted); font-weight: 300; line-height: 1;
+    }
+
+    /* ══════════════════════════════════════
+       QUESTION PAGE — Full Screen View
+    ══════════════════════════════════════ */
+    .q-page-view { padding-bottom: 20px; }
+
+    .q-page-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 0 14px;
+    }
+    .q-back-btn {
+      background: none; border: 1.5px solid var(--border);
+      color: var(--text); padding: 8px 14px; border-radius: 12px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      white-space: nowrap; flex-shrink: 0;
+      transition: all 0.2s;
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .q-back-btn:active { transform: scale(0.94); background: var(--border); }
+    .q-page-title {
+      flex: 1; font-size: 15px; font-weight: 700; color: var(--text);
+      text-align: center;
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .q-page-counter {
+      font-size: 13px; font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap; flex-shrink: 0;
+      padding: 5px 12px; border-radius: 12px;
+    }
+    .q-page-counter.clr-o { color: var(--accent-o); background: var(--pill-o-bg); border: 1px solid var(--pill-o-border); }
+    .q-page-counter.clr-r { color: var(--accent-r); background: var(--pill-r-bg); border: 1px solid var(--pill-r-border); }
+
+    .q-page-prog-track {
+      height: 5px; background: var(--border); border-radius: 10px;
+      margin-bottom: 18px; overflow: hidden;
+    }
+    .q-page-prog-fill {
+      height: 100%; border-radius: 10px;
+      transition: width 0.5s cubic-bezier(0.34,1.6,0.64,1);
+    }
+
+    .q-page-body {
+      background: var(--card-gradient);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--card-shadow);
+      min-height: 260px;
+    }
+    .q-page-num {
+      font-size: 12px; font-weight: 800;
+      font-family: 'Inter', sans-serif; margin-bottom: 14px;
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+    }
+    .q-page-num.clr-o { color: var(--accent-o); background: var(--pill-o-bg); border: 1px solid var(--pill-o-border); }
+    .q-page-num.clr-r { color: var(--accent-r); background: var(--pill-r-bg); border: 1px solid var(--pill-r-border); }
+
+    .q-page-hindi {
+      font-size: 18px; font-weight: 700; color: var(--text);
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      line-height: 1.65; margin-bottom: 8px;
+    }
+    .q-page-eng {
+      font-size: 14px; font-weight: 500; color: var(--muted);
+      line-height: 1.55; margin-bottom: 20px;
+    }
+    .q-page-opts {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .q-page-opt {
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 12px 14px;
+      font-size: 14px; font-weight: 500; color: var(--text);
+      line-height: 1.4;
+    }
+    .q-notfound { text-align:center; color:var(--muted); font-size:14px; padding:30px 0; }
+
+    /* Bottom Nav */
+    .q-page-nav {
+      display: flex; align-items: center; gap: 10px;
+      position: sticky; bottom: 0;
+      background: var(--bg); padding: 12px 0 8px;
+      border-top: 1px solid var(--border);
+      margin: 0 -16px; padding-left: 16px; padding-right: 16px;
+    }
+    .q-nav-btn {
+      flex: 1; padding: 14px 10px; border-radius: 14px;
+      font-size: 15px; font-weight: 700; cursor: pointer; border: none;
+      transition: all 0.2s ease;
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .q-nav-btn.prev {
+      background: var(--check-bg); border: 1.5px solid var(--border); color: var(--text);
+    }
+    .q-nav-btn.next-o { background: var(--accent-o); color: #fff; }
+    .q-nav-btn.next-r { background: var(--accent-r); color: #fff; }
+    .q-nav-btn.finish { background: #22c55e; color: #fff; }
+    .q-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .q-nav-btn:active:not(:disabled) { transform: scale(0.96); }
+
+    .q-nav-done {
+      padding: 10px 14px; border-radius: 14px;
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      border: 2px solid var(--border); background: var(--check-bg); color: var(--muted);
+      transition: all 0.3s ease; white-space: nowrap;
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      flex-shrink: 0;
+    }
+    .q-nav-done.done-o { background: var(--accent-o); border-color: var(--accent-o); color:#fff; }
+    .q-nav-done.done-r { background: var(--accent-r); border-color: var(--accent-r); color:#fff; }
+    .q-nav-done:active { transform: scale(0.94); }
+
+    @media(max-width: 400px) {
+      .q-page-opts { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -483,13 +656,12 @@
 
 <script>
 const API_MATH = "https://script.google.com/macros/s/AKfycbzh6to4m4pkRh6FyvmKJZrqv6ieOz6vKxwkWMCqlE5HMxJBZNY_0aFF8W3kDTkx4Tls/exec";
-// Base URL where your questions/ folder is hosted on GitHub Pages
 const QUESTIONS_BASE = "https://deepak325268.github.io/deepak2/questions/";
 
 const today = new Date();
 var yyyy = today.getFullYear();
-var mm = String(today.getMonth() + 1).padStart(2, '0');
-var dd = String(today.getDate()).padStart(2, '0');
+var mm   = String(today.getMonth() + 1).padStart(2, '0');
+var dd   = String(today.getDate()).padStart(2, '0');
 const dateStr  = yyyy + '-' + mm + '-' + dd;
 const doneKey  = "done_" + dateStr;
 const cacheKey = "cache_" + dateStr;
@@ -500,19 +672,23 @@ Object.keys(localStorage).forEach(function(key) {
   }
 });
 
-let doneSet = new Set(JSON.parse(localStorage.getItem(doneKey) || "[]"));
-let allData = { math: null, reasoning: null };
-let dayNums = { math: null, reasoning: null };
-
-// Question bank cache: { "hcf-lcm": [...], ... }
+let doneSet  = new Set(JSON.parse(localStorage.getItem(doneKey) || "[]"));
+let allData  = { math: null, reasoning: null };
+let dayNums  = { math: null, reasoning: null };
 var qBankCache = {};
 
 var savedTab = localStorage.getItem("activeTab");
 if (!savedTab || !["math","reasoning"].includes(savedTab)) savedTab = "math";
 let activeTab = savedTab;
 let isSliding = false;
-
 const TABS = ["math", "reasoning"];
+
+// ── NEW: Page state ──
+let currentView    = 'home';   // 'home' | 'questions'
+let currentCh      = null;     // current chapter object
+let currentChKey   = null;     // key like "math_2"
+let currentQIdx    = 0;        // which question index (0-based into ch.subs)
+let currentClr     = 'o';
 
 document.getElementById("dateText").textContent =
   today.toLocaleDateString("hi-IN", { weekday:"long", day:"numeric", month:"long" });
@@ -522,8 +698,7 @@ if (cached) {
   try {
     var c = JSON.parse(cached);
     if (c.math) {
-      dayNums.math = c.math.day;
-      allData.math = c.math;
+      dayNums.math = c.math.day; allData.math = c.math;
       if (c.math.reasoning) {
         dayNums.reasoning = c.math.reasoning.day;
         allData.reasoning = c.math.reasoning;
@@ -538,9 +713,7 @@ function save() {
 }
 
 function countTotal(tab) {
-  var d = allData[tab];
-  if (!d || !d.chapters) return 0;
-  return d.chapters.length;
+  var d = allData[tab]; if (!d || !d.chapters) return 0; return d.chapters.length;
 }
 function countDone(tab) {
   var done = 0;
@@ -567,15 +740,15 @@ function updateProgress() {
 
 function switchTab(tab, direction) {
   if (isSliding) return;
+  // Tab badle to hamesha home par wapas
+  currentView = 'home'; currentCh = null; currentChKey = null; currentQIdx = 0;
+
   if (tab === activeTab && direction === null) {
-    activeTab = tab;
-    localStorage.setItem("activeTab", tab);
-    updateTabUI(); updateDayPill(); renderContent();
-    return;
+    activeTab = tab; localStorage.setItem("activeTab", tab);
+    updateTabUI(); updateDayPill(); renderContent(); return;
   }
   if (direction === null) {
-    var oldIdx = TABS.indexOf(activeTab);
-    var newIdx = TABS.indexOf(tab);
+    var oldIdx = TABS.indexOf(activeTab), newIdx = TABS.indexOf(tab);
     direction = newIdx > oldIdx ? "left" : "right";
   }
   var content = document.getElementById("content");
@@ -585,8 +758,7 @@ function switchTab(tab, direction) {
   content.classList.remove("slide-out-left","slide-out-right","slide-in-left","slide-in-right");
   void content.offsetWidth;
   content.classList.add(outClass);
-  activeTab = tab;
-  localStorage.setItem("activeTab", tab);
+  activeTab = tab; localStorage.setItem("activeTab", tab);
   updateTabUI(); updateDayPill(); window.scrollTo(0,0);
   setTimeout(function() {
     renderContent();
@@ -605,204 +777,245 @@ function updateTabUI() {
   var tabsEl = document.getElementById("tabsContainer");
   var activeBtn = document.getElementById("tab-" + key);
   if (tabsEl && activeBtn) {
-    var scrollTo = activeBtn.offsetLeft - (tabsEl.offsetWidth/2) + (activeBtn.offsetWidth/2);
-    tabsEl.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    tabsEl.scrollTo({ left: activeBtn.offsetLeft - tabsEl.offsetWidth/2 + activeBtn.offsetWidth/2, behavior:'smooth' });
   }
 }
 
+// ══════════════════════════════════════
+//  RENDER — decides home vs question page
+// ══════════════════════════════════════
 function renderContent() {
   var content = document.getElementById("content");
   var clr = activeTab === "reasoning" ? "r" : "o";
+  currentClr = clr;
+
   if (!allData[activeTab]) {
     content.innerHTML = '<div class="loading"><div class="spinner spin-'+clr+'"></div><span>Loading...</span></div>';
     updateProgress(); return;
   }
+
+  if (currentView === 'questions' && currentCh) {
+    renderQuestionPage(content); return;
+  }
+
+  // ── HOME VIEW ──
+  currentView = 'home';
   content.innerHTML = "";
   var data = allData[activeTab];
   if (!data.chapters || data.chapters.length === 0) {
     content.innerHTML = '<div class="error-box"><p>कोई chapter नहीं मिला।</p></div>';
     updateProgress(); return;
   }
+
   var cards = [];
   data.chapters.forEach(function(ch, i) {
     ch.questionsFile = ch.chapter.toLowerCase().trim().replace(/\s+/g, '-') + ".json";
-    cards.push(makeSubCard(activeTab + "_" + i, ch, clr));
+    var key = activeTab + "_" + i;
+    cards.push(makeTopicCard(key, ch, clr));
   });
-  var pending = cards.filter(function(c) { return !c.classList.contains("done"); });
-  var done    = cards.filter(function(c) { return  c.classList.contains("done"); });
-  pending.concat(done).forEach(function(c) { content.appendChild(c); });
+
+  var pending = cards.filter(function(c){ return !c.classList.contains("done"); });
+  var done    = cards.filter(function(c){ return  c.classList.contains("done"); });
+  pending.concat(done).forEach(function(c){ content.appendChild(c); });
   updateProgress();
 }
 
-function makeSubCard(key, ch, clr) {
+// ── Home topic card ──
+function makeTopicCard(key, ch, clr) {
   var done = doneSet.has(key);
   var card = document.createElement("div");
-  card.className = "chapter-card" + (done?" done":"");
+  card.className = "topic-home-card" + (done ? " done" : "");
   card.dataset.key = key;
 
-  var subsHtml = '<div class="sub-list">';
-  ch.subs.forEach(function(s) {
-    subsHtml += '<div class="sub-row"><span class="sub-label">Sub '+s.subNum+'</span>'
-              + '<span class="sub-q'+(clr==="r"?"-r":"")+' q-click" data-qnum="'+s.q+'" title="Click to Expand">Q. '+s.q+'</span></div>';
-  });
-  subsHtml += '</div>';
+  var qCount = ch.subs ? ch.subs.length : 0;
+  var qRange = "";
+  if (ch.subs && ch.subs.length > 0) {
+    var first = ch.subs[0].q, last = ch.subs[ch.subs.length-1].q;
+    qRange = first === last ? "Q. "+first : "Q. "+first+" – "+last;
+  }
 
   card.innerHTML =
-    '<div class="card-top">'
-    + '<div class="chapter-info">'
-    +   '<div class="chapter-name">'+ch.chapter+'</div>'
-    +   subsHtml
+    '<div class="topic-home-left">'
+    + '<div class="topic-home-name">'+ch.chapter+'</div>'
+    + '<div class="topic-home-meta">'
+    +   '<span class="topic-q-badge clr-'+clr+'">'+qCount+' प्रश्न</span>'
+    +   (qRange ? '<span class="topic-q-range">'+qRange+'</span>' : '')
     + '</div>'
-    + '<div class="check-box check-'+clr+(done?" checked":"")+'">'+( done?"✓":"")+'</div>'
     + '</div>'
-    + '<div class="q-expand" id="qexp_'+key+'">'
-    +   '<div class="q-expand-inner" id="qinner_'+key+'"><div class="q-loading">Loading questions...</div></div>'
+    + '<div class="topic-home-right">'
+    +   '<div class="topic-check check-'+clr+(done?" checked":"")+'">'+( done?"✓":"")+'</div>'
+    +   '<div class="topic-arrow">›</div>'
     + '</div>';
 
-  var checkEl = card.querySelector(".check-box");
+  // Checkmark — toggle done
+  var checkEl = card.querySelector(".topic-check");
   checkEl.addEventListener("click", function(e) {
     e.stopPropagation();
-    toggleDone(key, card, clr);
+    haptic();
+    if (doneSet.has(key)) {
+      doneSet.delete(key);
+      card.classList.remove("done");
+      checkEl.className = "topic-check check-"+clr;
+      checkEl.textContent = "";
+    } else {
+      doneSet.add(key);
+      card.classList.add("done");
+      checkEl.className = "topic-check check-"+clr+" checked";
+      checkEl.textContent = "✓";
+    }
+    save();
+    setTimeout(function() { reorderTopicCards(); }, 350);
   });
 
-  if (ch.questionsFile) {
-    var pills = card.querySelectorAll(".q-click");
-    pills.forEach(function(pill) {
-      pill.addEventListener("click", function(e) {
-        e.stopPropagation();
-        var qnum = parseInt(pill.getAttribute("data-qnum"));
-        toggleExpandQuestion(key, ch.questionsFile, qnum, clr, pill);
-      });
-    });
-  }
+  // Card click — open question page
+  card.querySelector(".topic-home-left").addEventListener("click", function() { openTopic(key, ch, clr); });
+  card.querySelector(".topic-arrow").addEventListener("click",     function() { openTopic(key, ch, clr); });
 
   return card;
 }
 
-// State: which cards have expand open, and which qnums are shown
-var expandState = {}; 
-
-function toggleExpandQuestion(key, file, qnum, clr, pillEl) {
-  haptic();
-  if (!expandState[key]) expandState[key] = new Set();
-  var expDiv   = document.getElementById("qexp_" + key);
-  var innerDiv = document.getElementById("qinner_" + key);
-
-  // Card ke sabhi pills dhundho unki opacity reset karne ke liye
-  var card = document.querySelector('.chapter-card[data-key="'+key+'"]');
-  var allPills = card ? card.querySelectorAll(".q-click") : [];
-
-  if (expandState[key].has(qnum)) {
-    // Agar same click kiya hai to open wale ko band kar do
-    expandState[key].clear();
-    allPills.forEach(function(p) { p.style.opacity = "1"; });
-    expDiv.classList.remove("open");
-  } else {
-    // Agar doosra click kiya hai to pehle wale ko clear karo
-    expandState[key].clear();
-    allPills.forEach(function(p) { p.style.opacity = "1"; });
-    
-    // Ab is naye wale ko open karo
-    expandState[key].add(qnum);
-    pillEl.style.opacity = "0.5";
-    expDiv.classList.add("open");
-    
-    loadQBank(file, function() {
-      renderExpandedQuestions(key, file, clr);
-      if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise([innerDiv]).catch(function(){});
-      }
-    });
-  }
-}
-
-function loadQBank(file, cb) {
-  if (qBankCache[file]) { cb(); return; }
-  var url = QUESTIONS_BASE + file;
-  fetch(url)
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      qBankCache[file] = data;
-      cb();
-    })
-    .catch(function() {
-      qBankCache[file] = [];
-      cb();
-    });
-}
-
-function renderExpandedQuestions(key, file, clr) {
-  var innerDiv = document.getElementById("qinner_" + key);
-  var nums = Array.from(expandState[key]).sort(function(a,b){return a-b;});
-  var bank = qBankCache[file] || [];
-  var html = "";
-  nums.forEach(function(n) {
-    var q = null;
-    for (var i=0; i<bank.length; i++) { if (bank[i].num === n) { q = bank[i]; break; } }
-    if (!q) {
-      html += '<div class="q-block"><div class="q-block-num'+(clr==="r"?" r":"")+'">Q.'+n+'</div>'
-            + '<div class="q-block-text">Question not found.</div></div>';
-      return;
-    }
-    var optsHtml = '<div class="q-block-opts">'
-      + q.opts.map(function(o){ return '<div class="q-opt">'+o+'</div>'; }).join('')
-      + '</div>';
-      
-    // Yaha Hindi pehle aur English baad me set kiya gaya hai
-    html += '<div class="q-block">'
-      + '<div class="q-block-num'+(clr==="r"?" r":"")+'">Q.'+n+'</div>'
-      + (q.hindi ? '<div class="q-block-hindi">'+q.hindi+'</div>' : '')
-      + '<div class="q-block-text">'+q.text+'</div>'
-      + optsHtml
-      + '</div>';
-  });
-  innerDiv.innerHTML = html || '<div class="q-loading">कोई question select नहीं है।</div>';
-}
-
-function toggleDone(key, card, clr) {
-  haptic();
-  if (doneSet.has(key)) {
-    doneSet.delete(key);
-    card.classList.remove("done");
-    var cb = card.querySelector(".check-box");
-    cb.className = "check-box check-"+clr;
-    cb.style.animation = 'none'; void cb.offsetHeight; cb.style.animation = null;
-    cb.textContent = "";
-  } else {
-    doneSet.add(key);
-    card.classList.add("done");
-    var cb = card.querySelector(".check-box");
-    cb.className = "check-box check-"+clr+" checked";
-    cb.textContent = "✓";
-  }
-  save();
-  setTimeout(reorderCards, 350);
-}
-
-function reorderCards() {
+function reorderTopicCards() {
   var content = document.getElementById("content");
-  var cards   = Array.from(content.querySelectorAll(".chapter-card"));
+  var cards   = Array.from(content.querySelectorAll(".topic-home-card"));
   var pending = cards.filter(function(c){ return !c.classList.contains("done"); });
   var done    = cards.filter(function(c){ return  c.classList.contains("done"); });
-  var needReorder = false;
-  var sorted = pending.concat(done);
-  for (var i=0; i<sorted.length; i++) { if (sorted[i]!==cards[i]){ needReorder=true; break; } }
-  if (needReorder) {
-    var firstPos = {};
-    cards.forEach(function(c){ firstPos[c.dataset.key] = c.getBoundingClientRect().top; });
-    sorted.forEach(function(c){ content.appendChild(c); });
-    cards.forEach(function(c){
-      var delta = firstPos[c.dataset.key] - c.getBoundingClientRect().top;
-      if (Math.abs(delta) > 1) {
-        c.style.transform = 'translateY('+delta+'px)';
-        c.style.transition = 'none'; void c.offsetHeight;
-        c.style.transition = 'transform 0.4s cubic-bezier(0.34,1.6,0.64,1)';
-        c.style.transform  = 'translateY(0)';
-        setTimeout(function(){ c.style.transform=''; c.style.transition=''; }, 450);
-      }
-    });
+  var sorted  = pending.concat(done);
+  var changed = sorted.some(function(c,i){ return c !== cards[i]; });
+  if (!changed) return;
+  var tops = {};
+  cards.forEach(function(c){ tops[c.dataset.key] = c.getBoundingClientRect().top; });
+  sorted.forEach(function(c){ content.appendChild(c); });
+  cards.forEach(function(c){
+    var delta = tops[c.dataset.key] - c.getBoundingClientRect().top;
+    if (Math.abs(delta) > 1) {
+      c.style.transform = 'translateY('+delta+'px)'; c.style.transition = 'none';
+      void c.offsetHeight;
+      c.style.transition = 'transform 0.4s cubic-bezier(0.34,1.6,0.64,1)';
+      c.style.transform  = 'translateY(0)';
+      setTimeout(function(){ c.style.transform=''; c.style.transition=''; }, 450);
+    }
+  });
+}
+
+// ── Open topic → load questions → show page ──
+function openTopic(key, ch, clr) {
+  haptic();
+  currentView  = 'questions';
+  currentCh    = ch;
+  currentChKey = key;
+  currentQIdx  = 0;
+  currentClr   = clr;
+
+  var content = document.getElementById("content");
+  content.innerHTML = '<div class="loading"><div class="spinner spin-'+clr+'"></div><span>Question लोड हो रहा है...</span></div>';
+  window.scrollTo(0,0);
+
+  loadQBank(ch.questionsFile, function() {
+    renderContent();
+    window.scrollTo(0,0);
+  });
+}
+
+// ── Back to home ──
+function goBackHome() {
+  haptic();
+  currentView = 'home'; currentCh = null; currentChKey = null; currentQIdx = 0;
+  renderContent();
+  window.scrollTo(0,0);
+}
+
+// ── Navigate to question by index ──
+function goToQuestion(idx) {
+  haptic();
+  if (!currentCh || idx < 0 || idx >= currentCh.subs.length) return;
+  currentQIdx = idx;
+  renderContent();
+  window.scrollTo(0,0);
+}
+
+// ── Toggle done from question page ──
+function toggleDoneFromQPage() {
+  haptic();
+  var key = currentChKey, clr = currentClr;
+  if (doneSet.has(key)) { doneSet.delete(key); } else { doneSet.add(key); }
+  save();
+  renderContent();
+}
+
+// ── Full-screen Question Page ──
+function renderQuestionPage(content) {
+  var ch    = currentCh;
+  var clr   = currentClr;
+  var idx   = currentQIdx;
+  var total = ch.subs.length;
+  var sub   = ch.subs[idx];
+  var bank  = qBankCache[ch.questionsFile] || [];
+  var done  = doneSet.has(currentChKey);
+
+  // Find question object
+  var q = null;
+  for (var i=0; i<bank.length; i++) { if (bank[i].num === sub.q) { q = bank[i]; break; } }
+
+  var pct = Math.round(((idx+1)/total)*100);
+  var isLast = (idx === total-1);
+
+  var optsHtml = "";
+  if (q && q.opts && q.opts.length) {
+    optsHtml = '<div class="q-page-opts">'
+      + q.opts.map(function(o){ return '<div class="q-page-opt">'+o+'</div>'; }).join('')
+      + '</div>';
+  }
+
+  content.innerHTML =
+    '<div class="q-page-view">'
+    // Header
+    + '<div class="q-page-header">'
+    +   '<button class="q-back-btn" onclick="goBackHome()">‹ वापस</button>'
+    +   '<div class="q-page-title">'+ch.chapter+'</div>'
+    +   '<div class="q-page-counter clr-'+clr+'">'+(idx+1)+' / '+total+'</div>'
+    + '</div>'
+
+    // Progress bar
+    + '<div class="q-page-prog-track">'
+    +   '<div class="q-page-prog-fill fill-'+clr+'" style="width:'+pct+'%"></div>'
+    + '</div>'
+
+    // Question body
+    + '<div class="q-page-body">'
+    +   '<div class="q-page-num clr-'+clr+'">Q. '+sub.q+'</div>'
+    +   (q
+        ? (q.hindi ? '<div class="q-page-hindi">'+q.hindi+'</div>' : '')
+          + (q.text ? '<div class="q-page-eng">'+q.text+'</div>' : '')
+          + optsHtml
+        : '<div class="q-notfound">Question नहीं मिला।</div>')
+    + '</div>'
+
+    // Bottom Nav
+    + '<div class="q-page-nav">'
+    +   '<button class="q-nav-btn prev" '+(idx===0?'disabled':'')+' onclick="goToQuestion('+(idx-1)+')">← पिछला</button>'
+    +   '<button class="q-nav-done '+(done?'done-'+clr:'')+'" onclick="toggleDoneFromQPage()">'+(done?'✓ Done':'Done करें')+'</button>'
+    +   (isLast
+        ? '<button class="q-nav-btn finish" onclick="goBackHome()">✅ समाप्त</button>'
+        : '<button class="q-nav-btn next-'+clr+'" onclick="goToQuestion('+(idx+1)+')">अगला →</button>')
+    + '</div>'
+    + '</div>';
+
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise([content]).catch(function(){});
   }
 }
+
+// ── Load question JSON ──
+function loadQBank(file, cb) {
+  if (qBankCache[file]) { cb(); return; }
+  fetch(QUESTIONS_BASE + file)
+    .then(function(r){ return r.json(); })
+    .then(function(data){ qBankCache[file] = data; cb(); })
+    .catch(function(){ qBankCache[file] = []; cb(); });
+}
+
+// ── Misc ──
+function haptic() { if (navigator.vibrate) navigator.vibrate(10); }
 
 (function(){
   var now = new Date();
@@ -810,19 +1023,25 @@ function reorderCards() {
   setTimeout(function(){ location.reload(); }, msToMidnight);
 })();
 
-function haptic() { if (navigator.vibrate) navigator.vibrate(10); }
-
 switchTab(activeTab, null);
 
+// Swipe: home pe tab switch, question page pe prev/next
 var touchStartX = 0, touchStartY = 0;
 document.addEventListener("touchstart", function(e){ touchStartX=e.touches[0].clientX; touchStartY=e.touches[0].clientY; }, {passive:true});
 document.addEventListener("touchend", function(e){
   var dx = e.changedTouches[0].clientX - touchStartX;
   var dy = e.changedTouches[0].clientY - touchStartY;
-  if (Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.5) {
-    var idx = TABS.indexOf(activeTab);
-    if (dx<0 && idx<TABS.length-1) switchTab(TABS[idx+1],"left");
-    else if (dx>0 && idx>0)        switchTab(TABS[idx-1],"right");
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)*1.5) {
+    if (currentView === 'questions') {
+      // Question page par swipe = prev/next
+      if (dx < 0) goToQuestion(currentQIdx + 1);
+      else         goToQuestion(currentQIdx - 1);
+    } else {
+      // Home par swipe = tab switch
+      var idx = TABS.indexOf(activeTab);
+      if (dx < 0 && idx < TABS.length-1) switchTab(TABS[idx+1], "left");
+      else if (dx > 0 && idx > 0)        switchTab(TABS[idx-1], "right");
+    }
   }
 }, {passive:true});
 
@@ -836,12 +1055,9 @@ if (cached) document.getElementById("staleBar").classList.add("show");
 fetch(API_MATH)
   .then(function(r){ return r.json(); })
   .then(function(data){
-    cacheObj.math = data;
-    dayNums.math  = data.day;
-    allData.math  = data;
+    cacheObj.math = data; dayNums.math = data.day; allData.math = data;
     if (data.reasoning) {
-      dayNums.reasoning = data.reasoning.day;
-      allData.reasoning = data.reasoning;
+      dayNums.reasoning = data.reasoning.day; allData.reasoning = data.reasoning;
     }
     updateDayPill(); renderContent(); saveCache();
   })
