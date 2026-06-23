@@ -1,363 +1,175 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="hi" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin — Question Manager</title>
-  <style>
-    :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --border: #2a2d3a;
-      --accent: #6c63ff;
-      --accent2: #ff6584;
-      --text: #e8eaf6;
-      --muted: #7b7f9e;
-      --success: #4caf82;
-      --error: #ff5252;
-      --warn: #ffb347;
-      --radius: 10px;
-      --mono: 'Courier New', monospace;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Question Admin</title>
+<style>
+:root {
+  --bg:#0f1117; --surface:#1a1d27; --surface2:#22263a; --border:#2a2d3a;
+  --accent:#6c63ff; --accent2:#ff6584; --text:#e8eaf6; --muted:#7b7f9e;
+  --success:#4caf82; --error:#ff5252; --warn:#ffb347; --r:10px;
+  --mono:'Courier New',monospace; --fs:15px; --fs-sm:13px; --fs-xs:12px;
+}
+[data-theme="light"] {
+  --bg:#f4f6fa; --surface:#ffffff; --surface2:#eef0f8; --border:#d0d4e8;
+  --accent:#5148e8; --text:#1a1d2e; --muted:#6b6f8a; --success:#2e8f62;
+  --error:#d93030; --warn:#c87a00;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;font-size:var(--fs)}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+/* HEADER */
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:200}
+.logo{width:38px;height:38px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+header h1{font-size:17px;font-weight:700}
+header .sub{font-size:12px;color:var(--muted)}
+.header-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.theme-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.theme-btn:hover{border-color:var(--accent)}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      min-height: 100vh;
-      padding: 0 0 60px;
-    }
+/* TOAST */
+#toast{position:fixed;top:68px;right:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 16px;font-size:var(--fs-sm);max-width:320px;z-index:999;display:none;box-shadow:0 8px 32px rgba(0,0,0,.4);gap:8px;align-items:flex-start}
+#toast.show{display:flex}
+#toast.success{border-color:var(--success);color:var(--success)}
+#toast.error{border-color:var(--error);color:var(--error)}
+#toast.warn{border-color:var(--warn);color:var(--warn)}
+#toast.info{border-color:var(--accent);color:var(--accent)}
 
-    /* ── Header ── */
-    header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    header .logo {
-      width: 36px; height: 36px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-    }
-    header h1 { font-size: 16px; font-weight: 600; }
-    header span { font-size: 12px; color: var(--muted); }
+/* LAYOUT — full width 2-col */
+.layout{display:grid;grid-template-columns:340px 1fr;gap:0;height:calc(100vh - 66px)}
+.left-panel{border-right:1px solid var(--border);overflow-y:auto;background:var(--surface);display:flex;flex-direction:column}
+.right-panel{overflow-y:auto;background:var(--bg);padding:20px}
 
-    /* ── Toast ── */
-    #toast {
-      position: fixed;
-      top: 70px; right: 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 12px 16px;
-      font-size: 13px;
-      max-width: 300px;
-      z-index: 999;
-      display: none;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-      transition: opacity 0.3s;
-    }
-    #toast.show { display: flex; gap: 8px; align-items: flex-start; }
-    #toast.success { border-color: var(--success); color: var(--success); }
-    #toast.error   { border-color: var(--error);   color: var(--error);   }
-    #toast.warn    { border-color: var(--warn);     color: var(--warn);    }
-    #toast.info    { border-color: var(--accent);   color: var(--accent);  }
+/* LEFT PANEL sections */
+.lp-section{border-bottom:1px solid var(--border);padding:16px}
+.lp-title{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 
-    /* ── Main layout ── */
-    main { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+/* inputs */
+label{font-size:var(--fs-xs);color:var(--muted);display:block;margin-bottom:5px;font-weight:500}
+input[type="text"],input[type="password"],select,textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:7px;color:var(--text);padding:9px 12px;font-size:var(--fs-sm);outline:none;transition:border-color .2s;font-family:inherit}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+input[type="password"]{letter-spacing:2px}
+textarea{resize:vertical;font-family:var(--mono);line-height:1.6}
 
-    /* ── Card ── */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 16px;
-    }
-    .card-title {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
+/* PAT row */
+.pat-row{display:flex;gap:6px;align-items:flex-end}
+.pat-row>div{flex:1}
+.badge{font-size:11px;border-radius:5px;padding:3px 8px;white-space:nowrap;display:none}
+.badge.show{display:inline-block}
+.badge-success{color:var(--success);background:rgba(76,175,130,.1);border:1px solid rgba(76,175,130,.3)}
 
-    /* ── Settings section ── */
-    .settings-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    @media(max-width: 600px) { .settings-grid { grid-template-columns: 1fr; } }
+/* file row */
+.file-row{display:flex;gap:6px;align-items:flex-end}
+.file-row>div{flex:1}
 
-    label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 5px; }
+/* buttons */
+.btn{padding:9px 16px;border:none;border-radius:7px;font-size:var(--fs-sm);font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover:not(:disabled){filter:brightness(1.15)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-danger{background:transparent;border:1px solid var(--error);color:var(--error)}
+.btn-danger:hover{background:rgba(255,82,82,.1)}
+.btn-success{background:var(--success);color:#fff}
+.btn-success:hover:not(:disabled){filter:brightness(1.1)}
+.btn-warn{background:var(--warn);color:#111}
+.btn-sm{padding:6px 11px;font-size:var(--fs-xs)}
+.btn-xs{padding:4px 8px;font-size:11px}
 
-    input[type="text"], input[type="password"], select {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      color: var(--text);
-      padding: 9px 12px;
-      font-size: 13px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    input:focus, select:focus { border-color: var(--accent); }
-    input[type="password"] { letter-spacing: 2px; }
+/* status bar */
+.status-bar{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:9px 13px;font-size:var(--fs-xs);font-family:var(--mono);color:var(--muted);margin-top:10px;display:none}
+.status-bar.show{display:block}
+.status-bar.ok{color:var(--success);border-color:rgba(76,175,130,.3)}
+.status-bar.err{color:var(--error);border-color:rgba(255,82,82,.3)}
 
-    .pat-row {
-      display: flex;
-      gap: 8px;
-      align-items: flex-end;
-    }
-    .pat-row > div { flex: 1; }
-    .pat-saved-badge {
-      font-size: 11px;
-      color: var(--success);
-      background: rgba(76,175,130,0.1);
-      border: 1px solid rgba(76,175,130,0.3);
-      border-radius: 5px;
-      padding: 3px 8px;
-      white-space: nowrap;
-      display: none;
-    }
-    .pat-saved-badge.show { display: inline-block; }
+/* mode tabs */
+.mode-tabs{display:flex;gap:4px;background:var(--bg);border-radius:8px;padding:4px;margin-bottom:14px}
+.mode-tab{flex:1;padding:8px;text-align:center;font-size:var(--fs-xs);font-weight:600;border-radius:6px;cursor:pointer;color:var(--muted);transition:all .2s}
+.mode-tab.active{background:var(--accent);color:#fff}
 
-    /* ── File selector ── */
-    .file-selector {
-      display: flex;
-      gap: 8px;
-      align-items: flex-end;
-    }
-    .file-selector > div { flex: 1; }
-    .file-selector select { height: 38px; }
+.warn-box{background:rgba(255,179,71,.08);border:1px solid rgba(255,179,71,.25);border-radius:7px;padding:9px 13px;font-size:var(--fs-xs);color:var(--warn);margin-bottom:12px;display:none}
 
-    /* ── Mode tabs ── */
-    .mode-tabs {
-      display: flex;
-      gap: 4px;
-      background: var(--bg);
-      border-radius: 8px;
-      padding: 4px;
-      margin-bottom: 16px;
-    }
-    .mode-tab {
-      flex: 1;
-      padding: 8px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 600;
-      border-radius: 6px;
-      cursor: pointer;
-      color: var(--muted);
-      transition: all 0.2s;
-    }
-    .mode-tab.active {
-      background: var(--accent);
-      color: white;
-    }
+/* ACTION ROW */
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 
-    /* ── Textarea ── */
-    textarea {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      color: var(--text);
-      padding: 12px;
-      font-size: 13px;
-      font-family: var(--mono);
-      line-height: 1.6;
-      resize: vertical;
-      outline: none;
-      min-height: 280px;
-      transition: border-color 0.2s;
-    }
-    textarea:focus { border-color: var(--accent); }
-    textarea::placeholder { color: var(--muted); }
+/* ═══════════════════════════════════════
+   RIGHT PANEL — QUESTIONS EDITOR
+═══════════════════════════════════════ */
+.rp-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.rp-title{font-size:18px;font-weight:700;flex:1}
+.q-total-badge{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:4px 14px;font-size:var(--fs-xs);color:var(--accent);font-weight:600}
 
-    /* ── Preview ── */
-    #preview-area {
-      display: none;
-    }
-    #preview-area.show { display: block; }
+/* question card in editor */
+.qe-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:12px;overflow:hidden;transition:border-color .2s}
+.qe-card.editing{border-color:var(--accent)}
+.qe-card.new-q{border-color:var(--success)}
+.qe-head{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--surface2);cursor:pointer;user-select:none}
+.qe-num{font-size:13px;font-weight:700;color:var(--accent);min-width:32px}
+.qe-preview{flex:1;font-size:var(--fs-sm);color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qe-badge{font-size:10px;padding:2px 7px;border-radius:4px;font-weight:700}
+.qe-badge-new{background:rgba(76,175,130,.15);color:var(--success);border:1px solid rgba(76,175,130,.3)}
+.qe-head-btns{display:flex;gap:4px;flex-shrink:0}
+.qe-body{padding:14px;display:none;border-top:1px solid var(--border)}
+.qe-body.open{display:block}
 
-    .preview-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .q-count {
-      font-size: 12px;
-      color: var(--accent);
-      font-weight: 600;
-    }
+/* inline edit fields */
+.field-group{margin-bottom:10px}
+.field-group label{margin-bottom:4px}
+.field-row{display:flex;gap:6px}
+.field-row textarea{flex:1}
+.opt-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.opt-row input{flex:1}
+.opt-row .btn-xs{flex-shrink:0}
 
-    .q-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 14px;
-      margin-bottom: 8px;
-      font-size: 13px;
-    }
-    .q-num { color: var(--accent); font-weight: 700; font-size: 11px; margin-bottom: 4px; }
-    .q-text { margin-bottom: 6px; line-height: 1.5; }
-    .q-hindi { color: var(--muted); font-size: 12px; margin-bottom: 8px; }
-    .q-opts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-    }
-    .q-opt {
-      background: rgba(108,99,255,0.1);
-      border: 1px solid rgba(108,99,255,0.25);
-      border-radius: 4px;
-      padding: 2px 8px;
-      font-size: 12px;
-      color: var(--accent);
-    }
+/* insert zone */
+.insert-zone{text-align:center;padding:6px;opacity:0;transition:opacity .2s}
+.insert-zone:hover{opacity:1}
+.insert-btn{background:transparent;border:1px dashed var(--success);color:var(--success);border-radius:6px;padding:4px 12px;font-size:11px;cursor:pointer;font-weight:600}
+.insert-btn:hover{background:rgba(76,175,130,.1)}
 
-    /* ── Existing questions viewer ── */
-    #existing-section { display: none; }
-    #existing-section.show { display: block; }
-    .existing-stats {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
+/* drag handle */
+.drag-handle{cursor:grab;color:var(--muted);font-size:14px;padding:0 2px;user-select:none}
+.drag-handle:active{cursor:grabbing}
+.qe-card.drag-over{border-color:var(--accent2);border-style:dashed}
 
-    /* ── Buttons ── */
-    .btn {
-      padding: 10px 18px;
-      border: none;
-      border-radius: 7px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-    }
-    .btn-primary:hover:not(:disabled) { background: #5a52d5; }
+/* empty state */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-state .icon{font-size:48px;margin-bottom:12px}
+.empty-state p{font-size:var(--fs-sm)}
 
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+/* spinner */
+.spinner{width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle;margin-right:5px}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-    .btn-danger {
-      background: transparent;
-      border: 1px solid var(--error);
-      color: var(--error);
-    }
-    .btn-danger:hover { background: rgba(255,82,82,0.1); }
+hr{border:none;border-top:1px solid var(--border);margin:12px 0}
 
-    .btn-success {
-      background: var(--success);
-      color: white;
-    }
-    .btn-success:hover:not(:disabled) { background: #3d8f6a; }
+/* scrollbars */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
-    .btn-sm { padding: 6px 12px; font-size: 12px; }
+/* Add new JSON section */
+#add-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:16px}
+#add-section .add-title{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)}
 
-    /* ── Action row ── */
-    .action-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-    }
+/* save bar */
+.save-bar{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:10px;margin-top:16px}
+.save-bar-info{font-size:var(--fs-xs);color:var(--muted);flex:1}
 
-    /* ── Status bar ── */
-    #status-bar {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      padding: 10px 14px;
-      font-size: 12px;
-      font-family: var(--mono);
-      color: var(--muted);
-      margin-top: 12px;
-      min-height: 40px;
-      display: none;
-    }
-    #status-bar.show { display: block; }
-    #status-bar.ok  { color: var(--success); border-color: rgba(76,175,130,0.3); }
-    #status-bar.err { color: var(--error);   border-color: rgba(255,82,82,0.3); }
+/* right panel view tabs */
+.rp-view-tabs{display:flex;gap:3px;background:var(--surface2);border-radius:8px;padding:3px}
+.rp-tab{padding:6px 14px;font-size:var(--fs-xs);font-weight:600;border-radius:6px;cursor:pointer;color:var(--muted);transition:all .2s;white-space:nowrap}
+.rp-tab.active{background:var(--accent);color:#fff}
 
-    /* ── Merge mode ── */
-    .merge-info {
-      background: rgba(255,179,71,0.08);
-      border: 1px solid rgba(255,179,71,0.25);
-      border-radius: 7px;
-      padding: 10px 14px;
-      font-size: 12px;
-      color: var(--warn);
-      margin-bottom: 12px;
-    }
-
-    /* ── Spinner ── */
-    .spinner {
-      width: 14px; height: 14px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 0.6s linear infinite;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 6px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
-
-    /* ── Existing Q list ── */
-    .existing-q-list {
-      max-height: 300px;
-      overflow-y: auto;
-      margin-top: 8px;
-    }
-    .existing-q-list::-webkit-scrollbar { width: 4px; }
-    .existing-q-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-    .new-file-row {
-      display: flex;
-      gap: 8px;
-      align-items: flex-end;
-      margin-top: 10px;
-    }
-    .new-file-row > div { flex: 1; }
-
-    /* section toggle */
-    .section-toggle {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      user-select: none;
-    }
-    .chevron { transition: transform 0.2s; font-size: 12px; color: var(--muted); }
-    .chevron.open { transform: rotate(180deg); }
-  </style>
+/* preview cards */
+.pv-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:10px}
+.pv-num{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:5px}
+.pv-text{font-size:15px;line-height:1.6;margin-bottom:6px}
+.pv-hindi{font-size:14px;color:var(--muted);margin-bottom:10px;line-height:1.5}
+.pv-opts{display:flex;flex-wrap:wrap;gap:6px}
+.pv-opt{background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.25);border-radius:5px;padding:4px 12px;font-size:13px;color:var(--accent)}
+</style>
 </head>
 <body>
 
@@ -365,152 +177,191 @@
   <div class="logo">📚</div>
   <div>
     <h1>Question Admin</h1>
-    <span>deepak325268 / deepak2</span>
+    <div class="sub">deepak325268 / deepak2</div>
+  </div>
+  <div class="header-right">
+    <button class="theme-btn" onclick="toggleTheme()" id="theme-btn" title="Light/Dark">🌙</button>
   </div>
 </header>
 
 <div id="toast"></div>
 
-<main>
+<div class="layout">
 
-  <!-- ── Settings Card ── -->
-  <div class="card" id="settings-card">
-    <div class="section-toggle" onclick="toggleSection('settings-body', 'settings-chev')">
-      <div class="card-title">⚙️ GitHub Settings</div>
-      <span class="chevron" id="settings-chev">▼</span>
-    </div>
-    <div id="settings-body">
-      <br>
-      <div class="settings-grid">
-        <div>
-          <label>GitHub Username</label>
-          <input type="text" id="gh-user" value="deepak325268" placeholder="deepak325268">
-        </div>
-        <div>
-          <label>Repository</label>
-          <input type="text" id="gh-repo" value="deepak2" placeholder="deepak2">
-        </div>
+  <!-- ══════════════ LEFT PANEL ══════════════ -->
+  <div class="left-panel">
+
+    <!-- GitHub Settings -->
+    <div class="lp-section">
+      <div class="lp-title">⚙️ GitHub Settings</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div><label>Username</label><input type="text" id="gh-user" value="deepak325268"></div>
+        <div><label>Repository</label><input type="text" id="gh-repo" value="deepak2"></div>
       </div>
-      <br>
       <div class="pat-row">
-        <div>
-          <label>Personal Access Token (PAT) <span style="color:var(--muted);font-size:10px">— localStorage mein save hoga</span></label>
-          <input type="password" id="gh-pat" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+        <div><label>Personal Access Token <span style="color:var(--muted);font-size:10px">(localStorage)</span></label>
+          <input type="password" id="gh-pat" placeholder="ghp_...">
         </div>
-        <span class="pat-saved-badge" id="pat-badge">✓ Saved</span>
-        <button class="btn btn-outline btn-sm" onclick="savePAT()">Save PAT</button>
-        <button class="btn btn-outline btn-sm" onclick="testPAT()">Test</button>
+        <span class="badge badge-success" id="pat-badge">✓</span>
       </div>
-      <div id="status-bar"></div>
-    </div>
-  </div>
-
-  <!-- ── File Selector Card ── -->
-  <div class="card">
-    <div class="card-title">📁 Chapter File Select karo</div>
-
-    <div class="file-selector">
-      <div>
-        <label>Existing File</label>
-        <select id="file-select" onchange="onFileSelect()">
-          <option value="">-- Select karo --</option>
-          <option value="hcf-lcm.json">hcf-lcm.json</option>
-          <option value="compound-interest.json">compound-interest.json</option>
-          <option value="statistics.json">statistics.json</option>
-        </select>
+      <div style="display:flex;gap:6px;margin-top:8px">
+        <button class="btn btn-outline btn-sm" onclick="savePAT()">💾 Save</button>
+        <button class="btn btn-outline btn-sm" onclick="testPAT()">🔌 Test</button>
       </div>
-      <button class="btn btn-outline btn-sm" onclick="loadFiles()">🔄 Files Load</button>
+      <div class="status-bar" id="status-bar"></div>
     </div>
 
-    <div class="new-file-row">
-      <div>
-        <label>Ya Naya File Naam (naya chapter ke liye)</label>
+    <!-- File Selector -->
+    <div class="lp-section">
+      <div class="lp-title">📁 Chapter File</div>
+      <div class="file-row">
+        <div>
+          <label>Select File</label>
+          <select id="file-select" onchange="onFileSelect()">
+            <option value="">-- Select karo --</option>
+          </select>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="loadFiles()" style="margin-top:18px" title="Refresh">🔄</button>
+      </div>
+      <div style="margin-top:10px">
+        <label>Ya Naya File Naam</label>
         <input type="text" id="new-filename" placeholder="e.g. percentage.json" oninput="onNewFilename()">
       </div>
+      <div id="file-info" style="margin-top:8px;font-size:12px;color:var(--muted)"></div>
     </div>
 
-    <!-- Existing questions info -->
-    <div id="existing-section">
-      <hr>
-      <div class="existing-stats" id="existing-stats">Loading...</div>
-      <div class="existing-q-list" id="existing-q-list"></div>
-    </div>
-  </div>
+    <!-- Add Questions -->
+    <div class="lp-section" style="flex:1">
+      <div class="lp-title">➕ Naye Questions Add</div>
 
-  <!-- ── Add Questions Card ── -->
-  <div class="card">
-    <div class="card-title">➕ Questions Add karo</div>
+      <div class="mode-tabs">
+        <div class="mode-tab active" id="tab-append" onclick="setMode('append')">Append</div>
+        <div class="mode-tab" id="tab-replace" onclick="setMode('replace')">Replace All</div>
+      </div>
 
-    <div class="mode-tabs">
-      <div class="mode-tab active" id="tab-append" onclick="setMode('append')">Append (add karo existing mein)</div>
-      <div class="mode-tab" id="tab-replace" onclick="setMode('replace')">Replace (poora replace karo)</div>
-    </div>
+      <div class="warn-box" id="merge-info">⚠️ Replace mode: File ka poora content replace ho jaayega!</div>
 
-    <div class="merge-info" id="merge-info" style="display:none">
-      ⚠️ <strong>Replace mode:</strong> File ka poora content replace ho jaayega. Pehle se jo questions hain wo delete ho jaayenge.
-    </div>
-
-    <label>JSON Paste karo <span style="color:var(--muted);font-size:10px">— array of objects: {num, text, hindi, opts}</span></label>
-    <textarea id="json-input" placeholder='[
-  { "num": 1, "text": "Question here", "hindi": "हिंदी में प्रश्न", "opts": ["(a) Option1", "(b) Option2", "(c) Option3", "(d) Option4"] },
-  { "num": 2, "text": "Question 2", "hindi": "", "opts": ["(a) A", "(b) B", "(c) C", "(d) D"] }
+      <label>JSON Paste karo</label>
+      <textarea id="json-input" rows="10" placeholder='[
+  {
+    "num": 1,
+    "text": "Question text",
+    "hindi": "हिंदी प्रश्न",
+    "opts": ["(a) A","(b) B","(c) C","(d) D"]
+  }
 ]'></textarea>
 
-    <div class="action-row">
-      <button class="btn btn-outline" onclick="parseAndPreview()">👁️ Preview</button>
-      <button class="btn btn-primary" onclick="clearInput()">🗑️ Clear</button>
-      <button class="btn btn-success" id="save-btn" onclick="saveToGitHub()" disabled>
+      <div class="action-row">
+        <button class="btn btn-primary btn-sm" onclick="parseAndPreview()">👁️ Preview</button>
+        <button class="btn btn-sm" style="background:var(--surface2);border:1px solid var(--border);color:var(--text)" onclick="clearInput()">🗑️ Clear</button>
+      </div>
+    </div>
+
+    <!-- Save Button -->
+    <div style="padding:14px;border-top:1px solid var(--border);background:var(--surface)">
+      <div id="save-target-box" style="background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:12px;display:none">
+        <span style="color:var(--muted)">Save hoga →</span>
+        <span id="save-target-name" style="color:var(--accent);font-weight:700;margin-left:4px"></span>
+      </div>
+      <button class="btn btn-success" id="save-btn" onclick="saveToGitHub()" disabled style="width:100%;padding:12px;font-size:15px">
         ⬆️ GitHub pe Save karo
       </button>
+      <div id="save-info" style="text-align:center;font-size:11px;color:var(--muted);margin-top:6px"></div>
     </div>
 
-    <div id="save-status"></div>
   </div>
 
-  <!-- ── Preview Card ── -->
-  <div class="card" id="preview-area">
-    <div class="preview-header">
-      <div class="card-title">👁️ Preview</div>
-      <span class="q-count" id="q-count"></span>
+  <!-- ══════════════ RIGHT PANEL ══════════════ -->
+  <div class="right-panel" id="right-panel">
+    <div class="rp-header">
+      <div class="rp-title" id="rp-title">Questions Editor</div>
+      <span class="q-total-badge" id="q-total">0 questions</span>
+      <div class="rp-view-tabs" id="rp-view-tabs">
+        <div class="rp-tab active" id="rtab-editor" onclick="switchRTab('editor')">✏️ Editor</div>
+        <div class="rp-tab" id="rtab-preview" onclick="switchRTab('preview')">👁️ Preview</div>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="expandAll()">📖 Sab Kholo</button>
+      <button class="btn btn-outline btn-sm" onclick="collapseAll()">📕 Sab Band</button>
+      <button class="btn btn-outline btn-sm" onclick="renumberAll()">🔢 Renumber</button>
     </div>
-    <div id="preview-list"></div>
+
+    <!-- EDITOR VIEW -->
+    <div id="q-editor-list">
+      <div class="empty-state">
+        <div class="icon">📂</div>
+        <p>Left se file select karo<br>ya naya chapter naam dalo</p>
+      </div>
+    </div>
+
+    <!-- PREVIEW VIEW -->
+    <div id="q-preview-panel" style="display:none">
+      <div id="preview-confirm-bar" style="display:none;background:var(--surface);border:1px solid var(--success);border-radius:var(--r);padding:12px 16px;margin-bottom:16px;display:none;align-items:center;gap:10px;flex-wrap:wrap">
+        <span id="preview-count-label" style="flex:1;font-size:14px;font-weight:600;color:var(--success)"></span>
+        <button class="btn btn-success" onclick="confirmAndAdd()">✅ Confirm & Add to Editor</button>
+        <button class="btn btn-outline btn-sm" onclick="cancelPreview()">✕ Cancel</button>
+      </div>
+      <div id="preview-cards-list"></div>
+    </div>
   </div>
 
-</main>
+</div>
 
 <script>
-// ────────────────────────────────────────────
-//  State
-// ────────────────────────────────────────────
+// ═══════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════
 let currentMode = 'append';
-let parsedNew   = null;      // naye parsed questions
-let existingQ   = null;      // file mein pehle se jo hai
-let currentFile = '';        // selected filename
-let currentSHA  = '';        // GitHub file SHA (update ke liye zaroori)
+let existingQ   = [];
+let currentFile = '';
+let currentSHA  = '';
+let dirty       = false;   // unsaved changes?
+let dragSrcIdx  = null;
 
-// ────────────────────────────────────────────
-//  Init
-// ────────────────────────────────────────────
-window.onload = function() {
-  const saved = localStorage.getItem('gh_pat');
-  if (saved) {
-    document.getElementById('gh-pat').value = saved;
+// ═══════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════
+window.onload = async function() {
+  // Load saved PAT
+  const pat = localStorage.getItem('gh_pat');
+  if (pat) {
+    document.getElementById('gh-pat').value = pat;
     document.getElementById('pat-badge').classList.add('show');
   }
+  // Load saved theme
+  const th = localStorage.getItem('theme') || 'dark';
+  setTheme(th);
+  // Auto-load files
+  if (pat) await loadFiles();
 };
 
-// ────────────────────────────────────────────
-//  Helpers
-// ────────────────────────────────────────────
+// ═══════════════════════════════════════════
+//  THEME
+// ═══════════════════════════════════════════
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('theme-btn').textContent = t==='dark' ? '🌙' : '☀️';
+  localStorage.setItem('theme', t);
+}
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  setTheme(cur==='dark' ? 'light' : 'dark');
+}
+
+// ═══════════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════════
 function toast(msg, type='info', dur=3000) {
   const el = document.getElementById('toast');
-  const icons = { success:'✅', error:'❌', warn:'⚠️', info:'ℹ️' };
+  const icons = {success:'✅',error:'❌',warn:'⚠️',info:'ℹ️'};
   el.className = 'show ' + type;
   el.innerHTML = `<span>${icons[type]||'ℹ️'}</span><span>${msg}</span>`;
   clearTimeout(el._t);
-  el._t = setTimeout(() => { el.classList.remove('show'); }, dur);
+  el._t = setTimeout(() => el.classList.remove('show'), dur);
 }
 
+// ═══════════════════════════════════════════
+//  CONFIG
+// ═══════════════════════════════════════════
 function getConfig() {
   return {
     user: document.getElementById('gh-user').value.trim(),
@@ -518,101 +369,78 @@ function getConfig() {
     pat:  document.getElementById('gh-pat').value.trim(),
   };
 }
-
 function getFilename() {
-  const sel = document.getElementById('file-select').value;
-  const newF = document.getElementById('new-filename').value.trim();
-  return newF || sel;
+  return document.getElementById('new-filename').value.trim()
+      || document.getElementById('file-select').value;
 }
 
-function statusBar(msg, type='') {
-  const el = document.getElementById('status-bar');
-  el.className = 'show ' + type;
-  el.textContent = msg;
-}
-
-function toggleSection(id, chevId) {
-  const el = document.getElementById(id);
-  const ch = document.getElementById(chevId);
-  if (el.style.display === 'none') {
-    el.style.display = '';
-    ch.classList.add('open');
-  } else {
-    el.style.display = 'none';
-    ch.classList.remove('open');
-  }
-}
-
-// ────────────────────────────────────────────
+// ═══════════════════════════════════════════
 //  PAT
-// ────────────────────────────────────────────
+// ═══════════════════════════════════════════
 function savePAT() {
   const pat = document.getElementById('gh-pat').value.trim();
-  if (!pat) { toast('PAT khali hai!', 'error'); return; }
+  if (!pat) { toast('PAT khali hai!','error'); return; }
   localStorage.setItem('gh_pat', pat);
   document.getElementById('pat-badge').classList.add('show');
-  toast('PAT save ho gaya!', 'success');
+  toast('PAT save ho gaya!','success');
 }
 
 async function testPAT() {
-  const { user, repo, pat } = getConfig();
-  if (!pat) { toast('PAT dalo pehle!', 'error'); return; }
-  statusBar('Testing connection...');
+  const {user, repo, pat} = getConfig();
+  if (!pat) { toast('PAT dalo!','error'); return; }
+  const sb = document.getElementById('status-bar');
+  sb.className = 'status-bar show'; sb.textContent = 'Testing...';
   try {
     const r = await fetch(`https://api.github.com/repos/${user}/${repo}`, {
-      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' }
+      headers:{Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json'}
     });
     if (r.ok) {
       const d = await r.json();
-      statusBar(`✅ Connected! Repo: ${d.full_name} | Visibility: ${d.private?'Private':'Public'}`, 'ok');
-      toast('GitHub connection OK!', 'success');
-      loadFiles(); // files bhi load kar lo
+      sb.className='status-bar show ok';
+      sb.textContent=`✅ ${d.full_name} — ${d.private?'Private':'Public'}`;
+      toast('GitHub OK!','success');
+      await loadFiles();
     } else {
       const e = await r.json();
-      statusBar(`❌ Error: ${e.message}`, 'err');
-      toast('Connection fail! PAT check karo.', 'error');
+      sb.className='status-bar show err'; sb.textContent='❌ '+e.message;
+      toast('PAT error!','error');
     }
   } catch(e) {
-    statusBar(`❌ Network error: ${e.message}`, 'err');
-    toast('Network error!', 'error');
+    sb.className='status-bar show err'; sb.textContent='❌ '+e.message;
   }
 }
 
-// ────────────────────────────────────────────
-//  Load files from questions/ folder
-// ────────────────────────────────────────────
+// ═══════════════════════════════════════════
+//  LOAD FILES
+// ═══════════════════════════════════════════
 async function loadFiles() {
-  const { user, repo, pat } = getConfig();
-  if (!pat) { toast('PAT dalo pehle!', 'warn'); return; }
+  const {user,repo,pat} = getConfig();
+  if (!pat) return;
   try {
-    const r = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/questions`, {
-      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' }
+    const r = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/questions`,{
+      headers:{Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json'}
     });
-    if (!r.ok) { toast('Files load nahi hui!', 'error'); return; }
+    if (!r.ok) return;
     const files = await r.json();
     const sel = document.getElementById('file-select');
+    const prev = sel.value;
     sel.innerHTML = '<option value="">-- Select karo --</option>';
-    files.filter(f => f.name.endsWith('.json')).forEach(f => {
+    files.filter(f=>f.name.endsWith('.json')).sort((a,b)=>a.name.localeCompare(b.name)).forEach(f=>{
       const opt = document.createElement('option');
-      opt.value = f.name;
-      opt.textContent = f.name;
+      opt.value = f.name; opt.textContent = f.name;
       sel.appendChild(opt);
     });
-    toast(`${files.filter(f=>f.name.endsWith('.json')).length} files mili!`, 'success');
-  } catch(e) {
-    toast('Error: ' + e.message, 'error');
-  }
+    if (prev) sel.value = prev;
+  } catch(e) {}
 }
 
-// ────────────────────────────────────────────
-//  File select → load existing
-// ────────────────────────────────────────────
+// ═══════════════════════════════════════════
+//  FILE SELECT
+// ═══════════════════════════════════════════
 async function onFileSelect() {
   const sel = document.getElementById('file-select').value;
   document.getElementById('new-filename').value = '';
-  if (!sel) {
-    hideExisting(); return;
-  }
+  if (!sel) { currentFile=''; existingQ=[]; renderEditor(); return; }
   currentFile = sel;
   await loadExistingFile(sel);
 }
@@ -620,221 +448,437 @@ async function onFileSelect() {
 function onNewFilename() {
   const val = document.getElementById('new-filename').value.trim();
   if (val) {
-    document.getElementById('file-select').value = '';
-    hideExisting();
     currentFile = val;
+    // Note: file-select clear NAHI karo — user ko dono dikhte hain
+    // Warning save-target-box mein dikhegi
     existingQ = [];
     currentSHA = '';
+    renderEditor();
+    updateFileInfo();
+  } else {
+    // New filename clear hua — wapas selected file pe
+    const sel = document.getElementById('file-select').value;
+    if (sel) currentFile = sel;
   }
+  updateSaveBtn();
 }
 
 async function loadExistingFile(filename) {
-  const { user, repo, pat } = getConfig();
-  if (!pat) { toast('PAT dalo pehle!', 'warn'); return; }
-  const sec = document.getElementById('existing-section');
-  sec.classList.add('show');
-  document.getElementById('existing-stats').textContent = 'Loading...';
-  document.getElementById('existing-q-list').innerHTML = '';
+  const {user,repo,pat} = getConfig();
+  if (!pat) { toast('PAT dalo!','warn'); return; }
+  document.getElementById('file-info').textContent = '⏳ Loading...';
   try {
-    const r = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/questions/${filename}`, {
-      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' }
+    const r = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/questions/${filename}`,{
+      headers:{Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json'}
     });
-    if (r.status === 404) {
-      existingQ = [];
-      currentSHA = '';
-      document.getElementById('existing-stats').textContent = '⚠️ File abhi exist nahi karti — nayi file create hogi.';
-      return;
+    if (r.status===404) {
+      existingQ=[]; currentSHA='';
+      document.getElementById('file-info').textContent = '⚠️ Naya file banega';
+      renderEditor(); return;
     }
-    if (!r.ok) { toast('File load error!', 'error'); return; }
+    if (!r.ok) { toast('Load error!','error'); return; }
     const data = await r.json();
     currentSHA = data.sha;
-    const content = JSON.parse(atob(data.content.replace(/\n/g,'')));
-    existingQ = content;
-    renderExisting(content);
+    existingQ = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g,'')))));
+    updateFileInfo();
+    renderEditor();
+    toast(`${existingQ.length} questions load ho gaye!`,'success');
   } catch(e) {
-    toast('Parse error: ' + e.message, 'error');
+    toast('Parse error: '+e.message,'error');
   }
 }
 
-function renderExisting(questions) {
-  document.getElementById('existing-stats').textContent =
-    `📌 Is file mein pehle se ${questions.length} questions hain`;
-  const list = document.getElementById('existing-q-list');
-  list.innerHTML = '';
-  questions.slice(0, 10).forEach(q => {
-    const el = document.createElement('div');
-    el.className = 'q-card';
-    el.innerHTML = `
-      <div class="q-num">Q${q.num}</div>
-      <div class="q-text">${q.text||''}</div>
-      ${q.hindi ? `<div class="q-hindi">${q.hindi}</div>` : ''}
-      <div class="q-opts">${(q.opts||[]).map(o=>`<span class="q-opt">${o}</span>`).join('')}</div>
-    `;
-    list.appendChild(el);
-  });
-  if (questions.length > 10) {
-    const more = document.createElement('div');
-    more.style = 'font-size:12px;color:var(--muted);text-align:center;padding:8px';
-    more.textContent = `... aur ${questions.length-10} questions`;
-    list.appendChild(more);
-  }
+function updateFileInfo() {
+  const fi = document.getElementById('file-info');
+  if (existingQ.length>0) fi.textContent = `📌 ${existingQ.length} questions — ${currentFile}`;
+  else fi.textContent = '';
 }
 
-function hideExisting() {
-  document.getElementById('existing-section').classList.remove('show');
-  existingQ = null;
-  currentSHA = '';
+// ═══════════════════════════════════════════
+//  MODE
+// ═══════════════════════════════════════════
+function setMode(m) {
+  currentMode=m;
+  document.getElementById('tab-append').classList.toggle('active',m==='append');
+  document.getElementById('tab-replace').classList.toggle('active',m==='replace');
+  document.getElementById('merge-info').style.display = m==='replace'?'block':'none';
 }
 
-// ────────────────────────────────────────────
-//  Mode toggle
-// ────────────────────────────────────────────
-function setMode(mode) {
-  currentMode = mode;
-  document.getElementById('tab-append').classList.toggle('active', mode==='append');
-  document.getElementById('tab-replace').classList.toggle('active', mode==='replace');
-  document.getElementById('merge-info').style.display = mode==='replace' ? 'block' : 'none';
-  // preview reset
-  document.getElementById('preview-area').classList.remove('show');
-  document.getElementById('save-btn').disabled = true;
-  parsedNew = null;
-}
+// ═══════════════════════════════════════════
+//  PARSE & PREVIEW (step 1)
+// ═══════════════════════════════════════════
+let pendingArr = null;  // parsed but not yet added
 
-// ────────────────────────────────────────────
-//  Parse & Preview
-// ────────────────────────────────────────────
 function parseAndPreview() {
   const raw = document.getElementById('json-input').value.trim();
-  if (!raw) { toast('Pehle JSON paste karo!', 'warn'); return; }
-
+  if (!raw) { toast('JSON paste karo!','warn'); return; }
   let arr;
   try {
     arr = JSON.parse(raw);
-    if (!Array.isArray(arr)) throw new Error('Array chahiye, object nahi');
+    if (!Array.isArray(arr)) throw new Error('Array chahiye');
   } catch(e) {
-    toast('JSON invalid hai: ' + e.message, 'error');
-    return;
+    toast('JSON invalid: '+e.message,'error'); return;
   }
 
-  // validate
-  const invalid = arr.filter(q => !q.text && !q.hindi);
-  if (invalid.length > 0) {
-    toast(`⚠️ ${invalid.length} questions mein text/hindi dono khali hain!`, 'warn');
-  }
+  pendingArr = arr;
 
-  parsedNew = arr;
+  // Render preview cards
+  const pvList = document.getElementById('preview-cards-list');
+  pvList.innerHTML = '';
+  const maxN = existingQ.length>0 ? Math.max(...existingQ.map(q=>q.num||0)) : 0;
 
-  // figure out final array
-  let finalArr = arr;
-  if (currentMode === 'append' && existingQ && existingQ.length > 0) {
-    // num auto-adjust
-    const maxExisting = Math.max(...existingQ.map(q=>q.num||0));
-    finalArr = [...existingQ, ...arr.map((q,i) => ({ ...q, num: maxExisting + i + 1 }))];
-  }
-
-  // render preview
-  const list = document.getElementById('preview-list');
-  list.innerHTML = '';
-  const preview = currentMode === 'append' ? arr : finalArr;
-  preview.forEach(q => {
-    const el = document.createElement('div');
-    el.className = 'q-card';
-    el.innerHTML = `
-      <div class="q-num">Q${q.num} ${currentMode==='append'?'<span style="color:var(--success);font-size:10px">NEW</span>':''}</div>
-      <div class="q-text">${q.text||''}</div>
-      ${q.hindi ? `<div class="q-hindi">${q.hindi}</div>` : ''}
-      <div class="q-opts">${(q.opts||[]).map(o=>`<span class="q-opt">${o}</span>`).join('')}</div>
+  arr.forEach((q,i) => {
+    const dispNum = currentMode==='append' ? maxN+i+1 : q.num||i+1;
+    const card = document.createElement('div');
+    card.className = 'pv-card';
+    card.innerHTML = `
+      <div class="pv-num">Q${dispNum} <span style="color:var(--success);font-size:11px;font-weight:700">● NEW</span></div>
+      <div class="pv-text">${escH(q.text||'')}</div>
+      ${q.hindi?`<div class="pv-hindi">${escH(q.hindi)}</div>`:''}
+      <div class="pv-opts">${(q.opts||[]).map(o=>`<span class="pv-opt">${escH(o)}</span>`).join('')}</div>
     `;
-    list.appendChild(el);
+    pvList.appendChild(card);
   });
 
+  // Show confirm bar
+  const cbar = document.getElementById('preview-confirm-bar');
+  cbar.style.display = 'flex';
   const modeLabel = currentMode==='append'
-    ? `${arr.length} naye + ${existingQ?.length||0} existing = <strong>${(arr.length+(existingQ?.length||0))} total</strong>`
-    : `${arr.length} questions (replace mode)`;
+    ? `${arr.length} naye questions — ${existingQ.length} existing ke baad add honge (Total: ${existingQ.length+arr.length})`
+    : `${arr.length} questions — poora file replace ho jaayega`;
+  document.getElementById('preview-count-label').textContent = modeLabel;
 
-  document.getElementById('q-count').innerHTML = modeLabel;
-  document.getElementById('preview-area').classList.add('show');
-  document.getElementById('save-btn').disabled = false;
-  toast(`${arr.length} questions parse ho gaye!`, 'success');
+  // Switch to preview tab
+  switchRTab('preview');
+  toast(`${arr.length} questions preview mein — check karo!`,'info');
+}
+
+// confirm & move to editor
+function confirmAndAdd() {
+  if (!pendingArr) return;
+  if (currentMode==='replace') {
+    existingQ = pendingArr.map(q=>({...q, _new:true}));
+  } else {
+    const maxN = existingQ.length>0 ? Math.max(...existingQ.map(q=>q.num||0)) : 0;
+    pendingArr.forEach((q,i) => { q.num = maxN+i+1; q._new=true; });
+    existingQ = [...existingQ, ...pendingArr];
+  }
+  pendingArr = null;
+  document.getElementById('json-input').value = '';
+  document.getElementById('preview-confirm-bar').style.display = 'none';
+  document.getElementById('preview-cards-list').innerHTML = '';
+  dirty = true;
+  switchRTab('editor');
+  renderEditor();
+  updateSaveBtn();
+  toast('Questions editor mein add ho gaye! Ab Save karo.','success');
+}
+
+function cancelPreview() {
+  pendingArr = null;
+  document.getElementById('preview-confirm-bar').style.display = 'none';
+  document.getElementById('preview-cards-list').innerHTML = '';
+  switchRTab('editor');
+  toast('Preview cancel kiya.','warn');
+}
+
+// ═══════════════════════════════════════════
+//  RIGHT PANEL TAB SWITCH
+// ═══════════════════════════════════════════
+function switchRTab(tab) {
+  document.getElementById('rtab-editor').classList.toggle('active', tab==='editor');
+  document.getElementById('rtab-preview').classList.toggle('active', tab==='preview');
+  document.getElementById('q-editor-list').style.display = tab==='editor' ? 'block' : 'none';
+  document.getElementById('q-preview-panel').style.display = tab==='preview' ? 'block' : 'none';
+  // expand/collapse/renumber buttons only for editor
+  document.querySelectorAll('.rp-header .btn').forEach(b => b.style.display = tab==='editor'?'':'none');
 }
 
 function clearInput() {
-  document.getElementById('json-input').value = '';
-  document.getElementById('preview-area').classList.remove('show');
-  document.getElementById('save-btn').disabled = true;
-  parsedNew = null;
+  document.getElementById('json-input').value='';
+  pendingArr = null;
 }
 
-// ────────────────────────────────────────────
-//  Save to GitHub
-// ────────────────────────────────────────────
-async function saveToGitHub() {
-  const filename = getFilename();
-  if (!filename) { toast('File naam select ya type karo!', 'error'); return; }
-  if (!parsedNew) { toast('Pehle JSON parse karo!', 'error'); return; }
+// ═══════════════════════════════════════════
+//  RENDER EDITOR
+// ═══════════════════════════════════════════
+function renderEditor() {
+  const list = document.getElementById('q-editor-list');
+  const title = document.getElementById('rp-title');
+  const tot = document.getElementById('q-total');
 
-  const { user, repo, pat } = getConfig();
-  if (!pat) { toast('PAT dalo!', 'error'); return; }
+  title.textContent = currentFile || 'Questions Editor';
+  tot.textContent = `${existingQ.length} questions`;
+  updateSaveBtn();
 
-  // build final array
-  let finalArr;
-  if (currentMode === 'append' && existingQ && existingQ.length > 0) {
-    const maxExisting = Math.max(...existingQ.map(q=>q.num||0));
-    finalArr = [...existingQ, ...parsedNew.map((q,i) => ({ ...q, num: maxExisting + i + 1 }))];
-  } else {
-    finalArr = parsedNew;
+  if (existingQ.length===0) {
+    list.innerHTML = `<div class="empty-state"><div class="icon">📂</div><p>File select karo ya JSON paste karke Add karo</p></div>`;
+    return;
   }
 
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(finalArr, null, 2))));
+  list.innerHTML = '';
+  existingQ.forEach((q,idx) => {
+    // insert zone above
+    const iz = makeInsertZone(idx);
+    list.appendChild(iz);
+    // card
+    const card = makeQCard(q, idx);
+    list.appendChild(card);
+  });
+  // final insert zone
+  const iz = makeInsertZone(existingQ.length);
+  list.appendChild(iz);
+}
+
+function makeInsertZone(afterIdx) {
+  const div = document.createElement('div');
+  div.className = 'insert-zone';
+  div.innerHTML = `<button class="insert-btn" onclick="insertQuestionAt(${afterIdx})">＋ Yahan naya question daalo</button>`;
+  return div;
+}
+
+function makeQCard(q, idx) {
+  const card = document.createElement('div');
+  card.className = 'qe-card' + (q._new?' new-q':'');
+  card.setAttribute('draggable','true');
+  card.dataset.idx = idx;
+
+  // drag events
+  card.addEventListener('dragstart', e => { dragSrcIdx=idx; card.style.opacity='.4'; });
+  card.addEventListener('dragend',   e => { card.style.opacity='1'; document.querySelectorAll('.qe-card').forEach(c=>c.classList.remove('drag-over')); });
+  card.addEventListener('dragover',  e => { e.preventDefault(); card.classList.add('drag-over'); });
+  card.addEventListener('dragleave', e => card.classList.remove('drag-over'));
+  card.addEventListener('drop',      e => { e.preventDefault(); card.classList.remove('drag-over'); if(dragSrcIdx!==null && dragSrcIdx!==idx) moveQuestion(dragSrcIdx,idx); });
+
+  const preview = (q.text||q.hindi||'(khali)').substring(0,70);
+
+  card.innerHTML = `
+    <div class="qe-head" onclick="toggleCard(${idx})">
+      <span class="drag-handle" title="Drag to reorder" onclick="event.stopPropagation()">⠿</span>
+      <span class="qe-num">Q${q.num}</span>
+      <span class="qe-preview">${escH(preview)}</span>
+      ${q._new?'<span class="qe-badge qe-badge-new">NEW</span>':''}
+      <div class="qe-head-btns" onclick="event.stopPropagation()">
+        <button class="btn btn-outline btn-xs" onclick="toggleCard(${idx})">✏️</button>
+        <button class="btn btn-danger btn-xs" onclick="deleteQ(${idx})" title="Delete">🗑️</button>
+      </div>
+    </div>
+    <div class="qe-body" id="qbody-${idx}">
+      <div class="field-group">
+        <label>प्रश्न (English)</label>
+        <textarea rows="3" id="qtext-${idx}" onchange="updateQ(${idx},'text',this.value)">${escH(q.text||'')}</textarea>
+      </div>
+      <div class="field-group">
+        <label>प्रश्न (Hindi)</label>
+        <textarea rows="2" id="qhindi-${idx}" onchange="updateQ(${idx},'hindi',this.value)">${escH(q.hindi||'')}</textarea>
+      </div>
+      <div class="field-group">
+        <label>Options</label>
+        <div id="qopts-${idx}">
+          ${(q.opts||[]).map((o,oi)=>`
+            <div class="opt-row">
+              <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${oi},this.value)">
+              <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${oi})">✕</button>
+            </div>
+          `).join('')}
+        </div>
+        <button class="btn btn-outline btn-xs" style="margin-top:4px" onclick="addOpt(${idx})">＋ Option</button>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;margin-top:6px">
+        <label style="margin:0">Q No:</label>
+        <input type="text" style="width:70px" value="${q.num}" onchange="updateQ(${idx},'num',parseInt(this.value)||${idx+1})">
+        <button class="btn btn-outline btn-xs" onclick="moveUp(${idx})" ${idx===0?'disabled':''}>↑</button>
+        <button class="btn btn-outline btn-xs" onclick="moveDown(${idx})" ${idx===existingQ.length-1?'disabled':''}>↓</button>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+function escH(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ═══════════════════════════════════════════
+//  EDITOR ACTIONS
+// ═══════════════════════════════════════════
+function toggleCard(idx) {
+  const body = document.getElementById('qbody-'+idx);
+  const card = body.closest('.qe-card');
+  const isOpen = body.classList.toggle('open');
+  card.classList.toggle('editing', isOpen);
+}
+
+function expandAll()   { document.querySelectorAll('.qe-body').forEach(b=>{ b.classList.add('open'); b.closest('.qe-card').classList.add('editing'); }); }
+function collapseAll() { document.querySelectorAll('.qe-body').forEach(b=>{ b.classList.remove('open'); b.closest('.qe-card').classList.remove('editing'); }); }
+
+function updateQ(idx, field, val) {
+  existingQ[idx][field] = val;
+  dirty = true;
+  updateSaveBtn();
+  // update preview text in header
+  const card = document.querySelector(`.qe-card[data-idx="${idx}"]`);
+  if (card) {
+    const prev = card.querySelector('.qe-preview');
+    if (prev) prev.textContent = (existingQ[idx].text||existingQ[idx].hindi||'(khali)').substring(0,70);
+    const numEl = card.querySelector('.qe-num');
+    if (numEl && field==='num') numEl.textContent = 'Q'+val;
+  }
+}
+
+function updateOpt(idx, oi, val) {
+  existingQ[idx].opts[oi] = val;
+  dirty = true; updateSaveBtn();
+}
+
+function deleteOpt(idx, oi) {
+  existingQ[idx].opts.splice(oi,1);
+  dirty = true;
+  // re-render just that card's opts
+  const optsDiv = document.getElementById('qopts-'+idx);
+  optsDiv.innerHTML = existingQ[idx].opts.map((o,i)=>`
+    <div class="opt-row">
+      <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${i},this.value)">
+      <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${i})">✕</button>
+    </div>
+  `).join('');
+  updateSaveBtn();
+}
+
+function addOpt(idx) {
+  if (!existingQ[idx].opts) existingQ[idx].opts=[];
+  existingQ[idx].opts.push('(e) ');
+  dirty=true;
+  deleteOpt(idx, -1); // trigger re-render via above (dirty trick — just re-render opts)
+  const optsDiv = document.getElementById('qopts-'+idx);
+  const oi = existingQ[idx].opts.length-1;
+  optsDiv.insertAdjacentHTML('beforeend',`
+    <div class="opt-row">
+      <input type="text" value="${escH(existingQ[idx].opts[oi])}" onchange="updateOpt(${idx},${oi},this.value)">
+      <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${oi})">✕</button>
+    </div>
+  `);
+  updateSaveBtn();
+}
+
+function deleteQ(idx) {
+  if (!confirm(`Q${existingQ[idx].num} delete karna hai?`)) return;
+  existingQ.splice(idx,1);
+  dirty=true;
+  renderEditor();
+}
+
+function insertQuestionAt(idx) {
+  const maxN = existingQ.length>0?Math.max(...existingQ.map(q=>q.num||0)):0;
+  const newQ = {num: maxN+1, text:'', hindi:'', opts:['(a) ','(b) ','(c) ','(d) '], _new:true};
+  existingQ.splice(idx,0,newQ);
+  dirty=true;
+  renderEditor();
+  // auto open the new card
+  setTimeout(()=>{ toggleCard(idx); document.getElementById('qtext-'+idx)?.focus(); }, 50);
+}
+
+function moveUp(idx) {
+  if(idx===0) return;
+  [existingQ[idx-1],existingQ[idx]]=[existingQ[idx],existingQ[idx-1]];
+  dirty=true; renderEditor();
+}
+function moveDown(idx) {
+  if(idx>=existingQ.length-1) return;
+  [existingQ[idx],existingQ[idx+1]]=[existingQ[idx+1],existingQ[idx]];
+  dirty=true; renderEditor();
+}
+function moveQuestion(fromIdx, toIdx) {
+  const item = existingQ.splice(fromIdx,1)[0];
+  existingQ.splice(toIdx,0,item);
+  dirty=true; renderEditor();
+}
+
+function renumberAll() {
+  existingQ.forEach((q,i)=>q.num=i+1);
+  dirty=true; renderEditor();
+  toast('Renumber ho gaya!','success');
+}
+
+// ═══════════════════════════════════════════
+//  SAVE BTN STATE
+// ═══════════════════════════════════════════
+function updateSaveBtn() {
   const btn = document.getElementById('save-btn');
-  btn.innerHTML = '<span class="spinner"></span> Saving...';
-  btn.disabled = true;
+  const info = document.getElementById('save-info');
+  const fn = getFilename();
+
+  // Target file box
+  const box = document.getElementById('save-target-box');
+  const nameEl = document.getElementById('save-target-name');
+  if (fn) {
+    const newF = document.getElementById('new-filename').value.trim();
+    const selF = document.getElementById('file-select').value;
+    box.style.display = 'block';
+    // Dono filled hain toh warn karo
+    if (newF && selF) {
+      box.style.borderColor = 'var(--warn)';
+      nameEl.style.color = 'var(--warn)';
+      nameEl.textContent = `⚠️ ${newF} (New file — "${selF}" ignore hoga)`;
+    } else {
+      box.style.borderColor = 'var(--border)';
+      nameEl.style.color = 'var(--accent)';
+      nameEl.textContent = `📄 questions/${fn}`;
+    }
+  } else {
+    box.style.display = 'none';
+  }
+
+  btn.disabled = !dirty || existingQ.length===0 || !fn;
+  info.textContent = dirty ? `⚠️ ${existingQ.length} questions — unsaved changes` : '';
+}
+
+// ═══════════════════════════════════════════
+//  SAVE TO GITHUB
+// ═══════════════════════════════════════════
+async function saveToGitHub() {
+  const filename = getFilename();
+  if (!filename) { toast('File naam select karo!','error'); return; }
+  if (existingQ.length===0) { toast('Questions hain hi nahi!','error'); return; }
+  const {user,repo,pat} = getConfig();
+  if (!pat) { toast('PAT dalo!','error'); return; }
+
+  // Clean _new flag before save
+  const toSave = existingQ.map(q=>{ const {_new,...rest}=q; return rest; });
+
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(toSave, null, 2))));
+  const btn = document.getElementById('save-btn');
+  btn.innerHTML='<span class="spinner"></span> Saving...';
+  btn.disabled=true;
 
   const body = {
-    message: `Update ${filename} — ${parsedNew.length} questions ${currentMode==='append'?'added':'replaced'}`,
-    content,
-    branch: 'main'
+    message:`Update ${filename} — ${toSave.length} questions`,
+    content, branch:'main'
   };
-  if (currentSHA) body.sha = currentSHA;  // update existing file
+  if (currentSHA) body.sha = currentSHA;
 
   try {
     const r = await fetch(
       `https://api.github.com/repos/${user}/${repo}/contents/questions/${filename}`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: `token ${pat}`,
-          Accept: 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-      }
+      { method:'PUT', headers:{Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'}, body:JSON.stringify(body) }
     );
-
     const data = await r.json();
     if (r.ok) {
-      toast(`✅ ${filename} save ho gaya! Total: ${finalArr.length} questions`, 'success', 5000);
-      btn.innerHTML = '✅ Saved!';
-      btn.className = 'btn btn-success';
-      // SHA update karo next save ke liye
-      currentSHA = data.content?.sha || '';
-      existingQ = finalArr;
-      renderExisting(finalArr);
-      document.getElementById('existing-section').classList.add('show');
-      setTimeout(() => {
-        btn.innerHTML = '⬆️ GitHub pe Save karo';
-        btn.className = 'btn btn-success';
-        btn.disabled = false;
-      }, 3000);
+      currentSHA = data.content?.sha||'';
+      existingQ = toSave; // strip _new
+      dirty = false;
+      renderEditor();
+      toast(`✅ Saved! ${toSave.length} questions in ${filename}`,'success',5000);
+      btn.innerHTML='✅ Saved!';
+      document.getElementById('save-info').textContent='';
+      setTimeout(()=>{ btn.innerHTML='⬆️ GitHub pe Save karo'; }, 2500);
     } else {
-      toast(`❌ Error: ${data.message}`, 'error', 6000);
-      btn.innerHTML = '⬆️ GitHub pe Save karo';
-      btn.disabled = false;
+      toast('❌ '+data.message,'error',6000);
+      btn.innerHTML='⬆️ GitHub pe Save karo'; btn.disabled=false;
     }
   } catch(e) {
-    toast('Network error: ' + e.message, 'error');
-    btn.innerHTML = '⬆️ GitHub pe Save karo';
-    btn.disabled = false;
+    toast('Network error: '+e.message,'error');
+    btn.innerHTML='⬆️ GitHub pe Save karo'; btn.disabled=false;
   }
 }
 </script>
