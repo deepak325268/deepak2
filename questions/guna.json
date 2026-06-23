@@ -1,0 +1,167 @@
+[
+  {
+    "num": 1,
+    "text": "Calculate the mean of the following set of values: 2.2, 4.2, 6.4, 8.3, 10.5",
+    "hindi": "दिए गए मानों के समुच्चय का माध्य ज्ञात कीजिए: 2.2, 4.2, 6.4, 8.3, 10.5",
+    "opts": [
+      "(a) 6.50",
+      "(b) 7",
+      "(c) 6.32",
+      "(d) 6.12"
+    ]
+  },
+  {
+    "num": 2,
+    "text": "Find out the mean of the given below data: $1, \\frac{1}{2}, \\frac{1}{2}, \\frac{3}{4}, \\frac{1}{4}, 2, \\frac{1}{2}, \\frac{1}{4}, \\frac{3}{4}$",
+    "hindi": "आंकड़ों का माध्य हैं? $1, \\frac{1}{2}, \\frac{1}{2}, \\frac{3}{4}, \\frac{1}{4}, 2, \\frac{1}{2}, \\frac{1}{4}, \\frac{3}{4}$",
+    "opts": [
+      "(a) $\\frac{15}{18}$",
+      "(b) $\\frac{13}{18}$",
+      "(c) $\\frac{7}{9}$",
+      "(d) $\\frac{8}{9}$"
+    ]
+  },
+  {
+    "num": 3,
+    "text": "The median of 4, 4, 5, 7, 6, 7, 7, 12, 3",
+    "hindi": "4, 4, 5, 7, 6, 7, 7, 12, 3 की माध्यिका ज्ञात कीजिए",
+    "opts": [
+      "(a) 4",
+      "(b) 6",
+      "(c) 5",
+      "(d) 7"
+    ]
+  },
+  {
+    "num": 4,
+    "text": "What is the median of the following data? 78, 56, 22, 34, 48, 54, 39, 68, 54, 84",
+    "hindi": "निम्नलिखित आंकड़ों की माध्यिका ज्ञात कीजिए ? 78, 56, 22, 34, 48, 54, 39, 68, 54, 84",
+    "opts": [
+      "(a) 54",
+      "(b) 53",
+      "(c) 55",
+      "(d) 51"
+    ]
+  },
+  {
+    "num": 5,
+    "text": "The digits given below are arranged in ascending order. If their median is 10, then find the value of p: 3, 5, 6, 2p+3, 3p+2, 15, 25, 51",
+    "hindi": "नीचे दिए गए आंकड़ों को आरोही क्रम में व्यवस्थित किया गया हैं I यदि इनकी माध्यिका 10 हैं, तो p का मान ज्ञात कीजिए ? 3, 5, 6, 2p+3, 3p+2, 15, 25, 51",
+    "opts": [
+      "(a) 2",
+      "(b) 3",
+      "(c) 27.5",
+      "(d) 38"
+    ]
+  },
+  {
+    "num": 6,
+    "text": "What will be the mode of the given data? 12, 1, 10, 1, 9, 3, 4, 9, 7, 9",
+    "hindi": "आंकड़ों 12, 1, 10, 1, 9, 3, 4, 9, 7, 9 का बहुलक हैं?",
+    "opts": [
+      "(a) 9",
+      "(b) 12",
+      "(c) 1",
+      "(d) 7"
+    ]
+  },
+  {
+    "num": 7,
+    "text": "Wickets taken by a bowler in 12 cricket matches are as follows: 2, 6, 4, 3, 5, 0, 3, 2, 1, 3, 2, 3. What will be the mode of the given data?",
+    "hindi": "एक गेंदबाज द्वारा 12 क्रिकेट मैचों में लिए गए विकेट इस प्रकार हैं: 2, 6, 4, 3, 5, 0, 3, 2, 1, 3, 2, 3. आंकड़ों का बहुलक (मोड़) ज्ञात कीजिए।",
+    "opts": [
+      "(a) 4",
+      "(b) 2",
+      "(c) 3",
+      "(d) 1"
+    ]
+  },
+  {
+    "num": 8,
+    "text": "The following are the weights (in kg) of 25 students: 58, 55, 53, 50, 53, 51, 52, 54, 53, 52, 54, 53, 58, 53, 59, 55, 53, 52, 51, 54, 53, 59, 55, 53, 52. What is the range of the given data?",
+    "hindi": "25 छात्रों का वजन (किग्रा. में) निम्नलिखित हैं: 58, 55, 53, 50, 53, 51, 52, 54, 53, 52, 54, 53, 58, 53, 59, 55, 53, 52, 51, 54, 53, 59, 55, 53, 52. दिए गए आंकड़ों का परास (range) क्या हैं?",
+    "opts": [
+      "(a) 6",
+      "(b) 8",
+      "(c) 9",
+      "(d) 7"
+    ]
+  },
+  {
+    "num": 9,
+    "text": "What will be the range of the following data? 12, 11, 18, 28, 19, 13, 19, 18, 12, 11, 18, 28, 19, 13, 19, 18",
+    "hindi": "इन अंकों का range ज्ञात कीजिए ? 12, 11, 18, 28, 19, 13, 19, 18, 12, 11, 18, 28, 19, 13, 19, 18",
+    "opts": [
+      "(a) 11",
+      "(b) 17",
+      "(c) 18",
+      "(d) 19"
+    ]
+  },
+  {
+    "num": 10,
+    "text": "If the standard deviation of a distribution is 6, then what is the value of variance?",
+    "hindi": "यदि एक बंटन का मानक विचलन 6 हैं, तो उसके प्रसरण (variance) का क्या मान हैं?",
+    "opts": [
+      "(a) 8",
+      "(b) 24",
+      "(c) 36",
+      "(d) 12"
+    ]
+  },
+  {
+    "num": 11,
+    "text": "If the variance of a data set is 196, the standard deviation will be?",
+    "hindi": "एक डाटा सेट का प्रसरण 196 हैं, तो मानक विचलन ज्ञात कीजिए ?",
+    "opts": [
+      "(a) $\\pm14$",
+      "(b) 14",
+      "(c) 96",
+      "(d) 98"
+    ]
+  },
+  {
+    "num": 12,
+    "text": "The variance of a data set is 169, then what will be the standard deviation?",
+    "hindi": "एक सेट का विचलन (variance) 169 हैं, तो मानक विचलन (standard deviation) ज्ञात कीजिए ?",
+    "opts": [
+      "(a) $\\pm13$",
+      "(b) 13",
+      "(c) 69",
+      "(d) 845"
+    ]
+  },
+  {
+    "num": 13,
+    "text": "The mean of a distribution is 11 and the standard deviation is 5. What is the value of variance coefficient?",
+    "hindi": "एक बंटन का माध्य 11 हैं और मानक विचलन 5 हैं I विचरण गुणांक का मान क्या हैं?",
+    "opts": [
+      "(a) 45.45%",
+      "(b) 35.35%",
+      "(c) 25.25%",
+      "(d) 55.55%"
+    ]
+  },
+  {
+    "num": 14,
+    "text": "The mean of the distribution is 14 and the standard deviation is 5. Find the variance coefficient.",
+    "hindi": "बटनों का माध्य (mean) 14 हैं और मानक विचलन 5 हैं I विचलन गुणांक ज्ञात कीजिए ?",
+    "opts": [
+      "(a) 60.4%",
+      "(b) 27.9%",
+      "(c) 35.7%",
+      "(d) 48.3%"
+    ]
+  },
+  {
+    "num": 15,
+    "text": "If the median and mean are 36 and 35 respectively, then find the mode.",
+    "hindi": "यदि माध्यिका और माध्य क्रमशः 36 और 35 हैं, तो बहुलक ज्ञात कीजिए ?",
+    "opts": [
+      "(a) 32",
+      "(b) 34",
+      "(c) 38",
+      "(d) 30"
+    ]
+  }
+]
