@@ -1,0 +1,167 @@
+[
+  {
+    "num": 1,
+    "text": "What angle is covered by hour hand in 1 sec.",
+    "hindi": "1 सेकेंड में घंटे की सुई कितनी चलेगी ?",
+    "opts": [
+      "[A] 0.1°",
+      "[B] 1/90°",
+      "[C] 1/120°",
+      "[D] 0.30°"
+    ]
+  },
+  {
+    "num": 2,
+    "text": "What angle is covered by minute hand in 1 sec.",
+    "hindi": "1 सेकेंड में मिनट की सुई कितना चलेगी ?",
+    "opts": [
+      "[A] 60°",
+      "[B] 0.1°",
+      "[C] 90°",
+      "[D] 0.5°"
+    ]
+  },
+  {
+    "num": 3,
+    "text": "What angle is covered by hour hand from 4 : 40 to 8 : 00 ?",
+    "hindi": "4 : 40 से 8:00 बजे के बीच घंटे की सुई के द्वारा चलने में कितने अंश चलेगी ?",
+    "opts": [
+      "[A] 70°",
+      "[B] 80°",
+      "[C] 100°",
+      "[D] 120°"
+    ]
+  },
+  {
+    "num": 4,
+    "text": "What angle is covered by hour hand from 3: 12 to 6: 00?",
+    "hindi": "किसी घड़ी में 3 बजकर 12 मिनट से 6 बजे तक समय बदलने में घंटे की सुई कितने अंश घूम जाएगी?",
+    "opts": [
+      "[A] 84°",
+      "[B] 94°",
+      "[C] 120°",
+      "[D] 70°"
+    ]
+  },
+  {
+    "num": 5,
+    "text": "What angle is covered by hour hand from 3:20 to 5:40?",
+    "hindi": "किसी घड़ी में 3 बजकर 20 मिनट से 5:40 बजे तक समय बदलने में घंटे की सुई कितने अंश घूम जाएगी?",
+    "opts": [
+      "(a) 70",
+      "(b) 80",
+      "(c) 90",
+      "(d) 100"
+    ]
+  },
+  {
+    "num": 6,
+    "text": "What angle is covered by minute hand in 2 hours 20 minute?",
+    "hindi": "2 घंटे 20 मिनट में मिनट की सुई के द्वारा कितने डिग्री का कोण बनाया जाएगा ?",
+    "opts": [
+      "[A] 130°",
+      "[B] 180°",
+      "[C] 540°",
+      "[D] 840°"
+    ]
+  },
+  {
+    "num": 7,
+    "text": "What angle (in degrees) is formed by the minute hand from 3:40 to 4:44?",
+    "hindi": "3 बजकर 40 मिनट से 4 बजकर 44 मिनट तक मिनट की सुई कितने डिग्री का कोण बनाती है?",
+    "opts": [
+      "(a) 384",
+      "(b) 520",
+      "(c) 625",
+      "(d) 480"
+    ]
+  },
+  {
+    "num": 8,
+    "text": "From 4:40 to 6:00, what angle (in degrees) is formed by the minute hand, and what angle (in degrees) is formed by the hour hand?",
+    "hindi": "4 बजकर 40 मिनट से लेकर 6 बजे तक मिनट की सुई द्वारा कितना डिग्री का कोण बनता है तथा घंटे की सुई द्वारा कितना डिग्री का कोण बनता है?",
+    "opts": [
+      "(a) 40,  480",
+      "(b) 12,  420",
+      "(c) 30,  520",
+      "(d) 40, 820"
+    ]
+  },
+  {
+    "num": 9,
+    "text": "At what angle are the two hands of a clock inclined at 4:20?",
+    "hindi": "4 बजकर 20 मिनट पर दोनों सुइयों के बीच कितने डिग्री का कोण बनेगा ?",
+    "opts": [
+      "[A] 5°",
+      "[B] $7\\frac{1}{2}^\\circ$",
+      "[C] 3°",
+      "[D] 10°"
+    ]
+  },
+  {
+    "num": 10,
+    "text": "At what angle are the two hands of a clock inclined at 4:16?",
+    "hindi": "4 बजकर 16 मिनट पर दोनों सुइयों के बीच कितने डिग्री का कोण बनेगा ?",
+    "opts": [
+      "(a) 32",
+      "(b) 35",
+      "(c) 31",
+      "(d) 30"
+    ]
+  },
+  {
+    "num": 11,
+    "text": "At what angle are the two hands of a clock inclined at 10:50?",
+    "hindi": "10 बजकर 50 मिनट पर दोनों सुइयों के बीच कितने डिग्री का कोण बनेगा ?",
+    "opts": [
+      "[A] 25°",
+      "[B] 30°",
+      "[C] 40°",
+      "[D] 5°"
+    ]
+  },
+  {
+    "num": 12,
+    "text": "At what angle are the two hands of a clock inclined at 4: 16?",
+    "hindi": "4 बजकर 16 मिनट पर दोनों सुइयों के बीच कितने डिग्री का कोण बनेगा ?",
+    "opts": [
+      "[A] 10°",
+      "[B] 16°",
+      "[C] 32°",
+      "[D] 48°"
+    ]
+  },
+  {
+    "num": 13,
+    "text": "At what angle are the two hands of a clock inclined at 6:24?",
+    "hindi": "6 बजकर 24 मिनट पर दोनों सुइयों के बीच कितने डिग्री का कोण बनेगा ?",
+    "opts": [
+      "[A] 24°",
+      "[B] 48°",
+      "[C] 56°",
+      "[D] 60°"
+    ]
+  },
+  {
+    "num": 14,
+    "text": "At what angle are two hands of a clock inclined at 3: 25?",
+    "hindi": "3 बजकर 25 मिनट पर दोनों सुइयों के बीच कितने डिग्री का कोण बनेगा ?",
+    "opts": [
+      "[A] $45\\frac{1}{2}^\\circ$",
+      "[B] $47\\frac{1}{2}^\\circ$",
+      "[C] $75\\frac{1}{2}^\\circ$",
+      "[D] 90°"
+    ]
+  },
+  {
+    "num": 15,
+    "text": "At what Reflex angle are two hands of a clock inclined at 10:10?",
+    "hindi": "10 बजकर 10 मिनट पर दोनों सुइयों के बीच परावर्तन कोण कितने डिग्री का बनेगा ?",
+    "opts": [
+      "[A] 105°",
+      "[B] 180°",
+      "[C] 225°",
+      "[D] 245°"
+    ]
+  }
+]
