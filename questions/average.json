@@ -166,5 +166,209 @@
       "(d) 372"
     ],
     "ans": "b"
+  },
+  {
+    "num": 15,
+    "text": "Find average of all multiple of 5 from 267 to 572",
+    "hindi": "267 से 572 तक के सभी 5 के गुणक का औसत ज्ञात करें?",
+    "opts": [
+      "(a) 415",
+      "(b) 417",
+      "(c) 420",
+      "(d) 425"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 16,
+    "text": "What is the average of all numbers between 100 and 200 which are divisible by 13?",
+    "hindi": "100 और 200 के बीच के सभी संख्याओं का औसत क्या हैं, जो 13 से विभाज्य हो?",
+    "opts": [
+      "(a) 147.5",
+      "(b) 145.5",
+      "(c) 143.5",
+      "(d) 149.5"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 17,
+    "text": "The average of 7 consecutive odd numbers is 15, so what will be the larger number in it?",
+    "hindi": "7 लगातार विषम संख्याओं का औसत 15 है तो उसमें बड़ी संख्या क्या होगी?",
+    "opts": [
+      "(a) 9",
+      "(b) 21",
+      "(c) 22",
+      "(d) 105"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 18,
+    "text": "The average of 41 consecutive odd numbers is 49. What is the largest number.",
+    "hindi": "41 क्रमागत विषम संख्याओं का औसत 49 हैं I सबसे बड़ी संख्या क्या है?",
+    "opts": [
+      "(a) 89",
+      "(b) 91",
+      "(c) 93",
+      "(d) 95"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 19,
+    "text": "The average of the first 7 integers in a series of 13 consecutive odd integers is 37. What is the average of the entire series?",
+    "hindi": "13 क्रमागत विषम संख्याओं की श्रृंखला में पहले 7 पूर्णांक का औसत 37 हैं 1 पूरी श्रृंखला का औसत क्या हैं?",
+    "opts": [
+      "(a) 37",
+      "(b) 39",
+      "(c) 41",
+      "(d) 43"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 20,
+    "text": "The average of 8 consecutive even numbers is 15, so what will be the smaller number among them?",
+    "hindi": "लगातार 8 सम संख्याओं का औसत 15 है तो उनमें छोटी संख्या क्या होगी?",
+    "opts": [
+      "(a) 7",
+      "(b) 8",
+      "(c) 22",
+      "(d) 24"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 21,
+    "text": "The average of 44 consecutive odd numbers is 144. What is the largest number?",
+    "hindi": "44 क्रमागत विषम संख्याओं का औसत 144 हैं I सबसे बड़ी संख्या कौन-सी हैं?",
+    "opts": [
+      "(a) 189",
+      "(b) 191",
+      "(c) 187",
+      "(d) 193"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 22,
+    "text": "The average of 5 consecutive natural numbers is $x$. If the next four numbers are added, what will be the new average?",
+    "hindi": "5 लगातार प्राकृत संख्याओं का औसत $x$ है यदि अगली चार संख्याएँ और जोड़ दी जाएँ तो नया औसत क्या होगा?",
+    "opts": [
+      "(a) $x + 2$",
+      "(b) $x + 4$",
+      "(c) $x + 6$",
+      "(d) $x + 8$"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 23,
+    "text": "The average of 5 consecutive numbers is $A$. If the next 3 numbers are also taken, then what will be the new average?",
+    "hindi": "5 क्रमागत संख्याओं का औसत $A$ हैं यदि अगले तीन संख्याओं को भी ले लिया जाए तो नया औसत बताइए?",
+    "opts": [
+      "(a) $A + 1$",
+      "(b) $A + 1.5$",
+      "(c) $A + 2$",
+      "(d) $A + 2.5$"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 24,
+    "text": "The average of three consecutive even numbers is $A$. If next five even numbers are added, what is the average of these eight numbers?",
+    "hindi": "तीन क्रमागत सम संख्याओं का औसत $A$ हैं यदि अगली पांच सम संख्या जोड़ दिया जाए तो आठों संख्याओं का औसत बताइए?",
+    "opts": [
+      "(a) $A + 3$",
+      "(b) $A + 4$",
+      "(c) $A + 5$",
+      "(d) $A + 7$"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 25,
+    "text": "The average of 5 consecutive integers starting with $m$ is $n$. what is the average of 6 consecutive integers starting with $(m+2)$?",
+    "hindi": "5 क्रमागत पूर्णांक जो $m$ से शुरू होते हैं उनका औसत $n$ हैं तो 6 क्रमागत पूर्णांकों का औसत क्या होगा जो $(m+2)$ से शुरू हो रहे हों?",
+    "opts": [
+      "(a) $\\frac{2n + 5}{2}$",
+      "(b) $(n + 2)$",
+      "(c) $(n + 3)$",
+      "(d) $\\frac{2n + 9}{2}$"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 26,
+    "text": "Find the Mean of the First Ten Prime Numbers",
+    "hindi": "प्रथम दस अभाज्य संख्याओं का माध्य ज्ञात कीजिए।",
+    "opts": [
+      "(a) 8.5",
+      "(b) 9.5",
+      "(c) 10",
+      "(d) 12.9"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 27,
+    "text": "If 6, 8, 5, 7, $x$ and 4 are the arithmetic mean, then find the value of $x$?",
+    "hindi": "यदि 6, 8, 5, 7, $x$ तथा 4 समान्तर माध्य 7 हो तो $x$ का मान ज्ञात कीजिए?",
+    "opts": [
+      "(a) 12",
+      "(b) 10",
+      "(c) 9",
+      "(d) 8"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 28,
+    "text": "The mean of 16 numbers is 8. If 2 is added to each, find the new mean?",
+    "hindi": "16 संख्याओं का माध्य 8 है यदि प्रत्येक में 2 जोड़ा जाए तो नया माध्य ज्ञात कीजिए ?",
+    "opts": [
+      "(a) 8",
+      "(b) 9",
+      "(c) 10",
+      "(d) 12"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 29,
+    "text": "The mean of 10 numbers is 20. If 5 is subtracted from each, find the new mean?",
+    "hindi": "10 संख्याओं का माध्य 20 है। यदि प्रत्येक में से 5 घटाया जाए तो नया माध्य ज्ञात कीजिए?",
+    "opts": [
+      "(a) 5",
+      "(b) 10",
+      "(c) 15",
+      "(d) 20"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 30,
+    "text": "The mean of 10 numbers is 28. If each number is multiplied by 2, find the new mean?",
+    "hindi": "10 संख्याओं का माध्य 28 है। यदि प्रत्येक संख्या को 2 से गुणा किया जाए तो नया माध्य ज्ञात कीजिए ?",
+    "opts": [
+      "(a) ",
+      "(b) 20",
+      "(c) 28",
+      "(d) 56"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 31,
+    "text": "The average of 29 numbers is 45. If each number is divided by 9, find the new average?",
+    "hindi": "29 संख्याओं का औसत 45 है। यदि प्रत्येक संख्या को 9 से भाग दिया जाए तो नया औसत ज्ञात कीजिए ?",
+    "opts": [
+      "(a) 5",
+      "(b) 6",
+      "(c) 8",
+      "(d) 9"
+    ],
+    "ans": "a"
   }
 ]
