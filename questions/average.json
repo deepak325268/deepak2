@@ -502,7 +502,8 @@
       "(d) 30"
     ],
     "ans": "b",
-    "imp": true
+    "imp": true,
+    "freq": 1
   },
   {
     "num": 43,
