@@ -779,23 +779,19 @@ function makeQCard(q, idx) {
         <textarea rows="2" id="qhindi-${idx}" onchange="updateQ(${idx},'hindi',this.value)">${escH(q.hindi||'')}</textarea>
       </div>
       <div class="field-group">
-        <label>Options</label>
+        <label>Options <span style="color:var(--success);font-size:11px">(✓ = sahi jawab)</span></label>
         <div id="qopts-${idx}">
-          ${(q.opts||[]).map((o,oi)=>`
-            <div class="opt-row">
-              <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${oi},this.value)" style="${q.ans===letters[oi]?'border-color:var(--success);background:rgba(76,175,130,.08)':''}">
+          ${(q.opts||[]).map((o,oi)=>{
+            const letter = letters[oi];
+            const isAns = q.ans === letter;
+            return `<div class="opt-row">
+              <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}')" title="Sahi jawab" style="width:16px;height:16px;accent-color:var(--success);cursor:pointer;flex-shrink:0">
+              <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${oi},this.value)" style="${isAns?'border-color:var(--success);background:rgba(76,175,130,.08)':''}">
               <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${oi})">✕</button>
-            </div>
-          `).join('')}
+            </div>`;
+          }).join('')}
         </div>
         <button class="btn btn-outline btn-xs" style="margin-top:4px" onclick="addOpt(${idx})">＋ Option</button>
-      </div>
-      <div style="display:flex;gap:8px;align-items:center;margin-top:10px;padding:10px;background:var(--bg);border-radius:7px;border:1px solid var(--border)">
-        <label style="margin:0;color:var(--success);font-weight:700">✓ Sahi Answer:</label>
-        <select style="width:auto;flex:1" onchange="updateQ(${idx},'ans',this.value)">
-          <option value="">-- Select karo --</option>
-          ${(q.opts||[]).map((o,oi)=>`<option value="${letters[oi]}" ${q.ans===letters[oi]?'selected':''}>${o.substring(0,40)}</option>`).join('')}
-        </select>
       </div>
       <div style="display:flex;gap:6px;align-items:center;margin-top:8px">
         <label style="margin:0">Q No:</label>
@@ -848,29 +844,38 @@ function deleteOpt(idx, oi) {
   existingQ[idx].opts.splice(oi,1);
   dirty = true;
   // re-render just that card's opts
+  const letters = ['a','b','c','d','e','f'];
+  const q = existingQ[idx];
   const optsDiv = document.getElementById('qopts-'+idx);
-  optsDiv.innerHTML = existingQ[idx].opts.map((o,i)=>`
-    <div class="opt-row">
-      <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${i},this.value)">
+  optsDiv.innerHTML = q.opts.map((o,i)=>{
+    const letter = letters[i];
+    const isAns = q.ans === letter;
+    return `<div class="opt-row">
+      <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}')" title="Sahi jawab" style="width:16px;height:16px;accent-color:var(--success);cursor:pointer;flex-shrink:0">
+      <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${i},this.value)" style="${isAns?'border-color:var(--success);background:rgba(76,175,130,.08)':''}">
       <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${i})">✕</button>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
   updateSaveBtn();
 }
 
 function addOpt(idx) {
   if (!existingQ[idx].opts) existingQ[idx].opts=[];
-  existingQ[idx].opts.push('(e) ');
+  const letters = ['a','b','c','d','e','f'];
+  existingQ[idx].opts.push('');
   dirty=true;
-  deleteOpt(idx, -1); // trigger re-render via above (dirty trick — just re-render opts)
+  // full re-render of opts with radio buttons
+  const q = existingQ[idx];
   const optsDiv = document.getElementById('qopts-'+idx);
-  const oi = existingQ[idx].opts.length-1;
-  optsDiv.insertAdjacentHTML('beforeend',`
-    <div class="opt-row">
-      <input type="text" value="${escH(existingQ[idx].opts[oi])}" onchange="updateOpt(${idx},${oi},this.value)">
-      <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${oi})">✕</button>
-    </div>
-  `);
+  optsDiv.innerHTML = q.opts.map((o,i)=>{
+    const letter = letters[i];
+    const isAns = q.ans === letter;
+    return `<div class="opt-row">
+      <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}')" title="Sahi jawab" style="width:16px;height:16px;accent-color:var(--success);cursor:pointer;flex-shrink:0">
+      <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${i},this.value)" style="${isAns?'border-color:var(--success);background:rgba(76,175,130,.08)':''}">
+      <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${i})">✕</button>
+    </div>`;
+  }).join('');
   updateSaveBtn();
 }
 
