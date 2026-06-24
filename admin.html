@@ -699,8 +699,35 @@ function switchRTab(tab) {
   document.getElementById('rtab-preview').classList.toggle('active', tab==='preview');
   document.getElementById('q-editor-list').style.display = tab==='editor' ? 'block' : 'none';
   document.getElementById('q-preview-panel').style.display = tab==='preview' ? 'block' : 'none';
-  // expand/collapse/renumber buttons only for editor
   document.querySelectorAll('.rp-header .btn').forEach(b => b.style.display = tab==='editor'?'':'none');
+
+  // Preview tab — agar koi pending nahi toh current questions dikhaao
+  if (tab==='preview' && !pendingArr && existingQ.length>0) {
+    const pvList = document.getElementById('preview-cards-list');
+    const cbar = document.getElementById('preview-confirm-bar');
+    cbar.style.display = 'none';
+    pvList.innerHTML = '';
+    const letters = ['a','b','c','d','e','f'];
+    existingQ.forEach(q => {
+      const card = document.createElement('div');
+      card.className = 'pv-card';
+      card.innerHTML = `
+        <div class="pv-num">Q${q.num}
+          ${q.ans ? `<span style="margin-left:8px;color:var(--success);font-size:11px">✓ ${q.ans.toUpperCase()}</span>` : '<span style="margin-left:8px;color:var(--error);font-size:11px">⚠️ Ans nahi</span>'}
+        </div>
+        ${q.hindi ? `<div class="pv-hindi">${escH(q.hindi)}</div>` : ''}
+        ${q.text  ? `<div class="pv-text">${escH(q.text)}</div>`   : ''}
+        <div class="pv-opts">${(q.opts||[]).map((o,oi)=>{
+          const isAns = q.ans && q.ans===letters[oi];
+          return `<span class="pv-opt" style="${isAns?'background:rgba(76,175,130,.2);border-color:var(--success);color:var(--success);font-weight:700':''}">${isAns?'✓ ':''}${escH(o)}</span>`;
+        }).join('')}</div>
+      `;
+      pvList.appendChild(card);
+    });
+  } else if (tab==='preview' && existingQ.length===0 && !pendingArr) {
+    document.getElementById('preview-cards-list').innerHTML = '<div class="empty-state"><div class="icon">📂</div><p>Koi questions nahi hain abhi</p></div>';
+    document.getElementById('preview-confirm-bar').style.display = 'none';
+  }
 }
 
 function clearInput() {
