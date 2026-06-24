@@ -119,8 +119,13 @@ textarea{resize:vertical;font-family:var(--mono);line-height:1.6}
 .field-group label{margin-bottom:4px}
 .field-row{display:flex;gap:6px}
 .field-row textarea{flex:1}
-.opt-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
-.opt-row input{flex:1;font-size:var(--fs-opt-text,13px) !important}
+.opt-row{display:flex;gap:0;align-items:center;margin-bottom:6px;border:1px solid var(--border);border-radius:7px;overflow:hidden;transition:border-color .2s}
+.opt-row:has(input[type="radio"]:checked){border-color:var(--success)}
+.opt-row label.opt-radio-lbl{display:flex;align-items:center;padding:0 10px;background:var(--surface2);cursor:pointer;height:100%;border-right:1px solid var(--border);min-height:36px}
+.opt-row input[type="radio"]{width:15px;height:15px;accent-color:var(--success);cursor:pointer;margin:0}
+.opt-row input[type="text"]{flex:1;border:none;border-radius:0;background:transparent;padding:8px 10px}
+.opt-row input[type="text"]:focus{border:none;box-shadow:none}
+.opt-row .btn-xs{border-radius:0;border:none;border-left:1px solid var(--border);padding:8px 10px;height:100%}
 .opt-row .btn-xs{flex-shrink:0}
 
 /* insert zone */
@@ -785,13 +790,15 @@ function makeQCard(q, idx) {
             const letter = letters[oi];
             const isAns = q.ans === letter;
             return `<div class="opt-row">
-              <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}')" title="Sahi jawab" style="width:16px;height:16px;accent-color:var(--success);cursor:pointer;flex-shrink:0">
-              <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${oi},this.value)" style="${isAns?'border-color:var(--success);background:rgba(76,175,130,.08)':''}">
+              <label class="opt-radio-lbl" title="Sahi jawab mark karo">
+                <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}');renderEditor()">
+              </label>
+              <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${oi},this.value)">
               <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${oi})">✕</button>
             </div>`;
           }).join('')}
         </div>
-        <button class="btn btn-outline btn-xs" style="margin-top:4px" onclick="addOpt(${idx})">＋ Option</button>
+        <button class="btn btn-outline btn-xs" style="margin-top:6px" onclick="addOpt(${idx})">＋ Option</button>
       </div>
       <div style="display:flex;gap:6px;align-items:center;margin-top:8px">
         <label style="margin:0">Q No:</label>
@@ -851,8 +858,10 @@ function deleteOpt(idx, oi) {
     const letter = letters[i];
     const isAns = q.ans === letter;
     return `<div class="opt-row">
-      <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}')" title="Sahi jawab" style="width:16px;height:16px;accent-color:var(--success);cursor:pointer;flex-shrink:0">
-      <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${i},this.value)" style="${isAns?'border-color:var(--success);background:rgba(76,175,130,.08)':''}">
+      <label class="opt-radio-lbl" title="Sahi jawab mark karo">
+        <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}');renderEditor()">
+      </label>
+      <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${i},this.value)">
       <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${i})">✕</button>
     </div>`;
   }).join('');
@@ -864,15 +873,16 @@ function addOpt(idx) {
   const letters = ['a','b','c','d','e','f'];
   existingQ[idx].opts.push('');
   dirty=true;
-  // full re-render of opts with radio buttons
   const q = existingQ[idx];
   const optsDiv = document.getElementById('qopts-'+idx);
   optsDiv.innerHTML = q.opts.map((o,i)=>{
     const letter = letters[i];
     const isAns = q.ans === letter;
     return `<div class="opt-row">
-      <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}')" title="Sahi jawab" style="width:16px;height:16px;accent-color:var(--success);cursor:pointer;flex-shrink:0">
-      <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${i},this.value)" style="${isAns?'border-color:var(--success);background:rgba(76,175,130,.08)':''}">
+      <label class="opt-radio-lbl" title="Sahi jawab mark karo">
+        <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}');renderEditor()">
+      </label>
+      <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${i},this.value)">
       <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${i})">✕</button>
     </div>`;
   }).join('');
