@@ -283,7 +283,8 @@
       "(d) ₹ 92.50",
       "(e) None of these"
     ],
-    "ans": "b"
+    "ans": "b",
+    "imp": true
   },
   {
     "num": 23,
