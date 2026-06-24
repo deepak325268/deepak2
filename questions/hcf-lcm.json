@@ -1,75 +1,834 @@
 [
-  { "num": 1, "text": "The ratio of two numbers is 3:4 and their HCF is 4. The number is:-", "hindi": "दो संख्याओं का अनुपात 3 : 4 है और उनका म. स. 4 है, तो संख्याएं क्या होगी ?", "opts": ["(a) 9, 12", "(b) 12, 16", "(c) 16, 18", "(d) 20, 24"] },
-  { "num": 2, "text": "The ratio of two numbers is 6:7 and their HCF is 8. The number is:-", "hindi": "दो संख्याओं का अनुपात 6 : 7 है और उनका म. स. 8 है, तो संख्याएं क्या होगी ?", "opts": ["(a) 39, 42", "(b) 32, 16", "(c) 48, 56", "(d) 20, 24"] },
-  { "num": 3, "text": "The ratio of two numbers is 2:3 and their H.C.F. is 5. Then their L.C.M. is", "hindi": "दो संख्याओं का अनुपात 2 : 3 है और उनका म. स. 5 हो, तो उनका ल. स. होगा ?", "opts": ["(a) 20", "(b) 30", "(c) 50", "(d) 60"] },
-  { "num": 4, "text": "The ratio of two numbers is 3:4 and their H.C.F. is 4. Then their L.C.M. is", "hindi": "दो संख्याओं का अनुपात 3 : 4 है और उनका म. स. 4 हो, तो उनका ल. स. होगा ?", "opts": ["(a) 20", "(b) 30", "(c) 50", "(d) 48"] },
-  { "num": 5, "text": "Three numbers are in the ratio 2:3:4 and their HCF is 12. Find the LCM of these numbers?", "hindi": "तीन अंकों का अनुपात 2:3:4 तथा उनका म. स. 12 है, तो उनका ल. स. ज्ञात करें ?", "opts": ["(a) 288", "(b) 144", "(c) 350", "(d) 200"] },
-  { "num": 6, "text": "Three numbers are in the ratio 3:4:5 and their HCF is 12. Find the LCM of these numbers?", "hindi": "तीन अंकों का अनुपात 3 : 4 : 5 तथा उनका म. स. 12 है, तो उनका ल. स. ज्ञात करें ?", "opts": ["(a) 288", "(b) 144", "(c) 350", "(d) 720"] },
-  { "num": 7, "text": "Three numbers are in the ratio 5:6:7 and their HCF is 2. Find the LCM of these numbers?", "hindi": "तीन अंकों का अनुपात 5 : 6 : 7 तथा उनका म. स. 2 है, तो उनका ल. स. ज्ञात करें ?", "opts": ["(a) 288", "(b) 144", "(c) 420", "(d) 200"] },
-  { "num": 8, "text": "The ratio of two numbers is 3:2 and their LCM is 72. The HCF is:-", "hindi": "दो संख्याओं का अनुपात 3 : 2 है और उनका ल. स. 72 है, तो इनका म. स. क्या होगा ?", "opts": ["(a) 24", "(b) 3", "(c) 6", "(d) 12"] },
-  { "num": 9, "text": "The ratio of two numbers is 3:4 and their HCF is 8. The LCM is:-", "hindi": "दो संख्याओं का अनुपात 3 : 4 है और उनका HCF 8 है, तो इनका LCM क्या होगा ?", "opts": ["(a) 24", "(b) 3", "(c) 96", "(d) 12"] },
-  { "num": 10, "text": "The ratio of two numbers is 5:7 and their LCM is 105. The HCF is:-", "hindi": "दो संख्याओं का अनुपात 5 : 7 है और उनका ल. स. 105 है, तो इनका म. स. क्या होगा ?", "opts": ["(a) 24", "(b) 3", "(c) 6", "(d) 12"] },
-  { "num": 11, "text": "The ratio of two numbers is 2:3 and their LCM is 48. The numbers are:-", "hindi": "दो संख्याओं का अनुपात 2:3 है और उनका ल. स. 48 है, तो संख्याएं क्या होगी ?", "opts": ["(a) 16, 24", "(b) 8, 6", "(c) 12, 18", "(d) 12, 24"] },
-  { "num": 12, "text": "The ratio of two numbers is 3:2 and their LCM is 72. The numbers are:-", "hindi": "दो संख्याओं का अनुपात 3 : 2 है और उनका ल. स. 72 है, तो संख्याएं क्या होगी ?", "opts": ["(a) 16, 24", "(b) 36, 24", "(c) 12, 18", "(d) 12, 24"] },
-  { "num": 13, "text": "If the ratio of two numbers is 2:3 and their LCM is 54. Find the sum of the two numbers?", "hindi": "यदि किन्ही दो अंकों का अनुपात 2 : 3 है तथा उनका ल. स. 54 है, तो उन संख्याओं का जोड़ ज्ञात करें ?", "opts": ["(a) 55", "(b) 55", "(c) 40", "(d) 45"] },
-  { "num": 14, "text": "The LCM and HCF of the numbers 28 and 42 are in the ratio?", "hindi": "संख्या 28 तथा 42 के ल. स. तथा म. स. का अनुपात क्या होगा ?", "opts": ["(a) 5:6", "(b) 7:2", "(c) 6:1", "(d) 2:7"] },
-  { "num": 15, "text": "The LCM and HCF of the numbers 48 and 54 are in the ratio?", "hindi": "संख्या 48 तथा 54 के ल. स. तथा म. स. का अनुपात क्या होगा ?", "opts": ["(a) 50:60", "(b) 70:2", "(c) 72:1", "(d) 20:70"] },
-  { "num": 16, "text": "The LCM of two numbers is 60 and their HCF is 6. If one of the numbers is 30, find the other?", "hindi": "दो संख्याओं का ल. स. 60 है तथा म. स. 6 है यदि एक संख्या 30 हो, तो दूसरी संख्या ज्ञात कीजिए ?", "opts": ["(a) 24", "(b) 29", "(c) 32", "(d) 12"] },
-  { "num": 17, "text": "The LCM of two numbers is 2079 and their HCF is 27. If one of the numbers is 189, find the other?", "hindi": "दो संख्याओं का ल. स. 2079 है तथा म. स. 27 है यदि एक संख्या 189 हो, तो दूसरी संख्या ज्ञात कीजिए ?", "opts": ["(a) 247", "(b) 297", "(c) 327", "(d) 227"] },
-  { "num": 18, "text": "Find the least number which is exactly divisible by 12, 16 and 18.", "hindi": "वह छोटी से छोटी संख्या ज्ञात कीजिए जो 12,16 तथा 18 से पूर्ण रूप से विभाजित हो ?", "opts": ["(a) 108", "(b) 144", "(c) 360", "(d) 420"] },
-  { "num": 19, "text": "Find the least number which is exactly divisible by 72, 90 and 120.", "hindi": "वह छोटी से छोटी संख्या ज्ञात कीजिए जो 72, 90 तथा 120 से पूर्ण रूप से विभाजित हो ?", "opts": ["(a) 108", "(b) 180", "(c) 360", "(d) 420"] },
-  { "num": 20, "text": "Find the H.C.F. of 8/9 and 10/27", "hindi": "", "opts": ["(a) 2/3", "(b) 2/81", "(c) 160/3", "(d) 160/81"] },
-  { "num": 21, "text": "Find the H.C.F. of 6/1, 15/4, 9/10", "hindi": "", "opts": ["(a) 3/20", "(b) 2/81", "(c) 160/3", "(d) 160/81"] },
-  { "num": 22, "text": "Find the L.C.M. of 1/3, 5/6, 2/9, 4/27", "hindi": "", "opts": ["(a) 1/54", "(b) 10/27", "(c) 20/3", "(d) 40/27"] },
-  { "num": 23, "text": "Find the L.C.M. of 6/1, 15/4, 9/10", "hindi": "", "opts": ["(a) 1/54", "(b) 10/27", "(c) 60", "(d) 90"] },
-  { "num": 24, "text": "If $P=2^{3}\\cdot3^{10}\\cdot5$, $Q=2^{5}\\cdot3\\cdot7$, Then HCF of P and Q is:", "hindi": "यदि $P=2^{3}\\cdot3^{10}\\cdot5$, $Q=2^{5}\\cdot3\\cdot7$, तो P तथा Q का म. स. ज्ञात करें ?", "opts": ["(a) $2\\cdot3\\cdot5\\cdot7$", "(b) $2^{3}\\cdot3$", "(c) $2^{2}\\cdot3^{7}$", "(d) $2^{5}\\cdot3^{10}\\cdot5\\cdot7$"] },
-  { "num": 25, "text": "LCM of $2^{4}\\times3^{4}\\times5^{3}$ and $2^{2}\\times3^{6}\\times5^{5}\\times7^{2}$", "hindi": "$2^{4}\\times3^{4}\\times5^{3}$ और $2^{2}\\times3^{6}\\times5^{5}\\times7^{2}$ का लघुत्तम समापवर्त्य हैं?", "opts": ["(a) $2^{3}\\times3^{5}\\times5^{4}\\times7$", "(b) $2^{2}\\times3^{2}\\times5^{2}\\times7^{2}$", "(c) $2^{6}\\times3^{10}\\times5^{8}\\times7^{2}$", "(d) $2^{4}\\times3^{6}\\times5^{5}\\times7^{2}$"] },
-  { "num": 26, "text": "If $x=2^{5}\\times3^{2}\\times5^{3}$, $y=2^{4}\\times3^{3}\\times5^{2}$, $z=2^{3}\\times3^{3}\\times5^{2}$, then LCM(x,y,z) / HCF(x,y,z) =", "hindi": "(x, y और z का LCM) / (x, y और z का HCF) =", "opts": ["(a) 30", "(b) 45", "(c) 60", "(d) 120"] },
-  { "num": 27, "text": "If $a=2^{4}\\times3\\times5^{3}$, $b=2^{3}\\times3^{2}\\times5$, $c=2^{5}\\times3^{2}\\times5^{2}$, Then LCM(a,b,c) / HCF(a,b,c) =", "hindi": "यदि $a=2^{4}\\times3\\times5^{3}$, $b=2^{3}\\times3^{2}\\times5$ और $c=2^{5}\\times3^{2}\\times5^{2}$ है, तो LCM / HCF =", "opts": ["(a) 150", "(b) 240", "(c) 300", "(d) 600"] },
-  { "num": 28, "text": "Find the least number which, when divided by 2, 3, 4, 5 and 6 leaves in each case a remainder as 1.", "hindi": "वह छोटी से छोटी संख्या ज्ञात कीजिए जिसे 2, 3, 4, 5 तथा 6 से भाग देने पर प्रत्येक स्थिति में शेष 1 बचे ?", "opts": ["(a) 61", "(b) 81", "(c) 121", "(d) 31"] },
-  { "num": 29, "text": "Find the least number which, when divided by 12, 16 and 18 leaves in each case a remainder as 5.", "hindi": "वह छोटी से छोटी संख्या ज्ञात कीजिए जिसे 12, 16, तथा 18 से भाग देने पर प्रत्येक स्थिति में शेष 5 बचे ?", "opts": ["(a) 61", "(b) 81", "(c) 121", "(d) 149"] },
-  { "num": 30, "text": "Find the least number which being divided 2, 3, 4, 5, and 6 leaves in each case a remainder 1, but when divided by 7 leaves no remainder?", "hindi": "वह छोटी से छोटी संख्या ज्ञात कीजिए जिसे 2, 3, 4, 5 तथा 6 से भाग देने पर शेष 1 बचे तथा 7 से भाग देने पर कोई शेष न बचे ?", "opts": ["(a) 288", "(b) 301", "(c) 324", "(d) 336"] },
-  { "num": 31, "text": "What is the greatest number that will exactly divide 168, 176 and 192?", "hindi": "वह बड़ी से बड़ी संख्या ज्ञात कीजिए जो 168, 176 तथा 192 को विभाजित करती है ?", "opts": ["(a) 12", "(b) 16", "(c) 8", "(d) 36"] },
-  { "num": 32, "text": "What is the greatest number that will exactly divide 96, 528 and 792?", "hindi": "वह बड़ी से बड़ी संख्या ज्ञात कीजिए जो 96, 528 तथा 792 को विभाजित करती है ?", "opts": ["(a) 12", "(b) 16", "(c) 8", "(d) 24"] },
-  { "num": 33, "text": "The greatest number which divides 261, 933 and 1381, leaves remainder 5 is", "hindi": "वह बड़ी से बड़ी संख्या ज्ञात कीजिए जो 261, 933 और 1381 से भाग होने पर शेष 5 छोडती हो ?", "opts": ["(a) 24", "(b) 32", "(c) 15", "(d) 20"] },
-  { "num": 34, "text": "The greatest number which divides 245 and 511, leaves remainder 5 and 7 respectively is", "hindi": "वह बड़ी से बड़ी संख्या ज्ञात कीजिए जो 245 और 511 से भाग होने पर शेष क्रमानुसार 5 और 7 छोडती हो ?", "opts": ["(a) 24", "(b) 35", "(c) 15", "(d) 20"] },
-  { "num": 35, "text": "The greatest number which divides 38, 45 and 52 leaves remainder 2, 3 and 4 respectively is", "hindi": "वह बड़ी से बड़ी संख्या ज्ञात कीजिए जो 38, 45, और 52 से भाग होने पर शेष क्रमानुसार 2, 3 और 4 छोडती हो ?", "opts": ["(a) 24", "(b) 35", "(c) 6", "(d) 20"] },
-  { "num": 36, "text": "Find the maximum number by which after dividing in 140, 155 and 185 it gives remainder 5 in each case.", "hindi": "वह सबसे बड़ी संख्या ज्ञात करें जिससे यदि 140, 155 और 185 को भाग दिया जाए तो प्रत्येक दशा में शेष 5 हो ?", "opts": ["(a) 15", "(b) 35", "(c) 25", "(d) 45"] },
-  { "num": 37, "text": "What is the greatest number that will divide 38, 45 and 52 and leaves as remainders 2, 3 and 4 respectively?", "hindi": "वह बड़ी से बड़ी संख्या ज्ञात कीजिए जिससे 38, 45 तथा 52 को भाग देने पर क्रमशः 2, 3 तथा 4 शेष बचता है ?", "opts": ["(a) 6", "(b) 8", "(c) 9", "(d) 12"] },
-  { "num": 38, "text": "Find the 3-digit smallest number which divided by 8, 6 and 12?", "hindi": "3 अंकों वाली सबसे छोटी संख्या ज्ञात कीजिए जो 8, 6, तथा 12 से विभाजित होती है ?", "opts": ["(a) 100", "(b) 101", "(c) 120", "(d) 102"] },
-  { "num": 39, "text": "Find the 4-digit smallest number which divided by 4, 6, 8 and 10?", "hindi": "4 अंकों वाली सबसे छोटी संख्या ज्ञात कीजिए जो 4, 6, 8 तथा 10 से विभाजित होती है ?", "opts": ["(a) 1020", "(b) 1012", "(c) 1200", "(d) 1080"] },
-  { "num": 40, "text": "Find the 4-digit smallest number which, when divided by 12, 18, 21 and 28, leaves 3 in each case.", "hindi": "चार अंकों वाली सबसे छोटी संख्या ज्ञात कीजिए जिसे 12, 18, 21 तथा 28 से भाग देने पर प्रत्येक दशा में शेष 3 बचे ?", "opts": ["(a) 1008", "(b) 1011", "(c) 1016", "(d) 1024"] },
-  { "num": 41, "text": "N is a 6 digits smallest number which leaves 2 as a remainder in case when divided by 4, 6, 10 and 15. Find the sum of all digits of the numbers?", "hindi": "यदि N, 6 अंकों की छोटी से छोटी संख्या है जो 4, 6, 10 तथा 15 प्रत्येक से भाग होने पर, हमेशा शेष 2 छोडती हो तो उस संख्या के अंकों का जोड़ ज्ञात करें ?", "opts": ["(a) 16/5", "(b) 5", "(c) 7", "(d) 12"] },
-  { "num": 42, "text": "The product of the L.C.M. and H.C.F. of two numbers is 24. The difference of two numbers is 2. Find the numbers?", "hindi": "दो संख्याओं के ल. स. और म. स. का गुणनफल 24 है। इन संख्याओं में 2 का अंतर है संख्याएं क्या होगी ?", "opts": ["(a) 2 और 4", "(b) 6 और 4", "(c) 8 और 6", "(d) 8 और 10"] },
-  { "num": 43, "text": "The product of the L.C.M. and H.C.F. of two numbers is 48. The difference of two numbers is 2. Find the numbers?", "hindi": "दो संख्याओं के ल. स. और म. स. का गुणनफल 48 है। इन संख्याओं में 2 का अंतर है संख्याएं क्या होगी ?", "opts": ["(a) 2 और 4", "(b) 6 और 4", "(c) 8 और 6", "(d) 8 और 10"] },
-  { "num": 44, "text": "The L.C.M. of two numbers is 30 and their H.C.F is 5. If the sum of the number is 25, then their numbers is:", "hindi": "दो संख्याओं का ल. स. 30 और म. स. 5 है। यदि इन संख्याओं का योग 25 है, तो संख्याएं क्या होगी ?", "opts": ["(a) 10, 15", "(b) 12, 13", "(c) 15, 20", "(d) 12, 17"] },
-  { "num": 45, "text": "The L.C.M. of two numbers is 300 and their H.C.F is 15. If the sum of the number is 135, then their numbers is:", "hindi": "दो संख्याओं का ल. स. 300 और म. स. 15 है। यदि इन संख्याओं का योग 135 है, तो संख्याएं क्या होगी ?", "opts": ["(a) 55, 60", "(b) 75, 60", "(c) 60, 65", "(d) 70, 75"] },
-  { "num": 46, "text": "The L.C.M. of two numbers is 495 and their H.C.F is 5. If the sum of the number is 100, then their difference is:", "hindi": "दो संख्याओं का ल. स. 495 और म. स. 5 है। यदि इन संख्याओं का योग 100 है, तो इनका अंतर कितना होगा ?", "opts": ["(a) 10", "(b) 46", "(c) 70", "(d) 90"] },
-  { "num": 47, "text": "The HCF and LCM of two numbers are 13 and 455 respectively. If one of them lies between 75 and 125 find the numbers?", "hindi": "किन्हीं दो अंकों का म. स. तथा ल. स. 13 तथा 455 है यदि उनमें से एक अंक 75 तथा 125 के मध्य में है, तो उस अंक को ज्ञात करें ?", "opts": ["(a) 95", "(b) 50", "(c) 91", "(d) 100"] },
-  { "num": 48, "text": "The sum of two numbers is 216 and their HCF is 27. The numbers are:-", "hindi": "दो संख्याओं का योग 216 है और इनका म. स. 27 है, तो संख्याएं क्या होगी ?", "opts": ["(a) 27, 189", "(b) 108, 108", "(c) 200, 16", "(d) 100, 116"] },
-  { "num": 49, "text": "The sum of two numbers is 36 and their HCF is 4. How many pairs of these numbers are possible?", "hindi": "किन्ही दो अंकों का जोड़ 36 है और उनका म. स. 4 है, तो ऐसे अंकों के कितने जोड़े संभव है ?", "opts": ["(a) 6", "(b) 9", "(c) 4", "(d) 3"] },
-  { "num": 50, "text": "The sum of two numbers is 36 and their HCF and LCM are 3 and 105 respectively. The sum of the reciprocal of two numbers is:", "hindi": "किन्हीं दो संख्याओं का जोड़ 36 है तथा उनका म. स. और ल. स. क्रमानुसार 3 और 105 है, तो उनका पारस्परिक जोड़ है ?", "opts": ["(a) 4/35", "(b) 5/31", "(c) 7/30", "(d) 7/34"] },
-  { "num": 51, "text": "The sum of two numbers is 42 and their HCF and LCM are 6 and 60 respectively. The sum of the reciprocal of two numbers is:", "hindi": "किन्हीं दो संख्याओं का जोड़ 42 है तथा उनका म. स. और ल. स. क्रमानुसार 6 और 60 है, तो उनका पारस्परिक जोड़ है ?", "opts": ["(a) 4/35", "(b) 5/31", "(c) 7/60", "(d) 7/34"] },
-  { "num": 52, "text": "Three lights lighted at the interval of 12 seconds, 15 second and 20 second respectively. All three lights started lighting together then after what time all three lights will light together again for first time?", "hindi": "तीन बत्तियां क्रमशः 12 सेकेंड, 15 सेकेंड और 20 सेकेंड में अंतराल पर जलती है यदि तीनों बत्तियों को एक साथ जलाया जाए तो कितने समय बाद तीनों बत्तियां पहली बार पुनः एक साथ जलेंगी ?", "opts": ["(a) After two minutes", "(b) After four minutes", "(c) After one minute", "(d) After three minutes"] },
-  { "num": 53, "text": "Three lights lighted at the interval of 5 seconds, 10 seconds and 15 seconds respectively. All three lights started lighting together then after what time all three lights will light together again for first time?", "hindi": "तीन बत्तियां क्रमश: 5 सेकेंड, 10 सेकेंड और 15 सेकेंड में अंतराल पर जलती है यदि तीनों बत्तियों को एक साथ जलाया जाए तो कितने समय बाद तीनों बत्तियां पहली बार पुनः एक साथ जलेंगी ?", "opts": ["(a) After 5 seconds", "(b) After 10 seconds", "(c) After 15 seconds", "(d) After 30 seconds"] },
-  { "num": 54, "text": "3 bells begin to toll together and toll respectively at interval of 5, 10, 15 minutes. How many times they will toll together in 2 hours?", "hindi": "3 घंटियाँ एक साथ बजीं, ये सभी क्रमशः 5, 10, 15 मिनट के अन्तराल में बजती है ये सभी घंटियाँ 2 घंटे में कितनी बार एक साथ बजेंगी ?", "opts": ["(a) 4", "(b) 5", "(c) 8", "(d) 12"] },
-  { "num": 55, "text": "3 bells rings at an interval of 6 min, 12 min and 18 min respectively. How much times will they ring together in 6 hours, if they start ringing at same time.", "hindi": "3 घंटियाँ क्रमशः 6 मिनट 12 मिनट 18 मिनट के अंतराल पर बजते है 6 घंटे में वे कितनी बार साथ-साथ बजेंगे यदि घंटियाँ एक ही समय पर बजना प्रारंभ करते हो ?", "opts": ["(a) 6 times", "(b) 10 times", "(c) 5 times", "(d) 11 times"] },
-  { "num": 56, "text": "Five bells begin to toll together and toll respectively at interval of 6, 7, 8, 9 and 12 seconds. How many times they will toll together in one hour?", "hindi": "पांच घंटियाँ एक साथ बजीं ये सभी क्रमशः 6, 7, 8, 9 तथा 12 सेकेंड के अन्तराल में बजती है ये सभी घंटियाँ 1 घंटे में कितनी बार एक साथ बजेंगी ?", "opts": ["(a) 6", "(b) 7", "(c) 8", "(d) 12"] },
-  { "num": 57, "text": "Three persons A, B, C run along a circular path 12 km long. They start their race from the same point at speeds of 3 km/hr, 7 km/hr and 13 km/hr respectively. After what time will they meet again at the starting point?", "hindi": "तीन व्यक्ति A,B तथा C 12 किमी. के एक वृत्ताकार मैदान में दौड़ लगाते है वे एक ही स्थान से क्रमशः 3 किमी/घंटा 7 किमी./घंटा तथा 13 किमी/घंटा की चाल से दौड़ शुरू करते है कितने समय पश्चात वें प्रारंभिक बिंदु पर एक दूसरे से मिलेंगे ?", "opts": ["(a) 6 घंटे", "(b) 12 घंटे", "(c) 16 घंटे", "(d) 20 घंटे"] },
-  { "num": 58, "text": "Three persons A, B, C run along a circular path 25 km long at speeds of 5 km/hr, 10 km/hr and 15 km/hr. After what time will they meet again at the starting point?", "hindi": "तीन व्यक्ति A,B तथा C 25 किमी. के एक वृत्ताकार मैदान में दौड़ लगाते है वे एक ही स्थान से क्रमशः 5 किमी/घंटा, 10 किमी./घंटा तथा 15 किमी/घंटा की चाल से दौड़ शुरू करते है कितने समय पश्चात वें प्रारंभिक बिंदु पर एक दूसरे से मिलेंगे ?", "opts": ["(a) 6 घंटे", "(b) 12 घंटे", "(c) 5 घंटे", "(d) 20 घटे"] },
-  { "num": 59, "text": "Three persons A, B, C run along a circular path 16 km long at speeds of 4 km/hr, 6 km/hr and 8 km/hr. After what time will they meet again at the starting point?", "hindi": "तीन व्यक्ति A,B तथा C 16 किमी. के एक वृत्ताकार मैदान में दौड़ लगाते है वे एक ही स्थान से क्रमशः 4 किमी/घंटा 6 किमी./घंटा तथा 8 किमी/घंटा की चाल से दौड़ शुरू करते है कितने समय पश्चात वें प्रारंभिक बिंदु पर एक दूसरे से मिलेंगे?", "opts": ["(a) 6 घंटे", "(b) 8 घंटे", "(c) 16 घंटे", "(d) 20 घंटे"] },
-  { "num": 60, "text": "A gardener has 44 plants of apple, 66 plants of banana and 110 plants of mango. He wants to arrange them in lines such that each line has same number of plants. Find least number of such lines.", "hindi": "एक माली के पास 44 सेब के 66 केले व 110 आम के पेंड है वह इन्हें पंक्तियों में इस प्रकार लगाना चाहता है की प्रत्येक पंक्ति में पौधों की संख्या समान हो, तो ऐसे कम से कम पंक्तियों की संख्या ज्ञात कीजिए", "opts": ["(a) 12", "(b) 5", "(c) 10", "(d) 15"] },
-  { "num": 61, "text": "A gardener has 36 plants of apple, 54 plants of banana and 72 plants of mango. He wants to arrange them in lines such that each line has same number of plants. Find least number of such lines.", "hindi": "एक माली के पास 36 सेब के 54 केले व 72 आम के पेंड है वह इन्हें पंक्तियों में इस प्रकार लगाना चाहता है की प्रत्येक पंक्ति में पौधों की संख्या समान हो, तो ऐसे कम से कम पंक्तियों की संख्या ज्ञात कीजिए", "opts": ["(a) 12", "(b) 9", "(c) 10", "(d) 15"] },
-  { "num": 62, "text": "The area of three fields are 288 m², 408 m² and 552 m². Equal minimum size square blocks are made. Find the length of each block.", "hindi": "मैदानों का क्षेत्रफल क्रमशः 288, 408 तथा 552 m² है। बराबर आकार के वर्गाकार टुकड़े बनाए जाते हैं, तो प्रत्येक टुकड़े की भुजा ज्ञात करें।", "opts": ["(a) 17 मीटर", "(b) 5 मीटर", "(c) 24 मीटर", "(d) 10 मीटर"] },
-  { "num": 63, "text": "A sweet vendor has 420 cashew barfis and 150 almond barfis. He wishes to stack them so each stack has the same number, occupying minimum tray area. The number of stacks that can be formed is?", "hindi": "एक मिठाई विक्रेता के पास 420 काजू की बर्फियां और 150 बादाम की बर्फियां हैं। वह उन्हें इस तरह से ढेर करना चाहता है कि प्रत्येक ढेर में उनकी संख्या समान हो, और वे ट्रे का कम से कम क्षेत्र घेरें। इस प्रकार बनने वाले ढेरों की संख्या हैं?", "opts": ["(a) 17", "(b) 19", "(c) 18", "(d) उपर्युक्त में से एक से अधिक", "(e) उपर्युक्त में से कोई नहीं"] },
-  { "num": 64, "text": "HCF of 1.08, 0.36 and 0.9 is", "hindi": "", "opts": ["(a) 0.18", "(b) 0.108", "(c) 0.3", "(d) 0.9"] },
-  { "num": 65, "text": "LCM of $(ab-b^{2})$ and $(a^{2}-b^{2})$ is", "hindi": "", "opts": ["(a) $a(a^{2}-b^{2})$", "(b) $b(a^{2}-b^{2})$", "(c) $(a^{2}-b^{2})$", "(d) $b(a-b)$"] },
-  { "num": 66, "text": "HCF of $2x^{3}+2x$, $x^{2}+1$, $x^{4}-1$ is?", "hindi": "$2x^{3}+2x$, $x^{2}+1$, $x^{4}-1$ का HCF हैं?", "opts": ["(a) $x^{2}+1$", "(b) $x+1$", "(c) 1", "(d) उपर्युक्त में से एक से अधिक", "(e) उपर्युक्त में से कोई नहीं"] },
-  { "num": 67, "text": "What is the least common multiple of $x^{2}+5x+6$ and $x^{2}+4x+4$?", "hindi": "$x^{2}+5x+6$ और $x^{2}+4x+4$ का लघुतम समापवर्त्य हैं?", "opts": ["(a) $x+2$", "(b) $(x+2)(x+3)$", "(c) $(x+2)^{2}(x+3)$", "(d) उपर्युक्त में से एक से अधिक", "(e) उपर्युक्त में से कोई नहीं"] },
-  { "num": 68, "text": "Three numbers are in the ratio 2:3:4. If their LCM is 240, the smallest of the three numbers is", "hindi": "तीन संख्याएं 2:3:4 के अनुपात में है। यदि उनका ल. स. 240 है, तो तीनों संख्याओं में छोटी संख्या क्या है ?", "opts": ["(a) 40", "(b) 60", "(c) 30", "(d) 80"] },
-  { "num": 69, "text": "Three numbers are in the ratio 3:4:5. If their LCM is 180, the smallest of the three numbers is", "hindi": "तीन संख्याएं 3:4:5 के अनुपात में है। यदि उनका ल. स. 180 है, तो तीनों संख्याओं में छोटी संख्या क्या है ?", "opts": ["(a) 4", "(b) 6", "(c) 9", "(d) 8"] },
-  { "num": 70, "text": "Three numbers are in the ratio 3:4:5 and their LCM is 2400. What is their HCF?", "hindi": "तीन संख्याएं 3 : 4 : 5 के अनुपात में हैं और उनका LCM 2400 हैं। उनका HCF हैं?", "opts": ["(a) 40", "(b) 80", "(c) 120", "(d) उपर्युक्त में से एक से अधिक", "(e) उपर्युक्त में से कोई नहीं"] },
-  { "num": 71, "text": "The sum of two numbers is 45. Their difference is 1/9 of their sum. Find their LCM.", "hindi": "दो संख्याओं का योग 45 है उनका अंतर योग का 1/9 है, तो उनका ल. स. ज्ञात करें ?", "opts": ["(a) 200", "(b) 250", "(c) 100", "(d) 150"] },
-  { "num": 72, "text": "The sum of two numbers is 30. Their difference is 1/5 of their sum. Find their LCM.", "hindi": "दो संख्याओं का योग 30 है उनका अंतर योग का 1/5 है, तो उनका ल. स. ज्ञात करें ?", "opts": ["(a) 20", "(b) 25", "(c) 10", "(d) 36"] },
-  { "num": 73, "text": "The sum of LCM and HCF of two numbers is 1260. If their LCM is 900 more than their HCF, then the product of the two numbers is?", "hindi": "दो संख्याओं के लघुत्तम समापवर्त्य तथा महत्तम समापवर्तक का योग 1260 हैं। यदि उनका लघुत्तम समापवर्त्य, महत्तम समापवर्तक से 900 अधिक हैं, तब उन दो संख्याओं का गुणनफल हैं?", "opts": ["(a) 203400", "(b) 194400", "(c) 198400", "(d) उपर्युक्त में से एक से अधिक", "(e) उपर्युक्त में से कोई नहीं"] }
+  {
+    "num": 1,
+    "text": "The ratio of two numbers is 3:4 and their HCF is 4. The number is:-",
+    "hindi": "दो संख्याओं का अनुपात 3 : 4 है और उनका म. स. 4 है, तो संख्याएं क्या होगी ?",
+    "opts": [
+      "(a) 9, 12",
+      "(b) 12, 16",
+      "(c) 16, 18",
+      "(d) 20, 24"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 2,
+    "text": "The ratio of two numbers is 6:7 and their HCF is 8. The number is:-",
+    "hindi": "दो संख्याओं का अनुपात 6 : 7 है और उनका म. स. 8 है, तो संख्याएं क्या होगी ?",
+    "opts": [
+      "(a) 39, 42",
+      "(b) 32, 16",
+      "(c) 48, 56",
+      "(d) 20, 24"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 3,
+    "text": "The ratio of two numbers is 2:3 and their H.C.F. is 5. Then their L.C.M. is",
+    "hindi": "दो संख्याओं का अनुपात 2 : 3 है और उनका म. स. 5 हो, तो उनका ल. स. होगा ?",
+    "opts": [
+      "(a) 20",
+      "(b) 30",
+      "(c) 50",
+      "(d) 60"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 4,
+    "text": "The ratio of two numbers is 3:4 and their H.C.F. is 4. Then their L.C.M. is",
+    "hindi": "दो संख्याओं का अनुपात 3 : 4 है और उनका म. स. 4 हो, तो उनका ल. स. होगा ?",
+    "opts": [
+      "(a) 20",
+      "(b) 30",
+      "(c) 50",
+      "(d) 48"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 5,
+    "text": "Three numbers are in the ratio 2:3:4 and their HCF is 12. Find the LCM of these numbers?",
+    "hindi": "तीन अंकों का अनुपात 2:3:4 तथा उनका म. स. 12 है, तो उनका ल. स. ज्ञात करें ?",
+    "opts": [
+      "(a) 288",
+      "(b) 144",
+      "(c) 350",
+      "(d) 200"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 6,
+    "text": "Three numbers are in the ratio 3:4:5 and their HCF is 12. Find the LCM of these numbers?",
+    "hindi": "तीन अंकों का अनुपात 3 : 4 : 5 तथा उनका म. स. 12 है, तो उनका ल. स. ज्ञात करें ?",
+    "opts": [
+      "(a) 288",
+      "(b) 144",
+      "(c) 350",
+      "(d) 720"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 7,
+    "text": "Three numbers are in the ratio 5:6:7 and their HCF is 2. Find the LCM of these numbers?",
+    "hindi": "तीन अंकों का अनुपात 5 : 6 : 7 तथा उनका म. स. 2 है, तो उनका ल. स. ज्ञात करें ?",
+    "opts": [
+      "(a) 288",
+      "(b) 144",
+      "(c) 420",
+      "(d) 200"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 8,
+    "text": "The ratio of two numbers is 3:2 and their LCM is 72. The HCF is:-",
+    "hindi": "दो संख्याओं का अनुपात 3 : 2 है और उनका ल. स. 72 है, तो इनका म. स. क्या होगा ?",
+    "opts": [
+      "(a) 24",
+      "(b) 3",
+      "(c) 6",
+      "(d) 12"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 9,
+    "text": "The ratio of two numbers is 3:4 and their HCF is 8. The LCM is:-",
+    "hindi": "दो संख्याओं का अनुपात 3 : 4 है और उनका HCF 8 है, तो इनका LCM क्या होगा ?",
+    "opts": [
+      "(a) 24",
+      "(b) 3",
+      "(c) 96",
+      "(d) 12"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 10,
+    "text": "The ratio of two numbers is 5:7 and their LCM is 105. The HCF is:-",
+    "hindi": "दो संख्याओं का अनुपात 5 : 7 है और उनका ल. स. 105 है, तो इनका म. स. क्या होगा ?",
+    "opts": [
+      "(a) 24",
+      "(b) 3",
+      "(c) 6",
+      "(d) 12"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 11,
+    "text": "The ratio of two numbers is 2:3 and their LCM is 48. The numbers are:-",
+    "hindi": "दो संख्याओं का अनुपात 2:3 है और उनका ल. स. 48 है, तो संख्याएं क्या होगी ?",
+    "opts": [
+      "(a) 16, 24",
+      "(b) 8, 6",
+      "(c) 12, 18",
+      "(d) 12, 24"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 12,
+    "text": "The ratio of two numbers is 3:2 and their LCM is 72. The numbers are:-",
+    "hindi": "दो संख्याओं का अनुपात 3 : 2 है और उनका ल. स. 72 है, तो संख्याएं क्या होगी ?",
+    "opts": [
+      "(a) 16, 24",
+      "(b) 36, 24",
+      "(c) 12, 18",
+      "(d) 12, 24"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 13,
+    "text": "If the ratio of two numbers is 2:3 and their LCM is 54. Find the sum of the two numbers?",
+    "hindi": "यदि किन्ही दो अंकों का अनुपात 2 : 3 है तथा उनका ल. स. 54 है, तो उन संख्याओं का जोड़ ज्ञात करें ?",
+    "opts": [
+      "(a) 55",
+      "(b) 55",
+      "(c) 40",
+      "(d) 45"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 14,
+    "text": "The LCM and HCF of the numbers 28 and 42 are in the ratio?",
+    "hindi": "संख्या 28 तथा 42 के ल. स. तथा म. स. का अनुपात क्या होगा ?",
+    "opts": [
+      "(a) 5:6",
+      "(b) 7:2",
+      "(c) 6:1",
+      "(d) 2:7"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 15,
+    "text": "The LCM and HCF of the numbers 48 and 54 are in the ratio?",
+    "hindi": "संख्या 48 तथा 54 के ल. स. तथा म. स. का अनुपात क्या होगा ?",
+    "opts": [
+      "(a) 50:60",
+      "(b) 70:2",
+      "(c) 72:1",
+      "(d) 20:70"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 16,
+    "text": "The LCM of two numbers is 60 and their HCF is 6. If one of the numbers is 30, find the other?",
+    "hindi": "दो संख्याओं का ल. स. 60 है तथा म. स. 6 है यदि एक संख्या 30 हो, तो दूसरी संख्या ज्ञात कीजिए ?",
+    "opts": [
+      "(a) 24",
+      "(b) 29",
+      "(c) 32",
+      "(d) 12"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 17,
+    "text": "The LCM of two numbers is 2079 and their HCF is 27. If one of the numbers is 189, find the other?",
+    "hindi": "दो संख्याओं का ल. स. 2079 है तथा म. स. 27 है यदि एक संख्या 189 हो, तो दूसरी संख्या ज्ञात कीजिए ?",
+    "opts": [
+      "(a) 247",
+      "(b) 297",
+      "(c) 327",
+      "(d) 227"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 18,
+    "text": "Find the least number which is exactly divisible by 12, 16 and 18.",
+    "hindi": "वह छोटी से छोटी संख्या ज्ञात कीजिए जो 12,16 तथा 18 से पूर्ण रूप से विभाजित हो ?",
+    "opts": [
+      "(a) 108",
+      "(b) 144",
+      "(c) 360",
+      "(d) 420"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 19,
+    "text": "Find the least number which is exactly divisible by 72, 90 and 120.",
+    "hindi": "वह छोटी से छोटी संख्या ज्ञात कीजिए जो 72, 90 तथा 120 से पूर्ण रूप से विभाजित हो ?",
+    "opts": [
+      "(a) 108",
+      "(b) 180",
+      "(c) 360",
+      "(d) 420"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 20,
+    "text": "Find the H.C.F. of 8/9 and 10/27",
+    "hindi": "",
+    "opts": [
+      "(a) 2/3",
+      "(b) 2/81",
+      "(c) 160/3",
+      "(d) 160/81"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 21,
+    "text": "Find the H.C.F. of 6/1, 15/4, 9/10",
+    "hindi": "",
+    "opts": [
+      "(a) 3/20",
+      "(b) 2/81",
+      "(c) 160/3",
+      "(d) 160/81"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 22,
+    "text": "Find the L.C.M. of 1/3, 5/6, 2/9, 4/27",
+    "hindi": "",
+    "opts": [
+      "(a) 1/54",
+      "(b) 10/27",
+      "(c) 20/3",
+      "(d) 40/27"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 23,
+    "text": "Find the L.C.M. of 6/1, 15/4, 9/10",
+    "hindi": "",
+    "opts": [
+      "(a) 1/54",
+      "(b) 10/27",
+      "(c) 60",
+      "(d) 90"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 24,
+    "text": "If $P=2^{3}\\cdot3^{10}\\cdot5$, $Q=2^{5}\\cdot3\\cdot7$, Then HCF of P and Q is:",
+    "hindi": "यदि $P=2^{3}\\cdot3^{10}\\cdot5$, $Q=2^{5}\\cdot3\\cdot7$, तो P तथा Q का म. स. ज्ञात करें ?",
+    "opts": [
+      "(a) $2\\cdot3\\cdot5\\cdot7$",
+      "(b) $2^{3}\\cdot3$",
+      "(c) $2^{2}\\cdot3^{7}$",
+      "(d) $2^{5}\\cdot3^{10}\\cdot5\\cdot7$"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 25,
+    "text": "LCM of $2^{4}\\times3^{4}\\times5^{3}$ and $2^{2}\\times3^{6}\\times5^{5}\\times7^{2}$",
+    "hindi": "$2^{4}\\times3^{4}\\times5^{3}$ और $2^{2}\\times3^{6}\\times5^{5}\\times7^{2}$ का लघुत्तम समापवर्त्य हैं?",
+    "opts": [
+      "(a) $2^{3}\\times3^{5}\\times5^{4}\\times7$",
+      "(b) $2^{2}\\times3^{2}\\times5^{2}\\times7^{2}$",
+      "(c) $2^{6}\\times3^{10}\\times5^{8}\\times7^{2}$",
+      "(d) $2^{4}\\times3^{6}\\times5^{5}\\times7^{2}$"
+    ]
+  },
+  {
+    "num": 26,
+    "text": "If $x=2^{5}\\times3^{2}\\times5^{3}$, $y=2^{4}\\times3^{3}\\times5^{2}$, $z=2^{3}\\times3^{3}\\times5^{2}$, then LCM(x,y,z) / HCF(x,y,z) =",
+    "hindi": "(x, y और z का LCM) / (x, y और z का HCF) =",
+    "opts": [
+      "(a) 30",
+      "(b) 45",
+      "(c) 60",
+      "(d) 120"
+    ]
+  },
+  {
+    "num": 27,
+    "text": "If $a=2^{4}\\times3\\times5^{3}$, $b=2^{3}\\times3^{2}\\times5$, $c=2^{5}\\times3^{2}\\times5^{2}$, Then LCM(a,b,c) / HCF(a,b,c) =",
+    "hindi": "यदि $a=2^{4}\\times3\\times5^{3}$, $b=2^{3}\\times3^{2}\\times5$ और $c=2^{5}\\times3^{2}\\times5^{2}$ है, तो LCM / HCF =",
+    "opts": [
+      "(a) 150",
+      "(b) 240",
+      "(c) 300",
+      "(d) 600"
+    ]
+  },
+  {
+    "num": 28,
+    "text": "Find the least number which, when divided by 2, 3, 4, 5 and 6 leaves in each case a remainder as 1.",
+    "hindi": "वह छोटी से छोटी संख्या ज्ञात कीजिए जिसे 2, 3, 4, 5 तथा 6 से भाग देने पर प्रत्येक स्थिति में शेष 1 बचे ?",
+    "opts": [
+      "(a) 61",
+      "(b) 81",
+      "(c) 121",
+      "(d) 31"
+    ]
+  },
+  {
+    "num": 29,
+    "text": "Find the least number which, when divided by 12, 16 and 18 leaves in each case a remainder as 5.",
+    "hindi": "वह छोटी से छोटी संख्या ज्ञात कीजिए जिसे 12, 16, तथा 18 से भाग देने पर प्रत्येक स्थिति में शेष 5 बचे ?",
+    "opts": [
+      "(a) 61",
+      "(b) 81",
+      "(c) 121",
+      "(d) 149"
+    ]
+  },
+  {
+    "num": 30,
+    "text": "Find the least number which being divided 2, 3, 4, 5, and 6 leaves in each case a remainder 1, but when divided by 7 leaves no remainder?",
+    "hindi": "वह छोटी से छोटी संख्या ज्ञात कीजिए जिसे 2, 3, 4, 5 तथा 6 से भाग देने पर शेष 1 बचे तथा 7 से भाग देने पर कोई शेष न बचे ?",
+    "opts": [
+      "(a) 288",
+      "(b) 301",
+      "(c) 324",
+      "(d) 336"
+    ]
+  },
+  {
+    "num": 31,
+    "text": "What is the greatest number that will exactly divide 168, 176 and 192?",
+    "hindi": "वह बड़ी से बड़ी संख्या ज्ञात कीजिए जो 168, 176 तथा 192 को विभाजित करती है ?",
+    "opts": [
+      "(a) 12",
+      "(b) 16",
+      "(c) 8",
+      "(d) 36"
+    ]
+  },
+  {
+    "num": 32,
+    "text": "What is the greatest number that will exactly divide 96, 528 and 792?",
+    "hindi": "वह बड़ी से बड़ी संख्या ज्ञात कीजिए जो 96, 528 तथा 792 को विभाजित करती है ?",
+    "opts": [
+      "(a) 12",
+      "(b) 16",
+      "(c) 8",
+      "(d) 24"
+    ]
+  },
+  {
+    "num": 33,
+    "text": "The greatest number which divides 261, 933 and 1381, leaves remainder 5 is",
+    "hindi": "वह बड़ी से बड़ी संख्या ज्ञात कीजिए जो 261, 933 और 1381 से भाग होने पर शेष 5 छोडती हो ?",
+    "opts": [
+      "(a) 24",
+      "(b) 32",
+      "(c) 15",
+      "(d) 20"
+    ]
+  },
+  {
+    "num": 34,
+    "text": "The greatest number which divides 245 and 511, leaves remainder 5 and 7 respectively is",
+    "hindi": "वह बड़ी से बड़ी संख्या ज्ञात कीजिए जो 245 और 511 से भाग होने पर शेष क्रमानुसार 5 और 7 छोडती हो ?",
+    "opts": [
+      "(a) 24",
+      "(b) 35",
+      "(c) 15",
+      "(d) 20"
+    ]
+  },
+  {
+    "num": 35,
+    "text": "The greatest number which divides 38, 45 and 52 leaves remainder 2, 3 and 4 respectively is",
+    "hindi": "वह बड़ी से बड़ी संख्या ज्ञात कीजिए जो 38, 45, और 52 से भाग होने पर शेष क्रमानुसार 2, 3 और 4 छोडती हो ?",
+    "opts": [
+      "(a) 24",
+      "(b) 35",
+      "(c) 6",
+      "(d) 20"
+    ]
+  },
+  {
+    "num": 36,
+    "text": "Find the maximum number by which after dividing in 140, 155 and 185 it gives remainder 5 in each case.",
+    "hindi": "वह सबसे बड़ी संख्या ज्ञात करें जिससे यदि 140, 155 और 185 को भाग दिया जाए तो प्रत्येक दशा में शेष 5 हो ?",
+    "opts": [
+      "(a) 15",
+      "(b) 35",
+      "(c) 25",
+      "(d) 45"
+    ]
+  },
+  {
+    "num": 37,
+    "text": "What is the greatest number that will divide 38, 45 and 52 and leaves as remainders 2, 3 and 4 respectively?",
+    "hindi": "वह बड़ी से बड़ी संख्या ज्ञात कीजिए जिससे 38, 45 तथा 52 को भाग देने पर क्रमशः 2, 3 तथा 4 शेष बचता है ?",
+    "opts": [
+      "(a) 6",
+      "(b) 8",
+      "(c) 9",
+      "(d) 12"
+    ]
+  },
+  {
+    "num": 38,
+    "text": "Find the 3-digit smallest number which divided by 8, 6 and 12?",
+    "hindi": "3 अंकों वाली सबसे छोटी संख्या ज्ञात कीजिए जो 8, 6, तथा 12 से विभाजित होती है ?",
+    "opts": [
+      "(a) 100",
+      "(b) 101",
+      "(c) 120",
+      "(d) 102"
+    ]
+  },
+  {
+    "num": 39,
+    "text": "Find the 4-digit smallest number which divided by 4, 6, 8 and 10?",
+    "hindi": "4 अंकों वाली सबसे छोटी संख्या ज्ञात कीजिए जो 4, 6, 8 तथा 10 से विभाजित होती है ?",
+    "opts": [
+      "(a) 1020",
+      "(b) 1012",
+      "(c) 1200",
+      "(d) 1080"
+    ]
+  },
+  {
+    "num": 40,
+    "text": "Find the 4-digit smallest number which, when divided by 12, 18, 21 and 28, leaves 3 in each case.",
+    "hindi": "चार अंकों वाली सबसे छोटी संख्या ज्ञात कीजिए जिसे 12, 18, 21 तथा 28 से भाग देने पर प्रत्येक दशा में शेष 3 बचे ?",
+    "opts": [
+      "(a) 1008",
+      "(b) 1011",
+      "(c) 1016",
+      "(d) 1024"
+    ]
+  },
+  {
+    "num": 41,
+    "text": "N is a 6 digits smallest number which leaves 2 as a remainder in case when divided by 4, 6, 10 and 15. Find the sum of all digits of the numbers?",
+    "hindi": "यदि N, 6 अंकों की छोटी से छोटी संख्या है जो 4, 6, 10 तथा 15 प्रत्येक से भाग होने पर, हमेशा शेष 2 छोडती हो तो उस संख्या के अंकों का जोड़ ज्ञात करें ?",
+    "opts": [
+      "(a) 16/5",
+      "(b) 5",
+      "(c) 7",
+      "(d) 12"
+    ]
+  },
+  {
+    "num": 42,
+    "text": "The product of the L.C.M. and H.C.F. of two numbers is 24. The difference of two numbers is 2. Find the numbers?",
+    "hindi": "दो संख्याओं के ल. स. और म. स. का गुणनफल 24 है। इन संख्याओं में 2 का अंतर है संख्याएं क्या होगी ?",
+    "opts": [
+      "(a) 2 और 4",
+      "(b) 6 और 4",
+      "(c) 8 और 6",
+      "(d) 8 और 10"
+    ]
+  },
+  {
+    "num": 43,
+    "text": "The product of the L.C.M. and H.C.F. of two numbers is 48. The difference of two numbers is 2. Find the numbers?",
+    "hindi": "दो संख्याओं के ल. स. और म. स. का गुणनफल 48 है। इन संख्याओं में 2 का अंतर है संख्याएं क्या होगी ?",
+    "opts": [
+      "(a) 2 और 4",
+      "(b) 6 और 4",
+      "(c) 8 और 6",
+      "(d) 8 और 10"
+    ]
+  },
+  {
+    "num": 44,
+    "text": "The L.C.M. of two numbers is 30 and their H.C.F is 5. If the sum of the number is 25, then their numbers is:",
+    "hindi": "दो संख्याओं का ल. स. 30 और म. स. 5 है। यदि इन संख्याओं का योग 25 है, तो संख्याएं क्या होगी ?",
+    "opts": [
+      "(a) 10, 15",
+      "(b) 12, 13",
+      "(c) 15, 20",
+      "(d) 12, 17"
+    ]
+  },
+  {
+    "num": 45,
+    "text": "The L.C.M. of two numbers is 300 and their H.C.F is 15. If the sum of the number is 135, then their numbers is:",
+    "hindi": "दो संख्याओं का ल. स. 300 और म. स. 15 है। यदि इन संख्याओं का योग 135 है, तो संख्याएं क्या होगी ?",
+    "opts": [
+      "(a) 55, 60",
+      "(b) 75, 60",
+      "(c) 60, 65",
+      "(d) 70, 75"
+    ]
+  },
+  {
+    "num": 46,
+    "text": "The L.C.M. of two numbers is 495 and their H.C.F is 5. If the sum of the number is 100, then their difference is:",
+    "hindi": "दो संख्याओं का ल. स. 495 और म. स. 5 है। यदि इन संख्याओं का योग 100 है, तो इनका अंतर कितना होगा ?",
+    "opts": [
+      "(a) 10",
+      "(b) 46",
+      "(c) 70",
+      "(d) 90"
+    ]
+  },
+  {
+    "num": 47,
+    "text": "The HCF and LCM of two numbers are 13 and 455 respectively. If one of them lies between 75 and 125 find the numbers?",
+    "hindi": "किन्हीं दो अंकों का म. स. तथा ल. स. 13 तथा 455 है यदि उनमें से एक अंक 75 तथा 125 के मध्य में है, तो उस अंक को ज्ञात करें ?",
+    "opts": [
+      "(a) 95",
+      "(b) 50",
+      "(c) 91",
+      "(d) 100"
+    ]
+  },
+  {
+    "num": 48,
+    "text": "The sum of two numbers is 216 and their HCF is 27. The numbers are:-",
+    "hindi": "दो संख्याओं का योग 216 है और इनका म. स. 27 है, तो संख्याएं क्या होगी ?",
+    "opts": [
+      "(a) 27, 189",
+      "(b) 108, 108",
+      "(c) 200, 16",
+      "(d) 100, 116"
+    ]
+  },
+  {
+    "num": 49,
+    "text": "The sum of two numbers is 36 and their HCF is 4. How many pairs of these numbers are possible?",
+    "hindi": "किन्ही दो अंकों का जोड़ 36 है और उनका म. स. 4 है, तो ऐसे अंकों के कितने जोड़े संभव है ?",
+    "opts": [
+      "(a) 6",
+      "(b) 9",
+      "(c) 4",
+      "(d) 3"
+    ]
+  },
+  {
+    "num": 50,
+    "text": "The sum of two numbers is 36 and their HCF and LCM are 3 and 105 respectively. The sum of the reciprocal of two numbers is:",
+    "hindi": "किन्हीं दो संख्याओं का जोड़ 36 है तथा उनका म. स. और ल. स. क्रमानुसार 3 और 105 है, तो उनका पारस्परिक जोड़ है ?",
+    "opts": [
+      "(a) 4/35",
+      "(b) 5/31",
+      "(c) 7/30",
+      "(d) 7/34"
+    ]
+  },
+  {
+    "num": 51,
+    "text": "The sum of two numbers is 42 and their HCF and LCM are 6 and 60 respectively. The sum of the reciprocal of two numbers is:",
+    "hindi": "किन्हीं दो संख्याओं का जोड़ 42 है तथा उनका म. स. और ल. स. क्रमानुसार 6 और 60 है, तो उनका पारस्परिक जोड़ है ?",
+    "opts": [
+      "(a) 4/35",
+      "(b) 5/31",
+      "(c) 7/60",
+      "(d) 7/34"
+    ]
+  },
+  {
+    "num": 52,
+    "text": "Three lights lighted at the interval of 12 seconds, 15 second and 20 second respectively. All three lights started lighting together then after what time all three lights will light together again for first time?",
+    "hindi": "तीन बत्तियां क्रमशः 12 सेकेंड, 15 सेकेंड और 20 सेकेंड में अंतराल पर जलती है यदि तीनों बत्तियों को एक साथ जलाया जाए तो कितने समय बाद तीनों बत्तियां पहली बार पुनः एक साथ जलेंगी ?",
+    "opts": [
+      "(a) After two minutes",
+      "(b) After four minutes",
+      "(c) After one minute",
+      "(d) After three minutes"
+    ]
+  },
+  {
+    "num": 53,
+    "text": "Three lights lighted at the interval of 5 seconds, 10 seconds and 15 seconds respectively. All three lights started lighting together then after what time all three lights will light together again for first time?",
+    "hindi": "तीन बत्तियां क्रमश: 5 सेकेंड, 10 सेकेंड और 15 सेकेंड में अंतराल पर जलती है यदि तीनों बत्तियों को एक साथ जलाया जाए तो कितने समय बाद तीनों बत्तियां पहली बार पुनः एक साथ जलेंगी ?",
+    "opts": [
+      "(a) After 5 seconds",
+      "(b) After 10 seconds",
+      "(c) After 15 seconds",
+      "(d) After 30 seconds"
+    ]
+  },
+  {
+    "num": 54,
+    "text": "3 bells begin to toll together and toll respectively at interval of 5, 10, 15 minutes. How many times they will toll together in 2 hours?",
+    "hindi": "3 घंटियाँ एक साथ बजीं, ये सभी क्रमशः 5, 10, 15 मिनट के अन्तराल में बजती है ये सभी घंटियाँ 2 घंटे में कितनी बार एक साथ बजेंगी ?",
+    "opts": [
+      "(a) 4",
+      "(b) 5",
+      "(c) 8",
+      "(d) 12"
+    ]
+  },
+  {
+    "num": 55,
+    "text": "3 bells rings at an interval of 6 min, 12 min and 18 min respectively. How much times will they ring together in 6 hours, if they start ringing at same time.",
+    "hindi": "3 घंटियाँ क्रमशः 6 मिनट 12 मिनट 18 मिनट के अंतराल पर बजते है 6 घंटे में वे कितनी बार साथ-साथ बजेंगे यदि घंटियाँ एक ही समय पर बजना प्रारंभ करते हो ?",
+    "opts": [
+      "(a) 6 times",
+      "(b) 10 times",
+      "(c) 5 times",
+      "(d) 11 times"
+    ]
+  },
+  {
+    "num": 56,
+    "text": "Five bells begin to toll together and toll respectively at interval of 6, 7, 8, 9 and 12 seconds. How many times they will toll together in one hour?",
+    "hindi": "पांच घंटियाँ एक साथ बजीं ये सभी क्रमशः 6, 7, 8, 9 तथा 12 सेकेंड के अन्तराल में बजती है ये सभी घंटियाँ 1 घंटे में कितनी बार एक साथ बजेंगी ?",
+    "opts": [
+      "(a) 6",
+      "(b) 7",
+      "(c) 8",
+      "(d) 12"
+    ]
+  },
+  {
+    "num": 57,
+    "text": "Three persons A, B, C run along a circular path 12 km long. They start their race from the same point at speeds of 3 km/hr, 7 km/hr and 13 km/hr respectively. After what time will they meet again at the starting point?",
+    "hindi": "तीन व्यक्ति A,B तथा C 12 किमी. के एक वृत्ताकार मैदान में दौड़ लगाते है वे एक ही स्थान से क्रमशः 3 किमी/घंटा 7 किमी./घंटा तथा 13 किमी/घंटा की चाल से दौड़ शुरू करते है कितने समय पश्चात वें प्रारंभिक बिंदु पर एक दूसरे से मिलेंगे ?",
+    "opts": [
+      "(a) 6 घंटे",
+      "(b) 12 घंटे",
+      "(c) 16 घंटे",
+      "(d) 20 घंटे"
+    ]
+  },
+  {
+    "num": 58,
+    "text": "Three persons A, B, C run along a circular path 25 km long at speeds of 5 km/hr, 10 km/hr and 15 km/hr. After what time will they meet again at the starting point?",
+    "hindi": "तीन व्यक्ति A,B तथा C 25 किमी. के एक वृत्ताकार मैदान में दौड़ लगाते है वे एक ही स्थान से क्रमशः 5 किमी/घंटा, 10 किमी./घंटा तथा 15 किमी/घंटा की चाल से दौड़ शुरू करते है कितने समय पश्चात वें प्रारंभिक बिंदु पर एक दूसरे से मिलेंगे ?",
+    "opts": [
+      "(a) 6 घंटे",
+      "(b) 12 घंटे",
+      "(c) 5 घंटे",
+      "(d) 20 घटे"
+    ]
+  },
+  {
+    "num": 59,
+    "text": "Three persons A, B, C run along a circular path 16 km long at speeds of 4 km/hr, 6 km/hr and 8 km/hr. After what time will they meet again at the starting point?",
+    "hindi": "तीन व्यक्ति A,B तथा C 16 किमी. के एक वृत्ताकार मैदान में दौड़ लगाते है वे एक ही स्थान से क्रमशः 4 किमी/घंटा 6 किमी./घंटा तथा 8 किमी/घंटा की चाल से दौड़ शुरू करते है कितने समय पश्चात वें प्रारंभिक बिंदु पर एक दूसरे से मिलेंगे?",
+    "opts": [
+      "(a) 6 घंटे",
+      "(b) 8 घंटे",
+      "(c) 16 घंटे",
+      "(d) 20 घंटे"
+    ]
+  },
+  {
+    "num": 60,
+    "text": "A gardener has 44 plants of apple, 66 plants of banana and 110 plants of mango. He wants to arrange them in lines such that each line has same number of plants. Find least number of such lines.",
+    "hindi": "एक माली के पास 44 सेब के 66 केले व 110 आम के पेंड है वह इन्हें पंक्तियों में इस प्रकार लगाना चाहता है की प्रत्येक पंक्ति में पौधों की संख्या समान हो, तो ऐसे कम से कम पंक्तियों की संख्या ज्ञात कीजिए",
+    "opts": [
+      "(a) 12",
+      "(b) 5",
+      "(c) 10",
+      "(d) 15"
+    ]
+  },
+  {
+    "num": 61,
+    "text": "A gardener has 36 plants of apple, 54 plants of banana and 72 plants of mango. He wants to arrange them in lines such that each line has same number of plants. Find least number of such lines.",
+    "hindi": "एक माली के पास 36 सेब के 54 केले व 72 आम के पेंड है वह इन्हें पंक्तियों में इस प्रकार लगाना चाहता है की प्रत्येक पंक्ति में पौधों की संख्या समान हो, तो ऐसे कम से कम पंक्तियों की संख्या ज्ञात कीजिए",
+    "opts": [
+      "(a) 12",
+      "(b) 9",
+      "(c) 10",
+      "(d) 15"
+    ]
+  },
+  {
+    "num": 62,
+    "text": "The area of three fields are 288 m², 408 m² and 552 m². Equal minimum size square blocks are made. Find the length of each block.",
+    "hindi": "मैदानों का क्षेत्रफल क्रमशः 288, 408 तथा 552 m² है। बराबर आकार के वर्गाकार टुकड़े बनाए जाते हैं, तो प्रत्येक टुकड़े की भुजा ज्ञात करें।",
+    "opts": [
+      "(a) 17 मीटर",
+      "(b) 5 मीटर",
+      "(c) 24 मीटर",
+      "(d) 10 मीटर"
+    ]
+  },
+  {
+    "num": 63,
+    "text": "A sweet vendor has 420 cashew barfis and 150 almond barfis. He wishes to stack them so each stack has the same number, occupying minimum tray area. The number of stacks that can be formed is?",
+    "hindi": "एक मिठाई विक्रेता के पास 420 काजू की बर्फियां और 150 बादाम की बर्फियां हैं। वह उन्हें इस तरह से ढेर करना चाहता है कि प्रत्येक ढेर में उनकी संख्या समान हो, और वे ट्रे का कम से कम क्षेत्र घेरें। इस प्रकार बनने वाले ढेरों की संख्या हैं?",
+    "opts": [
+      "(a) 17",
+      "(b) 19",
+      "(c) 18",
+      "(d) उपर्युक्त में से एक से अधिक",
+      "(e) उपर्युक्त में से कोई नहीं"
+    ]
+  },
+  {
+    "num": 64,
+    "text": "HCF of 1.08, 0.36 and 0.9 is",
+    "hindi": "",
+    "opts": [
+      "(a) 0.18",
+      "(b) 0.108",
+      "(c) 0.3",
+      "(d) 0.9"
+    ]
+  },
+  {
+    "num": 65,
+    "text": "LCM of $(ab-b^{2})$ and $(a^{2}-b^{2})$ is",
+    "hindi": "",
+    "opts": [
+      "(a) $a(a^{2}-b^{2})$",
+      "(b) $b(a^{2}-b^{2})$",
+      "(c) $(a^{2}-b^{2})$",
+      "(d) $b(a-b)$"
+    ]
+  },
+  {
+    "num": 66,
+    "text": "HCF of $2x^{3}+2x$, $x^{2}+1$, $x^{4}-1$ is?",
+    "hindi": "$2x^{3}+2x$, $x^{2}+1$, $x^{4}-1$ का HCF हैं?",
+    "opts": [
+      "(a) $x^{2}+1$",
+      "(b) $x+1$",
+      "(c) 1",
+      "(d) उपर्युक्त में से एक से अधिक",
+      "(e) उपर्युक्त में से कोई नहीं"
+    ]
+  },
+  {
+    "num": 67,
+    "text": "What is the least common multiple of $x^{2}+5x+6$ and $x^{2}+4x+4$?",
+    "hindi": "$x^{2}+5x+6$ और $x^{2}+4x+4$ का लघुतम समापवर्त्य हैं?",
+    "opts": [
+      "(a) $x+2$",
+      "(b) $(x+2)(x+3)$",
+      "(c) $(x+2)^{2}(x+3)$",
+      "(d) उपर्युक्त में से एक से अधिक",
+      "(e) उपर्युक्त में से कोई नहीं"
+    ]
+  },
+  {
+    "num": 68,
+    "text": "Three numbers are in the ratio 2:3:4. If their LCM is 240, the smallest of the three numbers is",
+    "hindi": "तीन संख्याएं 2:3:4 के अनुपात में है। यदि उनका ल. स. 240 है, तो तीनों संख्याओं में छोटी संख्या क्या है ?",
+    "opts": [
+      "(a) 40",
+      "(b) 60",
+      "(c) 30",
+      "(d) 80"
+    ]
+  },
+  {
+    "num": 69,
+    "text": "Three numbers are in the ratio 3:4:5. If their LCM is 180, the smallest of the three numbers is",
+    "hindi": "तीन संख्याएं 3:4:5 के अनुपात में है। यदि उनका ल. स. 180 है, तो तीनों संख्याओं में छोटी संख्या क्या है ?",
+    "opts": [
+      "(a) 4",
+      "(b) 6",
+      "(c) 9",
+      "(d) 8"
+    ]
+  },
+  {
+    "num": 70,
+    "text": "Three numbers are in the ratio 3:4:5 and their LCM is 2400. What is their HCF?",
+    "hindi": "तीन संख्याएं 3 : 4 : 5 के अनुपात में हैं और उनका LCM 2400 हैं। उनका HCF हैं?",
+    "opts": [
+      "(a) 40",
+      "(b) 80",
+      "(c) 120",
+      "(d) उपर्युक्त में से एक से अधिक",
+      "(e) उपर्युक्त में से कोई नहीं"
+    ]
+  },
+  {
+    "num": 71,
+    "text": "The sum of two numbers is 45. Their difference is 1/9 of their sum. Find their LCM.",
+    "hindi": "दो संख्याओं का योग 45 है उनका अंतर योग का 1/9 है, तो उनका ल. स. ज्ञात करें ?",
+    "opts": [
+      "(a) 200",
+      "(b) 250",
+      "(c) 100",
+      "(d) 150"
+    ]
+  },
+  {
+    "num": 72,
+    "text": "The sum of two numbers is 30. Their difference is 1/5 of their sum. Find their LCM.",
+    "hindi": "दो संख्याओं का योग 30 है उनका अंतर योग का 1/5 है, तो उनका ल. स. ज्ञात करें ?",
+    "opts": [
+      "(a) 20",
+      "(b) 25",
+      "(c) 10",
+      "(d) 36"
+    ]
+  },
+  {
+    "num": 73,
+    "text": "The sum of LCM and HCF of two numbers is 1260. If their LCM is 900 more than their HCF, then the product of the two numbers is?",
+    "hindi": "दो संख्याओं के लघुत्तम समापवर्त्य तथा महत्तम समापवर्तक का योग 1260 हैं। यदि उनका लघुत्तम समापवर्त्य, महत्तम समापवर्तक से 900 अधिक हैं, तब उन दो संख्याओं का गुणनफल हैं?",
+    "opts": [
+      "(a) 203400",
+      "(b) 194400",
+      "(c) 198400",
+      "(d) उपर्युक्त में से एक से अधिक",
+      "(e) उपर्युक्त में से कोई नहीं"
+    ]
+  }
 ]
