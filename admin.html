@@ -277,6 +277,14 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;hei
         <label>Ya Naya File Naam</label>
         <input type="text" id="new-filename" placeholder="e.g. percentage.json" oninput="onNewFilename()">
       </div>
+      <div style="margin-top:10px">
+        <label>Subject</label>
+        <select id="file-subject" onchange="saveSubjectLocally()">
+          <option value="">-- Select karo --</option>
+          <option value="math">📐 Math</option>
+          <option value="reasoning">🧠 Reasoning</option>
+        </select>
+      </div>
       <div id="file-info" style="margin-top:8px;font-size:12px;color:var(--muted)"></div>
     </div>
 
@@ -556,6 +564,7 @@ async function onFileSelect() {
   document.getElementById('new-filename').value = '';
   if (!sel) { currentFile=''; existingQ=[]; renderEditor(); return; }
   currentFile = sel;
+  loadSubject(sel);
   await loadExistingFile(sel);
 }
 
@@ -855,11 +864,21 @@ function makeQCard(q, idx) {
         </div>
         <button class="btn btn-outline btn-xs" style="margin-top:6px" onclick="addOpt(${idx})">＋ Option</button>
       </div>
-      <div style="display:flex;gap:6px;align-items:center;margin-top:8px">
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px;padding:10px;background:var(--bg);border-radius:7px;border:1px solid var(--border)">
         <label style="margin:0">Q No:</label>
         <input type="text" style="width:70px" value="${q.num}" onchange="updateQ(${idx},'num',parseInt(this.value)||${idx+1})">
         <button class="btn btn-outline btn-xs" onclick="moveUp(${idx})" ${idx===0?'disabled':''}>↑</button>
         <button class="btn btn-outline btn-xs" onclick="moveDown(${idx})" ${idx===existingQ.length-1?'disabled':''}>↓</button>
+        <label style="margin:0 0 0 8px;cursor:pointer;display:flex;align-items:center;gap:4px;color:${q.imp?'#f5a623':'var(--muted)'}">
+          <input type="checkbox" ${q.imp?'checked':''} onchange="updateQ(${idx},'imp',this.checked)" style="width:14px;height:14px;accent-color:#f5a623">
+          ⭐
+        </label>
+        <select style="width:auto;font-size:11px;padding:4px 6px" onchange="updateQ(${idx},'freq',parseInt(this.value))" ${!q.imp?'disabled':''} id="freq-${idx}">
+          <option value="1" ${q.freq===1?'selected':''}>1 din</option>
+          <option value="2" ${(!q.freq||q.freq===2)?'selected':''}>2 din</option>
+          <option value="3" ${q.freq===3?'selected':''}>3 din</option>
+          <option value="7" ${q.freq===7?'selected':''}>7 din</option>
+        </select>
       </div>
     </div>
   `;
@@ -899,14 +918,35 @@ function updateQ(idx, field, val) {
   existingQ[idx][field] = val;
   dirty = true;
   updateSaveBtn();
-  // update preview text in header
   const card = document.querySelector(`.qe-card[data-idx="${idx}"]`);
   if (card) {
     const prev = card.querySelector('.qe-preview');
     if (prev) prev.textContent = (existingQ[idx].text||existingQ[idx].hindi||'(khali)').substring(0,70);
     const numEl = card.querySelector('.qe-num');
     if (numEl && field==='num') numEl.textContent = 'Q'+val;
+    // imp checkbox pe freq enable/disable karo
+    if (field==='imp') {
+      const freqSel = document.getElementById('freq-'+idx);
+      if (freqSel) freqSel.disabled = !val;
+    }
   }
+}
+
+// Subject localStorage mein save karo
+function saveSubjectLocally() {
+  const fn = getFilename();
+  if (!fn) return;
+  const subj = document.getElementById('file-subject').value;
+  const map = JSON.parse(localStorage.getItem('file_subjects')||'{}');
+  map[fn] = subj;
+  localStorage.setItem('file_subjects', JSON.stringify(map));
+}
+
+// File select hone par subject load karo
+function loadSubject(filename) {
+  const map = JSON.parse(localStorage.getItem('file_subjects')||'{}');
+  const subj = map[filename] || '';
+  document.getElementById('file-subject').value = subj;
 }
 
 function updateOpt(idx, oi, val) {
@@ -1062,12 +1102,13 @@ async function saveToGitHub() {
     const data = await r.json();
     if (r.ok) {
       currentSHA = data.content?.sha||'';
-      existingQ = toSave; // strip _new
+      existingQ = toSave;
       dirty = false;
       renderEditor();
       toast(`✅ Saved! ${toSave.length} questions in ${filename}`,'success',5000);
       btn.innerHTML='✅ Saved!';
       document.getElementById('save-info').textContent='';
+      await saveMetaJson(user, repo, pat, filename);
       setTimeout(()=>{ btn.innerHTML='⬆️ GitHub pe Save karo'; }, 2500);
     } else {
       toast('❌ '+data.message,'error',6000);
@@ -1076,6 +1117,43 @@ async function saveToGitHub() {
   } catch(e) {
     toast('Network error: '+e.message,'error');
     btn.innerHTML='⬆️ GitHub pe Save karo'; btn.disabled=false;
+  }
+}
+
+// ═══════════════════════════════════════════
+//  META.JSON — subject mapping save karo
+// ═══════════════════════════════════════════
+async function saveMetaJson(user, repo, pat, savedFilename) {
+  try {
+    const subj = document.getElementById('file-subject').value;
+    // localStorage map update
+    const map = JSON.parse(localStorage.getItem('file_subjects')||'{}');
+    if (subj) map[savedFilename] = subj;
+    localStorage.setItem('file_subjects', JSON.stringify(map));
+
+    // GitHub pe meta.json fetch (SHA chahiye update ke liye)
+    const metaUrl = `https://api.github.com/repos/${user}/${repo}/contents/questions/meta.json`;
+    const headers = {Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'};
+
+    let metaSHA = '';
+    let existingMeta = {};
+    try {
+      const mr = await fetch(metaUrl, {headers});
+      if (mr.ok) {
+        const md = await mr.json();
+        metaSHA = md.sha;
+        existingMeta = JSON.parse(decodeURIComponent(escape(atob(md.content.replace(/\n/g,'')))));
+      }
+    } catch(e) {}
+
+    // Merge + save
+    if (subj) existingMeta[savedFilename] = subj;
+    const metaContent = btoa(unescape(encodeURIComponent(JSON.stringify(existingMeta, null, 2))));
+    const metaBody = {message:`Update meta.json — ${savedFilename}:${subj||'?'}`, content:metaContent, branch:'main'};
+    if (metaSHA) metaBody.sha = metaSHA;
+    await fetch(metaUrl, {method:'PUT', headers, body:JSON.stringify(metaBody)});
+  } catch(e) {
+    console.warn('meta.json save error:', e);
   }
 }
 </script>
