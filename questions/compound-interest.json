@@ -284,7 +284,8 @@
       "(e) None of these"
     ],
     "ans": "b",
-    "imp": true
+    "imp": true,
+    "freq": 1
   },
   {
     "num": 23,
