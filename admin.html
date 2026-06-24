@@ -99,7 +99,7 @@ textarea{resize:vertical;font-family:var(--mono);line-height:1.6}
 /* ═══════════════════════════════════════
    RIGHT PANEL — QUESTIONS EDITOR
 ═══════════════════════════════════════ */
-.rp-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.rp-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:50;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--border);margin-bottom:16px}
 .rp-title{font-size:18px;font-weight:700;flex:1}
 .q-total-badge{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:4px 14px;font-size:var(--fs-xs);color:var(--accent);font-weight:600}
 
@@ -115,6 +115,14 @@ textarea{resize:vertical;font-family:var(--mono);line-height:1.6}
 .qe-head-btns{display:flex;gap:4px;flex-shrink:0}
 .qe-body{padding:14px;display:none;border-top:1px solid var(--border)}
 .qe-body.open{display:block}
+
+/* mini preview inside card */
+.qe-mini-preview{display:none;padding:12px 14px;border-top:1px solid var(--border);background:var(--bg)}
+.qe-mini-preview.open{display:block}
+.qe-mini-preview .pv-hindi{font-size:var(--fs-q-text,15px);color:var(--text);margin-bottom:6px;line-height:1.6}
+.qe-mini-preview .pv-text{font-size:var(--fs-q-text,15px);color:var(--muted);margin-bottom:10px;line-height:1.6}
+.qe-mini-preview .pv-opts{display:flex;flex-wrap:wrap;gap:6px}
+.qe-mini-preview .pv-opt{background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.25);border-radius:5px;padding:5px 12px;font-size:var(--fs-opt-text,13px);color:var(--accent)}
 
 /* inline edit fields */
 .field-group{margin-bottom:10px}
@@ -805,10 +813,21 @@ function makeQCard(q, idx) {
       ${q._new?'<span class="qe-badge qe-badge-new">NEW</span>':''}
       ${q.ans?`<span class="qe-badge" style="background:rgba(76,175,130,.15);color:var(--success);border:1px solid rgba(76,175,130,.3)">✓${q.ans.toUpperCase()}</span>`:'<span class="qe-badge" style="background:rgba(255,82,82,.1);color:var(--error);border:1px solid rgba(255,82,82,.3)">!Ans</span>'}
       <div class="qe-head-btns" onclick="event.stopPropagation()">
+        <button class="btn btn-outline btn-xs" onclick="toggleMiniPreview(${idx})" title="Preview dekho">👁️</button>
         <button class="btn btn-outline btn-xs" onclick="toggleCard(${idx})">✏️</button>
         <button class="btn btn-danger btn-xs" onclick="deleteQ(${idx})" title="Delete">🗑️</button>
       </div>
     </div>
+
+    <div class="qe-mini-preview" id="qmini-${idx}">
+      ${q.hindi?`<div class="pv-hindi">${q.hindi}</div>`:''}
+      ${q.text?`<div class="pv-text">${q.text}</div>`:''}
+      <div class="pv-opts">${(q.opts||[]).map((o,oi)=>{
+        const isAns = q.ans && q.ans===letters[oi];
+        return `<span class="pv-opt" style="${isAns?'background:rgba(76,175,130,.2);border-color:var(--success);color:var(--success);font-weight:700':''}">${isAns?'✓ ':''}${o}</span>`;
+      }).join('')}</div>
+    </div>
+
     <div class="qe-body" id="qbody-${idx}">
       <div class="field-group">
         <label>प्रश्न (English)</label>
@@ -853,6 +872,15 @@ function escH(s) {
 // ═══════════════════════════════════════════
 //  EDITOR ACTIONS
 // ═══════════════════════════════════════════
+function toggleMiniPreview(idx) {
+  const mini = document.getElementById('qmini-'+idx);
+  const isOpen = mini.classList.toggle('open');
+  // MathJax render karo
+  if (isOpen && window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise([mini]).catch(()=>{});
+  }
+}
+
 function toggleCard(idx) {
   const body = document.getElementById('qbody-'+idx);
   const card = body.closest('.qe-card');
