@@ -809,6 +809,7 @@ function updateTabUI() {
 // ══════════════════════════════════════
 function renderContent() {
   var content = document.getElementById("content");
+  if (activeTab === 'important') { renderImportant(); return; }
   var clr = activeTab === "reasoning" ? "r" : "o";
   currentClr = clr;
 
