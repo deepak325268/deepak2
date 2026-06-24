@@ -1,4 +1,5 @@
 {
   "average.json": "math",
-  "compound-interest.json": "math"
+  "compound-interest.json": "math",
+  "clock.json": "reasoning"
 }
