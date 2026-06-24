@@ -694,7 +694,7 @@ let dayNums  = { math: null, reasoning: null };
 var qBankCache = {};
 
 var savedTab = localStorage.getItem("activeTab");
-if (!savedTab || !["math","reasoning"].includes(savedTab)) savedTab = "math";
+if (!savedTab || !["math","reasoning","important"].includes(savedTab)) savedTab = "math";
 let activeTab = savedTab;
 let isSliding = false;
 const TABS = ["math", "reasoning", "important"];
