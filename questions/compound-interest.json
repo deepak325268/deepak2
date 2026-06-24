@@ -205,7 +205,8 @@
       "(d) 175:144",
       "(e) None of these"
     ],
-    "ans": "a"
+    "ans": "a",
+    "imp": true
   },
   {
     "num": 17,
@@ -218,7 +219,8 @@
       "(d) 441:400",
       "(e) None of these"
     ],
-    "ans": "b"
+    "ans": "b",
+    "imp": true
   },
   {
     "num": 18,
@@ -284,7 +286,7 @@
       "(e) None of these"
     ],
     "ans": "b",
-    "imp": true,
+    "imp": false,
     "freq": 1
   },
   {
