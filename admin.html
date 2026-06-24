@@ -791,7 +791,7 @@ function makeQCard(q, idx) {
             const isAns = q.ans === letter;
             return `<div class="opt-row">
               <label class="opt-radio-lbl" title="Sahi jawab mark karo">
-                <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}');renderEditor()">
+                <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}')">
               </label>
               <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${oi},this.value)">
               <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${oi})">✕</button>
@@ -859,7 +859,7 @@ function deleteOpt(idx, oi) {
     const isAns = q.ans === letter;
     return `<div class="opt-row">
       <label class="opt-radio-lbl" title="Sahi jawab mark karo">
-        <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}');renderEditor()">
+        <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}')">
       </label>
       <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${i},this.value)">
       <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${i})">✕</button>
@@ -880,7 +880,7 @@ function addOpt(idx) {
     const isAns = q.ans === letter;
     return `<div class="opt-row">
       <label class="opt-radio-lbl" title="Sahi jawab mark karo">
-        <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}');renderEditor()">
+        <input type="radio" name="ans-${idx}" value="${letter}" ${isAns?'checked':''} onchange="updateQ(${idx},'ans','${letter}')">
       </label>
       <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${i},this.value)">
       <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${i})">✕</button>
