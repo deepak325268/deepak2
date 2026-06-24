@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Question Admin</title>
+<script>MathJax = { tex: { inlineMath: [['$','$']] }, options: { skipHtmlTags: ['script','noscript','style','textarea'] } };</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
 :root {
   --bg:#0f1117; --surface:#1a1d27; --surface2:#22263a; --border:#2a2d3a;
@@ -728,6 +730,10 @@ function switchRTab(tab) {
     document.getElementById('preview-cards-list').innerHTML = '<div class="empty-state"><div class="icon">📂</div><p>Koi questions nahi hain abhi</p></div>';
     document.getElementById('preview-confirm-bar').style.display = 'none';
   }
+  // MathJax render
+  if (tab==='preview' && window.MathJax && MathJax.typesetPromise) {
+    setTimeout(() => MathJax.typesetPromise([document.getElementById('preview-cards-list')]).catch(()=>{}), 100);
+  }
 }
 
 function clearInput() {
@@ -754,16 +760,18 @@ function renderEditor() {
 
   list.innerHTML = '';
   existingQ.forEach((q,idx) => {
-    // insert zone above
     const iz = makeInsertZone(idx);
     list.appendChild(iz);
-    // card
     const card = makeQCard(q, idx);
     list.appendChild(card);
   });
-  // final insert zone
   const iz = makeInsertZone(existingQ.length);
   list.appendChild(iz);
+
+  // MathJax — sirf card headers (preview text) render karo
+  if (window.MathJax && MathJax.typesetPromise) {
+    setTimeout(() => MathJax.typesetPromise([list]).catch(()=>{}), 100);
+  }
 }
 
 function makeInsertZone(afterIdx) {
@@ -850,6 +858,9 @@ function toggleCard(idx) {
   const card = body.closest('.qe-card');
   const isOpen = body.classList.toggle('open');
   card.classList.toggle('editing', isOpen);
+  if (isOpen && window.MathJax && MathJax.typesetPromise) {
+    setTimeout(() => MathJax.typesetPromise([body]).catch(()=>{}), 50);
+  }
 }
 
 function expandAll()   { document.querySelectorAll('.qe-body').forEach(b=>{ b.classList.add('open'); b.closest('.qe-card').classList.add('editing'); }); }
