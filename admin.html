@@ -627,13 +627,19 @@ function parseAndPreview() {
 
   arr.forEach((q,i) => {
     const dispNum = currentMode==='append' ? maxN+i+1 : q.num||i+1;
+    const letters = ['a','b','c','d','e','f'];
     const card = document.createElement('div');
     card.className = 'pv-card';
     card.innerHTML = `
-      <div class="pv-num">Q${dispNum} <span style="color:var(--success);font-size:11px;font-weight:700">● NEW</span></div>
+      <div class="pv-num">Q${dispNum} <span style="color:var(--success);font-size:11px;font-weight:700">● NEW</span>
+        ${q.ans ? `<span style="margin-left:8px;color:var(--success);font-size:11px">✓ Ans: ${q.ans.toUpperCase()}</span>` : '<span style="margin-left:8px;color:var(--error);font-size:11px">⚠️ Answer set nahi</span>'}
+      </div>
       <div class="pv-text">${escH(q.text||'')}</div>
       ${q.hindi?`<div class="pv-hindi">${escH(q.hindi)}</div>`:''}
-      <div class="pv-opts">${(q.opts||[]).map(o=>`<span class="pv-opt">${escH(o)}</span>`).join('')}</div>
+      <div class="pv-opts">${(q.opts||[]).map((o,oi)=>{
+        const isAns = q.ans && q.ans===letters[oi];
+        return `<span class="pv-opt" style="${isAns?'background:rgba(76,175,130,.2);border-color:var(--success);color:var(--success);font-weight:700':''}">${isAns?'✓ ':''}${escH(o)}</span>`;
+      }).join('')}</div>
     `;
     pvList.appendChild(card);
   });
@@ -749,6 +755,7 @@ function makeQCard(q, idx) {
   card.addEventListener('drop',      e => { e.preventDefault(); card.classList.remove('drag-over'); if(dragSrcIdx!==null && dragSrcIdx!==idx) moveQuestion(dragSrcIdx,idx); });
 
   const preview = (q.text||q.hindi||'(khali)').substring(0,70);
+  const letters = ['a','b','c','d','e','f'];
 
   card.innerHTML = `
     <div class="qe-head" onclick="toggleCard(${idx})">
@@ -756,6 +763,7 @@ function makeQCard(q, idx) {
       <span class="qe-num">Q${q.num}</span>
       <span class="qe-preview">${escH(preview)}</span>
       ${q._new?'<span class="qe-badge qe-badge-new">NEW</span>':''}
+      ${q.ans?`<span class="qe-badge" style="background:rgba(76,175,130,.15);color:var(--success);border:1px solid rgba(76,175,130,.3)">✓${q.ans.toUpperCase()}</span>`:'<span class="qe-badge" style="background:rgba(255,82,82,.1);color:var(--error);border:1px solid rgba(255,82,82,.3)">!Ans</span>'}
       <div class="qe-head-btns" onclick="event.stopPropagation()">
         <button class="btn btn-outline btn-xs" onclick="toggleCard(${idx})">✏️</button>
         <button class="btn btn-danger btn-xs" onclick="deleteQ(${idx})" title="Delete">🗑️</button>
@@ -775,14 +783,21 @@ function makeQCard(q, idx) {
         <div id="qopts-${idx}">
           ${(q.opts||[]).map((o,oi)=>`
             <div class="opt-row">
-              <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${oi},this.value)">
+              <input type="text" value="${escH(o)}" onchange="updateOpt(${idx},${oi},this.value)" style="${q.ans===letters[oi]?'border-color:var(--success);background:rgba(76,175,130,.08)':''}">
               <button class="btn btn-danger btn-xs" onclick="deleteOpt(${idx},${oi})">✕</button>
             </div>
           `).join('')}
         </div>
         <button class="btn btn-outline btn-xs" style="margin-top:4px" onclick="addOpt(${idx})">＋ Option</button>
       </div>
-      <div style="display:flex;gap:6px;align-items:center;margin-top:6px">
+      <div style="display:flex;gap:8px;align-items:center;margin-top:10px;padding:10px;background:var(--bg);border-radius:7px;border:1px solid var(--border)">
+        <label style="margin:0;color:var(--success);font-weight:700">✓ Sahi Answer:</label>
+        <select style="width:auto;flex:1" onchange="updateQ(${idx},'ans',this.value)">
+          <option value="">-- Select karo --</option>
+          ${(q.opts||[]).map((o,oi)=>`<option value="${letters[oi]}" ${q.ans===letters[oi]?'selected':''}>${o.substring(0,40)}</option>`).join('')}
+        </select>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;margin-top:8px">
         <label style="margin:0">Q No:</label>
         <input type="text" style="width:70px" value="${q.num}" onchange="updateQ(${idx},'num',parseInt(this.value)||${idx+1})">
         <button class="btn btn-outline btn-xs" onclick="moveUp(${idx})" ${idx===0?'disabled':''}>↑</button>
