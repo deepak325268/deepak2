@@ -1129,7 +1129,7 @@ function renderImportant() {
           .then(function(qs) {
             var subj = meta[f] || 'math';
             var shown = JSON.parse(localStorage.getItem('imp_shown')||'{}');
-            var today = new Date().toISOString().split('T')[0];
+            var d = new Date(); var today = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
             qs.forEach(function(q) {
               if (!q.imp) return;
               var key = f + '_' + q.num;
@@ -1201,7 +1201,7 @@ function markImpShown(key) {
   // sirf ek baar mark karo — dobara click pe ignore
   var shown = JSON.parse(localStorage.getItem('imp_shown')||'{}');
   if (shown[key]) return; // pehle se mark hai
-  shown[key] = new Date().toISOString().split('T')[0];
+  var d = new Date(); shown[key] = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
   localStorage.setItem('imp_shown', JSON.stringify(shown));
 }
   
