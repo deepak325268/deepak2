@@ -516,6 +516,8 @@
       "(c) 25 years",
       "(d) 22 years"
     ],
-    "ans": "b"
+    "ans": "b",
+    "imp": true,
+    "freq": 1
   }
 ]
