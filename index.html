@@ -838,8 +838,7 @@ function renderContent() {
   var content = document.getElementById("content");
   if (activeTab === 'important') {
   if (!impLoaded) { renderImportant(); return; }
-  if (impView === 'questions' && impCurrentCh) { renderImpQuestion(); return; }
-  if (impView === 'chapters') { openImpSubject(impSubTab); return; }
+  if (impView === 'questions') { renderImpQuestion(); return; }
   renderImpHome();
   return;
 }
@@ -1196,9 +1195,7 @@ function renderImportant() {
         // Check kar rahe hain ki kya aaj is question ke aane ka din hai
         if (dayNum % actualFreq === q.num % actualFreq) {
           if (impAllQ[subj]) impAllQ[subj].push(q);
-          var ch = q._chapter || 'Unknown';
-          if (!impChapters[subj][ch]) impChapters[subj][ch] = [];
-          impChapters[subj][ch].push(q);
+          
         }
       });
       
@@ -1215,9 +1212,16 @@ function renderImportant() {
 
 function renderImpQuestion() {
   var content = document.getElementById("content");
-  var qs = impCurrentCh.questions;
+  var qs = impAllQ[impSubTab];
   var total = qs.length;
   var clr = impSubTab === 'reasoning' ? 'r' : 'o';
+
+  if (total === 0) {
+    content.innerHTML =
+      '<button class="q-back-btn" style="margin-bottom:12px" onclick="goImpHome()">‹ वापस</button>'
+      + '<div class="imp-empty">⭐ Aaj is subject me koi important question nahi!</div>';
+    return;
+  }
 
   if (impQIdx < 0) impQIdx = 0;
   if (impQIdx >= total) impQIdx = total - 1;
@@ -1238,8 +1242,8 @@ function renderImpQuestion() {
   content.innerHTML =
     '<div class="q-page-view">'
     + '<div class="q-page-header">'
-    +   '<button class="q-back-btn" onclick="goImpChapters()">‹ वापस</button>'
-    +   '<div class="q-page-title" style="font-size:13px">⭐ '+impCurrentCh.name+'</div>'
+    +   '<button class="q-back-btn" onclick="goImpHome()">‹ वापस</button>'
+    +   '<div class="q-page-title" style="font-size:13px">⭐ '+(q._chapter||'')+'</div>'
     +   '<div class="q-page-counter clr-'+clr+'">'+(impQIdx+1)+' / '+total+'</div>'
     + '</div>'
     + '<div class="q-page-prog-track"><div class="q-page-prog-fill fill-'+clr+'" style="width:'+pct+'%"></div></div>'
@@ -1260,14 +1264,7 @@ function renderImpQuestion() {
   if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([content]).catch(function(){});
 }
 
-function goImpChapters() {
-  haptic();
-  impView = 'chapters';
-  impCurrentCh = null;
-  impQIdx = 0;
-  openImpSubject(impSubTab);
-  window.scrollTo(0,0);
-}
+
   
 function goImpQ(idx) {
   impQIdx = idx;
@@ -1315,44 +1312,12 @@ function switchImpTab(subj) {
 function openImpSubject(subj) {
   haptic();
   impSubTab = subj;
-  impView = 'chapters';
-  var content = document.getElementById("content");
-  var clr = subj === 'reasoning' ? 'r' : 'o';
-  var chNames = Object.keys(impChapters[subj] || {});
-
-  if (chNames.length === 0) {
-    content.innerHTML = '<div class="imp-empty">कोई chapter नहीं मिला।</div>';
-    return;
-  }
-
-  var html = '<div style="padding-top:12px">'
-    + '<button class="q-back-btn" style="margin-bottom:12px" onclick="goImpHome()">‹ वापस</button>';
-
-  chNames.forEach(function(name) {
-    var qs = impChapters[subj][name];
-    html += '<div class="topic-home-card" onclick="openImpChapter(\''+subj+'\',\''+name+'\')">'
-      + '<div class="topic-home-left">'
-      +   '<div class="topic-home-name">'+name+'</div>'
-      +   '<div class="topic-home-meta"><span class="topic-q-badge clr-'+clr+'">'+qs.length+' प्रश्न</span></div>'
-      + '</div>'
-      + '<div class="topic-home-right"><div class="topic-arrow">›</div></div>'
-      + '</div>';
-  });
-
-  html += '</div>';
-  content.innerHTML = html;
-  window.scrollTo(0,0);
-}
-  
-function openImpChapter(subj, chName) {
-  haptic();
-  impSubTab = subj;
-  impCurrentCh = { name: chName, questions: impChapters[subj][chName] || [] };
-  impQIdx = 0;
-  impView = 'questions';
+  impQIdx   = 0;
+  impView   = 'questions';
   renderImpQuestion();
   window.scrollTo(0,0);
 }
+
 
 function goImpHome() {
   haptic();
