@@ -1058,7 +1058,10 @@ document.addEventListener("touchend", function(e){
   var dx = e.changedTouches[0].clientX - touchStartX;
   var dy = e.changedTouches[0].clientY - touchStartY;
   if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)*1.5) {
-    if (currentView === 'questions') {
+    if (activeTab === 'important' && impLoaded && impAllQ[impSubTab].length > 0) {
+  if (dx < 0) goImpQ(impQIdx + 1);
+  else         goImpQ(impQIdx - 1);
+} else if (currentView === 'questions') {
       // Question page par swipe = prev/next
       if (dx < 0) goToQuestion(currentQIdx + 1);
       else         goToQuestion(currentQIdx - 1);
@@ -1113,7 +1116,17 @@ fetch(API_MATH)
   // ══════════════════════════════════════
 //  IMPORTANT TAB
 // ══════════════════════════════════════
+
 var impSubTab = 'math';
+var impAllQ   = { math:[], reasoning:[] };
+var impQIdx   = 0;
+var impLoaded = false;
+
+function fileToChapter(f) {
+  return f.replace('.json','').split('-').map(function(w){
+    return w.charAt(0).toUpperCase()+w.slice(1);
+  }).join(' ');
+}
 
 function renderImportant() {
   var content = document.getElementById("content");
@@ -1122,77 +1135,107 @@ function renderImportant() {
     .then(function(r){ return r.json(); })
     .then(function(meta) {
       var files = Object.keys(meta);
-      var allImp = { math:[], reasoning:[] };
+      impAllQ = { math:[], reasoning:[] };
+      var start = new Date('2024-01-01');
+      var tod = new Date(); tod.setHours(0,0,0,0);
+      var dayNum = Math.floor((tod - start) / 86400000);
       var fetches = files.map(function(f) {
-        return fetch(QUESTIONS_BASE + f)
+        return fetch(QUESTIONS_BASE + f + '?v=' + Date.now())
           .then(function(r){ return r.json(); })
           .then(function(qs) {
             var subj = meta[f] || 'math';
-            var start = new Date('2024-01-01');
-var tod = new Date(); tod.setHours(0,0,0,0);
-var dayNum = Math.floor((tod - start) / 86400000);
-qs.forEach(function(q) {
-  if (!q.imp) return;
-  var freq = q.freq || 2;
-  if (Math.floor(dayNum / freq) % 2 === q.num % 2) {
-    if (allImp[subj]) allImp[subj].push({...q, _file:f});
-  }
-});
+            qs.forEach(function(q) {
+              if (!q.imp) return;
+              var freq = q.freq || 2;
+              if (Math.floor(dayNum / freq) % 2 === q.num % 2) {
+                if (impAllQ[subj]) impAllQ[subj].push(Object.assign({}, q, {_file:f, _chapter: fileToChapter(f)}));
+              }
+            });
           }).catch(function(){});
       });
-      return Promise.all(fetches).then(function(){ return allImp; });
+      return Promise.all(fetches);
     })
-    .then(function(allImp) {
-      var mathCount = allImp.math.length;
-      var rCount = allImp.reasoning.length;
-      var total = mathCount + rCount;
-      var html = '<div class="imp-sub-tabs">'
-        + '<div class="imp-sub-tab' + (impSubTab==='math'?' active':'') + '" onclick="switchImpTab(\'math\')" id="isub-math">📐 Math (' + mathCount + ')</div>'
-        + '<div class="imp-sub-tab' + (impSubTab==='reasoning'?' active':'') + '" onclick="switchImpTab(\'reasoning\')" id="isub-reasoning">🧠 Reasoning (' + rCount + ')</div>'
-        + '</div>';
-      if (total === 0) {
-        html += '<div class="imp-empty">⭐ Koi important question due nahi hai aaj!<br><small>Admin mein questions pe ⭐ mark karo</small></div>';
-        content.innerHTML = html; return;
-      }
-      ['math','reasoning'].forEach(function(subj) {
-        var qs = allImp[subj];
-        var divId = 'imp-' + subj;
-        html += '<div id="' + divId + '" style="display:' + (impSubTab===subj?'block':'none') + ';padding:12px 16px">';
-        if (qs.length === 0) {
-          html += '<div class="imp-empty">Aaj ke liye ' + (subj==='math'?'Math':'Reasoning') + ' mein koi important question nahi</div>';
-        } else {
-          qs.forEach(function(q) {
-            html += '<div class="q-block" style="margin-bottom:12px">';
-            if (q.hindi) html += '<div class="q-text">' + q.hindi + '</div>';
-            if (q.text)  html += '<div class="q-text" style="color:var(--text-2);font-size:14px">' + q.text + '</div>';
-            html += '<div class="q-block-opts">';
-            (q.opts||[]).forEach(function(o,i) {
-              var letters=['a','b','c','d','e'];
-              html += '<div class="q-page-opt" onclick="checkAns(this,\'' + (q.ans||'') + '\',' + i + ')">' + o + '</div>';
-            });
-            html += '</div></div>';
-          });
-        }
-        html += '</div>';
-      });
-      content.innerHTML = html;
-      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([content]).catch(function(){});
+    .then(function() {
+      impLoaded = true;
+      impQIdx = 0;
+      renderImpQuestion();
     })
     .catch(function() {
-      content.innerHTML = '<div class="imp-empty">❌ meta.json nahi mila!<br><small>Admin mein files save karo pehle (subject select karke)</small></div>';
+      document.getElementById('content').innerHTML =
+        '<div class="imp-empty">❌ meta.json nahi mila!<br><small>Admin mein files save karo pehle</small></div>';
     });
+}
+
+function renderImpQuestion() {
+  var content = document.getElementById("content");
+  var qs = impAllQ[impSubTab];
+  var total = qs.length;
+  var mathCount = impAllQ.math.length;
+  var rCount    = impAllQ.reasoning.length;
+
+  var subHtml =
+    '<div class="imp-sub-tabs">'
+    + '<div class="imp-sub-tab'+(impSubTab==='math'?' active':'')+'" onclick="switchImpTab(\'math\')" id="isub-math">📐 Math ('+mathCount+')</div>'
+    + '<div class="imp-sub-tab'+(impSubTab==='reasoning'?' active':'')+'" onclick="switchImpTab(\'reasoning\')" id="isub-reasoning">🧠 Reasoning ('+rCount+')</div>'
+    + '</div>';
+
+  if (total === 0) {
+    content.innerHTML = subHtml + '<div class="imp-empty">⭐ Aaj koi important question nahi!</div>';
+    return;
+  }
+
+  if (impQIdx < 0) impQIdx = 0;
+  if (impQIdx >= total) impQIdx = total - 1;
+
+  var q = qs[impQIdx];
+  var pct = Math.round(((impQIdx+1)/total)*100);
+  var isLast = impQIdx === total-1;
+
+  var optsHtml = '';
+  if (q.opts && q.opts.length) {
+    optsHtml = '<div class="q-page-opts">'
+      + q.opts.map(function(o,i){
+          return '<div class="q-page-opt" onclick="checkAns(this,\''+(q.ans||'')+'\','+i+')">'+o+'</div>';
+        }).join('')
+      + '</div>';
+  }
+
+  content.innerHTML = subHtml
+    + '<div class="q-page-view">'
+    + '<div class="q-page-header">'
+    +   '<div class="q-page-title" style="font-size:13px">⭐ '+q._chapter+'</div>'
+    +   '<div class="q-page-counter clr-o">'+(impQIdx+1)+' / '+total+'</div>'
+    + '</div>'
+    + '<div class="q-page-prog-track"><div class="q-page-prog-fill fill-o" style="width:'+pct+'%"></div></div>'
+    + '<div class="q-page-body">'
+    +   '<div class="q-page-num clr-o">Q. '+q.num+'</div>'
+    +   (q.hindi ? '<div class="q-page-hindi">'+q.hindi+'</div>' : '')
+    +   (q.text  ? '<div class="q-page-eng">'+q.text+'</div>'   : '')
+    +   optsHtml
+    + '</div>'
+    + '<div class="q-page-nav">'
+    +   '<button class="q-nav-btn prev" '+(impQIdx===0?'disabled':'')+' onclick="goImpQ('+(impQIdx-1)+')">← पिछला</button>'
+    +   (isLast
+        ? '<button class="q-nav-btn finish" onclick="switchImpTab(impSubTab)">✅ समाप्त</button>'
+        : '<button class="q-nav-btn next-o" onclick="goImpQ('+(impQIdx+1)+')">अगला →</button>')
+    + '</div>'
+    + '</div>';
+
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([content]).catch(function(){});
+}
+
+function goImpQ(idx) {
+  impQIdx = idx;
+  renderImpQuestion();
+  window.scrollTo(0,0);
 }
 
 function switchImpTab(subj) {
   impSubTab = subj;
-  document.getElementById('isub-math').className = 'imp-sub-tab' + (subj==='math'?' active':'');
-  document.getElementById('isub-reasoning').className = 'imp-sub-tab' + (subj==='reasoning'?' active':'');
-  var md = document.getElementById('imp-math');
-  var rd = document.getElementById('imp-reasoning');
-  if (md) md.style.display = subj==='math'?'block':'none';
-  if (rd) rd.style.display = subj==='reasoning'?'block':'none';
+  impQIdx   = 0;
+  if (impLoaded) renderImpQuestion();
+  else renderImportant();
 }
-
 
   
 </script>
