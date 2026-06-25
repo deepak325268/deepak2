@@ -1111,6 +1111,7 @@ async function saveToGitHub() {
       btn.innerHTML='✅ Saved!';
       document.getElementById('save-info').textContent='';
       await saveMetaJson(user, repo, pat, filename);
+      await saveImportantJson(user, repo, pat, filename);
       setTimeout(()=>{ btn.innerHTML='⬆️ GitHub pe Save karo'; }, 2500);
     } else {
       toast('❌ '+data.message,'error',6000);
@@ -1156,6 +1157,45 @@ async function saveMetaJson(user, repo, pat, savedFilename) {
     await fetch(metaUrl, {method:'PUT', headers, body:JSON.stringify(metaBody)});
   } catch(e) {
     console.warn('meta.json save error:', e);
+  }
+}
+async function saveImportantJson(user, repo, pat, filename) {
+  try {
+    const subject = document.getElementById('file-subject').value || 'math';
+    const chapter = filename.replace('.json','').split('-')
+      .map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+    const impUrl = `https://api.github.com/repos/${user}/${repo}/contents/questions/important-questions.json`;
+    const headers = {Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'};
+
+    // Existing fetch karo
+    let impSHA = '';
+    let existing = [];
+    try {
+      const r = await fetch(impUrl, {headers});
+      if (r.ok) {
+        const d = await r.json();
+        impSHA = d.sha;
+        existing = JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\n/g,'')))));
+      }
+    } catch(e) {}
+
+    // Is file ke purane entries hatao
+    existing = existing.filter(q => q._file !== filename);
+
+    // Naye imp questions add karo
+    const newImp = existingQ
+      .filter(q => q.imp)
+      .map(q => { const {_new,...rest} = q; return {...rest, _file:filename, _chapter:chapter, _subject:subject}; });
+
+    const final = [...existing, ...newImp];
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(final, null, 2))));
+    const body = {message:`Update important-questions.json — ${filename}`, content, branch:'main'};
+    if (impSHA) body.sha = impSHA;
+
+    await fetch(impUrl, {method:'PUT', headers, body:JSON.stringify(body)});
+    toast(`⭐ ${newImp.length} important questions updated!`, 'info');
+  } catch(e) {
+    console.warn('important-questions.json error:', e);
   }
 }
 </script>
