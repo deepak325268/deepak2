@@ -1,22 +1,5 @@
 [
   {
-    "num": 46,
-    "text": "The average of 14 innings of a batsman is 51. In the 15th pari he makes 96 runs, what will be his new average?",
-    "hindi": "एक बल्लेबाज की 14 पारियों का औसत 51 है। 15 वीं पारि में वह 96 रन बनाता है तो उसका नया औसत क्या होगा?",
-    "opts": [
-      "(a) 54",
-      "(b) 51",
-      "(c) 54",
-      "(d) 96"
-    ],
-    "ans": "a",
-    "imp": true,
-    "freq": 1,
-    "_file": "average.json",
-    "_chapter": "Average",
-    "_subject": "math"
-  },
-  {
     "num": 21,
     "text": "At what time between 5:00 - 5:30 and 5:40 - 6:00 are the hands of a clock at an angle of $95^\\circ$?",
     "hindi": "5:00 - 5:30 और 5:40 - 6:00 के बीच किस समय घड़ी की सुइयां $95^\\circ$ का कोण बनाएंगी?",
@@ -99,6 +82,39 @@
     "freq": 3,
     "_file": "hcf-lcm.json",
     "_chapter": "Hcf Lcm",
+    "_subject": "math"
+  },
+  {
+    "num": 45,
+    "text": "The average of 10 innings of a batsman is 50. In the 11th innings he makes 72 runs, what will be his new average?",
+    "hindi": "एक बल्लेबाज की 10 पारियों का औसत 50 है । 11 वीं पारि में वह 72 रन बनाता है तो उसका नया औसत क्या होगा?",
+    "opts": [
+      "(a) 99",
+      "(b) 52",
+      "(c) 54",
+      "(d) 96"
+    ],
+    "ans": "b",
+    "imp": true,
+    "_file": "average.json",
+    "_chapter": "Average",
+    "_subject": "math"
+  },
+  {
+    "num": 46,
+    "text": "The average of 14 innings of a batsman is 51. In the 15th pari he makes 96 runs, what will be his new average?",
+    "hindi": "एक बल्लेबाज की 14 पारियों का औसत 51 है। 15 वीं पारि में वह 96 रन बनाता है तो उसका नया औसत क्या होगा?",
+    "opts": [
+      "(a) 54",
+      "(b) 51",
+      "(c) 54",
+      "(d) 96"
+    ],
+    "ans": "a",
+    "imp": true,
+    "freq": 1,
+    "_file": "average.json",
+    "_chapter": "Average",
     "_subject": "math"
   }
 ]
