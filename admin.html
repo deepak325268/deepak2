@@ -552,7 +552,9 @@ async function loadFiles() {
     sel.innerHTML = '<option value="">-- Select karo --</option>';
     files.filter(f=>f.name.endsWith('.json')).sort((a,b)=>a.name.localeCompare(b.name)).forEach(f=>{
       const opt = document.createElement('option');
-      opt.value = f.name; opt.textContent = f.name;
+      opt.value = f.name;
+      const subs = JSON.parse(localStorage.getItem('file_subjects') || '{}');
+      opt.textContent = subs[f.name] ? f.name : "⚠️ " + f.name;
       sel.appendChild(opt);
     });
     if (prev) sel.value = prev;
