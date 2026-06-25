@@ -1131,38 +1131,21 @@ function fileToChapter(f) {
 function renderImportant() {
   var content = document.getElementById("content");
   content.innerHTML = '<div class="loading"><div class="spinner spin-o"></div><span>Important questions load ho rahe hain...</span></div>';
-  fetch(QUESTIONS_BASE + 'meta.json?v=' + Date.now())
+  fetch(QUESTIONS_BASE + 'important-questions.json?v=' + Date.now())
     .then(function(r){ return r.json(); })
-    .then(function(meta) {
-      var files = Object.keys(meta);
+    .then(function(qs) {
       impAllQ = { math:[], reasoning:[] };
-      var start = new Date('2024-01-01');
-      var tod = new Date(); tod.setHours(0,0,0,0);
-      var dayNum = Math.floor((tod - start) / 86400000);
-      var fetches = files.map(function(f) {
-        return fetch(QUESTIONS_BASE + f + '?v=' + Date.now())
-          .then(function(r){ return r.json(); })
-          .then(function(qs) {
-            var subj = meta[f] || 'math';
-            qs.forEach(function(q) {
-              if (!q.imp) return;
-              var freq = q.freq || 2;
-              if (dayNum % freq === q.num % freq) {
-                if (impAllQ[subj]) impAllQ[subj].push(Object.assign({}, q, {_file:f, _chapter: fileToChapter(f)}));
-              }
-            });
-          }).catch(function(){});
+      qs.forEach(function(q) {
+        var subj = q._subject || 'math';
+        if (impAllQ[subj]) impAllQ[subj].push(q);
       });
-      return Promise.all(fetches);
-    })
-    .then(function() {
       impLoaded = true;
       impQIdx = 0;
       renderImpQuestion();
     })
     .catch(function() {
       document.getElementById('content').innerHTML =
-        '<div class="imp-empty">❌ meta.json nahi mila!<br><small>Admin mein files save karo pehle</small></div>';
+        '<div class="imp-empty">❌ Koi important question nahi!<br><small>Admin mein ⭐ mark karke save karo</small></div>';
     });
 }
 
