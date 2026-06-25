@@ -506,7 +506,7 @@
 
     .q-page-header {
       display: flex; align-items: center; gap: 10px;
-      padding: 4px 0 8x;
+      padding: 4px 0 8px;
     }
     .q-back-btn {
       background: none; border: 1.5px solid var(--border);
@@ -784,6 +784,7 @@ function switchTab(tab, direction) {
   if (isSliding) return;
   // Tab badle to hamesha home par wapas
   currentView = 'home'; currentCh = null; currentChKey = null; currentQIdx = 0;
+  impView = 'home'; impCurrentCh = null;
 
   if (tab === activeTab && direction === null) {
     activeTab = tab; localStorage.setItem("activeTab", tab);
@@ -835,7 +836,13 @@ function updateTabUI() {
 // ══════════════════════════════════════
 function renderContent() {
   var content = document.getElementById("content");
-  if (activeTab === 'important') { renderImportant(); return; }
+  if (activeTab === 'important') {
+  if (!impLoaded) { renderImportant(); return; }
+  if (impView === 'questions' && impCurrentCh) { renderImpQuestion(); return; }
+  if (impView === 'chapters') { openImpSubject(impSubTab); return; }
+  renderImpHome();
+  return;
+}
   var clr = activeTab === "reasoning" ? "r" : "o";
   currentClr = clr;
 
@@ -1087,16 +1094,18 @@ document.addEventListener("touchend", function(e){
   var dy = e.changedTouches[0].clientY - touchStartY;
   if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)*1.5) {
     if (activeTab === 'important' && impLoaded) {
-    if (impView === 'questions') {
-    if (dx < 0) goImpQ(impQIdx + 1);
-    else         goImpQ(impQIdx - 1);
-  }
-} else if (currentView === 'questions') {
-      // Question page par swipe = prev/next
+      if (impView === 'questions') {
+        if (dx < 0) goImpQ(impQIdx + 1);
+        else         goImpQ(impQIdx - 1);
+      } else if (impView === 'home' || impView === 'chapters') {
+        var idx = TABS.indexOf(activeTab);
+        if (dx < 0 && idx < TABS.length-1) switchTab(TABS[idx+1], "left");
+        else if (dx > 0 && idx > 0)        switchTab(TABS[idx-1], "right");
+      }
+    } else if (currentView === 'questions') {
       if (dx < 0) goToQuestion(currentQIdx + 1);
       else         goToQuestion(currentQIdx - 1);
     } else {
-      // Home par swipe = tab switch
       var idx = TABS.indexOf(activeTab);
       if (dx < 0 && idx < TABS.length-1) switchTab(TABS[idx+1], "left");
       else if (dx > 0 && idx > 0)        switchTab(TABS[idx-1], "right");
@@ -1229,7 +1238,7 @@ function renderImpQuestion() {
   content.innerHTML =
     '<div class="q-page-view">'
     + '<div class="q-page-header">'
-    +   '<button class="q-back-btn" onclick="goImpHome()">‹ वापस</button>'
+    +   '<button class="q-back-btn" onclick="goImpChapters()">‹ वापस</button>'
     +   '<div class="q-page-title" style="font-size:13px">⭐ '+impCurrentCh.name+'</div>'
     +   '<div class="q-page-counter clr-'+clr+'">'+(impQIdx+1)+' / '+total+'</div>'
     + '</div>'
@@ -1251,6 +1260,15 @@ function renderImpQuestion() {
   if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([content]).catch(function(){});
 }
 
+function goImpChapters() {
+  haptic();
+  impView = 'chapters';
+  impCurrentCh = null;
+  impQIdx = 0;
+  openImpSubject(impSubTab);
+  window.scrollTo(0,0);
+}
+  
 function goImpQ(idx) {
   impQIdx = idx;
   renderImpQuestion();
@@ -1268,29 +1286,51 @@ function switchImpTab(subj) {
 
   function renderImpHome() {
   document.querySelector('.progress-wrap').style.display = 'none';
+  document.querySelector('.header').style.display = 'block';
   var content = document.getElementById("content");
-  var mathCount = impAllQ.math.length;
-  var rCount    = impAllQ.reasoning.length;
-  var clr = impSubTab === 'reasoning' ? 'r' : 'o';
+  var mathTotal = impAllQ.math.length;
+  var rTotal    = impAllQ.reasoning.length;
 
-  var subHtml =
-    '<div class="imp-sub-tabs">'
-    + '<div class="imp-sub-tab'+(impSubTab==='math'?' active':'')+'" onclick="switchImpTab(\'math\')">📐 Math ('+mathCount+')</div>'
-    + '<div class="imp-sub-tab'+(impSubTab==='reasoning'?' active':'')+'" onclick="switchImpTab(\'reasoning\')">🧠 Reasoning ('+rCount+')</div>'
+  var html =
+    '<div style="padding-top:12px">'
+    + '<div class="topic-home-card" onclick="openImpSubject(\'math\')">'
+    +   '<div class="topic-home-left">'
+    +     '<div class="topic-home-name">📐 Math</div>'
+    +     '<div class="topic-home-meta"><span class="topic-q-badge clr-o">'+mathTotal+' प्रश्न</span></div>'
+    +   '</div>'
+    +   '<div class="topic-home-right"><div class="topic-arrow">›</div></div>'
+    + '</div>'
+    + '<div class="topic-home-card" onclick="openImpSubject(\'reasoning\')">'
+    +   '<div class="topic-home-left">'
+    +     '<div class="topic-home-name">🧠 Reasoning</div>'
+    +     '<div class="topic-home-meta"><span class="topic-q-badge clr-r">'+rTotal+' प्रश्न</span></div>'
+    +   '</div>'
+    +   '<div class="topic-home-right"><div class="topic-arrow">›</div></div>'
+    + '</div>'
     + '</div>';
 
-  var chNames = Object.keys(impChapters[impSubTab] || {});
+  content.innerHTML = html;
+}
+
+function openImpSubject(subj) {
+  haptic();
+  impSubTab = subj;
+  impView = 'chapters';
+  var content = document.getElementById("content");
+  var clr = subj === 'reasoning' ? 'r' : 'o';
+  var chNames = Object.keys(impChapters[subj] || {});
 
   if (chNames.length === 0) {
-    content.innerHTML = subHtml + '<div class="imp-empty">⭐ Aaj koi important question nahi!</div>';
+    content.innerHTML = '<div class="imp-empty">कोई chapter नहीं मिला।</div>';
     return;
   }
 
-  var cardsHtml = '';
-  chNames.forEach(function(name, idx) {
-    var qs = impChapters[impSubTab][name];
-    cardsHtml +=
-      '<div class="topic-home-card" onclick="openImpChapter('+idx+')">'
+  var html = '<div style="padding-top:12px">'
+    + '<button class="q-back-btn" style="margin-bottom:12px" onclick="goImpHome()">‹ वापस</button>';
+
+  chNames.forEach(function(name) {
+    var qs = impChapters[subj][name];
+    html += '<div class="topic-home-card" onclick="openImpChapter(\''+subj+'\',\''+name+'\')">'
       + '<div class="topic-home-left">'
       +   '<div class="topic-home-name">'+name+'</div>'
       +   '<div class="topic-home-meta"><span class="topic-q-badge clr-'+clr+'">'+qs.length+' प्रश्न</span></div>'
@@ -1299,14 +1339,15 @@ function switchImpTab(subj) {
       + '</div>';
   });
 
-  content.innerHTML = subHtml + '<div style="padding-top:12px">'+cardsHtml+'</div>';
+  html += '</div>';
+  content.innerHTML = html;
+  window.scrollTo(0,0);
 }
-
-function openImpChapter(idx) {
+  
+function openImpChapter(subj, chName) {
   haptic();
-  var chNames = Object.keys(impChapters[impSubTab] || {});
-  var chName = chNames[idx];
-  impCurrentCh = { name: chName, questions: impChapters[impSubTab][chName] || [] };
+  impSubTab = subj;
+  impCurrentCh = { name: chName, questions: impChapters[subj][chName] || [] };
   impQIdx = 0;
   impView = 'questions';
   renderImpQuestion();
@@ -1321,7 +1362,7 @@ function goImpHome() {
   renderImpHome();
   window.scrollTo(0,0);
 }
-  
+
 </script>
 </body>
 </html>
