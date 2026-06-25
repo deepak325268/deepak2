@@ -1118,7 +1118,7 @@ var impSubTab = 'math';
 function renderImportant() {
   var content = document.getElementById("content");
   content.innerHTML = '<div class="loading"><div class="spinner spin-o"></div><span>Important questions load ho rahe hain...</span></div>';
-  fetch(QUESTIONS_BASE + 'meta.json')
+  fetch(QUESTIONS_BASE + 'meta.json?v=' + Date.now())
     .then(function(r){ return r.json(); })
     .then(function(meta) {
       var files = Object.keys(meta);
@@ -1172,7 +1172,7 @@ function renderImportant() {
             html += '<div class="q-block-opts">';
             (q.opts||[]).forEach(function(o,i) {
               var letters=['a','b','c','d','e'];
-              html += '<div class="q-page-opt" onclick="checkAns(this,\'' + (q.ans||'') + '\',' + i + ');markImpShown(\'' + q._file + '_' + q.num + '\')">' + o + '</div>';
+              html += '<div class="q-page-opt" onclick="checkAns(this,\'' + (q.ans||'') + '\',' + i + ')">' + o + '</div>';
             });
             html += '</div></div>';
           });
@@ -1198,7 +1198,9 @@ function switchImpTab(subj) {
 }
 
 function markImpShown(key) {
+  // sirf ek baar mark karo — dobara click pe ignore
   var shown = JSON.parse(localStorage.getItem('imp_shown')||'{}');
+  if (shown[key]) return; // pehle se mark hai
   shown[key] = new Date().toISOString().split('T')[0];
   localStorage.setItem('imp_shown', JSON.stringify(shown));
 }
