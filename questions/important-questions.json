@@ -10,7 +10,7 @@
       "(d) 22 years"
     ],
     "ans": "b",
-    "imp": true,
+    "imp": false,
     "freq": 1,
     "_file": "compound-interest.json",
     "_chapter": "Compound Interest",
@@ -27,7 +27,7 @@
       "(d) 22 years"
     ],
     "ans": "b",
-    "imp": true,
+    "imp": false,
     "freq": 1,
     "_file": "important-questions.json",
     "_chapter": "Important Questions",
@@ -44,7 +44,7 @@
       "(d) उपर्युक्त में से एक से अधिक",
       "(e) उपर्युक्त में से कोई नहीं"
     ],
-    "imp": true,
+    "imp": false,
     "freq": 3,
     "_file": "important-questions.json",
     "_chapter": "Important Questions",
