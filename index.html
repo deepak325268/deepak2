@@ -1134,7 +1134,7 @@ var dayNum = Math.floor((tod - start) / 86400000);
 qs.forEach(function(q) {
   if (!q.imp) return;
   var freq = q.freq || 2;
-  if (dayNum % freq === q.num % freq) {
+  if (Math.floor(dayNum / freq) % 2 === q.num % 2) {
     if (allImp[subj]) allImp[subj].push({...q, _file:f});
   }
 });
