@@ -32,5 +32,39 @@
     "_file": "hcf-lcm.json",
     "_chapter": "Hcf Lcm",
     "_subject": "math"
+  },
+  {
+    "num": 41,
+    "text": "If a certain sum of money becomes equal 2 times in 5 years in how much time it will be 16 times of itself.",
+    "hindi": "अगर कोई धन 5 वर्ष में अपने से 2 गुणा हो जाता हैं तो कितने समय में यह अपने से 16 गुणा हो जाएगा?",
+    "opts": [
+      "(a) 40 years",
+      "(b) 20 years",
+      "(c) 25 years",
+      "(d) 22 years"
+    ],
+    "ans": "b",
+    "imp": true,
+    "freq": 1,
+    "_file": "important-questions.json",
+    "_chapter": "Important Questions",
+    "_subject": "math"
+  },
+  {
+    "num": 73,
+    "text": "The sum of LCM and HCF of two numbers is 1260. If their LCM is 900 more than their HCF, then the product of the two numbers is?",
+    "hindi": "दो संख्याओं के लघुत्तम समापवर्त्य तथा महत्तम समापवर्तक का योग 1260 हैं। यदि उनका लघुत्तम समापवर्त्य, महत्तम समापवर्तक से 900 अधिक हैं, तब उन दो संख्याओं का गुणनफल हैं?",
+    "opts": [
+      "(a) 203400",
+      "(b) 194400",
+      "(c) 198400",
+      "(d) उपर्युक्त में से एक से अधिक",
+      "(e) उपर्युक्त में से कोई नहीं"
+    ],
+    "imp": true,
+    "freq": 3,
+    "_file": "important-questions.json",
+    "_chapter": "Important Questions",
+    "_subject": "math"
   }
 ]
