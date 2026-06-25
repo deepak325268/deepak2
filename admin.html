@@ -940,6 +940,8 @@ function saveSubjectLocally() {
   const map = JSON.parse(localStorage.getItem('file_subjects')||'{}');
   map[fn] = subj;
   localStorage.setItem('file_subjects', JSON.stringify(map));
+  // Subject change = unsaved change — save button enable karo
+  if (existingQ.length > 0) { dirty = true; updateSaveBtn(); }
 }
 
 // File select hone par subject load karo
