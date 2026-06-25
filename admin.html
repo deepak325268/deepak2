@@ -1267,8 +1267,13 @@ async function saveImportantJson(user, repo, pat, filename) {
     const body = {message:`Update important-questions.json — ${filename}`, content, branch:'main'};
     if (impSHA) body.sha = impSHA;
 
-    await fetch(impUrl, {method:'PUT', headers, body:JSON.stringify(body)});
-    toast(`⭐ ${newImp.length} important questions updated!`, 'info');
+    const pr = await fetch(impUrl, {method:'PUT', headers, body:JSON.stringify(body)});
+    if (pr.ok) {
+      toast(`⭐ ${newImp.length} important questions updated!`, 'info');
+    } else {
+      const errData = await pr.json().catch(()=>({}));
+      toast('❌ important-questions.json save fail: '+(errData.message||pr.status), 'error', 6000);
+    }
   } catch(e) {
     console.warn('important-questions.json error:', e);
   }
