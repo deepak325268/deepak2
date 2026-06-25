@@ -279,15 +279,11 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;hei
       </div>
       <div style="margin-top:10px">
         <label>Subject</label>
-        <div style="display:flex;gap:6px;align-items:center">
-          <select id="file-subject" onchange="saveSubjectLocally()" style="flex:1">
-            <option value="">-- Select karo --</option>
-            <option value="math">📐 Math</option>
-            <option value="reasoning">🧠 Reasoning</option>
-          </select>
-          <button class="btn btn-outline btn-sm" onclick="saveSubjectOnly()" title="Sirf subject GitHub pe save karo">💾</button>
-        </div>
-        <div id="subject-status" style="margin-top:4px;font-size:11px"></div>
+        <select id="file-subject" onchange="saveSubjectLocally()">
+          <option value="">-- Select karo --</option>
+          <option value="math">📐 Math</option>
+          <option value="reasoning">🧠 Reasoning</option>
+        </select>
       </div>
       <div id="file-info" style="margin-top:8px;font-size:12px;color:var(--muted)"></div>
     </div>
@@ -379,7 +375,6 @@ let currentFile = '';
 let currentSHA  = '';
 let dirty       = false;   // unsaved changes?
 let dragSrcIdx  = null;
-let savedSubject = '';     // last known subject value saved on GitHub (meta.json)
 
 // ═══════════════════════════════════════════
 //  INIT
@@ -586,10 +581,6 @@ function onNewFilename() {
     currentSHA = '';
     renderEditor();
     updateFileInfo();
-    // Naya file — subject ka koi GitHub record nahi, status reset karo
-    document.getElementById('file-subject').value = '';
-    savedSubject = '';
-    updateSubjectStatus();
   } else {
     // New filename clear hua — wapas selected file pe
     const sel = document.getElementById('file-select').value;
@@ -944,7 +935,7 @@ function updateQ(idx, field, val) {
   }
 }
 
-// Subject localStorage mein save karo (local change — GitHub pe abhi save nahi hua)
+// Subject localStorage mein save karo
 function saveSubjectLocally() {
   const fn = getFilename();
   if (!fn) return;
@@ -954,7 +945,6 @@ function saveSubjectLocally() {
   localStorage.setItem('file_subjects', JSON.stringify(map));
   // Subject change = unsaved change — save button enable karo
   if (existingQ.length > 0) { dirty = true; updateSaveBtn(); }
-  updateSubjectStatus();
 }
 
 // File select hone par subject load karo
@@ -962,67 +952,6 @@ function loadSubject(filename) {
   const map = JSON.parse(localStorage.getItem('file_subjects')||'{}');
   const subj = map[filename] || '';
   document.getElementById('file-subject').value = subj;
-  savedSubject = subj;   // ye GitHub (meta.json) ka abhi tak ka known value hai
-  updateSubjectStatus();
-}
-
-// Subject dropdown ke neeche status dikhao — Saved ✅ ya Not saved ⚠️
-function updateSubjectStatus() {
-  const el = document.getElementById('subject-status');
-  if (!el) return;
-  const cur = document.getElementById('file-subject').value;
-  if (!cur) { el.textContent = ''; return; }
-  if (cur === savedSubject) {
-    el.innerHTML = '✅ GitHub pe saved hai';
-    el.style.color = 'var(--success)';
-  } else {
-    el.innerHTML = '⚠️ Not saved — 💾 dabao ya neeche Save karo';
-    el.style.color = 'var(--warn)';
-  }
-}
-
-// Sirf subject ko GitHub ke meta.json mein save karo (questions file touch nahi hoga)
-async function saveSubjectOnly() {
-  const fn = getFilename();
-  if (!fn) { toast('File select karo ya naam dalo!','warn'); return; }
-  const {user, repo, pat} = getConfig();
-  if (!pat) { toast('PAT dalo!','error'); return; }
-  const subj = document.getElementById('file-subject').value;
-
-  const metaUrl = `https://api.github.com/repos/${user}/${repo}/contents/questions/meta.json`;
-  const headers = {Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'};
-
-  try {
-    let metaSHA = '';
-    let existingMeta = {};
-    const mr = await fetch(metaUrl, {headers});
-    if (mr.ok) {
-      const md = await mr.json();
-      metaSHA = md.sha;
-      existingMeta = JSON.parse(decodeURIComponent(escape(atob(md.content.replace(/\n/g,'')))));
-    }
-    if (subj) existingMeta[fn] = subj;
-    else delete existingMeta[fn];
-
-    const metaContent = btoa(unescape(encodeURIComponent(JSON.stringify(existingMeta, null, 2))));
-    const body = {message:`Update meta.json — ${fn}:${subj||'?'}`, content:metaContent, branch:'main'};
-    if (metaSHA) body.sha = metaSHA;
-
-    const r = await fetch(metaUrl, {method:'PUT', headers, body:JSON.stringify(body)});
-    if (r.ok) {
-      const map = JSON.parse(localStorage.getItem('file_subjects')||'{}');
-      if (subj) map[fn] = subj; else delete map[fn];
-      localStorage.setItem('file_subjects', JSON.stringify(map));
-      savedSubject = subj;
-      updateSubjectStatus();
-      toast('✅ Subject GitHub pe save ho gaya!','success');
-    } else {
-      const data = await r.json();
-      toast('❌ '+(data.message||'Save error'),'error');
-    }
-  } catch(e) {
-    toast('Network error: '+e.message,'error');
-  }
 }
 
 function updateOpt(idx, oi, val) {
@@ -1228,8 +1157,7 @@ async function saveMetaJson(user, repo, pat, savedFilename) {
     const metaContent = btoa(unescape(encodeURIComponent(JSON.stringify(existingMeta, null, 2))));
     const metaBody = {message:`Update meta.json — ${savedFilename}:${subj||'?'}`, content:metaContent, branch:'main'};
     if (metaSHA) metaBody.sha = metaSHA;
-    const mres = await fetch(metaUrl, {method:'PUT', headers, body:JSON.stringify(metaBody)});
-    if (mres.ok) { savedSubject = subj; updateSubjectStatus(); }
+    await fetch(metaUrl, {method:'PUT', headers, body:JSON.stringify(metaBody)});
   } catch(e) {
     console.warn('meta.json save error:', e);
   }
@@ -1267,13 +1195,8 @@ async function saveImportantJson(user, repo, pat, filename) {
     const body = {message:`Update important-questions.json — ${filename}`, content, branch:'main'};
     if (impSHA) body.sha = impSHA;
 
-    const pr = await fetch(impUrl, {method:'PUT', headers, body:JSON.stringify(body)});
-    if (pr.ok) {
-      toast(`⭐ ${newImp.length} important questions updated!`, 'info');
-    } else {
-      const errData = await pr.json().catch(()=>({}));
-      toast('❌ important-questions.json save fail: '+(errData.message||pr.status), 'error', 6000);
-    }
+    await fetch(impUrl, {method:'PUT', headers, body:JSON.stringify(body)});
+    toast(`⭐ ${newImp.length} important questions updated!`, 'info');
   } catch(e) {
     console.warn('important-questions.json error:', e);
   }
