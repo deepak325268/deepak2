@@ -32,5 +32,56 @@
     "_file": "clock.json",
     "_chapter": "Clock",
     "_subject": "reasoning"
+  },
+  {
+    "num": 16,
+    "text": "Find the ratio of principal to amount. If the rate of interest is $16\\frac{2}{3}\\%$ per annum compounded annually for $1\\frac{1}{4}$ years.",
+    "hindi": "मूलधन और मिश्रधन का अनुपात ज्ञात कीजिए यदि चक्रवृद्धि ब्याज की दर $16\\frac{2}{3}\\%$ वार्षिक तथा समय $1\\frac{1}{4}$ वर्ष हैं?",
+    "opts": [
+      "(a) 144:175",
+      "(b) 144:169",
+      "(c) 125:144",
+      "(d) 175:144",
+      "(e) None of these"
+    ],
+    "ans": "a",
+    "imp": true,
+    "_file": "compound-interest.json",
+    "_chapter": "Compound Interest",
+    "_subject": "math"
+  },
+  {
+    "num": 17,
+    "text": "Find the ratio of principal to amount. If the rate of interest is $12\\frac{1}{2}\\%$ per annum compounded annually for 1 year and 2 months.",
+    "hindi": "मूलधन और मिश्रधन का अनुपात ज्ञात कीजिए यदि चक्रवृद्धि ब्याज की दर $12\\frac{1}{2}\\%$ वार्षिक तथा समय 1 वर्ष 2 माह है?",
+    "opts": [
+      "(a) 441:625",
+      "(b) 128:147",
+      "(c) 400:441",
+      "(d) 441:400",
+      "(e) None of these"
+    ],
+    "ans": "b",
+    "imp": true,
+    "_file": "compound-interest.json",
+    "_chapter": "Compound Interest",
+    "_subject": "math"
+  },
+  {
+    "num": 41,
+    "text": "If a certain sum of money becomes equal 2 times in 5 years in how much time it will be 16 times of itself.",
+    "hindi": "अगर कोई धन 5 वर्ष में अपने से 2 गुणा हो जाता हैं तो कितने समय में यह अपने से 16 गुणा हो जाएगा?",
+    "opts": [
+      "(a) 40 years",
+      "(b) 20 years",
+      "(c) 25 years",
+      "(d) 22 years"
+    ],
+    "ans": "b",
+    "imp": true,
+    "freq": 1,
+    "_file": "compound-interest.json",
+    "_chapter": "Compound Interest",
+    "_subject": "math"
   }
 ]
