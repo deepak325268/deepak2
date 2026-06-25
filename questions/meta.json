@@ -3,5 +3,6 @@
   "compound-interest.json": "math",
   "clock.json": "reasoning",
   "hcf-lcm.json": "math",
-  "statistics.json": "math"
+  "statistics.json": "math",
+  "important-questions.json": "math"
 }
