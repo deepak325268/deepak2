@@ -83,22 +83,5 @@
     "_file": "hcf-lcm.json",
     "_chapter": "Hcf Lcm",
     "_subject": "math"
-  },
-  {
-    "num": 46,
-    "text": "The average of 14 innings of a batsman is 51. In the 15th pari he makes 96 runs, what will be his new average?",
-    "hindi": "एक बल्लेबाज की 14 पारियों का औसत 51 है। 15 वीं पारि में वह 96 रन बनाता है तो उसका नया औसत क्या होगा?",
-    "opts": [
-      "(a) 54",
-      "(b) 51",
-      "(c) 54",
-      "(d) 96"
-    ],
-    "ans": "a",
-    "imp": true,
-    "freq": 1,
-    "_file": "average.json",
-    "_chapter": "Average",
-    "_subject": "math"
   }
 ]
