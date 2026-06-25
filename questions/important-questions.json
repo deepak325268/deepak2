@@ -15,5 +15,22 @@
     "_file": "average.json",
     "_chapter": "Average",
     "_subject": "math"
+  },
+  {
+    "num": 21,
+    "text": "At what time between 5:00 - 5:30 and 5:40 - 6:00 are the hands of a clock at an angle of $95^\\circ$?",
+    "hindi": "5:00 - 5:30 और 5:40 - 6:00 के बीच किस समय घड़ी की सुइयां $95^\\circ$ का कोण बनाएंगी?",
+    "opts": [
+      "[A] 5:10 & $5:44\\frac{6}{11}$",
+      "[B] 5:15 & $5:40\\frac{5}{11}$",
+      "[C] 5:12 & $5:42\\frac{3}{11}$",
+      "[D] 5:05 & $5:50\\frac{2}{11}$"
+    ],
+    "ans": "a",
+    "imp": true,
+    "freq": 1,
+    "_file": "clock.json",
+    "_chapter": "Clock",
+    "_subject": "reasoning"
   }
 ]
