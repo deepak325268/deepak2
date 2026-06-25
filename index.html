@@ -960,6 +960,7 @@ function reorderTopicCards() {
 // ── Open topic → load questions → show page ──
 function openTopic(key, ch, clr) {
   haptic();
+  history.pushState({ pageOpen: true }, "");
   currentView  = 'questions';
   currentCh    = ch;
   currentChKey = key;
@@ -979,9 +980,7 @@ function openTopic(key, ch, clr) {
 // ── Back to home ──
 function goBackHome() {
   haptic();
-  currentView = 'home'; currentCh = null; currentChKey = null; currentQIdx = 0;
-  renderContent();
-  window.scrollTo(0,0);
+  history.back(); // Ye line automatically mobile ke back button wala kaam karegi
 }
 
 // ── Navigate to question by index ──
@@ -1311,6 +1310,7 @@ function switchImpTab(subj) {
 
 function openImpSubject(subj) {
   haptic();
+  history.pushState({ pageOpen: true }, "");
   impSubTab = subj;
   impQIdx   = 0;
   impView   = 'questions';
@@ -1321,12 +1321,29 @@ function openImpSubject(subj) {
 
 function goImpHome() {
   haptic();
-  impView = 'home';
-  impCurrentCh = null;
-  impQIdx = 0;
-  renderImpHome();
-  window.scrollTo(0,0);
+  history.back();
 }
+
+  // 👇 YAHAN SE MOBILE BACK BUTTON KO HANDLE KARNE KA LOGIC HAI 👇
+window.addEventListener('popstate', function(e) {
+  // Agar Important tab khula hai
+  if (activeTab === 'important' && impView === 'questions') {
+    impView = 'home';
+    impCurrentCh = null;
+    impQIdx = 0;
+    renderImpHome();
+    window.scrollTo(0,0);
+  } 
+  // Agar Math ya Reasoning tab khula hai
+  else if (currentView === 'questions') {
+    currentView = 'home'; 
+    currentCh = null; 
+    currentChKey = null; 
+    currentQIdx = 0;
+    renderContent();
+    window.scrollTo(0,0);
+  }
+});
 
 </script>
 </body>
