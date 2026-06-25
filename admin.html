@@ -539,6 +539,9 @@ async function loadFiles() {
   const {user,repo,pat} = getConfig();
   if (!pat) return;
   try {
+    fetch(`https://api.github.com/repos/${user}/${repo}/contents/questions/meta.json?t=`+Date.now(), {headers:{Authorization:`token ${pat}`, Accept:'application/vnd.github.v3+json'}})
+      .then(r=>r.json()).then(d=> localStorage.setItem('file_subjects', decodeURIComponent(escape(atob(d.content.replace(/\n/g,''))))))
+      .catch(e=>{});
     const r = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/questions`,{
       headers:{Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json'}
     });
