@@ -1131,21 +1131,37 @@ function fileToChapter(f) {
 function renderImportant() {
   var content = document.getElementById("content");
   content.innerHTML = '<div class="loading"><div class="spinner spin-o"></div><span>Important questions load ho rahe hain...</span></div>';
+  
   fetch(QUESTIONS_BASE + 'important-questions.json?v=' + Date.now())
     .then(function(r){ return r.json(); })
     .then(function(qs) {
       impAllQ = { math:[], reasoning:[] };
+      
+      // Fixed starting point rotation cycle ke liye
+      var start = new Date('2024-01-01');
+      var tod = new Date(); tod.setHours(0,0,0,0);
+      var dayNum = Math.floor((tod - start) / 86400000);
+
       qs.forEach(function(q) {
         var subj = q._subject || 'math';
-        if (impAllQ[subj]) impAllQ[subj].push(q);
+        var freq = q.freq || 2; // Agar freq set nahi hai toh default 2 rahega
+        
+        // NAYA LOGIC: Agar freq 1 hai toh roz (1), varna poore gap ke liye (freq + 1)
+        var actualFreq = (freq === 1) ? 1 : (freq + 1);
+        
+        // Check kar rahe hain ki kya aaj is question ke aane ka din hai
+        if (dayNum % actualFreq === q.num % actualFreq) {
+          if (impAllQ[subj]) impAllQ[subj].push(q);
+        }
       });
+      
       impLoaded = true;
       impQIdx = 0;
       renderImpQuestion();
     })
     .catch(function() {
       document.getElementById('content').innerHTML =
-        '<div class="imp-empty">❌ Koi important question nahi!<br><small>Admin mein ⭐ mark karke save karo</small></div>';
+        '<div class="imp-empty">❌ Aaj koi important question nahi hai!<br><small>Ya file nahi mili</small></div>';
     });
 }
 
