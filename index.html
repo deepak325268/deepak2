@@ -506,11 +506,11 @@
 
     .q-page-header {
       display: flex; align-items: center; gap: 10px;
-      padding: 12px 0 14px;
+      padding: 4px 0 8x;
     }
     .q-back-btn {
       background: none; border: 1.5px solid var(--border);
-      color: var(--text); padding: 8px 14px; border-radius: 12px;
+      color: var(--text); padding: 6px 12px; border-radius: 10px;
       font-size: 14px; font-weight: 600; cursor: pointer;
       white-space: nowrap; flex-shrink: 0;
       transition: all 0.2s;
@@ -535,7 +535,7 @@
 
     .q-page-prog-track {
       height: 5px; background: var(--border); border-radius: 10px;
-      margin-bottom: 18px; overflow: hidden;
+      margin-bottom: 8px; overflow: hidden;
     }
     .q-page-prog-fill {
       height: 100%; border-radius: 10px;
@@ -546,10 +546,10 @@
       background: var(--card-gradient);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 24px 20px 20px;
+      padding: 14px 16px 16px;
       margin-bottom: 16px;
       box-shadow: var(--card-shadow);
-      min-height: 260px;
+      min-height: auto;
     }
     .q-page-num {
       font-size: 12px; font-weight: 800;
@@ -820,12 +820,14 @@ function renderContent() {
 
   if (currentView === 'questions' && currentCh) {
     document.querySelector('.header').style.display = 'none';
+    document.querySelector('.progress-wrap').style.display = 'none';
     renderQuestionPage(content); return;
   }
 
   // ── HOME VIEW ──
   currentView = 'home';
   document.querySelector('.header').style.display = 'block';
+  document.querySelector('.progress-wrap').style.display = 'flex';
   content.innerHTML = "";
   var data = allData[activeTab];
   if (!data.chapters || data.chapters.length === 0) {
@@ -1129,6 +1131,7 @@ function fileToChapter(f) {
 }
 
 function renderImportant() {
+  document.querySelector('.progress-wrap').style.display = 'none';
   var content = document.getElementById("content");
   content.innerHTML = '<div class="loading"><div class="spinner spin-o"></div><span>Important questions load ho rahe hain...</span></div>';
   
