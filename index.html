@@ -81,11 +81,12 @@
       z-index: 10;
       transition: background-color 0.3s, border-color 0.3s;
     }
-    .header-top {
+ .header-top {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   padding-bottom: 12px;
+  gap: 12px;
 }
  .header h1 {
   text-align: center;
@@ -679,11 +680,13 @@
 
 <div class="header">
   <div class="header-top">
-    <div class="day-pill" id="dayPill">...</div>
-    <h1>TODAY'S REVISION</h1>
+  <div class="day-pill" id="dayPill">...</div>
+  <h1>TODAY'S REVISION</h1>
+  <div style="display:flex; align-items:center; gap:8px; justify-content:flex-end;">
     <div class="header-date" id="dateText"></div>
     <a href="admin.html" target="_blank" class="admin-link" title="Admin">⚙️</a>
   </div>
+</div>
   <div class="tabs" id="tabsContainer">
     <button class="tab-btn" id="tab-o" onclick="switchTab('math', null)"><span class="icon">📐</span> Math</button>
     <button class="tab-btn" id="tab-r" onclick="switchTab('reasoning', null)"><span class="icon">🧠</span> Reasoning</button>
