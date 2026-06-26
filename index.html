@@ -87,14 +87,28 @@
       justify-content: space-between;
       gap: 12px;
       padding-bottom: 12px;
+      position: relative;
     }
     .header h1 {
-      font-family: 'Noto Sans Devanagari', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1;
-    }
+  position: absolute;  
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(90deg, #f97316, #a855f7, #3b82f6, #f97316);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s linear infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
     .day-pill {
       background: var(--text);
       color: var(--bg);
@@ -667,7 +681,7 @@
 <div class="header">
   <div class="header-top">
     <div class="day-pill" id="dayPill">...</div>
-    <h1>आज का Revision</h1>
+    <h1>TODAY'S REVISION</h1>
     <div class="header-date" id="dateText"></div>
     <a href="admin.html" target="_blank" class="admin-link" title="Admin">⚙️</a>
   </div>
