@@ -11,7 +11,7 @@
       "(e) None of these"
     ],
     "ans": "a",
-    "imp": true,
+    "imp": false,
     "_file": "compound-interest.json",
     "_chapter": "Compound Interest",
     "_subject": "math"
@@ -28,7 +28,7 @@
       "(e) None of these"
     ],
     "ans": "b",
-    "imp": true,
+    "imp": false,
     "_file": "compound-interest.json",
     "_chapter": "Compound Interest",
     "_subject": "math"
@@ -44,7 +44,7 @@
       "(d) 22 years"
     ],
     "ans": "b",
-    "imp": true,
+    "imp": false,
     "freq": 1,
     "_file": "compound-interest.json",
     "_chapter": "Compound Interest",
