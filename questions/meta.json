@@ -3,5 +3,6 @@
   "clock.json": "reasoning",
   "hcf-lcm.json": "math",
   "statistics.json": "math",
-  "simple-interest.json": "math"
+  "simple-interest.json": "math",
+  "average.json": "math"
 }
