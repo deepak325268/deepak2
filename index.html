@@ -81,20 +81,33 @@
       z-index: 10;
       transition: background-color 0.3s, border-color 0.3s;
     }
-    .header-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding-bottom: 12px;
-    }
-    .header h1 {
-      font-family: 'Noto Sans Devanagari', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1;
-    }
+ .header-top {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding-bottom: 12px;
+  gap: 12px;
+}
+ .header h1 {
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #f97316, #a855f7, #3b82f6, #f97316);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s linear infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 150% 50%; }
+  100% { background-position: 300% 50%; }
+}
     .day-pill {
       background: var(--text);
       color: var(--bg);
@@ -108,6 +121,7 @@
       transition: background-color 0.3s, color 0.3s;
     }
     .header-date {
+      text-align: right;
       font-size: 12px;
       color: var(--text);
       font-family: 'Noto Sans Devanagari', sans-serif;
@@ -666,11 +680,13 @@
 
 <div class="header">
   <div class="header-top">
-    <div class="day-pill" id="dayPill">...</div>
-    <h1>आज का Revision</h1>
+  <div class="day-pill" id="dayPill">...</div>
+  <h1>TODAY'S REVISION</h1>
+  <div style="display:flex; align-items:center; gap:8px; justify-content:flex-end;">
     <div class="header-date" id="dateText"></div>
     <a href="admin.html" target="_blank" class="admin-link" title="Admin">⚙️</a>
   </div>
+</div>
   <div class="tabs" id="tabsContainer">
     <button class="tab-btn" id="tab-o" onclick="switchTab('math', null)"><span class="icon">📐</span> Math</button>
     <button class="tab-btn" id="tab-r" onclick="switchTab('reasoning', null)"><span class="icon">🧠</span> Reasoning</button>
