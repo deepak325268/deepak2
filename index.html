@@ -705,8 +705,8 @@
 <div class="main">
   <div id="slideWrapper">
     <div class="done-banner" id="doneBanner">
-      <h3>✅ सब complete हो गया!</h3>
-      <p>आज का revision खत्म।</p>
+      <h3>All Completed</h3>
+      <p>😊</p>
     </div>
     <div id="content"></div>
   </div>
@@ -1074,7 +1074,7 @@ function renderQuestionPage(content) {
     +   '<button class="q-nav-btn prev" '+(idx===0?'disabled':'')+' onclick="goToQuestion('+(idx-1)+')">← Pre..</button>'
     +   '<button class="q-nav-done '+(done?'done-'+clr:'')+'" onclick="toggleDoneFromQPage()">'+(done?'✓ Done':'Done')+'</button>'
     +   (isLast
-        ? '<button class="q-nav-btn finish" onclick="goBackHome()">✅ समाप्त</button>'
+        ? '<button class="q-nav-btn finish" onclick="goBackHome()">End</button>'
         : '<button class="q-nav-btn next-'+clr+'" onclick="goToQuestion('+(idx+1)+')">Next →</button>')
     + '</div>'
     + '</div>';
@@ -1283,7 +1283,7 @@ function renderImpQuestion() {
     + '<div class="q-page-nav">'
     +   '<button class="q-nav-btn prev" '+(impQIdx===0?'disabled':'')+' onclick="goImpQ('+(impQIdx-1)+')">← Pre..</button>'
     +   (isLast
-        ? '<button class="q-nav-btn finish" onclick="goImpHome()">✅ समाप्त</button>'
+        ? '<button class="q-nav-btn finish" onclick="goImpHome()">End</button>'
         : '<button class="q-nav-btn next-'+clr+'" onclick="goImpQ('+(impQIdx+1)+')">Next →</button>')
     + '</div>'
     + '</div>';
