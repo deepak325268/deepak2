@@ -1368,7 +1368,7 @@ window.addEventListener('popstate', function(e) {
 
 
   function playCorrect() {
-  var c = new (window.AudioContext||window.webkitAudioContext)(), vol = 0.3, now = c.currentTime;
+  var c = new (window.AudioContext||window.webkitAudioContext)(), vol = 0.9, now = c.currentTime;
   [[523,0],[659,0.1],[784,0.2]].forEach(function(p) {
     var osc=c.createOscillator(), g=c.createGain();
     osc.connect(g); g.connect(c.destination); osc.type='sine'; osc.frequency.value=p[0];
@@ -1379,7 +1379,7 @@ window.addEventListener('popstate', function(e) {
 }
 
 function playWrong() {
-  var c = new (window.AudioContext||window.webkitAudioContext)(), now = c.currentTime, v = 0.3;
+  var c = new (window.AudioContext||window.webkitAudioContext)(), now = c.currentTime, v = 0.9;
   [0, 0.18].forEach(function(t) {
     var osc=c.createOscillator(), g=c.createGain();
     osc.connect(g); g.connect(c.destination);
