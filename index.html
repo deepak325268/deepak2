@@ -725,7 +725,7 @@ const doneKey  = "done_" + dateStr;
 const cacheKey = "cache_" + dateStr;
 
 Object.keys(localStorage).forEach(function(key) {
-  if ((key.startsWith("done_") || key.startsWith("cache_")) && !key.endsWith(dateStr)) {
+  if ((key.startsWith("done_") || key.startsWith("cache_") || key.startsWith("qBankCache_")) && !key.endsWith(dateStr)) {
     localStorage.removeItem(key);
   }
 });
@@ -734,6 +734,10 @@ let doneSet  = new Set(JSON.parse(localStorage.getItem(doneKey) || "[]"));
 let allData  = { math: null, reasoning: null };
 let dayNums  = { math: null, reasoning: null };
 var qBankCache = {};
+try {
+  var saved = localStorage.getItem('qBankCache_' + dateStr);
+  if (saved) qBankCache = JSON.parse(saved);
+} catch(e) {}
 
 var savedTab = localStorage.getItem("activeTab");
 if (!savedTab || !["math","reasoning","important"].includes(savedTab)) savedTab = "math";
@@ -1085,7 +1089,11 @@ function loadQBank(file, cb) {
   if (qBankCache[file]) { cb(); return; }
   fetch(QUESTIONS_BASE + file)
     .then(function(r){ return r.json(); })
-    .then(function(data){ qBankCache[file] = data; cb(); })
+    .then(function(data){
+      qBankCache[file] = data;
+      try { localStorage.setItem('qBankCache_' + dateStr, JSON.stringify(qBankCache)); } catch(e) {}
+      cb();
+    })
     .catch(function(){ qBankCache[file] = []; cb(); });
 }
 
