@@ -1163,9 +1163,13 @@ fetch(API_MATH)
   opts.forEach(function(opt, i) {
     if (letters[i] === ans) opt.classList.add('opt-correct');
   });
-  if (chosen !== ans) el.classList.add('opt-wrong');
+  if (chosen !== ans) {
+  el.classList.add('opt-wrong');
+  playWrong();        // ❌ galat
+} else {
+  playCorrect();      // ✅ sahi (ye line add karo)
 }
-
+}
   // ══════════════════════════════════════
 //  IMPORTANT TAB
 // ══════════════════════════════════════
@@ -1360,6 +1364,35 @@ window.addEventListener('popstate', function(e) {
     window.scrollTo(0,0);
   }
 });
+
+
+
+  function playCorrect() {
+  var c = new (window.AudioContext||window.webkitAudioContext)(), vol = 0.3, now = c.currentTime;
+  [[523,0],[659,0.1],[784,0.2]].forEach(function(p) {
+    var osc=c.createOscillator(), g=c.createGain();
+    osc.connect(g); g.connect(c.destination); osc.type='sine'; osc.frequency.value=p[0];
+    g.gain.setValueAtTime(0,now+p[1]); g.gain.linearRampToValueAtTime(vol,now+p[1]+0.02);
+    g.gain.exponentialRampToValueAtTime(0.001,now+p[1]+0.18);
+    osc.start(now+p[1]); osc.stop(now+p[1]+0.2);
+  });
+}
+
+function playWrong() {
+  var c = new (window.AudioContext||window.webkitAudioContext)(), now = c.currentTime, v = 0.3;
+  [0, 0.18].forEach(function(t) {
+    var osc=c.createOscillator(), g=c.createGain();
+    osc.connect(g); g.connect(c.destination);
+    osc.type='square'; osc.frequency.value=220;
+    g.gain.setValueAtTime(0, now+t);
+    g.gain.linearRampToValueAtTime(v, now+t+0.02);
+    g.gain.exponentialRampToValueAtTime(0.001, now+t+0.12);
+    osc.start(now+t); osc.stop(now+t+0.13);
+  });
+}
+
+
+
 
 </script>
 </body>
