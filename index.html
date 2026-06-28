@@ -1049,7 +1049,7 @@ function renderQuestionPage(content) {
     '<div class="q-page-view">'
     // Header
     + '<div class="q-page-header">'
-    +   '<button class="q-back-btn" onclick="goBackHome()">‹ वापस</button>'
+    +   '<button class="q-back-btn" onclick="goBackHome()">‹ BACK</button>'
     +   '<div class="q-page-title">'+ch.chapter+'</div>'
     +   '<div class="q-page-counter clr-'+clr+'">'+(idx+1)+' / '+total+'</div>'
     + '</div>'
@@ -1245,7 +1245,7 @@ function renderImpQuestion() {
 
   if (total === 0) {
     content.innerHTML =
-      '<button class="q-back-btn" style="margin-bottom:12px" onclick="goImpHome()">‹ वापस</button>'
+      '<button class="q-back-btn" style="margin-bottom:12px" onclick="goImpHome()">‹ BACK</button>'
       + '<div class="imp-empty">⭐ Aaj is subject me koi important question nahi!</div>';
     return;
   }
@@ -1269,7 +1269,7 @@ function renderImpQuestion() {
   content.innerHTML =
     '<div class="q-page-view">'
     + '<div class="q-page-header">'
-    +   '<button class="q-back-btn" onclick="goImpHome()">‹ वापस</button>'
+    +   '<button class="q-back-btn" onclick="goImpHome()">‹ BACK</button>'
     +   '<div class="q-page-title" style="font-size:13px">⭐ '+(q._chapter||'')+'</div>'
     +   '<div class="q-page-counter clr-'+clr+'">'+(impQIdx+1)+' / '+total+'</div>'
     + '</div>'
