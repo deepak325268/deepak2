@@ -1071,11 +1071,11 @@ function renderQuestionPage(content) {
 
     // Bottom Nav
     + '<div class="q-page-nav">'
-    +   '<button class="q-nav-btn prev" '+(idx===0?'disabled':'')+' onclick="goToQuestion('+(idx-1)+')">← पिछला</button>'
-    +   '<button class="q-nav-done '+(done?'done-'+clr:'')+'" onclick="toggleDoneFromQPage()">'+(done?'✓ Done':'Done करें')+'</button>'
+    +   '<button class="q-nav-btn prev" '+(idx===0?'disabled':'')+' onclick="goToQuestion('+(idx-1)+')">← Pre..</button>'
+    +   '<button class="q-nav-done '+(done?'done-'+clr:'')+'" onclick="toggleDoneFromQPage()">'+(done?'✓ Done':'Done')+'</button>'
     +   (isLast
         ? '<button class="q-nav-btn finish" onclick="goBackHome()">✅ समाप्त</button>'
-        : '<button class="q-nav-btn next-'+clr+'" onclick="goToQuestion('+(idx+1)+')">अगला →</button>')
+        : '<button class="q-nav-btn next-'+clr+'" onclick="goToQuestion('+(idx+1)+')">Next →</button>')
     + '</div>'
     + '</div>';
 
@@ -1281,10 +1281,10 @@ function renderImpQuestion() {
     +   optsHtml
     + '</div>'
     + '<div class="q-page-nav">'
-    +   '<button class="q-nav-btn prev" '+(impQIdx===0?'disabled':'')+' onclick="goImpQ('+(impQIdx-1)+')">← पिछला</button>'
+    +   '<button class="q-nav-btn prev" '+(impQIdx===0?'disabled':'')+' onclick="goImpQ('+(impQIdx-1)+')">← Pre..</button>'
     +   (isLast
         ? '<button class="q-nav-btn finish" onclick="goImpHome()">✅ समाप्त</button>'
-        : '<button class="q-nav-btn next-'+clr+'" onclick="goImpQ('+(impQIdx+1)+')">अगला →</button>')
+        : '<button class="q-nav-btn next-'+clr+'" onclick="goImpQ('+(impQIdx+1)+')">Next →</button>')
     + '</div>'
     + '</div>';
 
