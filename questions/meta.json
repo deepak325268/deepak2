@@ -4,5 +4,6 @@
   "hcf-lcm.json": "math",
   "statistics.json": "math",
   "simple-interest.json": "math",
-  "average.json": "math"
+  "average.json": "math",
+  "profit-and-loss.json": "math"
 }
