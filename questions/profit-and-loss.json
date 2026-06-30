@@ -1,0 +1,158 @@
+[
+  {
+    "num": 1,
+    "text": "The ratio of Cost Price and Selling Price of an article is 5 : 6. The profit percent is:",
+    "hindi": "यदि एक वस्तु का क्रय मूल्य (CP) और विक्रय मूल्य (SP) 5 : 6 के अनुपात में हैं, तो उसका लाभ प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) 10%",
+      "(b) 20%",
+      "(c) 25%",
+      "(d) 30%"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 2,
+    "text": "The ratio of Cost Price and Selling Price of an article is 4 : 5. The profit percent is:",
+    "hindi": "यदि एक वस्तु का क्रय मूल्य (CP) और विक्रय मूल्य (SP) 4 : 5 के अनुपात में हैं, तो उसका लाभ प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) 10%",
+      "(b) 20%",
+      "(c) 25%",
+      "(d) 30%"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 3,
+    "text": "A shopkeeper sells an article at 25% profit. If the cost price is Rs. 280, find the selling price.",
+    "hindi": "एक दुकानदार किसी वस्तु को 25% लाभ पर बेचता है। यदि उस वस्तु का क्रय मूल्य ₹280 है, तो उसका विक्रय मूल्य ज्ञात कीजिए।",
+    "opts": [
+      "(a) ₹350",
+      "(b) ₹400",
+      "(c) ₹500",
+      "(d) ₹300"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 4,
+    "text": "A shopkeeper sells an article at 20% profit. If the cost price is Rs. 200, find the selling price.",
+    "hindi": "एक दुकानदार किसी वस्तु को 20% लाभ पर बेचता है। यदि उस वस्तु का क्रय मूल्य ₹200 है, तो उसका विक्रय मूल्य ज्ञात कीजिए।",
+    "opts": [
+      "(a) ₹350",
+      "(b) ₹400",
+      "(c) ₹100",
+      "(d) ₹240"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 5,
+    "text": "A shopkeeper sold an article at 40% loss. If the selling price is ₹6000, find the cost price.",
+    "hindi": "एक दुकानदार ने 40% हानि पर वस्तु बेची। यदि विक्रय मूल्य ₹6000 है, तो क्रय मूल्य ज्ञात कीजिए।",
+    "opts": [
+      "(a) ₹5,000",
+      "(b) ₹5,500",
+      "(c) ₹10,000",
+      "(d) None of these"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 6,
+    "text": "A shopkeeper sold an article at 10% profit. If the selling price is ₹1100, find the cost price.",
+    "hindi": "एक दुकानदार ने 10% लाभ पर वस्तु बेची। यदि विक्रय मूल्य ₹1100 है, तो क्रय मूल्य ज्ञात कीजिए।",
+    "opts": [
+      "(a) ₹1,000",
+      "(b) ₹5,500",
+      "(c) ₹10,000",
+      "(d) None of these"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 7,
+    "text": "A shopkeeper sells an article at 20% profit. If the cost price is Rs. 600, find the selling price.",
+    "hindi": "एक दुकानदार किसी वस्तु को 20% लाभ पर बेचता है। यदि क्रय मूल्य ₹600 है, तो विक्रय मूल्य ज्ञात कीजिए।",
+    "opts": [
+      "(a) ₹350",
+      "(b) ₹720",
+      "(c) ₹100",
+      "(d) ₹240"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 8,
+    "text": "A shopkeeper sold an article at $16\\frac{2}{3}\\%$ loss. If the selling price is Rs. 175, find the cost price.",
+    "hindi": "एक दुकानदार ने किसी वस्तु को $16\\frac{2}{3}\\%$ हानि पर बेचा। यदि विक्रय मूल्य ₹175 है, तो क्रय मूल्य ज्ञात कीजिए।",
+    "opts": [
+      "(a) ₹200",
+      "(b) ₹210",
+      "(c) ₹240",
+      "(d) ₹250"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 9,
+    "text": "A shopkeeper sold an article at $6\\frac{2}{3}\\%$ profit. If the selling price is Rs. 1600, find the cost price.",
+    "hindi": "एक दुकानदार ने किसी वस्तु को $6\\frac{2}{3}\\%$ लाभ पर बेचा। यदि विक्रय मूल्य ₹1600 है, तो क्रय मूल्य ज्ञात कीजिए।",
+    "opts": [
+      "(a) ₹1200",
+      "(b) ₹1400",
+      "(c) ₹1500",
+      "(d) None of these"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 10,
+    "text": "By selling a watch for Rs. 42, a shopkeeper loses $\\frac{1}{7}$th of its cost. If he sold the watch for Rs. 50, find the profit.",
+    "hindi": "एक घड़ी को ₹42 में बेचने पर दुकानदार को लागत मूल्य का $\\frac{1}{7}$ भाग हानि होती है। यदि वही घड़ी ₹50 में बेची जाए, तो लाभ कितना होगा?",
+    "opts": [
+      "(a) ₹1",
+      "(b) ₹2",
+      "(c) ₹4",
+      "(d) ₹5"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 11,
+    "text": "By selling a watch for Rs. 35, a shopkeeper loses $\\frac{1}{6}$th of its cost. If he sold the watch for Rs. 49, find the profit.",
+    "hindi": "एक घड़ी को ₹35 में बेचने पर दुकानदार को लागत मूल्य का $\\frac{1}{6}$ भाग हानि होती है। यदि वही घड़ी ₹49 में बेची जाए, तो लाभ कितना होगा?",
+    "opts": [
+      "(a) ₹10",
+      "(b) ₹7",
+      "(c) ₹4",
+      "(d) ₹5"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 12,
+    "text": "A shopkeeper earns 20% profit on selling price. What is his profit percent on cost price?",
+    "hindi": "एक दुकानदार विक्रय मूल्य (SP) पर 20% लाभ कमाता है। उसका क्रय मूल्य (CP) पर लाभ प्रतिशत ज्ञात कीजिए।",
+    "opts": [
+      "(a) 12%",
+      "(b) 15%",
+      "(c) 20%",
+      "(d) 25%"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 13,
+    "text": "A shopkeeper earns 50% profit on selling price. What is his profit percent on cost price?",
+    "hindi": "एक दुकानदार विक्रय मूल्य (SP) पर 50% लाभ कमाता है। उसका क्रय मूल्य (CP) पर लाभ प्रतिशत ज्ञात कीजिए।",
+    "opts": [
+      "(a) 25%",
+      "(b) 50%",
+      "(c) 75%",
+      "(d) 100%"
+    ],
+    "ans": "d"
+  }
+]
