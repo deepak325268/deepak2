@@ -220,7 +220,7 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;hei
       color:#e8eaf6;padding:11px 14px;font-size:15px;outline:none;text-align:center;letter-spacing:3px;margin-bottom:8px"
       onkeydown="if(event.key==='Enter') checkPass()">
     <div id="lock-err" style="color:#ff5252;font-size:12px;height:18px;margin-bottom:8px"></div>
-    <button onclick="checkPass()"
+    <button id="lock-btn" onclick="checkPass()"
       style="width:100%;background:#6c63ff;color:#fff;border:none;border-radius:8px;
       padding:12px;font-size:15px;font-weight:700;cursor:pointer">
       🔓 Enter
@@ -229,28 +229,45 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;hei
 </div>
 
 <script>
+// 👇 Cloudflare Worker deploy karne ke baad yahan uska URL daalo
+const WORKER_URL = "https://deepak2-admin-proxy.ctetone31.workers.dev";  // trailing slash hataya
+
+function getToken() { return localStorage.getItem('session_token') || ''; }
+
 (function(){
-  const PASSWORD = "6202"; // ← YE APNA PASSWORD BADLO
-  function checkPass(){
+  const btn = document.getElementById('lock-btn');
+  async function checkPass(){
     const val = document.getElementById('lock-input').value;
-    if(val === PASSWORD){
-      document.getElementById('lock-screen').style.display='none';
-      sessionStorage.setItem('admin_unlocked','1');
-    } else {
-      const err = document.getElementById('lock-err');
-      err.textContent = '❌ Galat password!';
-      document.getElementById('lock-input').value='';
+    const err = document.getElementById('lock-err');
+    err.textContent = '';
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Check ho raha hai...'; }
+    try {
+      const r = await fetch(`${WORKER_URL}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: val })
+      });
+      if (!r.ok) throw new Error('wrong');
+      const data = await r.json();
+      localStorage.setItem('session_token', data.token);
+      document.getElementById('lock-screen').style.display = 'none';
+      if (window.afterLogin) window.afterLogin();
+    } catch (e) {
+      err.textContent = '❌ Galat password ya server se connect nahi ho paaya!';
+      document.getElementById('lock-input').value = '';
       document.getElementById('lock-input').focus();
-      setTimeout(()=>err.textContent='', 2500);
+      setTimeout(() => err.textContent = '', 3000);
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = '🔓 Enter'; }
     }
   }
   window.checkPass = checkPass;
   // Already unlocked this session?
-  if(sessionStorage.getItem('admin_unlocked')==='1'){
-    document.getElementById('lock-screen').style.display='none';
+  if (getToken()) {
+    document.getElementById('lock-screen').style.display = 'none';
   }
   // Auto-focus
-  setTimeout(()=>document.getElementById('lock-input')?.focus(), 100);
+  setTimeout(() => document.getElementById('lock-input')?.focus(), 100);
 })();
 </script>
 <!-- ===== END LOCK ===== -->
@@ -278,20 +295,11 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;hei
         <button class="collapse-btn" id="settings-toggle-btn" title="Chhupaao/Dikhaao">▲</button>
       </div>
       <div class="lp-collapsible" id="settings-body" style="margin-top:12px">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-          <div><label>Username</label><input type="text" id="gh-user" value="deepak325268" onchange="saveSettings()"></div>
-          <div><label>Repository</label><input type="text" id="gh-repo" value="deepak2" onchange="saveSettings()"></div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:10px 12px;display:flex;align-items:center;gap:8px">
+          <span style="color:var(--success);font-size:16px">🔒</span>
+          <div style="flex:1;font-size:12px;color:var(--muted)">Session server-side verify ho raha hai — PAT ab browser mein store nahi hota</div>
         </div>
-        <div class="pat-row">
-          <div><label>Personal Access Token <span style="color:var(--muted);font-size:10px">(localStorage)</span></label>
-            <input type="password" id="gh-pat" placeholder="ghp_...">
-          </div>
-          <span class="badge badge-success" id="pat-badge">✓</span>
-        </div>
-        <div style="display:flex;gap:6px;margin-top:8px">
-          <button class="btn btn-outline btn-sm" onclick="savePAT()">💾 Save</button>
-          <button class="btn btn-outline btn-sm" onclick="testPAT()">🔌 Test</button>
-        </div>
+        <button class="btn btn-outline btn-sm" style="width:100%;margin-top:8px" onclick="logout()">🚪 Logout</button>
         <div class="status-bar" id="status-bar"></div>
 
         <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:10px">
@@ -428,16 +436,6 @@ let savedSubject = '';     // last known subject value saved on GitHub (meta.jso
 //  INIT
 // ═══════════════════════════════════════════
 window.onload = async function() {
-  const pat = localStorage.getItem('gh_pat');
-  if (pat) {
-    document.getElementById('gh-pat').value = pat;
-    document.getElementById('pat-badge').classList.add('show');
-  }
-  const user = localStorage.getItem('gh_user');
-  const repo = localStorage.getItem('gh_repo');
-  if (user) document.getElementById('gh-user').value = user;
-  if (repo) document.getElementById('gh-repo').value = repo;
-
   const th = localStorage.getItem('theme') || 'dark';
   setTheme(th);
 
@@ -451,8 +449,18 @@ window.onload = async function() {
   const collapsed = localStorage.getItem('settings_collapsed') === '1';
   if (collapsed) collapseSettings(false);
 
-  if (pat) await loadFiles();
+  if (getToken()) await loadFiles();
 };
+
+// Login hone ke baad (checkPass() se call hota hai)
+window.afterLogin = async function() {
+  await loadFiles();
+};
+
+function logout() {
+  localStorage.removeItem('session_token');
+  location.reload();
+}
 
 // ═══════════════════════════════════════════
 //  THEME
@@ -482,32 +490,28 @@ function toast(msg, type='info', dur=3000) {
 // ═══════════════════════════════════════════
 //  CONFIG
 // ═══════════════════════════════════════════
-function getConfig() {
-  return {
-    user: document.getElementById('gh-user').value.trim(),
-    repo: document.getElementById('gh-repo').value.trim(),
-    pat:  document.getElementById('gh-pat').value.trim(),
-  };
-}
 function getFilename() {
   return document.getElementById('new-filename').value.trim()
       || document.getElementById('file-select').value;
 }
 
 // ═══════════════════════════════════════════
-//  PAT
+//  SECURE GITHUB PROXY (Cloudflare Worker ke through)
+//  PAT yahan kabhi nahi aata — sirf session token jaata hai
 // ═══════════════════════════════════════════
-function savePAT() {
-  const pat = document.getElementById('gh-pat').value.trim();
-  if (!pat) { toast('PAT khali hai!','error'); return; }
-  localStorage.setItem('gh_pat', pat);
-  document.getElementById('pat-badge').classList.add('show');
-  toast('PAT save ho gaya!','success');
-}
-
-function saveSettings() {
-  localStorage.setItem('gh_user', document.getElementById('gh-user').value.trim());
-  localStorage.setItem('gh_repo', document.getElementById('gh-repo').value.trim());
+async function ghFetch(path, options = {}) {
+  const token = getToken();
+  const res = await fetch(`${WORKER_URL}/proxy/${path}`, {
+    ...options,
+    headers: { ...(options.headers || {}), Authorization: `Bearer ${token}` },
+  });
+  if (res.status === 401) {
+    localStorage.removeItem('session_token');
+    toast('Session expire ho gaya — dobara login karo', 'error');
+    document.getElementById('lock-screen').style.display = 'flex';
+    throw new Error('Unauthorized');
+  }
+  return res;
 }
 
 // ═══════════════════════════════════════════
@@ -548,28 +552,20 @@ function applyFontSize(type, val, saveLS=true) {
   }
 }
 
-async function testPAT() {
-  const {user, repo, pat} = getConfig();
-  if (!pat) { toast('PAT dalo!','error'); return; }
+async function checkConnection() {
   const sb = document.getElementById('status-bar');
-  sb.className = 'status-bar show'; sb.textContent = 'Testing...';
+  sb.className = 'status-bar show'; sb.textContent = 'Checking...';
   try {
-    const r = await fetch(`https://api.github.com/repos/${user}/${repo}`, {
-      headers:{Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json'}
-    });
+    const r = await ghFetch(``);
     if (r.ok) {
       const d = await r.json();
-      sb.className='status-bar show ok';
-      sb.textContent=`✅ ${d.full_name} — ${d.private?'Private':'Public'}`;
-      toast('GitHub OK!','success');
-      await loadFiles();
+      sb.className = 'status-bar show ok';
+      sb.textContent = `✅ ${d.full_name} — ${d.private ? 'Private' : 'Public'}`;
     } else {
-      const e = await r.json();
-      sb.className='status-bar show err'; sb.textContent='❌ '+e.message;
-      toast('PAT error!','error');
+      sb.className = 'status-bar show err'; sb.textContent = '❌ Connection error';
     }
-  } catch(e) {
-    sb.className='status-bar show err'; sb.textContent='❌ '+e.message;
+  } catch (e) {
+    sb.className = 'status-bar show err'; sb.textContent = '❌ ' + e.message;
   }
 }
 
@@ -577,14 +573,12 @@ async function testPAT() {
 //  LOAD FILES (सुरक्षित तरीके से meta.json सिंक किया गया)
 // ═══════════════════════════════════════════
 async function loadFiles() {
-  const {user,repo,pat} = getConfig();
-  if (!pat) return;
+  if (!getToken()) return;
   try {
+    checkConnection();
     // meta.json को सुरक्षित फ़ेच करना
     try {
-      const metaRes = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/questions/meta.json?t=`+Date.now(), {
-        headers:{Authorization:`token ${pat}`, Accept:'application/vnd.github.v3+json'}
-      });
+      const metaRes = await ghFetch(`contents/questions/meta.json?t=${Date.now()}`);
       if (metaRes.ok) {
         const d = await metaRes.json();
         if (d && d.content) {
@@ -596,9 +590,7 @@ async function loadFiles() {
       console.warn("Meta JSON recovery sync failed, using localStorage cache.");
     }
 
-    const r = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/questions`,{
-      headers:{Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json'}
-    });
+    const r = await ghFetch(`contents/questions`);
     if (!r.ok) return;
     const files = await r.json();
     const sel = document.getElementById('file-select');
@@ -647,13 +639,10 @@ function onNewFilename() {
 }
 
 async function loadExistingFile(filename) {
-  const {user,repo,pat} = getConfig();
-  if (!pat) { toast('PAT dalo!','warn'); return; }
+  if (!getToken()) { toast('Pehle login karo!','warn'); return; }
   document.getElementById('file-info').textContent = '⏳ Loading...';
   try {
-    const r = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/questions/${filename}`,{
-      headers:{Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json'}
-    });
+    const r = await ghFetch(`contents/questions/${filename}`);
     if (r.status===404) {
       existingQ=[]; currentSHA='';
       document.getElementById('file-info').textContent = '⚠️ Naya file banega';
@@ -1019,17 +1008,13 @@ function updateSubjectStatus() {
 async function saveSubjectOnly() {
   const fn = getFilename();
   if (!fn) { toast('File select karo ya naam dalo!','warn'); return; }
-  const {user, repo, pat} = getConfig();
-  if (!pat) { toast('PAT dalo!','error'); return; }
+  if (!getToken()) { toast('Pehle login karo!','error'); return; }
   const subj = document.getElementById('file-subject').value;
-
-  const metaUrl = `https://api.github.com/repos/${user}/${repo}/contents/questions/meta.json`;
-  const headers = {Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'};
 
   try {
     let metaSHA = '';
     let existingMeta = {};
-    const mr = await fetch(metaUrl, {headers});
+    const mr = await ghFetch(`contents/questions/meta.json`);
     if (mr.ok) {
       const md = await mr.json();
       metaSHA = md.sha;
@@ -1042,7 +1027,11 @@ async function saveSubjectOnly() {
     const body = {message:`Update meta.json — ${fn}:${subj||'?'}`, content:metaContent, branch:'main'};
     if (metaSHA) body.sha = metaSHA;
 
-    const r = await fetch(metaUrl, {method:'PUT', headers, body:JSON.stringify(body)});
+    const r = await ghFetch(`contents/questions/meta.json`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
     if (r.ok) {
       savedSubject = subj;
       updateSubjectStatus();
@@ -1172,8 +1161,7 @@ async function saveToGitHub() {
   const filename = getFilename();
   if (!filename) { toast('File naam select karo!','error'); return; }
   if (existingQ.length===0) { toast('Questions hain hi nahi!','error'); return; }
-  const {user,repo,pat} = getConfig();
-  if (!pat) { toast('PAT dalo!','error'); return; }
+  if (!getToken()) { toast('Pehle login karo!','error'); return; }
 
   const toSave = existingQ.map(q=>{ const {_new,...rest}=q; return rest; });
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(toSave, null, 2))));
@@ -1188,10 +1176,11 @@ async function saveToGitHub() {
   if (currentSHA) body.sha = currentSHA;
 
   try {
-    const r = await fetch(
-      `https://api.github.com/repos/${user}/${repo}/contents/questions/${filename}`,
-      { method:'PUT', headers:{Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'}, body:JSON.stringify(body) }
-    );
+    const r = await ghFetch(`contents/questions/${filename}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
     const data = await r.json();
     if (r.ok) {
       currentSHA = data.content?.sha||'';
@@ -1201,8 +1190,8 @@ async function saveToGitHub() {
       toast(`✅ Saved! ${toSave.length} questions in ${filename}`,'success',5000);
       btn.innerHTML='✅ Saved!';
       document.getElementById('save-info').textContent='';
-      await saveMetaJson(user, repo, pat, filename);
-      await saveImportantJson(user, repo, pat, filename);
+      await saveMetaJson(filename);
+      await saveImportantJson(filename);
       setTimeout(()=>{ btn.innerHTML='⬆️ GitHub pe Save karo'; }, 2500);
     } else {
       toast('❌ '+data.message,'error',6000);
@@ -1214,20 +1203,17 @@ async function saveToGitHub() {
   }
 }
 
-async function saveMetaJson(user, repo, pat, savedFilename) {
+async function saveMetaJson(savedFilename) {
   try {
     const subj = document.getElementById('file-subject').value;
     const map = JSON.parse(localStorage.getItem('file_subjects')||'{}');
     if (subj) map[savedFilename] = subj;
     localStorage.setItem('file_subjects', JSON.stringify(map));
 
-    const metaUrl = `https://api.github.com/repos/${user}/${repo}/contents/questions/meta.json`;
-    const headers = {Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'};
-
     let metaSHA = '';
     let existingMeta = {};
     try {
-      const mr = await fetch(metaUrl, {headers});
+      const mr = await ghFetch(`contents/questions/meta.json`);
       if (mr.ok) {
         const md = await mr.json();
         metaSHA = md.sha;
@@ -1239,25 +1225,27 @@ async function saveMetaJson(user, repo, pat, savedFilename) {
     const metaContent = btoa(unescape(encodeURIComponent(JSON.stringify(existingMeta, null, 2))));
     const metaBody = {message:`Update meta.json — ${savedFilename}:${subj||'?'}`, content:metaContent, branch:'main'};
     if (metaSHA) metaBody.sha = metaSHA;
-    const mres = await fetch(metaUrl, {method:'PUT', headers, body:JSON.stringify(metaBody)});
+    const mres = await ghFetch(`contents/questions/meta.json`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(metaBody),
+    });
     if (mres.ok) { savedSubject = subj; updateSubjectStatus(); }
   } catch(e) {
     console.warn('meta.json save error:', e);
   }
 }
 
-async function saveImportantJson(user, repo, pat, filename) {
+async function saveImportantJson(filename) {
   try {
     const subject = document.getElementById('file-subject').value || 'math';
     const chapter = filename.replace('.json','').split('-')
       .map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
-    const impUrl = `https://api.github.com/repos/${user}/${repo}/contents/questions/important-questions.json`;
-    const headers = {Authorization:`token ${pat}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'};
 
     let impSHA = '';
     let existing = [];
     try {
-      const r = await fetch(impUrl, {headers});
+      const r = await ghFetch(`contents/questions/important-questions.json`);
       if (r.ok) {
         const d = await r.json();
         impSHA = d.sha;
@@ -1276,7 +1264,11 @@ async function saveImportantJson(user, repo, pat, filename) {
     const body = {message:`Update important-questions.json — ${filename}`, content, branch:'main'};
     if (impSHA) body.sha = impSHA;
 
-    await fetch(impUrl, {method:'PUT', headers, body:JSON.stringify(body)});
+    await ghFetch(`contents/questions/important-questions.json`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
     toast(`⭐ ${newImp.length} important questions updated!`, 'info');
   } catch(e) {
     console.warn('important-questions.json error:', e);
