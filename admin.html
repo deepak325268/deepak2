@@ -103,6 +103,21 @@ textarea{resize:vertical;font-family:var(--mono);line-height:1.6}
 .rp-title{font-size:18px;font-weight:700;flex:1}
 .q-total-badge{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:4px 14px;font-size:var(--fs-xs);color:var(--accent);font-weight:600}
 
+/* SEARCH / FILTER TOOLBAR */
+.rp-toolbar{display:none;align-items:center;gap:10px;flex-wrap:wrap;padding:0 0 14px}
+.search-box{display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:0 10px;flex:1;min-width:200px;max-width:340px;transition:border-color .2s}
+.search-box:focus-within{border-color:var(--accent)}
+.search-box .search-icon{font-size:13px;color:var(--muted);flex-shrink:0}
+.search-box input{border:none;background:transparent;padding:8px 0;font-size:var(--fs-sm)}
+.search-box input:focus{border:none}
+.search-clear-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;padding:2px 4px;flex-shrink:0}
+.search-clear-btn:hover{color:var(--error)}
+.missing-ans-btn{display:none;background:rgba(255,179,71,.1);border:1px solid var(--warn);color:var(--warn);border-radius:7px;padding:7px 12px;font-size:var(--fs-xs);font-weight:600;cursor:pointer;white-space:nowrap;align-items:center;gap:4px;transition:all .2s}
+.missing-ans-btn:hover{background:rgba(255,179,71,.2)}
+.missing-ans-btn.active-filter{background:var(--accent);border-color:var(--accent);color:#fff}
+.draft-indicator{font-size:11px;color:var(--success);opacity:0;transition:opacity .4s;white-space:nowrap;margin-left:auto}
+.draft-indicator.show{opacity:1}
+
 /* question card in editor */
 .qe-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:12px;overflow:hidden;transition:border-color .2s}
 .qe-card.editing{border-color:var(--accent)}
@@ -112,6 +127,7 @@ textarea{resize:vertical;font-family:var(--mono);line-height:1.6}
 .qe-preview{flex:1;font-size:var(--fs-q-text,15px);color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .qe-badge{font-size:10px;padding:2px 7px;border-radius:4px;font-weight:700}
 .qe-badge-new{background:rgba(76,175,130,.15);color:var(--success);border:1px solid rgba(76,175,130,.3)}
+.qe-badge-imp{background:rgba(245,166,35,.15);color:#f5a623;border:1px solid rgba(245,166,35,.35)}
 .qe-head-btns{display:flex;gap:4px;flex-shrink:0}
 .qe-body{padding:14px;display:none;border-top:1px solid var(--border)}
 .qe-body.open{display:block}
@@ -184,6 +200,20 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;hei
 .lp-add-section>*:not(textarea){flex-shrink:0}
 .lp-add-section textarea{flex:1;min-height:70px;resize:none}
 
+/* JSON full-screen expand editor */
+.json-expand-overlay{display:none;position:fixed;inset:0;background:var(--bg);z-index:3000;flex-direction:column;padding:16px}
+.json-expand-overlay.show{display:flex}
+.json-expand-header{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px;flex-shrink:0}
+.json-expand-title{font-weight:700;font-size:var(--fs)}
+.json-expand-actions{display:flex;gap:8px}
+.json-expand-textarea{flex:1;width:100%;font-family:var(--mono);font-size:14px;line-height:1.6;resize:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;color:var(--text);outline:none}
+.json-expand-textarea:focus{border-color:var(--accent)}
+@media(max-width:600px){
+  .json-expand-header{flex-direction:column;align-items:stretch}
+  .json-expand-actions{width:100%}
+  .json-expand-actions .btn{flex:1}
+}
+
 /* save bar */
 .save-bar{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:10px;margin-top:16px}
 .save-bar-info{font-size:var(--fs-xs);color:var(--muted);flex:1}
@@ -200,6 +230,54 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;hei
 .pv-hindi{font-size:var(--fs-q-text,15px);color:var(--muted);margin-bottom:10px;line-height:1.5}
 .pv-opts{display:flex;flex-wrap:wrap;gap:6px}
 .pv-opt{background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.25);border-radius:5px;padding:4px 12px;font-size:var(--fs-opt-text,13px);color:var(--accent)}
+
+/* ═══════════════════════════════════════
+   MOBILE ONLY — everything below is scoped to
+   @media(max-width:860px). Desktop (>860px) is
+   100% untouched / unchanged.
+═══════════════════════════════════════ */
+.hamburger-btn{display:none;background:var(--surface2);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:18px;align-items:center;justify-content:center;flex-shrink:0}
+.hamburger-btn:hover{border-color:var(--accent)}
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:400;opacity:0;transition:opacity .25s}
+.mobile-overlay.show{display:block;opacity:1}
+
+@media (max-width:860px){
+  header{padding:14px 14px;gap:8px}
+  header .sub{display:none}
+  .hamburger-btn{display:flex}
+
+  /* stack: left-panel becomes a slide-in drawer, right-panel takes full width */
+  .layout{display:block;position:relative;overflow:hidden;height:calc(100vh - 66px);height:calc(100dvh - 66px)}
+
+  .left-panel{
+    position:fixed;top:66px;left:0;bottom:0;
+    width:86%;max-width:340px;
+    height:calc(100vh - 66px);height:calc(100dvh - 66px);
+    transform:translateX(-100%);
+    transition:transform .25s ease;
+    z-index:450;
+    border-right:none;
+    box-shadow:6px 0 28px rgba(0,0,0,.45);
+  }
+  .left-panel.open{transform:translateX(0)}
+
+  .right-panel{width:100%;height:100%;padding:14px 14px 30px}
+
+  /* HTML5 drag-and-drop doesn't work via touch — hide the non-functional handle,
+     reordering still works via the ↑ / ↓ buttons inside each question */
+  .drag-handle{display:none}
+
+  /* ≥16px stops iOS Safari auto-zooming inputs on focus */
+  input[type="text"],input[type="password"],select,textarea{font-size:16px}
+
+  #toast{left:12px;right:12px;max-width:none;top:74px}
+
+  .rp-header{gap:8px}
+  .rp-title{font-size:16px}
+
+  .qe-head{padding:10px}
+  .qe-head-btns .btn-xs{padding:6px 9px}
+}
 </style>
 </head>
 <body>
@@ -211,7 +289,7 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;hei
 <div id="lock-screen" style="
   position:fixed;inset:0;background:#0f1117;z-index:9999;
   display:flex;align-items:center;justify-content:center">
-  <div style="background:#1a1d27;border:1px solid #2a2d3a;border-radius:14px;padding:36px 40px;width:320px;text-align:center">
+  <div style="background:#1a1d27;border:1px solid #2a2d3a;border-radius:14px;padding:36px 40px;width:min(320px,92vw);text-align:center">
     <div style="font-size:40px;margin-bottom:12px">🔐</div>
     <div style="font-size:18px;font-weight:700;margin-bottom:6px">Question Admin</div>
     <div style="font-size:13px;color:#7b7f9e;margin-bottom:24px">Password</div>
@@ -273,6 +351,7 @@ function getToken() { return localStorage.getItem('session_token') || ''; }
 <!-- ===== END LOCK ===== -->
   
 <header>
+  <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileDrawer()" title="Menu" aria-label="Menu">☰</button>
   <div class="logo">📚</div>
   <div>
     <h1>Question Admin</h1>
@@ -285,9 +364,30 @@ function getToken() { return localStorage.getItem('session_token') || ''; }
 
 <div id="toast"></div>
 
+<div class="mobile-overlay" id="mobile-overlay" onclick="closeMobileDrawer()"></div>
+
+<div class="json-expand-overlay" id="json-expand-overlay">
+  <div class="json-expand-header">
+    <div class="json-expand-title">📝 JSON Editor — Full Screen</div>
+    <div class="json-expand-actions">
+      <button type="button" class="btn btn-sm" style="background:var(--surface2);border:1px solid var(--border);color:var(--text)" onclick="closeJsonExpand(false)">✖ Cancel</button>
+      <button type="button" class="btn btn-primary btn-sm" onclick="closeJsonExpand(true)">✅ Apply &amp; Close</button>
+    </div>
+  </div>
+  <textarea id="json-input-expanded" class="json-expand-textarea" spellcheck="false" placeholder='[
+  {
+    "num": 1,
+    "text": "Question text",
+    "hindi": "हिंदी प्रश्न",
+    "opts": ["(a) A","(b) B","(c) C","(d) D"],
+    "ans": "b"
+  }
+]'></textarea>
+</div>
+
 <div class="layout">
 
-  <div class="left-panel">
+  <div class="left-panel" id="left-panel">
 
     <div class="lp-section" id="gh-section">
       <div class="lp-title-row" onclick="toggleSettings()">
@@ -346,6 +446,7 @@ function getToken() { return localStorage.getItem('session_token') || ''; }
         <div id="subject-status" style="margin-top:4px;font-size:11px"></div>
       </div>
       <div id="file-info" style="margin-top:8px;font-size:12px;color:var(--muted)"></div>
+      <button class="btn btn-outline btn-xs" onclick="forceReloadFromGitHub()" style="margin-top:6px;width:100%" title="Draft/local changes ignore karke GitHub se fresh copy lao">↻ GitHub se Fresh Reload</button>
     </div>
 
     <div class="lp-add-section">
@@ -358,8 +459,22 @@ function getToken() { return localStorage.getItem('session_token') || ''; }
 
       <div class="warn-box" id="merge-info">⚠️ Replace mode: File ka poora content replace ho jaayega!</div>
 
-      <label>JSON Paste karo</label>
-      <textarea id="json-input" placeholder='[
+      <div style="margin-bottom:10px">
+        <label>📁 JSON File Upload karo</label>
+        <button type="button" class="btn btn-outline btn-sm" style="width:100%" onclick="document.getElementById('json-file-input').click()">📂 File Choose karo</button>
+        <input type="file" id="json-file-input" accept=".json,application/json" style="display:none" onchange="handleJsonFileUpload(event)">
+        <div id="json-file-name" style="font-size:11px;color:var(--muted);margin-top:5px"></div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:8px;margin:2px 0 10px;color:var(--muted);font-size:11px">
+        <hr style="flex:1;margin:0"><span>YA</span><hr style="flex:1;margin:0">
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
+        <label style="margin-bottom:0">JSON Paste karo</label>
+        <button type="button" class="btn btn-outline btn-xs" style="padding:3px 9px" onclick="openJsonExpand()" title="Bade screen me edit karo">⛶ Expand</button>
+      </div>
+      <textarea id="json-input" ondragover="event.preventDefault();this.style.borderColor='var(--accent)'" ondragleave="this.style.borderColor='var(--border)'" ondrop="handleJsonFileDrop(event)" placeholder='[
   {
     "num": 1,
     "text": "Question text",
@@ -401,6 +516,16 @@ function getToken() { return localStorage.getItem('session_token') || ''; }
       <button class="btn btn-outline btn-sm" onclick="renumberAll()">🔢 Renumber</button>
     </div>
 
+    <div class="rp-toolbar" id="rp-toolbar">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="q-search" placeholder="Q number ya text se search karo..." oninput="onSearchInput(this.value)">
+        <button class="search-clear-btn" id="search-clear-btn" onclick="clearSearch()" style="display:none" title="Search clear karo">✕</button>
+      </div>
+      <button class="missing-ans-btn" id="missing-ans-btn" onclick="toggleMissingFilter()"></button>
+      <span class="draft-indicator" id="draft-save-indicator">📝 Auto-saved abhi</span>
+    </div>
+
     <div id="q-editor-list">
       <div class="empty-state">
         <div class="icon">📂</div>
@@ -429,8 +554,123 @@ let existingQ   = [];
 let currentFile = '';
 let currentSHA  = '';
 let dirty       = false;   // unsaved changes?
+let savedSnapshot = '[]';  // JSON snapshot of existingQ as last loaded/saved from GitHub — used to detect real changes vs undone edits
 let dragSrcIdx  = null;
 let savedSubject = '';     // last known subject value saved on GitHub (meta.json)
+let searchQuery       = '';    // question search/filter text
+let filterMissingOnly = false; // "answer missing" quick-filter active?
+let lastVisibleCount  = 0;     // how many cards matched the last render (for badge)
+let activeRTab        = 'editor'; // which right-panel tab is currently shown
+
+// ═══════════════════════════════════════════
+//  UNSAVED CHANGES WARNING + Ctrl/Cmd+S SHORTCUT
+// ═══════════════════════════════════════════
+window.addEventListener('beforeunload', function(e) {
+  if (!dirty) return;
+  e.preventDefault();
+  e.returnValue = '';
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('json-expand-overlay').classList.contains('show')) {
+    closeJsonExpand(false);
+    return;
+  }
+  const isSaveCombo = (e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S');
+  if (!isSaveCombo) return;
+  e.preventDefault();
+  const btn = document.getElementById('save-btn');
+  if (btn && !btn.disabled) {
+    saveToGitHub();
+  } else if (dirty) {
+    toast('Pehle file naam / login check karo — Save disabled hai!','warn');
+  }
+});
+
+// ═══════════════════════════════════════════
+//  MOBILE DRAWER (left-panel slide-in, only relevant ≤860px)
+// ═══════════════════════════════════════════
+function openMobileDrawer() {
+  document.getElementById('left-panel').classList.add('open');
+  document.getElementById('mobile-overlay').classList.add('show');
+}
+function closeMobileDrawer() {
+  document.getElementById('left-panel').classList.remove('open');
+  document.getElementById('mobile-overlay').classList.remove('show');
+}
+function toggleMobileDrawer() {
+  const lp = document.getElementById('left-panel');
+  if (lp.classList.contains('open')) closeMobileDrawer(); else openMobileDrawer();
+}
+function closeMobileDrawerIfMobile() {
+  if (window.innerWidth <= 860) closeMobileDrawer();
+}
+
+// ═══════════════════════════════════════════
+//  DRAFT AUTO-SAVE (localStorage) — refresh/reload pe
+//  currently-open file + unsaved edits waapis aa jaate hain
+// ═══════════════════════════════════════════
+const DRAFT_KEY = 'admin_draft_v1';
+
+function saveDraft() {
+  try {
+    if (!currentFile) { localStorage.removeItem(DRAFT_KEY); return; }
+    localStorage.setItem(DRAFT_KEY, JSON.stringify({
+      file: currentFile,
+      sha: currentSHA,
+      questions: existingQ,
+      dirty: dirty,
+      snapshot: savedSnapshot,
+      ts: Date.now()
+    }));
+    if (dirty) pingDraftSaved();
+  } catch(e) { console.warn('draft save failed', e); }
+}
+
+function pingDraftSaved() {
+  const el = document.getElementById('draft-save-indicator');
+  if (!el) return;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 1800);
+}
+
+function clearDraft() {
+  localStorage.removeItem(DRAFT_KEY);
+}
+
+function restoreDraftIfAny() {
+  let draft;
+  try { draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch(e) { draft = null; }
+  if (!draft || !draft.file || !Array.isArray(draft.questions)) return;
+
+  currentFile = draft.file;
+  currentSHA  = draft.sha || '';
+  existingQ   = draft.questions;
+  dirty       = !!draft.dirty;
+  savedSnapshot = typeof draft.snapshot === 'string' ? draft.snapshot : '';
+
+  const sel = document.getElementById('file-select');
+  const isKnownFile = Array.from(sel.options).some(o => o.value === draft.file);
+  if (isKnownFile) {
+    sel.value = draft.file;
+    document.getElementById('new-filename').value = '';
+  } else {
+    sel.value = '';
+    document.getElementById('new-filename').value = draft.file;
+  }
+  loadSubject(draft.file);
+
+  renderEditor();
+  updateFileInfo();
+  updateSaveBtn();
+
+  if (dirty) {
+    toast(`📝 Draft restore ho gaya — ${draft.file} (${existingQ.length} questions, unsaved changes). Save karna mat bhoolna!`, 'warn', 7000);
+  } else if (existingQ.length) {
+    toast(`📝 ${draft.file} waapis khul gayi (${existingQ.length} questions)`, 'info', 4000);
+  }
+}
 
 // ═══════════════════════════════════════════
 //  INIT
@@ -449,12 +689,13 @@ window.onload = async function() {
   const collapsed = localStorage.getItem('settings_collapsed') === '1';
   if (collapsed) collapseSettings(false);
 
-  if (getToken()) await loadFiles();
+  if (getToken()) { await loadFiles(); restoreDraftIfAny(); }
 };
 
 // Login hone ke baad (checkPass() se call hota hai)
 window.afterLogin = async function() {
   await loadFiles();
+  restoreDraftIfAny();
 };
 
 function logout() {
@@ -614,6 +855,7 @@ async function onFileSelect() {
   if (!sel) { currentFile=''; existingQ=[]; renderEditor(); return; }
   currentFile = sel;
   loadSubject(sel);
+  closeMobileDrawerIfMobile();
   await loadExistingFile(sel);
 }
 
@@ -638,13 +880,19 @@ function onNewFilename() {
   updateSaveBtn();
 }
 
+async function forceReloadFromGitHub() {
+  if (!currentFile) { toast('Pehle file select karo!','warn'); return; }
+  if (dirty && !confirm('Aapke unsaved local changes discard ho jaayenge. GitHub se fresh copy load karein?')) return;
+  await loadExistingFile(currentFile);
+}
+
 async function loadExistingFile(filename) {
   if (!getToken()) { toast('Pehle login karo!','warn'); return; }
   document.getElementById('file-info').textContent = '⏳ Loading...';
   try {
     const r = await ghFetch(`contents/questions/${filename}`);
     if (r.status===404) {
-      existingQ=[]; currentSHA='';
+      existingQ=[]; currentSHA=''; savedSnapshot='[]'; dirty=false;
       document.getElementById('file-info').textContent = '⚠️ Naya file banega';
       renderEditor(); return;
     }
@@ -652,6 +900,8 @@ async function loadExistingFile(filename) {
     const data = await r.json();
     currentSHA = data.sha;
     existingQ = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g,'')))));
+    savedSnapshot = JSON.stringify(existingQ);
+    dirty = false;
     updateFileInfo();
     renderEditor();
     toast(`${existingQ.length} questions load ho gaye!`,'success');
@@ -674,6 +924,52 @@ function setMode(m) {
   document.getElementById('tab-append').classList.toggle('active',m==='append');
   document.getElementById('tab-replace').classList.toggle('active',m==='replace');
   document.getElementById('merge-info').style.display = m==='replace'?'block':'none';
+}
+
+// ═══════════════════════════════════════════
+//  JSON FILE UPLOAD (button-click or drag-drop)
+// ═══════════════════════════════════════════
+function loadJsonFile(file) {
+  if (!file) return;
+  if (!/\.json$/i.test(file.name)) { toast('Sirf .json file allowed hai!','error'); return; }
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    document.getElementById('json-input').value = ev.target.result;
+    document.getElementById('json-file-name').textContent = `✅ ${file.name} (${(file.size/1024).toFixed(1)} KB) loaded`;
+    toast(`📁 ${file.name} load ho gayi!`,'success');
+    parseAndPreview();
+  };
+  reader.onerror = () => toast('File padhne mein error aaya!','error');
+  reader.readAsText(file);
+}
+function handleJsonFileUpload(e) {
+  loadJsonFile(e.target.files[0]);
+  e.target.value = ''; // allow re-selecting same file later
+}
+function handleJsonFileDrop(e) {
+  e.preventDefault();
+  e.currentTarget.style.borderColor = 'var(--border)';
+  loadJsonFile(e.dataTransfer.files[0]);
+}
+
+// ═══════════════════════════════════════════
+//  JSON FULL-SCREEN EXPAND EDITOR
+// ═══════════════════════════════════════════
+function openJsonExpand() {
+  const src = document.getElementById('json-input');
+  const exp = document.getElementById('json-input-expanded');
+  exp.value = src.value;
+  document.getElementById('json-expand-overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => exp.focus(), 50);
+}
+function closeJsonExpand(apply) {
+  if (apply) {
+    document.getElementById('json-input').value = document.getElementById('json-input-expanded').value;
+    toast('✅ JSON apply ho gaya!','success');
+  }
+  document.getElementById('json-expand-overlay').classList.remove('show');
+  document.body.style.overflow = '';
 }
 
 // ═══════════════════════════════════════════
@@ -741,7 +1037,7 @@ function confirmAndAdd() {
   document.getElementById('json-input').value = '';
   document.getElementById('preview-confirm-bar').style.display = 'none';
   document.getElementById('preview-cards-list').innerHTML = '';
-  dirty = true;
+  computeDirty();
   switchRTab('editor');
   renderEditor();
   updateSaveBtn();
@@ -760,11 +1056,13 @@ function cancelPreview() {
 //  RIGHT PANEL TAB SWITCH
 // ═══════════════════════════════════════════
 function switchRTab(tab) {
+  activeRTab = tab;
   document.getElementById('rtab-editor').classList.toggle('active', tab==='editor');
   document.getElementById('rtab-preview').classList.toggle('active', tab==='preview');
   document.getElementById('q-editor-list').style.display = tab==='editor' ? 'block' : 'none';
   document.getElementById('q-preview-panel').style.display = tab==='preview' ? 'block' : 'none';
   document.querySelectorAll('.rp-header .btn').forEach(b => b.style.display = tab==='editor'?'':'none');
+  updateToolbarVisibility();
 
   if (tab==='preview' && !pendingArr && existingQ.length>0) {
     const pvList = document.getElementById('preview-cards-list');
@@ -799,6 +1097,8 @@ function switchRTab(tab) {
 
 function clearInput() {
   document.getElementById('json-input').value='';
+  document.getElementById('json-file-name').textContent = '';
+  document.getElementById('json-file-input').value = '';
   pendingArr = null;
 }
 
@@ -808,30 +1108,118 @@ function clearInput() {
 function renderEditor() {
   const list = document.getElementById('q-editor-list');
   const title = document.getElementById('rp-title');
-  const tot = document.getElementById('q-total');
 
   title.textContent = currentFile || 'Questions Editor';
-  tot.textContent = `${existingQ.length} questions`;
   updateSaveBtn();
+  saveDraft();
+  updateToolbarVisibility();
 
   if (existingQ.length===0) {
+    updateTotalBadge(0);
+    updateMissingBtn();
     list.innerHTML = `<div class="empty-state"><div class="icon">📂</div><p>File select karo ya JSON paste karke Add karo</p></div>`;
     return;
   }
 
+  // agar "missing only" filter on hai but ab koi answer missing bacha hi nahi — auto-clear
+  if (filterMissingOnly && !existingQ.some(q=>!q.ans)) {
+    filterMissingOnly = false;
+  }
+  updateMissingBtn();
+
+  let entries = existingQ.map((q,idx)=>({q,idx}));
+  if (filterMissingOnly) entries = entries.filter(e=>!e.q.ans);
+  const query = searchQuery.trim().toLowerCase();
+  if (query) entries = entries.filter(e=>questionMatchesSearch(e.q, query));
+  const filtering = !!query || filterMissingOnly;
+  updateTotalBadge(entries.length);
+
+  if (filtering && entries.length===0) {
+    list.innerHTML = `<div class="empty-state"><div class="icon">🔍</div><p>Koi question match nahi hua<br>search clear karo ya kuch aur try karo</p></div>`;
+    return;
+  }
+
   list.innerHTML = '';
-  existingQ.forEach((q,idx) => {
-    const iz = makeInsertZone(idx);
-    list.appendChild(iz);
-    const card = makeQCard(q, idx);
-    list.appendChild(card);
-  });
-  const iz = makeInsertZone(existingQ.length);
-  list.appendChild(iz);
+  if (!filtering) {
+    entries.forEach(({q,idx}) => {
+      list.appendChild(makeInsertZone(idx));
+      list.appendChild(makeQCard(q, idx, false));
+    });
+    list.appendChild(makeInsertZone(existingQ.length));
+  } else {
+    entries.forEach(({q,idx}) => list.appendChild(makeQCard(q, idx, true)));
+  }
 
   if (window.MathJax && MathJax.typesetPromise) {
     setTimeout(() => MathJax.typesetPromise([list]).catch(()=>{}), 100);
   }
+}
+
+// ═══════════════════════════════════════════
+//  SEARCH / "ANSWER MISSING" FILTER
+// ═══════════════════════════════════════════
+function questionMatchesSearch(q, query) {
+  if (String(q.num).toLowerCase().includes(query)) return true;
+  if ((q.text||'').toLowerCase().includes(query)) return true;
+  if ((q.hindi||'').toLowerCase().includes(query)) return true;
+  const digits = query.replace(/[^0-9]/g,'');
+  if (digits && String(q.num)===digits) return true;
+  return false;
+}
+
+function onSearchInput(val) {
+  searchQuery = val;
+  const clearBtn = document.getElementById('search-clear-btn');
+  if (clearBtn) clearBtn.style.display = val ? 'flex' : 'none';
+  renderEditor();
+}
+
+function clearSearch() {
+  searchQuery = '';
+  const input = document.getElementById('q-search');
+  if (input) input.value = '';
+  const clearBtn = document.getElementById('search-clear-btn');
+  if (clearBtn) clearBtn.style.display = 'none';
+  renderEditor();
+}
+
+function toggleMissingFilter() {
+  const missingCount = existingQ.filter(q=>!q.ans).length;
+  if (missingCount===0 && !filterMissingOnly) return;
+  filterMissingOnly = !filterMissingOnly;
+  renderEditor();
+}
+
+function updateMissingBtn() {
+  const btn = document.getElementById('missing-ans-btn');
+  if (!btn) return;
+  const missingCount = existingQ.filter(q=>!q.ans).length;
+  if (missingCount===0 && !filterMissingOnly) { btn.style.display = 'none'; return; }
+  btn.style.display = 'inline-flex';
+  if (filterMissingOnly) {
+    btn.classList.add('active-filter');
+    btn.textContent = '✕ Sab questions dikhao';
+  } else {
+    btn.classList.remove('active-filter');
+    btn.textContent = `⚠️ ${missingCount} answer${missingCount>1?'s':''} missing — dikhao`;
+  }
+}
+
+function updateTotalBadge(visibleCount) {
+  const tot = document.getElementById('q-total');
+  if (!tot) return;
+  lastVisibleCount = visibleCount;
+  const impCount = existingQ.filter(q=>q.imp).length;
+  const filtering = !!searchQuery.trim() || filterMissingOnly;
+  let txt = filtering ? `${visibleCount} / ${existingQ.length} questions` : `${existingQ.length} questions`;
+  if (impCount>0) txt += ` · ⭐ ${impCount}`;
+  tot.textContent = txt;
+}
+
+function updateToolbarVisibility() {
+  const tb = document.getElementById('rp-toolbar');
+  if (!tb) return;
+  tb.style.display = (activeRTab==='editor' && existingQ.length>0) ? 'flex' : 'none';
 }
 
 function makeInsertZone(afterIdx) {
@@ -841,41 +1229,45 @@ function makeInsertZone(afterIdx) {
   return div;
 }
 
-function makeQCard(q, idx) {
+function makeQCard(q, idx, filtering) {
   const card = document.createElement('div');
   card.className = 'qe-card' + (q._new?' new-q':'');
-  card.setAttribute('draggable','true');
   card.dataset.idx = idx;
 
-  card.addEventListener('dragstart', e => { dragSrcIdx=idx; card.style.opacity='.4'; });
-  card.addEventListener('dragend',   e => { card.style.opacity='1'; document.querySelectorAll('.qe-card').forEach(c=>c.classList.remove('drag-over')); });
-  card.addEventListener('dragover',  e => { e.preventDefault(); card.classList.add('drag-over'); });
-  card.addEventListener('dragleave', e => card.classList.remove('drag-over'));
-  card.addEventListener('drop',      e => { e.preventDefault(); card.classList.remove('drag-over'); if(dragSrcIdx!==null && dragSrcIdx!==idx) moveQuestion(dragSrcIdx,idx); });
+  if (!filtering) {
+    card.setAttribute('draggable','true');
+    card.addEventListener('dragstart', e => { dragSrcIdx=idx; card.style.opacity='.4'; });
+    card.addEventListener('dragend',   e => { card.style.opacity='1'; document.querySelectorAll('.qe-card').forEach(c=>c.classList.remove('drag-over')); });
+    card.addEventListener('dragover',  e => { e.preventDefault(); card.classList.add('drag-over'); });
+    card.addEventListener('dragleave', e => card.classList.remove('drag-over'));
+    card.addEventListener('drop',      e => { e.preventDefault(); card.classList.remove('drag-over'); if(dragSrcIdx!==null && dragSrcIdx!==idx) moveQuestion(dragSrcIdx,idx); });
+  }
 
   const preview = (q.text||q.hindi||'(khali)').substring(0,70);
   const letters = ['a','b','c','d','e','f'];
 
   card.innerHTML = `
     <div class="qe-head" onclick="toggleCard(${idx})">
-      <span class="drag-handle" title="Drag to reorder" onclick="event.stopPropagation()">⠿</span>
+      <span class="drag-handle" title="Drag to reorder" onclick="event.stopPropagation()" style="${filtering?'visibility:hidden':''}">⠿</span>
       <span class="qe-num">Q${q.num}</span>
       <span class="qe-preview">${escH(preview)}</span>
       ${q._new?'<span class="qe-badge qe-badge-new">NEW</span>':''}
-      ${q.ans?`<span class="qe-badge" style="background:rgba(76,175,130,.15);color:var(--success);border:1px solid rgba(76,175,130,.3)">✓${q.ans.toUpperCase()}</span>`:'<span class="qe-badge" style="background:rgba(255,82,82,.1);color:var(--error);border:1px solid rgba(255,82,82,.3)">!Ans</span>'}
+      ${q.ans?`<span class="qe-badge qe-badge-ans" style="background:rgba(76,175,130,.15);color:var(--success);border:1px solid rgba(76,175,130,.3)">✓${q.ans.toUpperCase()}</span>`:'<span class="qe-badge qe-badge-ans" style="background:rgba(255,82,82,.1);color:var(--error);border:1px solid rgba(255,82,82,.3)">!Ans</span>'}
+      ${q.imp?'<span class="qe-badge qe-badge-imp" title="Important">⭐</span>':''}
       <div class="qe-head-btns" onclick="event.stopPropagation()">
         <button class="btn btn-outline btn-xs" onclick="toggleMiniPreview(${idx})" title="Preview dekho">👁️</button>
+        <button class="btn btn-outline btn-xs" onclick="duplicateQ(${idx})" title="Duplicate karo">📋</button>
         <button class="btn btn-outline btn-xs" onclick="toggleCard(${idx})">✏️</button>
         <button class="btn btn-danger btn-xs" onclick="deleteQ(${idx})" title="Delete">🗑️</button>
       </div>
     </div>
 
     <div class="qe-mini-preview" id="qmini-${idx}">
-      ${q.hindi?`<div class="pv-hindi">${q.hindi}</div>`:''}
-      ${q.text?`<div class="pv-text">${q.text}</div>`:''}
+      ${q.hindi?`<div class="pv-hindi">${escH(q.hindi)}</div>`:''}
+      ${q.text?`<div class="pv-text">${escH(q.text)}</div>`:''}
       <div class="pv-opts">${(q.opts||[]).map((o,oi)=>{
         const isAns = q.ans && q.ans===letters[oi];
-        return `<span class="pv-opt" style="${isAns?'background:rgba(76,175,130,.2);border-color:var(--success);color:var(--success);font-weight:700':''}">${isAns?'✓ ':''}${o}</span>`;
+        return `<span class="pv-opt" style="${isAns?'background:rgba(76,175,130,.2);border-color:var(--success);color:var(--success);font-weight:700':''}">${isAns?'✓ ':''}${escH(o)}</span>`;
       }).join('')}</div>
     </div>
 
@@ -908,8 +1300,8 @@ function makeQCard(q, idx) {
       <div style="display:flex;gap:8px;align-items:center;margin-top:8px;padding:10px;background:var(--bg);border-radius:7px;border:1px solid var(--border)">
         <label style="margin:0">Q No:</label>
         <input type="text" style="width:70px" value="${q.num}" onchange="updateQ(${idx},'num',parseInt(this.value)||${idx+1})">
-        <button class="btn btn-outline btn-xs" onclick="moveUp(${idx})" ${idx===0?'disabled':''}>↑</button>
-        <button class="btn btn-outline btn-xs" onclick="moveDown(${idx})" ${idx===existingQ.length-1?'disabled':''}>↓</button>
+        <button class="btn btn-outline btn-xs" onclick="moveUp(${idx})" ${(idx===0||filtering)?'disabled':''} ${filtering?'title="Search/filter clear karo pehle"':''}>↑</button>
+        <button class="btn btn-outline btn-xs" onclick="moveDown(${idx})" ${(idx===existingQ.length-1||filtering)?'disabled':''} ${filtering?'title="Search/filter clear karo pehle"':''}>↓</button>
         <label style="margin:0 0 0 8px;cursor:pointer;display:flex;align-items:center;gap:4px;color:${q.imp?'#f5a623':'var(--muted)'}">
           <input type="checkbox" ${q.imp?'checked':''} onchange="updateQ(${idx},'imp',this.checked)" style="width:14px;height:14px;accent-color:#f5a623">
           ⭐
@@ -956,8 +1348,9 @@ function collapseAll() { document.querySelectorAll('.qe-body').forEach(b=>{ b.cl
 
 function updateQ(idx, field, val) {
   existingQ[idx][field] = val;
-  dirty = true;
+  computeDirty();
   updateSaveBtn();
+  saveDraft();
   const card = document.querySelector(`.qe-card[data-idx="${idx}"]`);
   if (card) {
     const prev = card.querySelector('.qe-preview');
@@ -967,6 +1360,31 @@ function updateQ(idx, field, val) {
     if (field==='imp') {
       const freqSel = document.getElementById('freq-'+idx);
       if (freqSel) freqSel.disabled = !val;
+      updateTotalBadge(lastVisibleCount);
+      const head = card.querySelector('.qe-head');
+      let impBadge = head.querySelector('.qe-badge-imp');
+      if (val && !impBadge) {
+        impBadge = document.createElement('span');
+        impBadge.className = 'qe-badge qe-badge-imp';
+        impBadge.title = 'Important';
+        impBadge.textContent = '⭐';
+        head.insertBefore(impBadge, head.querySelector('.qe-head-btns'));
+      } else if (!val && impBadge) {
+        impBadge.remove();
+      }
+    }
+    if (field==='ans') {
+      const badge = card.querySelector('.qe-head .qe-badge-ans');
+      if (badge) {
+        if (val) {
+          badge.textContent = '✓'+String(val).toUpperCase();
+          badge.style.cssText = 'background:rgba(76,175,130,.15);color:var(--success);border:1px solid rgba(76,175,130,.3)';
+        } else {
+          badge.textContent = '!Ans';
+          badge.style.cssText = 'background:rgba(255,82,82,.1);color:var(--error);border:1px solid rgba(255,82,82,.3)';
+        }
+      }
+      updateMissingBtn();
     }
   }
 }
@@ -979,7 +1397,7 @@ function saveSubjectLocally() {
   const map = JSON.parse(localStorage.getItem('file_subjects')||'{}');
   if (subj) map[fn] = subj; else delete map[fn];
   localStorage.setItem('file_subjects', JSON.stringify(map));
-  if (existingQ.length > 0) { dirty = true; updateSaveBtn(); }
+  if (existingQ.length > 0) { computeDirty(); updateSaveBtn(); saveDraft(); }
   updateSubjectStatus();
 }
 
@@ -1047,12 +1465,13 @@ async function saveSubjectOnly() {
 
 function updateOpt(idx, oi, val) {
   existingQ[idx].opts[oi] = val;
-  dirty = true; updateSaveBtn();
+  computeDirty(); updateSaveBtn();
+  saveDraft();
 }
 
 function deleteOpt(idx, oi) {
   existingQ[idx].opts.splice(oi,1);
-  dirty = true;
+  computeDirty();
   const letters = ['a','b','c','d','e','f'];
   const q = existingQ[idx];
   const optsDiv = document.getElementById('qopts-'+idx);
@@ -1068,13 +1487,14 @@ function deleteOpt(idx, oi) {
     </div>`;
   }).join('');
   updateSaveBtn();
+  saveDraft();
 }
 
 function addOpt(idx) {
   if (!existingQ[idx].opts) existingQ[idx].opts=[];
   const letters = ['a','b','c','d','e','f'];
   existingQ[idx].opts.push('');
-  dirty=true;
+  computeDirty();
   const q = existingQ[idx];
   const optsDiv = document.getElementById('qopts-'+idx);
   optsDiv.innerHTML = q.opts.map((o,i)=>{
@@ -1089,12 +1509,13 @@ function addOpt(idx) {
     </div>`;
   }).join('');
   updateSaveBtn();
+  saveDraft();
 }
 
 function deleteQ(idx) {
   if (!confirm(`Q${existingQ[idx].num} delete karna hai?`)) return;
   existingQ.splice(idx,1);
-  dirty=true;
+  computeDirty();
   renderEditor();
 }
 
@@ -1102,31 +1523,52 @@ function insertQuestionAt(idx) {
   const newQ = {num: 0, text:'', hindi:'', opts:['(a) ','(b) ','(c) ','(d) '], _new:true};
   existingQ.splice(idx, 0, newQ);
   existingQ.forEach((q, i) => { q.num = i + 1; });
-  dirty = true;
+  computeDirty();
   renderEditor();
   setTimeout(() => { toggleCard(idx); document.getElementById('qtext-'+idx)?.focus(); }, 50);
+}
+
+function duplicateQ(idx) {
+  const copy = JSON.parse(JSON.stringify(existingQ[idx]));
+  copy._new = true;
+  existingQ.splice(idx+1, 0, copy);
+  existingQ.forEach((q,i) => { q.num = i+1; });
+  computeDirty();
+  renderEditor();
+  toast(`Q${copy.num} duplicate ho gaya — ab edit karke save karo!`,'success');
+  setTimeout(() => { toggleCard(idx+1); document.getElementById('qtext-'+(idx+1))?.focus(); }, 50);
 }
 
 function moveUp(idx) {
   if(idx===0) return;
   [existingQ[idx-1],existingQ[idx]]=[existingQ[idx],existingQ[idx-1]];
-  dirty=true; renderEditor();
+  computeDirty(); renderEditor();
 }
 function moveDown(idx) {
   if(idx>=existingQ.length-1) return;
   [existingQ[idx],existingQ[idx+1]]=[existingQ[idx+1],existingQ[idx]];
-  dirty=true; renderEditor();
+  computeDirty(); renderEditor();
 }
 function moveQuestion(fromIdx, toIdx) {
   const item = existingQ.splice(fromIdx,1)[0];
   existingQ.splice(toIdx,0,item);
-  dirty=true; renderEditor();
+  computeDirty(); renderEditor();
 }
 
 function renumberAll() {
   existingQ.forEach((q,i)=>q.num=i+1);
-  dirty=true; renderEditor();
+  computeDirty(); renderEditor();
   toast('Renumber ho gaya!','success');
+}
+
+// Real dirty-check: compares CURRENT content/subject against the last
+// GitHub-loaded/saved baseline — so undo-ing an edit correctly clears
+// the "unsaved changes" state instead of dirty staying stuck true.
+function computeDirty() {
+  const contentChanged = JSON.stringify(existingQ) !== savedSnapshot;
+  const subjSel = document.getElementById('file-subject');
+  const subjectChanged = existingQ.length > 0 && !!subjSel && subjSel.value !== savedSubject;
+  dirty = contentChanged || subjectChanged;
 }
 
 function updateSaveBtn() {
@@ -1185,6 +1627,7 @@ async function saveToGitHub() {
     if (r.ok) {
       currentSHA = data.content?.sha||'';
       existingQ = toSave;
+      savedSnapshot = JSON.stringify(existingQ);
       dirty = false;
       renderEditor();
       toast(`✅ Saved! ${toSave.length} questions in ${filename}`,'success',5000);
