@@ -1328,9 +1328,26 @@ function escH(s) {
 function toggleMiniPreview(idx) {
   const mini = document.getElementById('qmini-'+idx);
   const isOpen = mini.classList.toggle('open');
+  if (isOpen) refreshMiniPreview(idx);
   if (isOpen && window.MathJax && MathJax.typesetPromise) {
     MathJax.typesetPromise([mini]).catch(()=>{});
   }
+}
+
+// mini-preview (👁️) ka HTML dobara existingQ se banao — taaki edits turant reflect ho
+function refreshMiniPreview(idx) {
+  const mini = document.getElementById('qmini-'+idx);
+  if (!mini) return;
+  const q = existingQ[idx];
+  const letters = ['a','b','c','d','e','f'];
+  mini.innerHTML = `
+    ${q.hindi?`<div class="pv-hindi">${escH(q.hindi)}</div>`:''}
+    ${q.text?`<div class="pv-text">${escH(q.text)}</div>`:''}
+    <div class="pv-opts">${(q.opts||[]).map((o,oi)=>{
+      const isAns = q.ans && q.ans===letters[oi];
+      return `<span class="pv-opt" style="${isAns?'background:rgba(76,175,130,.2);border-color:var(--success);color:var(--success);font-weight:700':''}">${isAns?'✓ ':''}${escH(o)}</span>`;
+    }).join('')}</div>
+  `;
 }
 
 function toggleCard(idx) {
@@ -1387,6 +1404,7 @@ function updateQ(idx, field, val) {
       updateMissingBtn();
     }
   }
+  refreshMiniPreview(idx);
 }
 
 // Subject Local Storage Sync & Status Update
@@ -1467,6 +1485,7 @@ function updateOpt(idx, oi, val) {
   existingQ[idx].opts[oi] = val;
   computeDirty(); updateSaveBtn();
   saveDraft();
+  refreshMiniPreview(idx);
 }
 
 function deleteOpt(idx, oi) {
@@ -1488,6 +1507,7 @@ function deleteOpt(idx, oi) {
   }).join('');
   updateSaveBtn();
   saveDraft();
+  refreshMiniPreview(idx);
 }
 
 function addOpt(idx) {
@@ -1510,6 +1530,7 @@ function addOpt(idx) {
   }).join('');
   updateSaveBtn();
   saveDraft();
+  refreshMiniPreview(idx);
 }
 
 function deleteQ(idx) {
