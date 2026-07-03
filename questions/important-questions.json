@@ -66,5 +66,21 @@
     "_file": "clock.json",
     "_chapter": "Clock",
     "_subject": "reasoning"
+  },
+  {
+    "num": 28,
+    "text": "When an article is sold for Rs. 4800, there is a pfofit of $14\\frac{2}{7}\\%$. To loss $16\\frac{2}{3}\\%$, it should be sold for Rs.",
+    "hindi": "जब कोई वस्तु रु 4800 में बेचीं जाती हैं तो $14\\frac{2}{7}\\%$ की लाभ होती हैं तो $16\\frac{2}{3}\\%$ का हानि कमाने के लिए इसे किस कीमत पर बेचा जाना चाहिए?",
+    "opts": [
+      "(a) Rs. 6200",
+      "(b) Rs. 6240",
+      "(c) Rs. 3500",
+      "(d) Rs. 7500"
+    ],
+    "ans": "c",
+    "imp": true,
+    "_file": "profit-and-loss.json",
+    "_chapter": "Profit And Loss",
+    "_subject": "math"
   }
 ]
