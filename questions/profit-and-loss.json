@@ -154,5 +154,185 @@
       "(d) 100%"
     ],
     "ans": "d"
+  },
+  {
+    "num": 14,
+    "text": "If a person calculates his profit% on Selling Price and according to him, his profit is 20%. Find his actual profit %.",
+    "hindi": "यदि कोई व्यक्ति विक्रय मूल्य पर अपने लाभ% की गणना करता है और उसके अनुसार, उसका लाभ 20% है। उसका वास्तविक लाभ% ज्ञात करें।",
+    "opts": [
+      "(a) 25%",
+      "(b) 20%",
+      "(c) 40%",
+      "(d) 50%"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 15,
+    "text": "If a person calculates his loss % on Selling Price and according to him, his loss is 37.5%. Find his actual loss %.",
+    "hindi": "यदि कोई व्यक्ति विक्रय मूल्य पर अपने नुकसान प्रतिशत की गणना करता है और उसके अनुसार, उसका नुकसान 37.5% है। उसका वास्तविक नुकसान प्रतिशत ज्ञात कीजिये ।",
+    "opts": [
+      "(a) 11.11%",
+      "(b) 9.09%",
+      "(c) 20%",
+      "(d) $\\frac{300}{11}\\%$"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 16,
+    "text": "The cost price of an article is Rs. 2800. Profit as a percentage of selling price is 20 percent. What is the actual profit (in Rs.)?",
+    "hindi": "एक वस्तु का क्रय मूल्य रूपये 2800 है। विक्रय मूल्य के प्रतिशत में लाभ 20 प्रतिशत है। वास्तविक लाभ का मान (रूपये में) क्या है?",
+    "opts": [
+      "(a) Rs. 616",
+      "(b) Rs. 700",
+      "(c) Rs. 504",
+      "(d) Rs. 560"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 17,
+    "text": "A man purchased a cell phone for Rs. 24,500 and sold it at a gain of 12.5% calculated on the selling price. The selling price of the cell phone was:",
+    "hindi": "एक आदमी ने 24500 रुपये में एक सेल फोन खरीदा। और इसे बिक्री मूल्य पर गणना किए गए 12.5% के लाभ पर बेच दिया। सेल फोन का विक्रय मूल्य थाः",
+    "opts": [
+      "(a) Rs. 25,000",
+      "(b) Rs. 28,000",
+      "(c) Rs. 27,500",
+      "(d) Rs. 25,500"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 18,
+    "text": "The cost price of 25 articles is same as the selling price of 20 articles. Find the profit or loss percent?",
+    "hindi": "25 वस्तुओं का क्रय मूल्य 20 वस्तुओं के विक्रय मूल्य के बराबर हो तो उसका लाभ या हानि प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) 10%",
+      "(b) 15%",
+      "(c) 20%",
+      "(d) 25%"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 19,
+    "text": "The cost price of 20 articles is same as the selling price of 25 articles. Find the profit or loss percent.",
+    "hindi": "20 वस्तुओं का क्रय मूल्य 25 वस्तुओं के विक्रय के बराबर हो तो उसका लाभ या हानि प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) 12% loss",
+      "(b) 15% loss",
+      "(c) 20% loss",
+      "(d) 25% loss"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 20,
+    "text": "A shopkeeper buys pens at the rate of 6 for Rs.5 and sells them at 5 for Rs. 6. His profit percent is:",
+    "hindi": "एक दुकानदार 5 रु. में 6 पैन खरीद कर 6 रु. में 5 पैन के हिसाब से बेच देता है। उसका लाभ प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) 25% Profit",
+      "(b) 28% Profit",
+      "(c) 36% Profit",
+      "(d) 44% Profit"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 21,
+    "text": "A shopkeeper buys mangoes at the rate of 12 for Rs. 15 and sells them at 10 for Rs 14. His profit percent is:",
+    "hindi": "एक दुकानदार 15 रु. में 12 आम खरीद कर 14 रु. में 10 आम के हिसाब से बेच देता है तो उसका लाभ प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) 10%",
+      "(b) 12%",
+      "(c) 15%",
+      "(d) 20%"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 22,
+    "text": "A shopkeeper buys pens at the rate of 11 for Rs.10 and sells them at 10 for Rs. 11. His profit percent is:",
+    "hindi": "एक दुकानदार 10 रु. में 11 पैन खरीद कर 11 रु. में 10 पैन के हिसाब से बेच देता है। उसका लाभ प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) 21% Profit",
+      "(b) 28% Profit",
+      "(c) 36% Profit",
+      "(d) 44% Profit"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 23,
+    "text": "By selling a book for ₹400, I lose 20% for what amount should I sell it to gain 20% profit?",
+    "hindi": "₹400 लिए एक किताब बेचकर मैं 20% खो देता हूँ। किस राशि के लिए मुझे इसे 20% हासिल करने के लिए बेचना चाहिए।",
+    "opts": [
+      "(a) Rs. 600",
+      "(b) Rs. 470",
+      "(c) Rs. 150",
+      "(d) Rs. 400"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 24,
+    "text": "When an article is sold for ₹355, there is a loss of 29%. To gain 21%, it should be sold for:",
+    "hindi": "जब कोई वस्तु 355 रूपए में बेची जाती है तो 29% की हानि होती है तो 21% का लाभ कमाने के लिए इसे किस कीमत पर बेचा जाना चाहिए?",
+    "opts": [
+      "(a) Rs. 629.20",
+      "(b) Rs. 580.80",
+      "(c) Rs. 605",
+      "(d) Rs. 635"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 25,
+    "text": "If an article is sold for ₹ 402, there is a loss of 33%. At way price should it be sold to get 37% profit?",
+    "hindi": "यदि एक वस्तु ₹ 402 में बेची जाती है, तो 33% की हानि होती है। 37% का लाभ अर्जित करने के लिए इसे किस मूल्य पर बेचा जाना चाहिए?",
+    "opts": [
+      "(a) ₹ 911",
+      "(b) ₹ 822",
+      "(c) ₹ 822",
+      "(d) ₹ 711"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 26,
+    "text": "An article is sold for ₹ 810 at a loss of 10%. What should be the selling price if the loss is 20%?",
+    "hindi": "एक वस्तु 10% की हानि पर ₹810 में बेची जाती है। यदि हानि 20% है तो विक्रय मूल्य कितना होना चाहिए?",
+    "opts": [
+      "(a) ₹ 750",
+      "(b) ₹ 630",
+      "(c) ₹ 600",
+      "(d) ₹ 720"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 27,
+    "text": "When an article is sold for Rs. 480, there is a loss of $16\\frac{2}{3}\\%$. To gain $8\\frac{1}{3}\\%$, it should be sold for Rs.",
+    "hindi": "जब कोई वस्तु रु 480 में बेचीं जाती हैं तो $16\\frac{2}{3}\\%$ की हानि होती हैं तो $8\\frac{1}{3}\\%$ का लाभ कमाने के लिए इसे किस कीमत पर बेचा जाना चाहिए?",
+    "opts": [
+      "(a) Rs. 620",
+      "(b) Rs. 624",
+      "(c) Rs. 605",
+      "(d) Rs. 750"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 28,
+    "text": "When an article is sold for Rs. 4800, there is a pfofit of $14\\frac{2}{7}\\%$. To loss $16\\frac{2}{3}\\%$, it should be sold for Rs.",
+    "hindi": "जब कोई वस्तु रु 4800 में बेचीं जाती हैं तो $14\\frac{2}{7}\\%$ की लाभ होती हैं तो $16\\frac{2}{3}\\%$ का हानि कमाने के लिए इसे किस कीमत पर बेचा जाना चाहिए?",
+    "opts": [
+      "(a) Rs. 6200",
+      "(b) Rs. 6240",
+      "(c) Rs. 3500",
+      "(d) Rs. 7500"
+    ],
+    "ans": "c"
   }
 ]
