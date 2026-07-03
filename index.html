@@ -711,11 +711,16 @@
 .imp-empty { text-align:center; padding:60px 20px; color:var(--muted); font-size:14px; }
 .hard-reset-btn {
   position: fixed; right: 16px; bottom: 16px; z-index: 999;
-  width: 48px; height: 48px; border-radius: 50%; border: none;
-  background: #ef4444; color: #fff; font-size: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer;
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted); font-size: 16px;
+  opacity: 0.90;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
 }
-.hard-reset-btn:active { transform: scale(0.88); }
+.hard-reset-btn:active { transform: scale(0.88); opacity: 0.9; }
 .q-topic-reset-btn {
   background: none; border: 1.5px solid var(--border); color: var(--muted);
   width: 30px; height: 30px; border-radius: 50%; font-size: 14px;
@@ -751,7 +756,7 @@
   <div class="progress-label" id="progressLabel">Loading...</div>
 </div>
 <div class="stale-bar" id="staleBar">⟳ Updating data...</div>
-<button class="hard-reset-btn" onclick="hardReset()" title="Hard Reset">🔄</button>
+<button class="hard-reset-btn" onclick="smartRefresh()" title="Refresh">🔄</button>
 
 <div class="main">
   <div id="slideWrapper">
@@ -1131,7 +1136,6 @@ function renderQuestionPage(content) {
     +   '<button class="q-back-btn" onclick="goBackHome()">‹ BACK</button>'
     +   '<div class="q-page-title">'+ch.chapter+'</div>'
     +   '<div class="q-page-counter clr-'+clr+'">'+(idx+1)+' / '+total+'</div>'
-    +   '<button class="q-topic-reset-btn" onclick="resetTopicCache()" title="Reset is topic">🔄</button>'
     + '</div>'
 
     // Progress bar
@@ -1197,7 +1201,6 @@ function renderQuestionPageList(content) {
     +   '<button class="q-back-btn" onclick="goBackHome()">‹ BACK</button>'
     +   '<div class="q-page-title">'+ch.chapter+'</div>'
     +   '<div class="q-page-counter clr-'+clr+'">'+subs.length+' Q</div>'
-    +   '<button class="q-topic-reset-btn" onclick="resetTopicCache()" title="Reset is topic">🔄</button>'
     + '</div>'
     + qHtml
     + '<button class="q-nav-done '+(done?'done-'+clr:'')+'" style="width:100%" onclick="toggleDoneFromQPage()">'+(done?'✓ Done':'Mark as Done')+'</button>'
@@ -1221,6 +1224,10 @@ function loadQBank(file, cb) {
 
 // ── Misc ──
 function haptic() { if (navigator.vibrate) navigator.vibrate(10); }
+  function smartRefresh() {
+    if (currentView === 'questions') { resetTopicCache(); }
+    else { hardReset(); }
+  }
 
   function hardReset() {
   if (!confirm("Sara question data reset karein? Progress safe rahega.")) return;
