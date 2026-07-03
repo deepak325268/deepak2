@@ -120,13 +120,24 @@
       font-family: 'Inter', sans-serif;
       transition: background-color 0.3s, color 0.3s;
     }
-    .header-date {
-      text-align: right;
-      font-size: 12px;
+    .all-que-btn {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface);
       color: var(--text);
-      font-family: 'Noto Sans Devanagari', sans-serif;
       white-space: nowrap;
       flex-shrink: 0;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .all-que-btn.active {
+      background: #f5a623;
+      border-color: #f5a623;
+      color: #fff;
     }
 
     .tabs {
@@ -663,8 +674,33 @@
     .q-page-opt { cursor: pointer; transition: all 0.2s; user-select: none; }
 .q-page-opt:active { transform: scale(0.97); }
 .q-page-opts.answered .q-page-opt { pointer-events: none; }
-.q-page-opt.opt-correct { background: rgba(76,175,82,0.2) !important; border-color: #4caf52 !important; color: #2e7d32 !important; font-weight: 700; }
-.q-page-opt.opt-wrong   { background: rgba(255,82,82,0.2)  !important; border-color: #ff5252 !important; color: #c62828 !important; }
+.q-page-opt.opt-correct {
+  background: rgba(76,175,82,0.2) !important; border-color: #4caf52 !important; color: #2e7d32 !important; font-weight: 700;
+  position: relative; isolation: isolate;
+}
+.q-page-opt.opt-correct::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: #4caf52;
+  opacity: 0.35;
+  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: -1;
+  animation: qFillSweep 0.45s ease-out forwards;
+}
+@keyframes qFillSweep { to { transform: scaleX(1); } }
+.q-page-opt.opt-wrong {
+  background: rgba(255,82,82,0.2)  !important; border-color: #ff5252 !important; color: #c62828 !important;
+  animation: qShakeX 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes qShakeX {
+  0%, 100% { transform: translateX(0); }
+  10%,90% { transform: translateX(-1px); }
+  20%,80% { transform: translateX(2px); }
+  30%,50%,70% { transform: translateX(-4px); }
+  40%,60% { transform: translateX(4px); }
+}
 
 .tab-btn.active-i { color: #f5a623; font-weight: 700; transform: translateY(-2px) scale(1.15); }
 .tab-btn.active-i::after { width: 100%; background-color: #f5a623; box-shadow: 0 -1px 6px 0px rgba(245,166,35,0.5); }
@@ -683,7 +719,7 @@
   <div class="day-pill" id="dayPill">...</div>
   <h1>TODAY'S REVISION</h1>
   <div style="display:flex; align-items:center; gap:8px; justify-content:flex-end;">
-    <div class="header-date" id="dateText"></div>
+    <button class="all-que-btn" id="allQueBtn" onclick="toggleAllQuesMode()">ALL QUE.</button>
     <a href="admin.html" target="_blank" class="admin-link" title="Admin">⚙️</a>
   </div>
 </div>
@@ -756,9 +792,8 @@ let currentCh      = null;     // current chapter object
 let currentChKey   = null;     // key like "math_2"
 let currentQIdx    = 0;        // which question index (0-based into ch.subs)
 let currentClr     = 'o';
+let allQuesMode    = false;   // true = sabhi topics ke SABHI questions dikhao (day-filter bypass)
 
-document.getElementById("dateText").textContent =
-  today.toLocaleDateString("hi-IN", { weekday:"long", day:"numeric", month:"long" });
 
 var cached = localStorage.getItem(cacheKey);
 if (cached) {
@@ -856,6 +891,21 @@ function updateTabUI() {
   
 }
 
+// ── ALL QUE. toggle: sabhi topics ke sabhi questions (day/freq filter bypass) ──
+function toggleAllQuesMode() {
+  haptic();
+  allQuesMode = !allQuesMode;
+  var btn = document.getElementById('allQueBtn');
+  btn.textContent = allQuesMode ? "TODAY'S" : "ALL QUE.";
+  btn.classList.toggle('active', allQuesMode);
+
+  currentView = 'home'; currentCh = null; currentChKey = null; currentQIdx = 0;
+  impView = 'home'; impCurrentCh = null; impQIdx = 0;
+  document.querySelector('.header').style.display = 'block';
+  renderContent();
+  window.scrollTo(0,0);
+}
+
 // ══════════════════════════════════════
 //  RENDER — decides home vs question page
 // ══════════════════════════════════════
@@ -863,7 +913,8 @@ function renderContent() {
   var content = document.getElementById("content");
   if (activeTab === 'important') {
   if (!impLoaded) { renderImportant(); return; }
-  if (impView === 'questions') { renderImpQuestion(); return; }
+  if (impView === 'questions') { if (allQuesMode) { renderImpQuestionList(); } else { renderImpQuestion(); } return; }
+  if (impView === 'chapters') { renderImpChapterList(impSubTab); return; }
   renderImpHome();
   return;
 }
@@ -878,7 +929,8 @@ function renderContent() {
   if (currentView === 'questions' && currentCh) {
     document.querySelector('.header').style.display = 'none';
     document.querySelector('.progress-wrap').style.display = 'none';
-    renderQuestionPage(content); return;
+    if (allQuesMode) { renderQuestionPageList(content); } else { renderQuestionPage(content); }
+    return;
   }
 
   // ── HOME VIEW ──
@@ -918,12 +970,14 @@ function makeTopicCard(key, ch, clr) {
     var first = ch.subs[0].q, last = ch.subs[ch.subs.length-1].q;
     qRange = first === last ? "Q. "+first : "Q. "+first+" – "+last;
   }
+  var badgeText = allQuesMode ? 'सभी प्रश्न' : (qCount + ' प्रश्न');
+  if (allQuesMode) qRange = '';
 
   card.innerHTML =
     '<div class="topic-home-left">'
     + '<div class="topic-home-name">'+ch.chapter+'</div>'
     + '<div class="topic-home-meta">'
-    +   '<span class="topic-q-badge clr-'+clr+'">'+qCount+' प्रश्न</span>'
+    +   '<span class="topic-q-badge clr-'+clr+'">'+badgeText+'</span>'
     +   (qRange ? '<span class="topic-q-range">'+qRange+'</span>' : '')
     + '</div>'
     + '</div>'
@@ -987,7 +1041,6 @@ function openTopic(key, ch, clr) {
   haptic();
   history.pushState({ pageOpen: true }, "");
   currentView  = 'questions';
-  currentCh    = ch;
   currentChKey = key;
   currentQIdx  = 0;
   currentClr   = clr;
@@ -997,6 +1050,12 @@ function openTopic(key, ch, clr) {
   window.scrollTo(0,0);
 
   loadQBank(ch.questionsFile, function() {
+    if (allQuesMode) {
+      var bank = (qBankCache[ch.questionsFile] || []).slice().sort(function(a,b){ return a.num - b.num; });
+      currentCh = { chapter: ch.chapter, questionsFile: ch.questionsFile, subs: bank.map(function(q){ return {q:q.num}; }) };
+    } else {
+      currentCh = ch;
+    }
     renderContent();
     window.scrollTo(0,0);
   });
@@ -1089,7 +1148,48 @@ function renderQuestionPage(content) {
   }
 }
 
-// ── Load question JSON ──
+// ── ALL QUE. mode: sabhi questions ek saath upar se niche list mein (slide/pagination nahi) ──
+function renderQuestionPageList(content) {
+  var ch    = currentCh;
+  var clr   = currentClr;
+  var subs  = ch.subs;
+  var bank  = qBankCache[ch.questionsFile] || [];
+  var done  = doneSet.has(currentChKey);
+
+  var qHtml = subs.map(function(sub) {
+    var q = null;
+    for (var i=0; i<bank.length; i++) { if (bank[i].num === sub.q) { q = bank[i]; break; } }
+    var optsHtml = "";
+    if (q && q.opts && q.opts.length) {
+      optsHtml = '<div class="q-page-opts">'
+        + q.opts.map(function(o,oi){ return '<div class="q-page-opt" onclick="checkAns(this,\''+(q.ans||'')+'\','+oi+')">'+escH(o)+'</div>'; }).join('')
+        + '</div>';
+    }
+    return '<div class="q-page-body">'
+      +   '<div class="q-page-num clr-'+clr+'">Q. '+sub.q+'</div>'
+      +   (q
+          ? (q.hindi ? '<div class="q-page-hindi">'+escH(q.hindi)+'</div>' : '')
+            + (q.text ? '<div class="q-page-eng">'+escH(q.text)+'</div>' : '')
+            + optsHtml
+          : '<div class="q-notfound">Question नहीं मिला।</div>')
+      + '</div>';
+  }).join('');
+
+  content.innerHTML =
+    '<div class="q-page-view">'
+    + '<div class="q-page-header">'
+    +   '<button class="q-back-btn" onclick="goBackHome()">‹ BACK</button>'
+    +   '<div class="q-page-title">'+ch.chapter+'</div>'
+    +   '<div class="q-page-counter clr-'+clr+'">'+subs.length+' Q</div>'
+    + '</div>'
+    + qHtml
+    + '<button class="q-nav-done '+(done?'done-'+clr:'')+'" style="width:100%" onclick="toggleDoneFromQPage()">'+(done?'✓ Done':'Mark as Done')+'</button>'
+    + '</div>';
+
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise([content]).catch(function(){});
+  }
+}
 function loadQBank(file, cb) {
   if (qBankCache[file]) { cb(); return; }
   fetch(QUESTIONS_BASE + file)
@@ -1189,6 +1289,7 @@ fetch(API_MATH)
 
 var impSubTab = 'math';
 var impAllQ   = { math:[], reasoning:[] };
+var impAllQFull = { math:[], reasoning:[] };   // sabhi important questions, bina freq/day filter ke
 var impQIdx   = 0;
 var impLoaded = false;
 var impView = 'home';
@@ -1210,6 +1311,7 @@ function renderImportant() {
     .then(function(r){ return r.json(); })
     .then(function(qs) {
       impAllQ = { math:[], reasoning:[] };
+      impAllQFull = { math:[], reasoning:[] };
       impChapters = { math: {}, reasoning: {} };
       
       // Fixed starting point rotation cycle ke liye
@@ -1219,6 +1321,8 @@ function renderImportant() {
 
       qs.forEach(function(q) {
         var subj = q._subject || 'math';
+        if (impAllQFull[subj]) impAllQFull[subj].push(q);
+
         var freq = q.freq || 2; // Agar freq set nahi hai toh default 2 rahega
         
         // NAYA LOGIC: Agar freq 1 hai toh roz (1), varna poore gap ke liye (freq + 1)
@@ -1244,7 +1348,7 @@ function renderImportant() {
 
 function renderImpQuestion() {
   var content = document.getElementById("content");
-  var qs = impAllQ[impSubTab];
+  var qs = impCurrentCh || impAllQ[impSubTab];
   var total = qs.length;
   var clr = impSubTab === 'reasoning' ? 'r' : 'o';
 
@@ -1296,6 +1400,41 @@ function renderImpQuestion() {
   if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([content]).catch(function(){});
 }
 
+// ── ALL QUE. mode: important tab ke sabhi questions ek saath upar se niche list mein ──
+function renderImpQuestionList() {
+  var content = document.getElementById("content");
+  var qs = impCurrentCh || impAllQ[impSubTab];
+  var clr = impSubTab === 'reasoning' ? 'r' : 'o';
+  var chapterName = (qs[0] && qs[0]._chapter) || '';
+
+  var qHtml = qs.map(function(q) {
+    var optsHtml = '';
+    if (q.opts && q.opts.length) {
+      optsHtml = '<div class="q-page-opts">'
+        + q.opts.map(function(o,i){ return '<div class="q-page-opt" onclick="checkAns(this,\''+(q.ans||'')+'\','+i+')">'+escH(o)+'</div>'; }).join('')
+        + '</div>';
+    }
+    return '<div class="q-page-body">'
+      +   '<div class="q-page-num clr-'+clr+'">Q. '+q.num+'</div>'
+      +   (q.hindi ? '<div class="q-page-hindi">'+escH(q.hindi)+'</div>' : '')
+      +   (q.text  ? '<div class="q-page-eng">'+escH(q.text)+'</div>'   : '')
+      +   optsHtml
+      + '</div>';
+  }).join('');
+
+  content.innerHTML =
+    '<div class="q-page-view">'
+    + '<div class="q-page-header">'
+    +   '<button class="q-back-btn" onclick="goImpHome()">‹ BACK</button>'
+    +   '<div class="q-page-title" style="font-size:13px">⭐ '+escH(chapterName)+'</div>'
+    +   '<div class="q-page-counter clr-'+clr+'">'+qs.length+' Q</div>'
+    + '</div>'
+    + qHtml
+    + '</div>';
+
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([content]).catch(function(){});
+}
+
 
   
 function goImpQ(idx) {
@@ -1317,8 +1456,8 @@ function switchImpTab(subj) {
   document.querySelector('.progress-wrap').style.display = 'none';
   document.querySelector('.header').style.display = 'block';
   var content = document.getElementById("content");
-  var mathTotal = impAllQ.math.length;
-  var rTotal    = impAllQ.reasoning.length;
+  var mathTotal = allQuesMode ? impAllQFull.math.length : impAllQ.math.length;
+  var rTotal    = allQuesMode ? impAllQFull.reasoning.length : impAllQ.reasoning.length;
 
   var html =
     '<div style="padding-top:12px">'
@@ -1346,8 +1485,58 @@ function openImpSubject(subj) {
   history.pushState({ pageOpen: true }, "");
   impSubTab = subj;
   impQIdx   = 0;
-  impView   = 'questions';
-  renderImpQuestion();
+  if (allQuesMode) {
+    impView = 'chapters';
+    renderImpChapterList(subj);
+  } else {
+    impView = 'questions';
+    renderImpQuestion();
+  }
+  window.scrollTo(0,0);
+}
+
+// ── ALL QUE. mode: topic-wise chapter list for Important ──
+function renderImpChapterList(subj) {
+  document.querySelector('.progress-wrap').style.display = 'none';
+  document.querySelector('.header').style.display = 'block';
+  var content = document.getElementById("content");
+  var qs = impAllQFull[subj] || [];
+  var groups = {};
+  qs.forEach(function(q) {
+    var chName = q._chapter || 'Other';
+    if (!groups[chName]) groups[chName] = [];
+    groups[chName].push(q);
+  });
+  var chapterNames = Object.keys(groups).sort();
+  var clr = subj === 'reasoning' ? 'r' : 'o';
+
+  var html = '<button class="q-back-btn" style="margin:12px 0 8px" onclick="goImpHome()">‹ BACK</button>';
+  if (chapterNames.length === 0) {
+    html += '<div class="imp-empty">⭐ Is subject me koi important topic nahi mila!</div>';
+  } else {
+    chapterNames.forEach(function(chName) {
+      html +=
+        '<div class="topic-home-card" onclick="openImpChapter(\''+subj+'\',\''+encodeURIComponent(chName)+'\')">'
+        + '<div class="topic-home-left">'
+        +   '<div class="topic-home-name">'+escH(chName)+'</div>'
+        +   '<div class="topic-home-meta"><span class="topic-q-badge clr-'+clr+'">'+groups[chName].length+' प्रश्न</span></div>'
+        + '</div>'
+        + '<div class="topic-home-right"><div class="topic-arrow">›</div></div>'
+        + '</div>';
+    });
+  }
+  content.innerHTML = html;
+}
+
+function openImpChapter(subj, chNameEnc) {
+  haptic();
+  history.pushState({ pageOpen: true }, "");
+  var chName = decodeURIComponent(chNameEnc);
+  impSubTab    = subj;
+  impCurrentCh = (impAllQFull[subj] || []).filter(function(q){ return (q._chapter||'Other') === chName; });
+  impQIdx      = 0;
+  impView      = 'questions';
+  renderImpQuestionList();
   window.scrollTo(0,0);
 }
 
@@ -1361,12 +1550,24 @@ function goImpHome() {
 window.addEventListener('popstate', function(e) {
   // Agar Important tab khula hai
   if (activeTab === 'important' && impView === 'questions') {
+    if (allQuesMode) {
+      impView = 'chapters';
+      impCurrentCh = null;
+      impQIdx = 0;
+      renderImpChapterList(impSubTab);
+    } else {
+      impView = 'home';
+      impCurrentCh = null;
+      impQIdx = 0;
+      renderImpHome();
+    }
+    window.scrollTo(0,0);
+  }
+  else if (activeTab === 'important' && impView === 'chapters') {
     impView = 'home';
-    impCurrentCh = null;
-    impQIdx = 0;
     renderImpHome();
     window.scrollTo(0,0);
-  } 
+  }
   // Agar Math ya Reasoning tab khula hai
   else if (currentView === 'questions') {
     currentView = 'home'; 
