@@ -709,6 +709,20 @@
 .imp-sub-tab { padding:6px 16px; border-radius:20px; font-size:13px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--surface); color:var(--muted); }
 .imp-sub-tab.active { background:#f5a623; color:#fff; border-color:#f5a623; }
 .imp-empty { text-align:center; padding:60px 20px; color:var(--muted); font-size:14px; }
+.hard-reset-btn {
+  position: fixed; right: 16px; bottom: 16px; z-index: 999;
+  width: 48px; height: 48px; border-radius: 50%; border: none;
+  background: #ef4444; color: #fff; font-size: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer;
+}
+.hard-reset-btn:active { transform: scale(0.88); }
+.q-topic-reset-btn {
+  background: none; border: 1.5px solid var(--border); color: var(--muted);
+  width: 30px; height: 30px; border-radius: 50%; font-size: 14px;
+  cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.q-topic-reset-btn:active { transform: scale(0.85); background: var(--border); }
     
   </style>
 </head>
@@ -737,6 +751,7 @@
   <div class="progress-label" id="progressLabel">Loading...</div>
 </div>
 <div class="stale-bar" id="staleBar">⟳ Updating data...</div>
+<button class="hard-reset-btn" onclick="hardReset()" title="Hard Reset">🔄</button>
 
 <div class="main">
   <div id="slideWrapper">
@@ -1116,6 +1131,7 @@ function renderQuestionPage(content) {
     +   '<button class="q-back-btn" onclick="goBackHome()">‹ BACK</button>'
     +   '<div class="q-page-title">'+ch.chapter+'</div>'
     +   '<div class="q-page-counter clr-'+clr+'">'+(idx+1)+' / '+total+'</div>'
+    +   '<button class="q-topic-reset-btn" onclick="resetTopicCache()" title="Reset is topic">🔄</button>'
     + '</div>'
 
     // Progress bar
@@ -1181,6 +1197,7 @@ function renderQuestionPageList(content) {
     +   '<button class="q-back-btn" onclick="goBackHome()">‹ BACK</button>'
     +   '<div class="q-page-title">'+ch.chapter+'</div>'
     +   '<div class="q-page-counter clr-'+clr+'">'+subs.length+' Q</div>'
+    +   '<button class="q-topic-reset-btn" onclick="resetTopicCache()" title="Reset is topic">🔄</button>'
     + '</div>'
     + qHtml
     + '<button class="q-nav-done '+(done?'done-'+clr:'')+'" style="width:100%" onclick="toggleDoneFromQPage()">'+(done?'✓ Done':'Mark as Done')+'</button>'
@@ -1204,6 +1221,37 @@ function loadQBank(file, cb) {
 
 // ── Misc ──
 function haptic() { if (navigator.vibrate) navigator.vibrate(10); }
+
+  function hardReset() {
+  if (!confirm("Sara question data reset karein? Progress safe rahega.")) return;
+  Object.keys(localStorage).forEach(function(key) {
+    if (key.startsWith("cache_") || key.startsWith("qBankCache_")) {
+      localStorage.removeItem(key);
+    }
+  });
+  location.reload();
+}
+
+function resetTopicCache() {
+  if (!currentCh || !currentCh.questionsFile) return;
+  var file = currentCh.questionsFile;
+  if (!confirm("Is topic ka question data reset karke dobara load karein?")) return;
+
+  delete qBankCache[file];
+  try { localStorage.setItem('qBankCache_' + dateStr, JSON.stringify(qBankCache)); } catch(e) {}
+
+  var content = document.getElementById("content");
+  content.innerHTML = '<div class="loading"><div class="spinner spin-'+currentClr+'"></div><span>Refresh ho raha hai...</span></div>';
+
+  loadQBank(file, function() {
+    if (allQuesMode) {
+      var bank = (qBankCache[file] || []).slice().sort(function(a,b){ return a.num - b.num; });
+      currentCh.subs = bank.map(function(q){ return {q:q.num}; });
+    }
+    currentQIdx = 0;
+    renderContent();
+  });
+}
 
 (function(){
   var now = new Date();
