@@ -65,6 +65,7 @@ header .sub{font-size:12px;color:var(--muted);margin-top:3px}
   background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);
   padding:10px 12px;margin-bottom:8px;
   transition:box-shadow .15s,border-color .15s,background .15s,transform .15s;
+  will-change:transform;
 }
 .ch-card.dragging{
   background:var(--surface2);border-color:var(--accent);
@@ -311,11 +312,20 @@ function renderList(subject) {
 }
 
 // ---------- Drag & drop reorder (Pointer Events: mouse + touch dono) ----------
+// Smooth banane ke 3 tarike:
+// 1) Dragging card transform se pointer ke saath 1:1 move karta hai (jump nahi)
+// 2) Jagah banane wale baaki cards FLIP technique se slide hote hain
+// 3) pointermove ko requestAnimationFrame pe throttle karte hai (warna har move
+//    event pe getBoundingClientRect chalne se layout thrash + jank hota hai)
 
 function initDragging(subject) {
   const container = document.getElementById(subject === 'math' ? 'listMath' : 'listReasoning');
   let draggingEl = null;
   let pointerId = null;
+  let pointerStartY = 0;
+  let elStartOffsetTop = 0;
+  let pendingY = null;
+  let rafId = null;
 
   container.addEventListener('pointerdown', function(e) {
     const handle = e.target.closest('.drag-handle');
@@ -326,7 +336,13 @@ function initDragging(subject) {
     e.preventDefault();
     draggingEl = card;
     pointerId = e.pointerId;
+    pointerStartY = e.clientY;
+    elStartOffsetTop = card.offsetTop;
+
     card.classList.add('dragging');
+    card.style.transition = 'none'; // drag ke dauraan koi CSS transition lag na kare
+    card.style.transform = 'translateY(0px) scale(1.02)';
+
     try { handle.setPointerCapture(pointerId); } catch (err) {}
     if (navigator.vibrate) navigator.vibrate(8);
   });
@@ -334,17 +350,65 @@ function initDragging(subject) {
   container.addEventListener('pointermove', function(e) {
     if (!draggingEl || e.pointerId !== pointerId) return;
     e.preventDefault();
-    const afterEl = getDragAfterElement(container, e.clientY);
-    if (afterEl == null) {
-      container.appendChild(draggingEl);
-    } else if (afterEl !== draggingEl) {
-      container.insertBefore(draggingEl, afterEl);
-    }
+    pendingY = e.clientY;
+    if (rafId == null) rafId = requestAnimationFrame(processMove);
   });
+
+  function processMove() {
+    rafId = null;
+    if (!draggingEl || pendingY == null) return;
+    const clientY = pendingY;
+
+    // Card kahan dikhna chahiye (finger ke saath 1:1)
+    const desiredTop = elStartOffsetTop + (clientY - pointerStartY);
+
+    // Order badalne ki zaroorat hai kya, baaki cards ko smoothly slide karo
+    reorderWithFlip(getDragAfterElement(container, clientY));
+
+    // Naye flow-position ke hisaab se transform recalc karo taaki visual jump na aaye
+    const newOffsetTop = draggingEl.offsetTop;
+    draggingEl.style.transform = 'translateY(' + (desiredTop - newOffsetTop) + 'px) scale(1.02)';
+  }
+
+  function reorderWithFlip(afterEl) {
+    if (afterEl === draggingEl) return;
+    const currentNext = draggingEl.nextElementSibling;
+    if (afterEl == null && currentNext == null) return; // already last
+    if (afterEl === currentNext) return; // no-op
+
+    const siblings = [].slice.call(container.querySelectorAll('.ch-card:not(.dragging)'));
+    const firstRects = siblings.map(function(el) { return [el, el.getBoundingClientRect()]; });
+
+    if (afterEl == null) container.appendChild(draggingEl);
+    else container.insertBefore(draggingEl, afterEl);
+
+    // FLIP: purani position se nayi position tak smoothly slide karo (jump nahi)
+    firstRects.forEach(function(pair) {
+      const el = pair[0], first = pair[1];
+      const last = el.getBoundingClientRect();
+      const dy = first.top - last.top;
+      if (dy) {
+        el.style.transition = 'none';
+        el.style.transform = 'translateY(' + dy + 'px)';
+        el.getBoundingClientRect(); // reflow force karne ke liye
+        requestAnimationFrame(function() {
+          el.style.transition = '';
+          el.style.transform = '';
+        });
+      }
+    });
+  }
 
   function endDrag(e) {
     if (!draggingEl || e.pointerId !== pointerId) return;
-    draggingEl.classList.remove('dragging');
+    const el = draggingEl;
+    if (rafId != null) { cancelAnimationFrame(rafId); rafId = null; }
+    pendingY = null;
+
+    el.style.transition = ''; // wapas CSS ke .15s transition pe (smooth settle)
+    el.style.transform = '';
+    el.classList.remove('dragging');
+
     draggingEl = null;
     pointerId = null;
     syncOrderFromDOM(subject);
