@@ -215,11 +215,11 @@ async function unlockApp() {
   const errEl = document.getElementById('lockErr');
   const btn = document.getElementById('lockBtn');
 
-  if (!val) { errEl.textContent = 'Key khali nahi ho sakta'; return; }
+  if (!val) { errEl.textContent = 'Key can not be emptly'; return; }
 
   errEl.textContent = '';
   btn.disabled = true;
-  btn.textContent = 'Check ho raha hai...';
+  btn.textContent = 'Checking...';
 
   try {
     const res = await fetch(WORKER_URL + '/verify-key', {
@@ -232,7 +232,7 @@ async function unlockApp() {
       localStorage.setItem('chapter_order_access_key', val);
       hideLock();
     } else {
-      errEl.textContent = '❌ ' + (data.error || 'Galat access key');
+      errEl.textContent = '❌ ' + (data.error || 'Wrong access key');
     }
   } catch (e) {
     errEl.textContent = 'Network error: ' + e.message;
