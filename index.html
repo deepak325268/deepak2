@@ -5,7 +5,7 @@
   <link rel="apple-touch-icon" href="/deepak2/logo2.png">
   <link rel="icon" type="image/png" href="/deepak2/logo2.png">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -59,6 +59,10 @@
       }
     }
 
+    html {
+      overflow-x: hidden;
+      width: 100%;
+    }
     body {
       background: var(--bg);
       color: var(--text);
@@ -66,6 +70,7 @@
       min-height: 100vh;
       padding-bottom: 60px;
       overflow-x: hidden;
+      width: 100%;
       transition: background-color 0.3s, color 0.3s;
       touch-action: manipulation;
     }
@@ -84,7 +89,7 @@
     }
  .header-top {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   padding-bottom: 12px;
   gap: 12px;
@@ -96,6 +101,9 @@
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
   background: linear-gradient(90deg, #f97316, #a855f7, #3b82f6, #f97316);
   background-size: 300% 100%;
   -webkit-background-clip: text;
@@ -121,25 +129,50 @@
       font-family: 'Inter', sans-serif;
       transition: background-color 0.3s, color 0.3s;
     }
-    .all-que-btn {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 6px 10px;
-      border-radius: 20px;
+    .menu-wrap { position: relative; flex-shrink: 0; }
+    .menu-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 50%;
       border: 1px solid var(--border);
       background: var(--surface);
       color: var(--text);
-      white-space: nowrap;
-      flex-shrink: 0;
-      font-family: 'Inter', sans-serif;
+      font-size: 16px;
       cursor: pointer;
-      transition: all 0.2s;
+      flex-shrink: 0;
+      transition: background-color 0.2s, transform 0.15s;
     }
-    .all-que-btn.active {
-      background: #f5a623;
-      border-color: #f5a623;
-      color: #fff;
+    .menu-btn:active { transform: scale(0.9); }
+    .menu-btn.active { background: #f5a623; border-color: #f5a623; color: #fff; }
+    .menu-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      overflow: hidden;
+      z-index: 50;
+      min-width: 180px;
     }
+    .menu-dropdown.show { display: flex; flex-direction: column; }
+    .menu-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px;
+      font-size: 14px; font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: transparent;
+      border: none;
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+      text-align: left;
+      transition: background-color 0.15s;
+    }
+    .menu-item:active { background: var(--border); }
+    .menu-item + .menu-item { border-top: 1px solid var(--border); }
 
     .tabs {
       display: flex;
@@ -456,14 +489,6 @@
     @media(max-width: 400px) {
       .q-block-opts { grid-template-columns: 1fr; }
     }
-    .admin-link {
-      display: flex; align-items: center; justify-content: center;
-      width: 30px; height: 30px; border-radius: 50%;
-      background: var(--border); color: var(--text);
-      font-size: 16px; text-decoration: none;
-      flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s;
-    }
-    .admin-link:hover { opacity: 1; }
 
     /* ══════════════════════════════════════
        HOME — Topic Cards
@@ -738,9 +763,12 @@
   <div class="header-top">
   <div class="day-pill" id="dayPill">...</div>
   <h1>TODAY'S REVISION</h1>
-  <div style="display:flex; align-items:center; gap:8px; justify-content:flex-end;">
-    <button class="all-que-btn" id="allQueBtn" onclick="toggleAllQuesMode()">ALL QUE.</button>
-    <a href="admin.html" target="_blank" class="admin-link" title="Admin">⚙️</a>
+  <div class="menu-wrap" id="menuWrap">
+    <button class="menu-btn" id="menuBtn" onclick="toggleHeaderMenu(event)">☰</button>
+    <div class="menu-dropdown" id="menuDropdown">
+      <button class="menu-item" id="allQueBtn" onclick="toggleAllQuesMode()">📋 All Questions</button>
+      <a href="admin.html" target="_blank" class="menu-item">⚙️ Admin Panel</a>
+    </div>
   </div>
 </div>
   <div class="tabs" id="tabsContainer">
@@ -912,13 +940,26 @@ function updateTabUI() {
   
 }
 
+// ── Header hamburger menu open/close ──
+function toggleHeaderMenu(e) {
+  e.stopPropagation();
+  document.getElementById('menuDropdown').classList.toggle('show');
+}
+document.addEventListener('click', function(e) {
+  var wrap = document.getElementById('menuWrap');
+  if (wrap && !wrap.contains(e.target)) {
+    document.getElementById('menuDropdown').classList.remove('show');
+  }
+});
+
 // ── ALL QUE. toggle: sabhi topics ke sabhi questions (day/freq filter bypass) ──
 function toggleAllQuesMode() {
   haptic();
   allQuesMode = !allQuesMode;
   var btn = document.getElementById('allQueBtn');
-  btn.textContent = allQuesMode ? "TODAY'S" : "ALL QUE.";
-  btn.classList.toggle('active', allQuesMode);
+  btn.textContent = allQuesMode ? "🏠 Today's View" : "📋 All Questions";
+  document.getElementById('menuBtn').classList.toggle('active', allQuesMode);
+  document.getElementById('menuDropdown').classList.remove('show');
 
   currentView = 'home'; currentCh = null; currentChKey = null; currentQIdx = 0;
   impView = 'home'; impCurrentCh = null; impQIdx = 0;
