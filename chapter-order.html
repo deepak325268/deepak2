@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<title>Chapter Order Manager</title>
+<style>
+:root {
+  --bg:#0f1117; --surface:#1a1d27; --surface2:#22263a; --border:#2a2d3a;
+  --accent:#6c63ff; --accent2:#ff6584; --text:#e8eaf6; --muted:#7b7f9e;
+  --success:#4caf82; --error:#ff5252; --warn:#ffb347; --r:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding-bottom:40px}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 18px;position:sticky;top:0;z-index:10}
+header h1{font-size:17px;font-weight:700}
+header .sub{font-size:12px;color:var(--muted);margin-top:2px}
+
+.tabs{display:flex;gap:6px;padding:14px 14px 0}
+.tab-btn{flex:1;padding:10px;text-align:center;font-size:13px;font-weight:700;border-radius:9px;cursor:pointer;background:var(--surface);border:1px solid var(--border);color:var(--muted)}
+.tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.panel{display:none;padding:14px}
+.panel.active{display:block}
+
+.ch-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.ch-num{font-size:12px;color:var(--muted);min-width:20px;font-weight:700}
+.ch-name{flex:1;font-size:14px;font-weight:600}
+.ch-btns{display:flex;gap:6px;flex-shrink:0}
+.arrow-btn{width:34px;height:34px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.arrow-btn:disabled{opacity:.3;cursor:not-allowed}
+.arrow-btn:active:not(:disabled){background:var(--accent)}
+
+.action-row{display:flex;gap:8px;padding:6px 14px 0}
+.btn{flex:1;padding:12px;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer}
+.btn-save{background:var(--success);color:#fff}
+.btn-reset{background:transparent;border:1px solid var(--error);color:var(--error)}
+
+.status{margin:10px 14px 0;font-size:13px;padding:10px 12px;border-radius:8px;display:none}
+.status.show{display:block}
+.status.ok{background:rgba(76,175,130,.12);color:var(--success);border:1px solid rgba(76,175,130,.3)}
+.status.err{background:rgba(255,82,82,.12);color:var(--error);border:1px solid rgba(255,82,82,.3)}
+.status.info{background:rgba(108,99,255,.12);color:var(--accent);border:1px solid rgba(108,99,255,.3)}
+
+.loading{text-align:center;padding:40px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📑 Chapter Order Manager</h1>
+  <div class="sub">Yaha jo order set karoge, wahi order app me dikhega</div>
+</header>
+
+<div class="tabs">
+  <div class="tab-btn active" id="tabMathBtn" onclick="switchPanel('math')">📐 Math</div>
+  <div class="tab-btn" id="tabReasoningBtn" onclick="switchPanel('reasoning')">🧠 Reasoning</div>
+</div>
+
+<div class="status" id="status"></div>
+
+<div class="panel active" id="panelMath">
+  <div class="loading" id="loadingMath">Load ho raha hai...</div>
+</div>
+<div class="panel" id="panelReasoning">
+  <div class="loading" id="loadingReasoning">Load ho raha hai...</div>
+</div>
+
+<div class="action-row">
+  <button class="btn btn-reset" onclick="resetOrder()">↩️ Sheet Order pe wapas jao</button>
+</div>
+<div class="action-row">
+  <button class="btn btn-save" onclick="saveOrder()">💾 Order Save Karo</button>
+</div>
+
+<script>
+// ⚠️ Deploy karne ke baad Worker ka URL yaha daalo:
+const WORKER_URL = "https://chapter-order-proxy.YOUR-SUBDOMAIN.workers.dev";
+const FIREBASE_URL = "https://bpsc-sachin-sir-revise-default-rtdb.asia-southeast1.firebasedatabase.app";
+
+let activeSubject = 'math';
+let lists = { math: [], reasoning: [] };
+
+function switchPanel(subject) {
+  activeSubject = subject;
+  document.getElementById('tabMathBtn').classList.toggle('active', subject === 'math');
+  document.getElementById('tabReasoningBtn').classList.toggle('active', subject === 'reasoning');
+  document.getElementById('panelMath').classList.toggle('active', subject === 'math');
+  document.getElementById('panelReasoning').classList.toggle('active', subject === 'reasoning');
+}
+
+function showStatus(msg, type) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = 'status show ' + type;
+}
+
+function applyCustomOrder(chapterNames, order) {
+  if (!order || !Array.isArray(order) || order.length === 0) return chapterNames.slice();
+  const remaining = chapterNames.slice();
+  const ordered = [];
+  order.forEach(function(name) {
+    const idx = remaining.indexOf(name);
+    if (idx !== -1) { ordered.push(name); remaining.splice(idx, 1); }
+  });
+  return ordered.concat(remaining); // naye chapters jo order me nahi hain, end me
+}
+
+function renderList(subject) {
+  const panel = document.getElementById(subject === 'math' ? 'panelMath' : 'panelReasoning');
+  const arr = lists[subject];
+  panel.innerHTML = '';
+  arr.forEach(function(name, i) {
+    const card = document.createElement('div');
+    card.className = 'ch-card';
+    card.innerHTML =
+      '<div class="ch-num">' + (i + 1) + '</div>' +
+      '<div class="ch-name">' + escH(name) + '</div>' +
+      '<div class="ch-btns">' +
+        '<button class="arrow-btn" ' + (i === 0 ? 'disabled' : '') + ' onclick="move(\'' + subject + '\',' + i + ',-1)">▲</button>' +
+        '<button class="arrow-btn" ' + (i === arr.length - 1 ? 'disabled' : '') + ' onclick="move(\'' + subject + '\',' + i + ',1)">▼</button>' +
+      '</div>';
+    panel.appendChild(card);
+  });
+}
+
+function escH(s) {
+  return s.replace(/[&<>"']/g, function(c) {
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+  });
+}
+
+function move(subject, index, dir) {
+  const arr = lists[subject];
+  const newIndex = index + dir;
+  if (newIndex < 0 || newIndex >= arr.length) return;
+  const tmp = arr[index];
+  arr[index] = arr[newIndex];
+  arr[newIndex] = tmp;
+  renderList(subject);
+}
+
+async function loadAll() {
+  try {
+    const [mainRes, mathOrderRes, reasoningOrderRes] = await Promise.all([
+      fetch(FIREBASE_URL + '/revisionData.json').then(r => r.json()),
+      fetch(FIREBASE_URL + '/chapterOrder/math.json').then(r => r.json()).catch(() => null),
+      fetch(FIREBASE_URL + '/chapterOrder/reasoning.json').then(r => r.json()).catch(() => null),
+    ]);
+
+    const mathNames = (mainRes.chapters || []).map(c => c.chapter);
+    const reasoningNames = (mainRes.reasoning && mainRes.reasoning.chapters || []).map(c => c.chapter);
+
+    lists.math = applyCustomOrder(mathNames, mathOrderRes);
+    lists.reasoning = applyCustomOrder(reasoningNames, reasoningOrderRes);
+
+    renderList('math');
+    renderList('reasoning');
+  } catch (e) {
+    showStatus('Data load nahi hua: ' + e.message, 'err');
+  }
+}
+
+function getAccessKey() {
+  let key = localStorage.getItem('chapter_order_access_key');
+  if (!key) {
+    key = prompt('Access key daalo (Worker me set kiya hua password):');
+    if (key) localStorage.setItem('chapter_order_access_key', key);
+  }
+  return key;
+}
+
+async function saveOrder() {
+  const key = getAccessKey();
+  if (!key) { showStatus('Access key ke bina save nahi hoga', 'err'); return; }
+
+  showStatus('Saving...', 'info');
+  try {
+    const res = await fetch(WORKER_URL + '/save-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ accessKey: key, subject: activeSubject, order: lists[activeSubject] }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      showStatus('✅ ' + (activeSubject === 'math' ? 'Math' : 'Reasoning') + ' order save ho gaya!', 'ok');
+    } else {
+      if (res.status === 401) localStorage.removeItem('chapter_order_access_key');
+      showStatus('❌ ' + data.error, 'err');
+    }
+  } catch (e) {
+    showStatus('Network error: ' + e.message, 'err');
+  }
+}
+
+async function resetOrder() {
+  if (!confirm((activeSubject === 'math' ? 'Math' : 'Reasoning') + ' ka order Sheet wale default order pe wapas kar du?')) return;
+  const key = getAccessKey();
+  if (!key) { showStatus('Access key ke bina reset nahi hoga', 'err'); return; }
+
+  showStatus('Resetting...', 'info');
+  try {
+    const res = await fetch(WORKER_URL + '/save-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ accessKey: key, subject: activeSubject, order: [] }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      showStatus('↩️ Sheet order pe wapas ho gaya. Page reload karo.', 'ok');
+    } else {
+      if (res.status === 401) localStorage.removeItem('chapter_order_access_key');
+      showStatus('❌ ' + data.error, 'err');
+    }
+  } catch (e) {
+    showStatus('Network error: ' + e.message, 'err');
+  }
+}
+
+loadAll();
+</script>
+</body>
+</html>
