@@ -68,6 +68,22 @@
     "_subject": "reasoning"
   },
   {
+    "num": 27,
+    "text": "When an article is sold for Rs. 480, there is a loss of $16\\frac{2}{3}\\%$. To gain $8\\frac{1}{3}\\%$, it should be sold for Rs.",
+    "hindi": "जब कोई वस्तु रु 480 में बेचीं जाती हैं तो $16\\frac{2}{3}\\%$ की हानि होती हैं तो $8\\frac{1}{3}\\%$ का लाभ कमाने के लिए इसे किस कीमत पर बेचा जाना चाहिए?",
+    "opts": [
+      "(a) Rs. 620",
+      "(b) Rs. 624",
+      "(c) Rs. 605",
+      "(d) Rs. 750"
+    ],
+    "ans": "b",
+    "imp": true,
+    "_file": "profit-and-loss.json",
+    "_chapter": "Profit And Loss",
+    "_subject": "math"
+  },
+  {
     "num": 28,
     "text": "When an article is sold for Rs. 4800, there is a pfofit of $14\\frac{2}{7}\\%$. To loss $16\\frac{2}{3}\\%$, it should be sold for Rs.",
     "hindi": "जब कोई वस्तु रु 4800 में बेचीं जाती हैं तो $14\\frac{2}{7}\\%$ की लाभ होती हैं तो $16\\frac{2}{3}\\%$ का हानि कमाने के लिए इसे किस कीमत पर बेचा जाना चाहिए?",
