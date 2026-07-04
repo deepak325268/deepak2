@@ -1558,7 +1558,7 @@ function switchImpTab(subj) {
     +     '<div class="topic-home-meta"><span class="topic-q-badge clr-o">'+mathTotal+' प्रश्न</span></div>'
     +   '</div>'
     +   '<div class="topic-home-right">'
-    +     '<div class="topic-check check-o'+(mathDone?" checked":"")+'">'+(mathDone?"✓":"")+'</div>'
+    +     '<div class="topic-check check-o'+(mathDone?" checked":"")+'" onclick="event.stopPropagation(); toggleImpSubjectDone(\'math\')">'+(mathDone?"✓":"")+'</div>'
     +     '<div class="topic-arrow">›</div>'
     +   '</div>'
     + '</div>'
@@ -1568,7 +1568,7 @@ function switchImpTab(subj) {
     +     '<div class="topic-home-meta"><span class="topic-q-badge clr-r">'+rTotal+' प्रश्न</span></div>'
     +   '</div>'
     +   '<div class="topic-home-right">'
-    +     '<div class="topic-check check-r'+(rDone?" checked":"")+'">'+(rDone?"✓":"")+'</div>'
+    +     '<div class="topic-check check-r'+(rDone?" checked":"")+'" onclick="event.stopPropagation(); toggleImpSubjectDone(\'reasoning\')">'+(rDone?"✓":"")+'</div>'
     +     '<div class="topic-arrow">›</div>'
     +   '</div>'
     + '</div>'
@@ -1577,6 +1577,17 @@ function switchImpTab(subj) {
   content.innerHTML = html;
 }
 
+function toggleImpSubjectDone(subj) {
+  haptic();
+  var list = allQuesMode ? impAllQFull[subj] : impAllQ[subj];
+  var allDone = list.length > 0 && list.every(function(q){ return doneSet.has("imp_"+subj+"_"+q.num); });
+  list.forEach(function(q) {
+    var key = "imp_" + subj + "_" + q.num;
+    if (allDone) { doneSet.delete(key); } else { doneSet.add(key); }
+  });
+  save();
+  renderImpHome();
+}  
 
 function openImpSubject(subj) {
   haptic();
