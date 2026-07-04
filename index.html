@@ -1022,7 +1022,7 @@ function renderContent() {
   content.innerHTML = "";
   var data = allData[activeTab];
   if (!data.chapters || data.chapters.length === 0) {
-    content.innerHTML = '<div class="error-box"><p>कोई chapter नहीं मिला।</p></div>';
+    content.innerHTML = '<div class="error-box"><p>No chapter found.</p></div>';
     updateProgress(); return;
   }
 
@@ -1052,7 +1052,7 @@ function makeTopicCard(key, ch, clr) {
     var first = ch.subs[0].q, last = ch.subs[ch.subs.length-1].q;
     qRange = first === last ? "Q. "+first : "Q. "+first+" – "+last;
   }
-  var badgeText = allQuesMode ? 'सभी प्रश्न' : (qCount + ' प्रश्न');
+  var badgeText = allQuesMode ? 'All Questions' : (qCount + ' प्रश्न');
   if (allQuesMode) qRange = '';
 
   card.innerHTML =
@@ -1128,7 +1128,7 @@ function openTopic(key, ch, clr) {
   currentClr   = clr;
 
   var content = document.getElementById("content");
-  content.innerHTML = '<div class="loading"><div class="spinner spin-'+clr+'"></div><span>Question लोड हो रहा है...</span></div>';
+  content.innerHTML = '<div class="loading"><div class="spinner spin-'+clr+'"></div><span>Question loading...</span></div>';
   window.scrollTo(0,0);
 
   loadQBank(ch.questionsFile, function() {
@@ -1212,7 +1212,7 @@ function renderQuestionPage(content) {
         ? (q.hindi ? '<div class="q-page-hindi">'+escH(q.hindi)+'</div>' : '')
           + (q.text ? '<div class="q-page-eng">'+escH(q.text)+'</div>' : '')
           + optsHtml
-        : '<div class="q-notfound">Question नहीं मिला।</div>')
+        : '<div class="q-notfound">Question not found.</div>')
     + '</div>'
 
     // Bottom Nav
@@ -1253,7 +1253,7 @@ function renderQuestionPageList(content) {
           ? (q.hindi ? '<div class="q-page-hindi">'+escH(q.hindi)+'</div>' : '')
             + (q.text ? '<div class="q-page-eng">'+escH(q.text)+'</div>' : '')
             + optsHtml
-          : '<div class="q-notfound">Question नहीं मिला।</div>')
+          : '<div class="q-notfound">Question not found.</div>')
       + '</div>';
   }).join('');
 
@@ -1294,7 +1294,7 @@ function haptic() { if (navigator.vibrate) navigator.vibrate(10); }
 }
 
   function hardReset() {
-  if (!confirm("Sara question data reset karein? Progress safe rahega.")) return;
+  if (!confirm("Reset all question data? Your progress will be saved.")) return;
   Object.keys(localStorage).forEach(function(key) {
     if (key.startsWith("cache_") || key.startsWith("qBankCache_")) {
       localStorage.removeItem(key);
@@ -1306,13 +1306,13 @@ function haptic() { if (navigator.vibrate) navigator.vibrate(10); }
 function resetTopicCache() {
   if (!currentCh || !currentCh.questionsFile) return;
   var file = currentCh.questionsFile;
-  if (!confirm("Is topic ka question data reset karke dobara load karein?")) return;
+  if (!confirm("Reset and reload question data for this topic?")) return;
 
   delete qBankCache[file];
   try { localStorage.setItem('qBankCache_' + dateStr, JSON.stringify(qBankCache)); } catch(e) {}
 
   var content = document.getElementById("content");
-  content.innerHTML = '<div class="loading"><div class="spinner spin-'+currentClr+'"></div><span>Refresh ho raha hai...</span></div>';
+  content.innerHTML = '<div class="loading"><div class="spinner spin-'+currentClr+'"></div><span>Refreshing...</span></div>';
 
   loadQBank(file, function() {
     if (allQuesMode) {
@@ -1387,10 +1387,10 @@ fetch(API_MATH)
   .catch(function(){
     if (!allData.math && activeTab==="math")
       document.getElementById("content").innerHTML =
-        '<div class="error-box"><p>Math data load नहीं हुआ।</p><button class="retry-btn" onclick="location.reload()">Retry</button></div>';
+        '<div class="error-box"><p>Failed to load Math data.</p><button class="retry-btn" onclick="location.reload()">Retry</button></div>';
     if (!allData.reasoning && activeTab==="reasoning")
       document.getElementById("content").innerHTML =
-        '<div class="error-box"><p>Reasoning data load नहीं हुआ।</p><button class="retry-btn" onclick="location.reload()">Retry</button></div>';
+        '<div class="error-box"><p>Failed to load Reasoning data.</p><button class="retry-btn" onclick="location.reload()">Retry</button></div>';
   });
 
   function checkAns(el, ans, idx) {
@@ -1459,14 +1459,14 @@ function loadImportantData(cb) {
     })
     .catch(function() {
       document.getElementById('content').innerHTML =
-        '<div class="imp-empty">❌ Aaj koi important question nahi hai!<br><small>Ya file nahi mili</small></div>';
+        '<div class="imp-empty">❌ No important questions for today!<br><small>Or file not found</small></div>';
     });
 }
 
 function renderImportant() {
   document.querySelector('.progress-wrap').style.display = 'none';
   var content = document.getElementById("content");
-  content.innerHTML = '<div class="loading"><div class="spinner spin-o"></div><span>Important questions load ho rahe hain...</span></div>';
+  content.innerHTML = '<div class="loading"><div class="spinner spin-o"></div><span>Loading important questions...</span></div>';
 
   loadImportantData(function() {
     impView = 'home';
@@ -1476,10 +1476,10 @@ function renderImportant() {
 }
 
 function resetImpTopicCache() {
-  if (!confirm("Is topic ka question data reset karke dobara load karein?")) return;
+  if (!confirm("Reset and reload question data for this topic?")) return;
   var chName = (impCurrentCh && impCurrentCh.length) ? (impCurrentCh[0]._chapter || 'Other') : null;
   var content = document.getElementById("content");
-  content.innerHTML = '<div class="loading"><div class="spinner spin-o"></div><span>Refresh ho raha hai...</span></div>';
+  content.innerHTML = '<div class="loading"><div class="spinner spin-o"></div><span>Refreshing...</span></div>';
 
   loadImportantData(function() {
     if (chName) {
@@ -1507,7 +1507,7 @@ function renderImpQuestion() {
   if (total === 0) {
     content.innerHTML =
       '<button class="q-back-btn" style="margin-bottom:12px" onclick="goImpHome()">‹ BACK</button>'
-      + '<div class="imp-empty">⭐ Aaj is subject me koi important question nahi!</div>';
+      + '<div class="imp-empty">⭐ No important questions in this subject today!</div>';
     return;
   }
 
@@ -1624,7 +1624,7 @@ function switchImpTab(subj) {
     + '<div class="topic-home-card'+(mathDone?" done":"")+'" onclick="openImpSubject(\'math\')">'
     +   '<div class="topic-home-left">'
     +     '<div class="topic-home-name">📐 Math</div>'
-    +     '<div class="topic-home-meta"><span class="topic-q-badge clr-o">'+mathTotal+' प्रश्न</span></div>'
+    +     '<div class="topic-home-meta"><span class="topic-q-badge clr-o">'+mathTotal+' Questions</span></div>'
     +   '</div>'
     +   '<div class="topic-home-right">'
     +     '<div class="topic-check check-o'+(mathDone?" checked":"")+'" onclick="event.stopPropagation(); toggleImpSubjectDone(\'math\')">'+(mathDone?"✓":"")+'</div>'
@@ -1634,7 +1634,7 @@ function switchImpTab(subj) {
     + '<div class="topic-home-card'+(rDone?" done":"")+'" onclick="openImpSubject(\'reasoning\')">'
     +   '<div class="topic-home-left">'
     +     '<div class="topic-home-name">🧠 Reasoning</div>'
-    +     '<div class="topic-home-meta"><span class="topic-q-badge clr-r">'+rTotal+' प्रश्न</span></div>'
+    +     '<div class="topic-home-meta"><span class="topic-q-badge clr-r">'+rTotal+' Questions</span></div>'
     +   '</div>'
     +   '<div class="topic-home-right">'
     +     '<div class="topic-check check-r'+(rDone?" checked":"")+'" onclick="event.stopPropagation(); toggleImpSubjectDone(\'reasoning\')">'+(rDone?"✓":"")+'</div>'
@@ -1690,14 +1690,14 @@ function renderImpChapterList(subj) {
 
   var html = '<button class="q-back-btn" style="margin:12px 0 8px" onclick="goImpHome()">‹ BACK</button>';
   if (chapterNames.length === 0) {
-    html += '<div class="imp-empty">⭐ Is subject me koi important topic nahi mila!</div>';
+    html += '<div class="imp-empty">⭐ No important topics found in this subject!</div>';
   } else {
     chapterNames.forEach(function(chName) {
       html +=
         '<div class="topic-home-card" onclick="openImpChapter(\''+subj+'\',\''+encodeURIComponent(chName)+'\')">'
         + '<div class="topic-home-left">'
         +   '<div class="topic-home-name">'+escH(chName)+'</div>'
-        +   '<div class="topic-home-meta"><span class="topic-q-badge clr-'+clr+'">'+groups[chName].length+' प्रश्न</span></div>'
+        +   '<div class="topic-home-meta"><span class="topic-q-badge clr-'+clr+'">'+groups[chName].length+' Questions</span></div>'
         + '</div>'
         + '<div class="topic-home-right"><div class="topic-arrow">›</div></div>'
         + '</div>';
