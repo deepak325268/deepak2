@@ -79,6 +79,7 @@
     ],
     "ans": "c",
     "imp": true,
+    "freq": 1,
     "_file": "profit-and-loss.json",
     "_chapter": "Profit And Loss",
     "_subject": "math"
