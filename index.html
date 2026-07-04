@@ -768,6 +768,7 @@
     <div class="menu-dropdown" id="menuDropdown">
       <button class="menu-item" id="allQueBtn" onclick="toggleAllQuesMode()">📋 All Questions</button>
       <a href="admin.html" target="_blank" class="menu-item">⚙️ Admin Panel</a>
+      <a href="chapter-order.html" target="_blank" class="menu-item">🔀 Chapter Order</a>
     </div>
   </div>
 </div>
@@ -804,7 +805,25 @@
   });
 }
 const API_MATH = "https://bpsc-sachin-sir-revise-default-rtdb.asia-southeast1.firebasedatabase.app/revisionData.json";
+const FIREBASE_URL = "https://bpsc-sachin-sir-revise-default-rtdb.asia-southeast1.firebasedatabase.app";
 const QUESTIONS_BASE = "https://deepak325268.github.io/deepak2/questions/";
+
+// ── Chapter-order.html tool se save kiya hua custom order apply karta hai ──
+function applyCustomOrder(chapters, order) {
+  if (!order || !Array.isArray(order) || order.length === 0) return chapters;
+  var remaining = chapters.slice();
+  var ordered = [];
+  order.forEach(function(name) {
+    var idx = remaining.findIndex(function(c){ return c.chapter === name; });
+    if (idx !== -1) { ordered.push(remaining[idx]); remaining.splice(idx, 1); }
+  });
+  return ordered.concat(remaining); // naye chapters jo order me nahi hain, end me aayenge
+}
+function fetchChapterOrder(subject) {
+  return fetch(FIREBASE_URL + "/chapterOrder/" + subject + ".json")
+    .then(function(r){ return r.json(); })
+    .catch(function(){ return null; });
+}
 
 const today = new Date();
 var yyyy = today.getFullYear();
@@ -1353,6 +1372,15 @@ fetch(API_MATH)
     cacheObj.math = data; dayNums.math = data.day; allData.math = data;
     if (data.reasoning) {
       dayNums.reasoning = data.reasoning.day; allData.reasoning = data.reasoning;
+    }
+    return Promise.all([fetchChapterOrder('math'), fetchChapterOrder('reasoning')]);
+  })
+  .then(function(orders){
+    if (allData.math && allData.math.chapters) {
+      allData.math.chapters = applyCustomOrder(allData.math.chapters, orders[0]);
+    }
+    if (allData.reasoning && allData.reasoning.chapters) {
+      allData.reasoning.chapters = applyCustomOrder(allData.reasoning.chapters, orders[1]);
     }
     updateDayPill(); renderContent(); saveCache();
   })
