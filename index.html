@@ -1052,7 +1052,7 @@ function makeTopicCard(key, ch, clr) {
     var first = ch.subs[0].q, last = ch.subs[ch.subs.length-1].q;
     qRange = first === last ? "Q. "+first : "Q. "+first+" – "+last;
   }
-  var badgeText = allQuesMode ? 'All Questions' : (qCount + ' प्रश्न');
+  var badgeText = allQuesMode ? 'All Questions' : (qCount + 'Q');
   if (allQuesMode) qRange = '';
 
   card.innerHTML =
@@ -1624,7 +1624,7 @@ function switchImpTab(subj) {
     + '<div class="topic-home-card'+(mathDone?" done":"")+'" onclick="openImpSubject(\'math\')">'
     +   '<div class="topic-home-left">'
     +     '<div class="topic-home-name">📐 Math</div>'
-    +     '<div class="topic-home-meta"><span class="topic-q-badge clr-o">'+mathTotal+' Questions</span></div>'
+    +     '<div class="topic-home-meta"><span class="topic-q-badge clr-o">'+mathTotal+' Q</span></div>'
     +   '</div>'
     +   '<div class="topic-home-right">'
     +     '<div class="topic-check check-o'+(mathDone?" checked":"")+'" onclick="event.stopPropagation(); toggleImpSubjectDone(\'math\')">'+(mathDone?"✓":"")+'</div>'
@@ -1634,7 +1634,7 @@ function switchImpTab(subj) {
     + '<div class="topic-home-card'+(rDone?" done":"")+'" onclick="openImpSubject(\'reasoning\')">'
     +   '<div class="topic-home-left">'
     +     '<div class="topic-home-name">🧠 Reasoning</div>'
-    +     '<div class="topic-home-meta"><span class="topic-q-badge clr-r">'+rTotal+' Questions</span></div>'
+    +     '<div class="topic-home-meta"><span class="topic-q-badge clr-r">'+rTotal+' Q</span></div>'
     +   '</div>'
     +   '<div class="topic-home-right">'
     +     '<div class="topic-check check-r'+(rDone?" checked":"")+'" onclick="event.stopPropagation(); toggleImpSubjectDone(\'reasoning\')">'+(rDone?"✓":"")+'</div>'
@@ -1697,7 +1697,7 @@ function renderImpChapterList(subj) {
         '<div class="topic-home-card" onclick="openImpChapter(\''+subj+'\',\''+encodeURIComponent(chName)+'\')">'
         + '<div class="topic-home-left">'
         +   '<div class="topic-home-name">'+escH(chName)+'</div>'
-        +   '<div class="topic-home-meta"><span class="topic-q-badge clr-'+clr+'">'+groups[chName].length+' Questions</span></div>'
+        +   '<div class="topic-home-meta"><span class="topic-q-badge clr-'+clr+'">'+groups[chName].length+' Q</span></div>'
         + '</div>'
         + '<div class="topic-home-right"><div class="topic-arrow">›</div></div>'
         + '</div>';
