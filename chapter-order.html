@@ -123,8 +123,8 @@ header .sub{font-size:12px;color:var(--muted);margin-top:3px}
 <div class="lock-screen" id="lockScreen">
   <div class="lock-box">
     <div class="lock-icon">🔒</div>
-    <h2>Access Key Chahiye</h2>
-    <p>Cloudflare Worker me jo access key set ki hai, wahi yaha daalo</p>
+    <h2>Access Key</h2>
+    <p></p>
     <input type="password" id="lockInput" placeholder="Access key" onkeydown="if(event.key==='Enter') unlockApp()">
     <button class="btn btn-save" id="lockBtn" onclick="unlockApp()">Unlock</button>
     <div class="lock-err" id="lockErr"></div>
@@ -135,7 +135,7 @@ header .sub{font-size:12px;color:var(--muted);margin-top:3px}
   <div class="header-row">
     <div>
       <h1>📑 Chapter Order Manager</h1>
-      <div class="sub">Yaha jo order set karoge, wahi order app me dikhega</div>
+      <div class="sub">set order as you want in app</div>
     </div>
     <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Theme badlo">🌙</button>
   </div>
@@ -149,13 +149,13 @@ header .sub{font-size:12px;color:var(--muted);margin-top:3px}
 <div class="status" id="status"></div>
 
 <div class="panel active" id="panelMath">
-  <div class="hint">👆 Dots ko pakadkar drag karo, order badalne ke liye</div>
+  <div class="hint"></div>
   <div class="list" id="listMath">
     <div class="loading" id="loadingMath">Load ho raha hai...</div>
   </div>
 </div>
 <div class="panel" id="panelReasoning">
-  <div class="hint">👆 Dots ko pakadkar drag karo, order badalne ke liye</div>
+  <div class="hint"></div>
   <div class="list" id="listReasoning">
     <div class="loading" id="loadingReasoning">Load ho raha hai...</div>
   </div>
@@ -163,7 +163,7 @@ header .sub{font-size:12px;color:var(--muted);margin-top:3px}
 
 <div class="footer-actions">
   <button class="btn btn-reset" onclick="resetOrder()">↩️ Reset</button>
-  <button class="btn btn-save" onclick="saveOrder()">💾 Order Save Karo</button>
+  <button class="btn btn-save" onclick="saveOrder()">💾 Save order</button>
 </div>
 
 <script>
