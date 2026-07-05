@@ -1738,6 +1738,11 @@ async function saveImportantJson(filename) {
     console.warn('important-questions.json error:', e);
   }
 }
+
+  if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/deepak2/sw.js');
+}
+  
 </script>
 </body>
 </html>
