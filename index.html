@@ -1796,6 +1796,9 @@ function playWrong() {
   }
 }
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/deepak2/sw.js');
+}
 </script>
 </body>
 </html>
