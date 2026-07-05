@@ -337,5 +337,257 @@
     "ans": "c",
     "imp": true,
     "freq": 1
+  },
+  {
+    "num": 29,
+    "text": "By selling an article for Rs. 2,200, a profit of 10% is earned. If the same article is sold for Rs. 2,600, then what will be the gain percentage?",
+    "hindi": "एक वस्तु को Rs. 2,200 में बेचने पर 10% का लाभ प्राप्त होता है। यदि इस वस्तु को Rs. 2,600 बेचा गया होता, तो लाभ प्रतिशत क्या होता?",
+    "opts": [
+      "(a) 20%",
+      "(b) 15%",
+      "(c) 37%",
+      "(d) 30%"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 30,
+    "text": "An article is sold for ₹2070 at a profit of 15%. If the article is sold for ₹1890, then what will be gain or loss percent?",
+    "hindi": "एक वस्तु 15% की लाभ पर ₹2070 में बेची जाती है। यदि वस्तु ₹1890 में बेची जाती है, तो लाभ या हानि प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) 10% gain",
+      "(b) 10% loss",
+      "(c) 5% gain",
+      "(d) 5% loss"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 31,
+    "text": "Vipin bought a toy for ₹1200 and spent ₹200 on its repairing. He sold it for ₹1680, then his profit percent is:",
+    "hindi": "विपिन ने एक खिलौना ₹1200 में खरीदा। इसकी मरम्मत पर उसने ₹200 खर्च किए, उसने इसे ₹1680 रुपये में बेच दिया। तो उसका लाभ प्रतिशत क्या है?",
+    "opts": [
+      "(a) 20%",
+      "(b) 10%",
+      "(c) 8%",
+      "(d) 16%"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 32,
+    "text": "The difference between the Cost price and selling price of an article is ₹360. If the profit is 20%, the selling price is:",
+    "hindi": "एक वस्तु की लागत मूल्य और विक्रय मूल्य के बीच का अंतर ₹360 है। यदि लाभ 20% है, तो विक्रय मूल्य क्या है?",
+    "opts": [
+      "(a) Rs. 1,000",
+      "(b) Rs. 1,500",
+      "(c) Rs. 1,800",
+      "(d) Rs. 2,160"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 33,
+    "text": "The difference between the Cost price and selling price of a bat is ₹180. If there is a profit of 20%, then what is the selling price of the bat?",
+    "hindi": "एक बल्ले की लागत मूल्य और विक्रय मूल्य के बीच का अंतर ₹180 है। यदि लाभ 20% है, तो बल्ले का विक्रय मूल्य क्या है?",
+    "opts": [
+      "(a) Rs. 1080",
+      "(b) Rs. 1240",
+      "(c) Rs. 1040",
+      "(d) Rs. 1120"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 34,
+    "text": "A shopkeeper gains 20% in place of 16% loss if the selling price of an article is increased by Rs. 324. The cost price of the article is:",
+    "hindi": "यदि वस्तु के विक्रय मूल्य में 324 रुपये की वृद्धि की जाती है तो एक दुकानदार को 16% हानि के स्थान पर 20% का लाभ होता है। वस्तु का क्रय मुल्य क्या है?",
+    "opts": [
+      "(a) Rs. 900",
+      "(b) Rs. 750",
+      "(c) Rs. 1,350",
+      "(d) Rs. 600"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 35,
+    "text": "If the difference between the selling prices of an article at profits of 10% and 7% is ₹6, then the cost price (in ₹) of the article is:",
+    "hindi": "यदि किसी वस्तु के 10% लाभ पर और 7% लाभ पर विक्रय मूल्यों के बीच का अंतर ₹6 है, तो वस्तु का क्रय मूल्य (₹ में) क्या है?",
+    "opts": [
+      "(a) 175",
+      "(b) 150",
+      "(c) 200",
+      "(d) 100"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 36,
+    "text": "A shopkeeper sold an article at profit of 10%. If he had sold for Rs. 20 more, then he earn a profit of 15%. Find the cost price of article.",
+    "hindi": "एक दुकानदार किसी वस्तु को 10% लाभ पर बेचता है। यदि वस्तु का मूल्य 20 रु. बढ़ा दे तो उसे 15% का लाभ प्राप्त होता है तो उस वस्तु का क्रय मूल्य क्या है?",
+    "opts": [
+      "(a) Rs. 400",
+      "(b) Rs. 500",
+      "(c) Rs. 600",
+      "(d) Rs. 800"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 37,
+    "text": "A shopkeeper sold an article at loss of 5%. If he had sold for Rs. 60 more than he earn a profit of 7%, find the cost price of article.",
+    "hindi": "एक दुकानदार किसी वस्तु को 5% हानि पर बेचता है। यदि वह वस्तु का मूल्य 60 रु. बढ़ा दे तो उसे 7% का लाभ प्राप्त होता है तो उस वस्तु का क्रय मूल्य क्या होगा?",
+    "opts": [
+      "(a) Rs. 1500",
+      "(b) Rs. 600",
+      "(c) Rs. 800",
+      "(d) Rs. 500"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 38,
+    "text": "A hawker sells oranges at a profit of 25 percent. If he increases the selling price of each orange by 30 paise, he earns a profit of 40%. Find the cost price and the initial selling price of each orange.",
+    "hindi": "एक हॉकर 25% लाभ से संतरे बेचता है। यदि वह प्रत्येक संतरे का विक्रय मूल्य 30 पैसे बढ़ा दे तो उसे 40% का लाभ होता है। एक संतरे का क्रयमूल्य तथा एक संतरे का पहले का विक्रय मूल्य ज्ञात कीजिए?",
+    "opts": [
+      "(a) Rs. 2, Rs. 2.50",
+      "(b) Rs. 2.50, Rs. 3",
+      "(c) Rs. 3, Rs. 4",
+      "(d) Rs. 1.50, Rs. 2"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 39,
+    "text": "A person sold an article at a loss of 18%. Had he sold it for Rs 960 more, he would have gained 12%. If the article is sold for Rs 3840 then how much is the profit percentage?",
+    "hindi": "एक व्यक्ति ने एक वस्तु को 18% की हानि पर बेचा। यदि वह इसे 960 रुपये अधिक में बेचता, तो उसे 12% का लाभ होता। यदि वस्तु 3840 रुपये में बेची जाती है तो लाभ प्रतिशत कितना है?",
+    "opts": [
+      "(a) 15%",
+      "(b) 24%",
+      "(c) 20%",
+      "(d) 21%"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 40,
+    "text": "A sells a mobile to B at a profit of 10% and B sells it to C at a profit of 20%. If the cost price of C is Rs 3300. Find the cost price of A.",
+    "hindi": "A एक मोबाइल को 10% लाभ पर B को व B उसी मोबाइल को 20% लाभ पर C को बेचता है। यदि C ने उस मोबाइल को 3300 रु. में खरीदा हो तो A ने उस मोबाइल को कितने में खरीदा होगा?",
+    "opts": [
+      "(a) Rs. 2500",
+      "(b) Rs. 2800",
+      "(c) Rs. 3000",
+      "(d) Rs. 3200"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 41,
+    "text": "A sells a mobile to B at a loss of 20% and B sells it to C at loss of 25%. If the cost price of C is Rs 900. Find the cost price of A.",
+    "hindi": "A एक मोबाइल को 20% हानि पर B को व B उसी मोबाइल को 25% हानि पर C को बेचता है। यदि C ने उस मोबाइल को 900 रु. में खरीदा हो तो A ने उस मोबाइल को कितने में खरीदा होगा?",
+    "opts": [
+      "(a) Rs. 1000",
+      "(b) Rs. 1200",
+      "(c) Rs. 1500",
+      "(d) Rs. 1800"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 42,
+    "text": "By selling 25 articles, a shopkeeper earns profit equivalent to the selling price of 5 articles. Find his profit percentage?",
+    "hindi": "25 वस्तुएँ बेचने पर एक दुकानदार को 5 वस्तुओं के विक्रय मूल्य के बराबर लाभ होता है तो उसका लाभ प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) 10%",
+      "(b) 20%",
+      "(c) 25%",
+      "(d) 28%"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 43,
+    "text": "By selling 72 articles, a shopkeeper earns profit equivalent to the selling price of 9 articles. Find his profit percentage?",
+    "hindi": "72 वस्तुएँ बेचने पर एक दुकानदार को 9 वस्तुओं के विक्रय मूल्य के बराबर लाभ होता है तो उसका लाभ प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) $11\\frac{1}{9}\\%$",
+      "(b) $14\\frac{2}{7}\\%$",
+      "(c) $16\\frac{2}{3}\\%$",
+      "(d) $33\\frac{1}{3}\\%$"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 44,
+    "text": "By selling 40 articles, a shopkeeper incurs loss equivalent to the selling price of 10 articles. Find his loss percentage.",
+    "hindi": "40 वस्तुएँ बेचने पर एक दुकानदार को 10 वस्तुओं के विक्रय मूल्य के बराबर हानि होती है तो उसका हानि प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) 8%",
+      "(b) 12%",
+      "(c) 15%",
+      "(d) 20%"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 45,
+    "text": "By selling 72 articles, a shopkeeper earns loss equivalent to the selling price of 9 articles. Find his loss percentage?",
+    "hindi": "72 वस्तुएँ बेचने पर एक दुकानदार को 9 वस्तुओं के विक्रय मूल्य के बराबर हानि होती है तो उसका हानि प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) $11\\frac{1}{9}\\%$",
+      "(b) $14\\frac{2}{7}\\%$",
+      "(c) $16\\frac{2}{3}\\%$",
+      "(d) $33\\frac{1}{3}\\%$"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 46,
+    "text": "By selling 72 articles, a shopkeeper earns loss equivalent to the cost price of 9 articles. Find his loss percentage?",
+    "hindi": "72 वस्तुएँ बेचने पर एक दुकानदार को 9 वस्तुओं के क्रय मूल्य के बराबर हानि होती है तो उसका हानि प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) $11\\frac{1}{9}\\%$",
+      "(b) $14\\frac{2}{7}\\%$",
+      "(c) $12\\frac{1}{2}\\%$",
+      "(d) $33\\frac{1}{3}\\%$"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 47,
+    "text": "By selling 72 articles, a shopkeeper earn profit equivalent of the cost price of 9 articles. Find his profit percentage?",
+    "hindi": "72 वस्तुओं को बेचने पर एक व्यक्ति को 9 वस्तुओं के क्रय मूल्य के बराबर लाभ होता है तो लाभ प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) $11\\frac{1}{9}\\%$",
+      "(b) $14\\frac{2}{7}\\%$",
+      "(c) $12\\frac{1}{2}\\%$",
+      "(d) $33\\frac{1}{3}\\%$"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 48,
+    "text": "By selling 60 articles, a shopkeeper earn profit equivalent of the cost price of 15 articles. Find his profit percentage?",
+    "hindi": "60 वस्तुओं को बेचने पर एक व्यक्ति को 15 वस्तुओं के क्रय मूल्य के बराबर लाभ होता है तो लाभ प्रतिशत क्या होगा?",
+    "opts": [
+      "(a) 10%",
+      "(b) 15%",
+      "(c) 20%",
+      "(d) 25%"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 49,
+    "text": "On selling 17 balls at Rs. 720, there is a loss equal to the cost price of 5 balls. The cost price (in Rs.) of a ball is:",
+    "hindi": "रु. 720 में, 17 गेंद बेचने पर 5 गेंदों के क्रय मूल्य के बराबर हानि होती है। एक गेंद का क्रयमूल्य (रु. में) होगा:",
+    "opts": [
+      "(a) 45",
+      "(b) 50",
+      "(c) 35",
+      "(d) 60"
+    ],
+    "ans": "d"
   }
 ]
