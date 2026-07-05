@@ -524,6 +524,11 @@ checkLock();
 initDragging('math');
 initDragging('reasoning');
 loadAll();
+
+  if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/deepak2/sw.js');
+}
+  
 </script>
 </body>
 </html>
