@@ -589,5 +589,101 @@
       "(d) 60"
     ],
     "ans": "d"
+  },
+  {
+    "num": 50,
+    "text": "A shopkeeper bought two articles for Rs. 1500. He sold one at a profit 20% and the other at a loss of 20%. If selling prices of each article are equal find the cost price of both articles.",
+    "hindi": "एक दुकानदार 1500 रु. में दो वस्तुएँ खरीदता है और एक वस्तु को 20% लाभ व दूसरी वस्तु को 20% हानि पर बेचता है। यदि दोनों वस्तुओं का विक्रय मूल्य समान हो तो दोनों वस्तुओं का क्रय मूल्य क्या होगा?",
+    "opts": [
+      "(a) 600, 900",
+      "(b) 700, 600",
+      "(c) 700, 800",
+      "(d) 800, 700"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 51,
+    "text": "A shopkeeper bought two articles for Rs. 14250. He sold one at a profit 10% and the other at a loss of 20%. If selling prices of each article are equal find the cost price of both articles.",
+    "hindi": "एक दुकानदार 14250 रु में दो वस्तुएँ खरीदता है और एक वस्तु को 10% लाभ व दूसरी वस्तु को 20% हानि पर बेचता है। यदि दोनों वस्तुओं का विक्रय मूल्य समान हो तो दोनों वस्तुओं का क्रय मूल्य क्या होगा?",
+    "opts": [
+      "(a) 6000, 9000",
+      "(b) 6000, 8250",
+      "(c) 7000, 8250",
+      "(d) 8000, 7000"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 52,
+    "text": "A person bought two goods for 19,500. He sold one at a loss of 20% and the other at a profit of 15%. If the selling price of each goods is the same, find the cost price of goods sold at profit.",
+    "hindi": "एक व्यक्ति ने 19,500 में दो वस्तुएं खरीदी। उसने एक को 20% की हानि पर और दूसरी को 15% लाभ पर बेचा। यदि प्रत्येक वस्तु का विक्रय मूल्य समान है, तो लाभ पर बेची गई वस्तुओं का क्रय मूल्य ज्ञात कीजिए ।",
+    "opts": [
+      "(a) ₹ 11,475",
+      "(b) ₹ 9,750",
+      "(c) ₹ 11,500",
+      "(d) ₹ 8,000"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 53,
+    "text": "Selling price of two articles is equal. If one article is sold at 20% profit and second at 20% loss. Find the total profit or loss percent in whole transaction.",
+    "hindi": "दो वस्तुओं का विक्रय मूल्य बराबर है। यदि एक को 20% लाभ व दूसरी को 20% हानि पर बेचा जाए तो पूरे व्यवसाय पर लाभ या हानि प्रतिशत ज्ञात करें?",
+    "opts": [
+      "(a) 1% loss",
+      "(b) 4% loss",
+      "(c) 5% loss",
+      "(d) 8% loss"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 54,
+    "text": "A shopkeeper cheat 10% at purchasing time and cheat 10% at selling time. Find the total profit percent.",
+    "hindi": "एक दुकानदार खरीदते समय 10% व बेचते समय भी 10% की बेईमानी करता है तो बताइए इस व्यवसाय में उसे कितना प्रतिशत लाभ हुआ।",
+    "opts": [
+      "(a) 12% Profit",
+      "(b) 20% Profit",
+      "(c) 21% Profit",
+      "(d) 25% Profit"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 55,
+    "text": "A shopkeeper sells goods at cost price but uses 900gm in place of 1 kg weight. Find the profit percent?",
+    "hindi": "एक दुकानदार एक वस्तु को क्रय मूल्य पर बेचने की घोषणा करता है लेकिन वह 1 किलो के स्थान पर 900 ग्रा. वजन का प्रयोग करता है। उसे कितने प्रतिशत का लाभ प्राप्त हुआ?",
+    "opts": [
+      "(a) $9\\frac{1}{11}\\%$ profit",
+      "(b) $11\\frac{1}{9}\\%$ profit",
+      "(c) $12\\frac{1}{2}\\%$ profit",
+      "(d) $16\\frac{2}{3}\\%$ profit"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 56,
+    "text": "A shopkeeper sells goods at cost price but uses 920gm in place of 1 kg weight. Find the profit percent?",
+    "hindi": "एक दुकानदार एक वस्तु को क्रय मूल्य पर बेचने की घोषणा करता है लेकिन वह 1 किलो के स्थान पर 920 ग्रा. वजन का प्रयोग करता है। उसे कितने प्रतिशत का लाभ प्राप्त हुआ?",
+    "opts": [
+      "(a) $\\frac{100}{13}\\%$ profit",
+      "(b) $\\frac{200}{23}\\%$ profit",
+      "(c) $\\frac{100}{7}\\%$ profit",
+      "(d) $16\\frac{2}{3}\\%$ profit"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 57,
+    "text": "A shopkeeper sells goods at cost price but uses 960gm in place of 1 kg weight. Find the profit percent?",
+    "hindi": "एक दुकानदार एक वस्तु को क्रय मूल्य पर बेचने की घोषणा करता है लेकिन वह 1 किलो के स्थान पर 960 ग्रा. वजन का प्रयोग करता है। उसे कितने प्रतिशत का लाभ प्राप्त हुआ?",
+    "opts": [
+      "(a) $9\\frac{1}{11}\\%$ profit",
+      "(b) $11\\frac{1}{9}\\%$ profit",
+      "(c) $12\\frac{1}{2}\\%$ profit",
+      "(d) $4\\frac{1}{6}\\%$ profit"
+    ],
+    "ans": "d"
   }
 ]
