@@ -685,5 +685,173 @@
       "(d) $4\\frac{1}{6}\\%$ profit"
     ],
     "ans": "d"
+  },
+  {
+    "num": 58,
+    "text": "A shopkeeper sold an article on profit of 20% and uses weight of 10% less. Find his total profit percent.",
+    "hindi": "एक दुकानदार एक वस्तु को 20% लाभ पर बेचता है और 10% कम तोलता है तो बताइए उसे कितने प्रतिशत का लाभ प्राप्त हुआ?",
+    "opts": [
+      "(a) $11\\frac{1}{9}\\%$",
+      "(b) $12\\frac{1}{2}\\%$",
+      "(c) $16\\frac{2}{3}\\%$",
+      "(d) $33\\frac{1}{3}\\%$"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 59,
+    "text": "A shopkeeper sold an article on profit of 10% and uses weight of 20% less. Find his total profit percent.",
+    "hindi": "एक दुकानदार एक वस्तु को 10% लाभ पर बेचता है और 20% कम तोलता है तो बताइए उसे कितने प्रतिशत का लाभ प्राप्त हुआ?",
+    "opts": [
+      "(a) $11\\frac{1}{9}\\%$",
+      "(b) $37\\frac{1}{2}\\%$",
+      "(c) $16\\frac{2}{3}\\%$",
+      "(d) $33\\frac{1}{3}\\%$"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 60,
+    "text": "A shopkeeper sold an article on loss of 5% and uses weight of 20% less. Find his total profit percent.",
+    "hindi": "एक दुकानदार एक वस्तु को 5% हानि पर बेचता है और 20% कम तोलता है तो बताइए उसे कितने प्रतिशत का लाभ प्राप्त हुआ?",
+    "opts": [
+      "(a) $11\\frac{1}{9}\\%$",
+      "(b) $37\\frac{1}{2}\\%$",
+      "(c) $18\\frac{3}{4}\\%$",
+      "(d) $33\\frac{1}{3}\\%$"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 61,
+    "text": "A merchant professes to loss 6% on a certain tea, but he uses a weight equal to 900 gm instead of one kg. Find his real gain percent.",
+    "hindi": "एक व्यापारी 6% हानि से चाय बेचता है लेकिन वह तोलने में 1 किलो के बदले 900 ग्राम देता है। उसका वास्तविक लाभ प्रतिशत ज्ञात कीजिए।",
+    "opts": [
+      "(a) $4\\frac{1}{9}\\%$",
+      "(b) $4\\frac{2}{9}\\%$",
+      "(c) $4\\frac{4}{9}\\%$",
+      "(d) $4\\frac{5}{9}\\%$"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 62,
+    "text": "A merchant professes to profit 15% on a certain tea, but he uses a weight equal to 920 gm instead of one kg. Find his real gain percent.",
+    "hindi": "एक व्यापारी 15% लाभ से चाय बेचता है लेकिन वह तोलने में 1 किलो के बदले 920 ग्राम देता है। उसका वास्तविक लाभ प्रतिशत ज्ञात कीजिए।",
+    "opts": [
+      "(a) 25%",
+      "(b) 20%",
+      "(c) 45%",
+      "(d) 33%"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 63,
+    "text": "A merchant professes to profit 10% on a certain tea, but he uses a weight equal to 800 gm instead of one kg. Find his real gain percent.",
+    "hindi": "एक व्यापारी 10% लाभ से चाय बेचता है लेकिन वह तोलने में 1 किलो के बदले 800 ग्राम देता है। उसका वास्तविक लाभ प्रतिशत ज्ञात कीजिए।",
+    "opts": [
+      "(a) $11\\frac{1}{9}\\%$",
+      "(b) $37\\frac{1}{2}\\%$",
+      "(c) $18\\frac{3}{4}\\%$",
+      "(d) $33\\frac{1}{3}\\%$"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 64,
+    "text": "A merchant professes to profit 10% on a certain tea, but he uses a weight equal to 200 gm instead of 250gm. Find his real gain percent.",
+    "hindi": "एक व्यापारी 10% लाभ से चाय बेचता है लेकिन वह तोलने में 250 ग्राम के बदले 200 ग्राम देता है। उसका वास्तविक लाभ प्रतिशत ज्ञात कीजिए।",
+    "opts": [
+      "(a) $11\\frac{1}{9}\\%$",
+      "(b) $37\\frac{1}{2}\\%$",
+      "(c) $18\\frac{3}{4}\\%$",
+      "(d) $33\\frac{1}{3}\\%$"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 65,
+    "text": "A merchant professes to profit 20% on a certain tea, but he uses a weight equal to 4 gm instead of 5 gm. Find his real gain percent.",
+    "hindi": "एक व्यापारी 20% लाभ से चाय बेचता है लेकिन वह तोलने में 5 ग्राम के बदले 4 ग्राम देता है। उसका वास्तविक लाभ प्रतिशत ज्ञात कीजिए।",
+    "opts": [
+      "(a) 25%",
+      "(b) 20%",
+      "(c) 45%",
+      "(d) 50%"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 66,
+    "text": "A dishonest milkman promises to sell the milk on cost price but earns a profit of $16\\frac{2}{3}\\%$ by adding water to it. Find the ratio of mixture to milk.",
+    "hindi": "एक बेईमान दूधवाला दूध को क्रय मूल्य पर बेचने की घोषणा करता है और वह दूध में पानी मिलाकर $16\\frac{2}{3}\\%$ लाभ कमाता है। बताइए मिश्रण व दूध का अनुपात क्या होगा?",
+    "opts": [
+      "(a) 5:6",
+      "(b) 6:5",
+      "(c) 6:7",
+      "(d) 7:6"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 67,
+    "text": "A shopkeeper bought two articles for Rs. 1200. He sold one at a profit 10% and the other at a loss of 5%. There is no loss or profit in the whole transaction. Find the cost price of both articles.",
+    "hindi": "एक दुकानदार 1200 रु. में दो वस्तुएँ खरीदता है। एक वस्तु पर 10% लाभ व दूसरी वस्तु पर 5% हानि पर बेचता है। पूरे सौदे पर उसे ना तो लाभ और ना ही हानि होती है तो दोनों वस्तुओं का क्रय मूल्य क्या होगा?",
+    "opts": [
+      "(a) 500, 700",
+      "(b) 700, 500",
+      "(c) 400, 800",
+      "(d) 300, 900"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 68,
+    "text": "A shopkeeper bought two articles for Rs. 1200. He sold one at a profit 20% and the other at a loss of 30%. There is no loss or profit in the whole transaction. Find the cost price of both articles.",
+    "hindi": "एक दुकानदार 1200 रु. में दो वस्तुएँ खरीदता है। एक वस्तु पर 20% लाभ व दूसरी वस्तु पर 30% हानि पर बेचता है। पूरे सौदे पर उसे ना तो लाभ और ना ही हानि होती है तो दोनों वस्तुओं का क्रय मूल्य क्या होगा?",
+    "opts": [
+      "(a) 500, 700",
+      "(b) 720, 480",
+      "(c) 400, 800",
+      "(d) 300, 900"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 69,
+    "text": "A shopkeeper bought two articles for Rs. 1750. He sold one at a profit 15% and the other at a loss of 10%. There is no loss or profit in the whole transaction. Find the cost price of both articles.",
+    "hindi": "एक दुकानदार 1750 रु. में दो वस्तुएँ खरीदता है। एक वस्तु पर 15% लाभ व दूसरी वस्तु पर 10% हानि पर बेचता है। पूरे सौदे पर उसे ना तो लाभ और ना ही हानि होती है तो दोनों वस्तुओं का क्रय मूल्य क्या होगा?",
+    "opts": [
+      "(a) 500, 700",
+      "(b) 720, 480",
+      "(c) 300, 900",
+      "(d) 1050, 700"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 70,
+    "text": "A shopkeeper bought two articles for Rs. 1200. He sold one at a profit 10% and the other at a profit of 6%. There is 7% profit in the whole transaction. Find the cost price of both articles.",
+    "hindi": "एक दुकानदार 1200 रु. में दो वस्तुएँ खरीदता है। एक वस्तु पर 10% लाभ व दूसरी वस्तु पर 6% लाभ पर बेचता है। पूरे सौदे पर उसे 7% लाभ होता है तो दोनों वस्तुओं का क्रय मूल्य क्या होगा?",
+    "opts": [
+      "(a) 500, 700",
+      "(b) 720, 480",
+      "(c) 800, 400",
+      "(d) 300, 900"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 71,
+    "text": "A shopkeeper bought two articles for Rs. 1200. He sold one at a profit 20% and the other at a loss of 10%. There is 10% profit in the whole transaction. Find the cost price of both articles.",
+    "hindi": "एक दुकानदार 1200 रु. में दो वस्तुएँ खरीदता है। एक वस्तु पर 20% लाभ व दूसरी वस्तु पर 10% हानि पर बेचता है। पूरे सौदे पर उसे 10% लाभ होता है तो दोनों वस्तुओं का क्रय मूल्य क्या होगा?",
+    "opts": [
+      "(a) 500, 700",
+      "(b) 720, 480",
+      "(c) 800, 400",
+      "(d) 300, 900"
+    ],
+    "ans": "c"
   }
 ]
