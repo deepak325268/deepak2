@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revision Data Checker</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0b0b0d;color:#e4e4e7;font-family:system-ui,sans-serif;padding:16px;max-width:780px;margin:0 auto}
+  h1{font-size:19px;margin-bottom:4px}
+  h2{font-size:15px;margin-bottom:10px;color:#f4f4f5}
+  p.sub{color:#9ca3af;font-size:13px;margin-bottom:14px;line-height:1.5}
+  .status{font-size:13px;color:#a1a1aa;margin-bottom:16px;white-space:pre-line}
+  button.main{background:#4f46e5;color:#fff;border:none;border-radius:8px;padding:10px 16px;font-size:13px;cursor:pointer;font-weight:600;margin-bottom:16px}
+  button.main:hover{background:#4338ca}
+
+  .issues-box{background:#1c1013;border:1px solid #7f1d1d;border-radius:12px;padding:16px;margin-bottom:20px}
+  .issues-box.clean{background:#0f1c14;border-color:#166534}
+  .issue-row{font-size:13px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+  .issue-row:last-child{border-bottom:none}
+  .issue-chapter{font-weight:700;color:#fca5a5}
+  .issue-text{color:#e4e4e7}
+
+  .chapter{background:#151517;border:1px solid #27272a;border-radius:12px;padding:14px;margin-bottom:10px}
+  .chapter-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+  .chapter-name{font-weight:700;font-size:15px}
+  .chapter-total{font-size:12px;color:#9ca3af;background:#1f1f23;padding:3px 9px;border-radius:999px;white-space:nowrap}
+  .result{margin-top:4px;font-size:13px;line-height:1.6}
+  .ok{color:#4ade80}
+  .missing{color:#f87171}
+  .unmatched{color:#facc15}
+</style>
+</head>
+<body>
+
+<h1>📊 Revision Data Checker</h1>
+<p class="sub">
+  Google Sheet ki poori revision-data ko check karta hai — galat/reversed ranges, chapter ke total
+  se bahar jaati hui ranges, samajh na aane wale cells, aur jo questions kisi bhi din revise nahi ho rahe,
+  sab ek jagah dikhata hai.
+</p>
+
+<button class="main" onclick="runCheck()">🔄 Fetch &amp; Check</button>
+<div class="status" id="status">"Fetch & Check" dabao shuru karne ke liye.</div>
+<div id="issues"></div>
+<div id="chapters"></div>
+
+<script>
+const FIREBASE_URL = "https://bpsc-sachin-sir-revise-default-rtdb.asia-southeast1.firebasedatabase.app";
+const SHEET_ID = "199iBspeBjmVJoNS5JuBl7EqDzHwl5GotW376Ads0Eso";
+const SHEETS = [
+  { name: "Math",      gid: "0" },
+  { name: "Reasoning", gid: "170226942" }
+];
+
+function slugify(name) {
+  return name.toLowerCase().trim().replace(/&/g, 'and').replace(/\s+/g, '-');
+}
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [], field = '', inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i], next = text[i + 1];
+    if (inQuotes) {
+      if (c === '"' && next === '"') { field += '"'; i++; }
+      else if (c === '"') { inQuotes = false; }
+      else field += c;
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ',') { row.push(field); field = ''; }
+      else if (c === '\r') { /* skip */ }
+      else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+      else field += c;
+    }
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+  return rows;
+}
+
+// Sheet parse karke har chapter ki raw cell-list nikalta hai (bina normalize kiye,
+// taaki reversed/invalid ranges pakde ja sakein)
+async function fetchSheetChapters(gid, sheetLabel) {
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`${sheetLabel} sheet fetch fail (${res.status})`);
+  const csv = await res.text();
+  const rows = parseCSV(csv);
+  const dayHeaders = rows[1] || [];
+
+  const chapters = {}; // slug -> {displayName, sheetLabel, cells:[{day, raw}]}
+  for (let i = 2; i < rows.length; i++) {
+    const chapter = (rows[i][0] || "").toString().trim();
+    if (!chapter || chapter.toLowerCase() === "chapter name" || chapter.includes("/")) continue;
+
+    const cells = [];
+    let anyContent = false;
+    for (let j = 1; j < rows[i].length; j++) {
+      const raw = (rows[i][j] || "").toString().trim();
+      if (raw) {
+        anyContent = true;
+        const day = (dayHeaders[j] || "").toString().trim() || ("col" + j);
+        cells.push({ day, raw });
+      }
+    }
+    if (!anyContent) continue; // khaali row (label/spacer), skip
+
+    const slug = slugify(chapter);
+    if (!chapters[slug]) chapters[slug] = { displayName: chapter, sheetLabel, cells: [] };
+    chapters[slug].cells.push(...cells);
+  }
+  return chapters;
+}
+
+async function runCheck() {
+  const statusEl = document.getElementById('status');
+  const issuesEl = document.getElementById('issues');
+  const container = document.getElementById('chapters');
+  issuesEl.innerHTML = '';
+  container.innerHTML = '';
+  statusEl.textContent = "Sheet se data fetch ho raha hai...";
+
+  let sheetChapters = {};
+  try {
+    for (const s of SHEETS) {
+      const r = await fetchSheetChapters(s.gid, s.name);
+      Object.assign(sheetChapters, r);
+    }
+  } catch (e) {
+    statusEl.textContent = "❌ Sheet fetch nahi ho payi: " + e.message + "\n(Sheet 'Anyone with link — Viewer' pe set hai ye check kar lo)";
+    return;
+  }
+
+  statusEl.textContent = "Firebase se chapters/totals fetch ho rahe hain...";
+  let meta;
+  try {
+    const metaRes = await fetch(FIREBASE_URL + "/questionBank/files/meta.json");
+    meta = await metaRes.json();
+  } catch (e) {
+    statusEl.textContent = "❌ Firebase meta fetch fail: " + e.message;
+    return;
+  }
+  if (!meta) { statusEl.textContent = "❌ meta.json khaali hai Firebase me."; return; }
+
+  const keys = Object.keys(meta).map(k => k.replace(/\.json$/i, "")).filter(k => k !== "important-questions");
+  statusEl.textContent = `${keys.length} chapters mile Firebase me. Compare ho raha hai...`;
+
+  const allIssues = []; // {chapter, text}
+  const usedSlugs = new Set();
+
+  for (const key of keys) {
+    const res = await fetch(FIREBASE_URL + "/questionBank/files/" + key + ".json");
+    const arr = await res.json();
+    const total = Array.isArray(arr) ? arr.reduce((max, q) => Math.max(max, q.num || 0), 0) : 0;
+
+    const match = sheetChapters[key];
+    const div = document.createElement('div');
+    div.className = 'chapter';
+    let resultHTML;
+
+    if (!match) {
+      allIssues.push({ chapter: key, text: `Sheet me "${key}" jaisi koi row nahi mili (chapter shayad sheet me hai hi nahi, ya naam match nahi kar raha).` });
+      resultHTML = `<div class="result unmatched">⚠️ Sheet me match nahi hua.</div>`;
+    } else {
+      usedSlugs.add(key);
+      const covered = new Set();
+      match.cells.forEach(({ day, raw }) => {
+        const m = raw.match(/^(\d+)\s*-\s*(\d+)$/);
+        if (!m) {
+          allIssues.push({ chapter: match.displayName, text: `Day ${day}: samajh nahi aaya format — "${raw}"` });
+          return;
+        }
+        const start = +m[1], end = +m[2];
+        if (start > end) {
+          allIssues.push({ chapter: match.displayName, text: `Day ${day}: range ulta likha hai — "${raw}" (chahiye ${end}-${start})` });
+        }
+        if (start < 1) {
+          allIssues.push({ chapter: match.displayName, text: `Day ${day}: "${raw}" — 1 se pehle ka number likha hai` });
+        }
+        if (total > 0 && Math.max(start, end) > total) {
+          allIssues.push({ chapter: match.displayName, text: `Day ${day}: "${raw}" — is chapter me sirf ${total} questions hain, lekin range ${Math.max(start,end)} tak jaati hai` });
+        }
+        const lo = Math.min(start, end), hi = Math.max(start, end);
+        for (let n = lo; n <= hi; n++) if (n >= 1 && n <= total) covered.add(n);
+      });
+
+      if (total === 0) {
+        allIssues.push({ chapter: match.displayName, text: `Firebase me is chapter ke 0 questions hain — file khaali/missing hai.` });
+        resultHTML = `<div class="result missing">⚠️ Firebase me koi question hi nahi hai.</div>`;
+      } else {
+        const missing = [];
+        for (let n = 1; n <= total; n++) if (!covered.has(n)) missing.push(n);
+        resultHTML = missing.length === 0
+          ? `<div class="result ok">✅ Sab ${total} questions cover ho rahe hain!</div>`
+          : `<div class="result missing">⚠️ ${missing.length} question(s) kabhi revise nahi honge — Q: ${missing.join(', ')}</div>`;
+      }
+    }
+
+    div.innerHTML = `
+      <div class="chapter-head">
+        <div class="chapter-name">${key}${match ? ' <span style="color:#71717a;font-weight:400">('+match.displayName+' — '+match.sheetLabel+')</span>' : ''}</div>
+        <div class="chapter-total">${total} questions</div>
+      </div>
+      ${resultHTML}
+    `;
+    container.appendChild(div);
+  }
+
+  // Sheet me jo chapters hain jo Firebase me bilkul hi nahi hain (naam mismatch ka doosra pehlu)
+  Object.keys(sheetChapters).forEach(slug => {
+    if (!usedSlugs.has(slug)) {
+      allIssues.push({ chapter: sheetChapters[slug].displayName, text: `Sheet me hai (${sheetChapters[slug].sheetLabel}) lekin Firebase me is naam ki koi file nahi mili (expected filename: "${slug}").` });
+    }
+  });
+
+  if (allIssues.length === 0) {
+    issuesEl.innerHTML = `<div class="issues-box clean"><h2>✅ Koi bhi data-issue nahi mila</h2><p style="font-size:13px;color:#9ca3af">Sab chapters, sab ranges sahi hain.</p></div>`;
+  } else {
+    issuesEl.innerHTML = `<div class="issues-box"><h2>⚠️ ${allIssues.length} Data Issue(s) Mile</h2>` +
+      allIssues.map(i => `<div class="issue-row"><span class="issue-chapter">${i.chapter}:</span> <span class="issue-text">${i.text}</span></div>`).join('') +
+      `</div>`;
+  }
+
+  statusEl.textContent = `✅ Done — ${keys.length} Firebase chapters check kiye.`;
+}
+</script>
+</body>
+</html>
