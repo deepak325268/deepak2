@@ -1,0 +1,110 @@
+[
+  {
+    "num": 1,
+    "text": "Find discount % when M.P. = Rs. 25 and S.P. = Rs. 23.50",
+    "hindi": "निम्नलिखित का बट्टा प्रतिशत ज्ञात कीजिए, यदि अंकित मूल्य = 25 रु. और विक्रय मूल्य = 23.50 रु.",
+    "opts": [
+      "(a) 4%",
+      "(b) 6%",
+      "(c) 8%",
+      "(d) 10%"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 2,
+    "text": "Find M.P. when S.P. = Rs. 225 and discount = 10%",
+    "hindi": "अंकित मूल्य ज्ञात कीजिए, यदि विक्रय मूल्य = 225 रु. और छूट = 10%",
+    "opts": [
+      "(a) 250",
+      "(b) 300",
+      "(c) 235",
+      "(d) 275"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 3,
+    "text": "Find M.P. when S.P. = Rs. 1920 and discount = 4%",
+    "hindi": "अंकित मूल्य ज्ञात कीजिए, यदि विक्रय मूल्य = 1920 रु. और छूट = 4%",
+    "opts": [
+      "(a) 800",
+      "(b) 1000",
+      "(c) 1200",
+      "(d) 2000"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 4,
+    "text": "Find M.P. when S.P. = Rs. 2400 and discount = $14\\frac{2}{7}\\%$",
+    "hindi": "अंकित मूल्य ज्ञात कीजिए, यदि विक्रय मूल्य = 2400 रु. और छूट = $14\\frac{2}{7}\\%$",
+    "opts": [
+      "(a) 2800",
+      "(b) 1000",
+      "(c) 1200",
+      "(d) 2000"
+    ],
+    "ans": "a"
+  },
+  {
+    "num": 5,
+    "text": "Find S.P. when M.P = Rs. 120 and discount = 15%",
+    "hindi": "विक्रय मूल्य ज्ञात कीजिए, यदि अंकित मूल्य = 120 रु. और छूट = 15%",
+    "opts": [
+      "(a) Rs. 100",
+      "(b) Rs. 115",
+      "(c) Rs. 118",
+      "(d) Rs. 102"
+    ],
+    "ans": "d"
+  },
+  {
+    "num": 6,
+    "text": "Find S.P. when M.P = Rs. 64 and discount = 12.5%",
+    "hindi": "विक्रय मूल्य ज्ञात कीजिए, यदि अंकित मूल्य = 64 रु. और छूट = 12.5%",
+    "opts": [
+      "(a) Rs. 48",
+      "(b) Rs. 50",
+      "(c) Rs. 56",
+      "(d) Rs. 60"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 7,
+    "text": "The marked price of an article is Rs. 420. A shopkeeper gives a discount of 15% on the marked price and still makes a profit of 19%. What is the cost price of the article?",
+    "hindi": "एक वस्तु का अंकित मूल्य रु. 420 है। एक दुकानदार अंकित मूल्य पर 15% की छूट देता है और फिर भी 19% का लाभ कमाता है। वस्तु का लागत (क्रय) मूल्य क्या है?",
+    "opts": [
+      "(a) Rs. 270",
+      "(b) Rs. 290",
+      "(c) Rs. 300",
+      "(d) Rs. 320"
+    ],
+    "ans": "c"
+  },
+  {
+    "num": 8,
+    "text": "A shopkeeper allows his customers 10% discount on the marked price of goods and still gets a profit of 25%. What is the actual cost to him of an article marked Rs. 250?",
+    "hindi": "एक दुकानदार ग्राहकों को अंकित मूल्य पर 10% छूट देकर भी 25% लाभ कमाता है। जिस वस्तु का अंकित मूल्य 250 रु० हो, उसे दुकानदार ने कितने में खरीदा होगा?",
+    "opts": [
+      "(a) 120",
+      "(b) 180",
+      "(c) 220",
+      "(d) 240"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 9,
+    "text": "The marked price of an article is Rs. 625. A shopkeeper sells it by allowing 10% discount on its marked price. If he gains 25% profit. Then the cost price of the article is:",
+    "hindi": "एक वस्तु का अंकित मूल्य रु. 625 है। एक दुकानदार इसके अंकित मूल्य पर 10% छूट देकर इसे बेचता है। यदि उसे 25% लाभ प्राप्त होता है, तो वस्तु का क्रय मूल्य है:",
+    "opts": [
+      "(a) Rs. 350",
+      "(b) Rs. 375",
+      "(c) Rs. 400",
+      "(d) Rs. 450"
+    ],
+    "ans": "d"
+  }
+]
