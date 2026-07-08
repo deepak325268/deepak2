@@ -853,5 +853,41 @@
       "(d) 300, 900"
     ],
     "ans": "c"
+  },
+  {
+    "num": 72,
+    "text": "60% of the cost price of an object is equal to the 50% of the selling price. Find profit or loss percent.",
+    "hindi": "किसी वस्तु के क्रय मूल्य का 60% उसके विक्रय मूल्य के 50% के बराबर है तो क्रय मूल्य पर लाभ या हानि प्रतिशत ज्ञात करो?",
+    "opts": [
+      "(a) 10% loss",
+      "(b) 20% profit",
+      "(c) 25% profit",
+      "(d) 30% loss"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 73,
+    "text": "The loss incurred when an article is sold at Rs. 500 is equal to the profit which is gained if the article is sold at Rs. 700. Find the cost price of that article.",
+    "hindi": "एक वस्तु को 500 रु. में बेचने से उतनी हानि होती है जितना कि 700 रु. में बेचने से लाभ प्राप्त होता है। वस्तु का वास्तविक क्रय मूल्य क्या होगा?",
+    "opts": [
+      "(a) 550",
+      "(b) 600",
+      "(c) 650",
+      "(d) 680"
+    ],
+    "ans": "b"
+  },
+  {
+    "num": 74,
+    "text": "A shopkeeper when sells an article for Rs 900, then he faces loss which is equal to half of the profit gained if the article is sold for Rs. 1200. Find the cost price.",
+    "hindi": "एक दुकानदार जब किसी वस्तु को 900 रु. में बेचता है तो उसे आधी हानि होती है जितना कि उसे उस वस्तु को 1200 रु. में बेचने पर लाभ प्राप्त होता है। वस्तु का वास्तविक क्रय मूल्य क्या होगा?",
+    "opts": [
+      "(a) 1050",
+      "(b) 1000",
+      "(c) 1100",
+      "(d) 1150"
+    ],
+    "ans": "b"
   }
 ]
